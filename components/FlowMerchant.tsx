@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, CircleAlert, Clock3, FileCheck2, LockKeyhole, RefreshCw, ShieldCheck } from "lucide-react";
 import type { FlowDisclosure, FlowRun, FlowState } from "../lib/flow-types";
 import "./FlowMerchant.css";
@@ -40,7 +40,7 @@ function Disclosure({ item }: { item: FlowDisclosure }) {
   </div>;
 }
 
-export default function FlowMerchant() {
+export default function FlowMerchant({ focusKey = 0 }: { focusKey?: number }) {
   const [state, setState] = useState<FlowState | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [error, setError] = useState("");
@@ -59,9 +59,20 @@ export default function FlowMerchant() {
   }, []);
   const run = state?.runs.find(item => item.id === selected) ?? state?.runs[0];
   const request = state?.requests.find(item => item.id === run?.currentRequestId);
+  // On a phone the task card sits below the intent list. When a task starts
+  // (here or from another screen), bring its status into view once.
+  const runCard = useRef<HTMLDivElement | null>(null);
+  const [localFocus, setLocalFocus] = useState(0);
+  const focused = useRef("0:0");
+  const wanted = `${focusKey}:${localFocus}`;
+  useEffect(() => {
+    if (wanted === "0:0" || focused.current === wanted || !run || !runCard.current) return;
+    focused.current = wanted;
+    runCard.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [wanted, run]);
   async function start(intentId: string) {
     setBusy(true); setError(""); setPin("");
-    try { const result = await command("start", { intentId }); setState(result.state); setSelected(result.run.id); }
+    try { const result = await command("start", { intentId }); setState(result.state); setSelected(result.run.id); setLocalFocus(value => value + 1); }
     catch (caught) { setError(caught instanceof Error ? caught.message : "Task could not start."); }
     finally { setBusy(false); }
   }
@@ -91,7 +102,7 @@ export default function FlowMerchant() {
       <div className="fm-section-label">Your tracked tasks</div>
       <div className="fm-run-tabs">{state.runs.map(item => <button type="button" key={item.id} aria-pressed={run?.id === item.id} onClick={() => { setSelected(item.id); setPin(""); setError(""); }}><b>{item.title}</b><small>{statusLabel(item.status)}</small></button>)}</div>
     </>}
-    {run && <div className="fm-run" aria-live="polite">
+    {run && <div className="fm-run" aria-live="polite" ref={runCard}>
       <div className="fm-run-top"><span className={"fm-status fm-status-" + run.status}>{statusLabel(run.status)}</span><small>{kindLabel(run.stage)}</small></div>
       <h3>{run.title}</h3><p>{run.summary}</p>
       <div className="fm-original"><b>Your original intent</b><span>{run.originalIntent.description}</span></div>

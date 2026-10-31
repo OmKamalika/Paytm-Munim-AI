@@ -94,26 +94,6 @@ function AnchorChart({ cash }: { cash: Cash | null }) {
   </div>;
 }
 
-function answerFor(question: string, cash: Cash | null, options: Options | null, forecast: OutletForecast | null): string {
-  if (/\b(sku|stock|replenish|reorder)\b/i.test(question))
-    return "Payment records do not show which SKU sold or how many units remain. Open Your data and enter the item price, estimated share of outlet revenue, stock on hand, and the number of festival days to cover from 4 Nov. I can then flag a possible shortfall or surplus for your review; no order is placed.";
-  if (/\b(outlet|dadar|matunga|sion|demand)\b/i.test(question)) {
-    if (!forecast) return "The outlet collection estimate is still loading. Open Your data to review it when ready.";
-    const named = forecast.outlets.find(item => question.toLowerCase().includes(item.name.toLowerCase()));
-    if (named) return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, ${named.name} has an estimated ${money(named.total.pointInr)} in all-channel collections, with a historical low/high scenario of ${money(named.total.lowInr)}–${money(named.total.highInr)}. Count stock before deciding what to replenish; this is not SKU demand.`;
-    const point = forecast.outlets.reduce((sum, item) => sum + item.total.pointInr, 0);
-    return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, the three outlets have an estimated ${money(point)} in all-channel collections. Review each outlet in Your data, then check actual SKU stock before placing orders. The cash plan uses this outlet estimate for its expected collections.`;
-  }
-  if (!cash || !options) return "Loading the synthetic cash plan.";
-  const a = cash.cashPlan.anchors;
-  const gupta = cash.cashPlan.outflows.find(item => item.id === "gupta");
-  if (/gupta|supplier|invoice|defer|split/i.test(question))
-    return "The listed " + (gupta?.invoiceId || "Gupta") + " bill is " + money(gupta?.amountInr) + " due " + dateLabel(gupta?.date) + ". Asking for a deferral is conditional on Gupta agreeing. No revised cash balance has been supplied.";
-  if (/lender|loan|emi|capital|credit/i.test(question))
-    return "The illustrative plan offers a " + money(options.options.find(item => item.id === "drawdown")?.amountInr) + " Lender A drawdown. Open Capital to request the simulated offers and compare their EMI cap checks.";
-  return "The illustrative plan marks a projected low of " + money(a.lowestBalanceInr) + " on " + dateLabel(a.lowestDate) + ". It first turns negative on " + dateLabel(a.firstNegativeDate) + " and is above zero on " + dateLabel(a.recoveryAboveZeroDate) + ". Review the three cost-ordered choices.";
-}
-
 export default function HomePage() {
   const [mode, setMode] = useState<"merchant" | "riskops">("merchant");
   const [screen, setScreen] = useState<Screen>("home");
@@ -130,6 +110,7 @@ export default function HomePage() {
   const [paused, setPaused] = useState(false);
   const [question, setQuestion] = useState("Diwali ke liye paisa kahan se aayega?");
   const [answer, setAnswer] = useState("");
+  const [focusTask, setFocusTask] = useState(0);
   const [whatIf, setWhatIf] = useState(false);
   const [selectedLender, setSelectedLender] = useState("A");
   const [taskBusy, setTaskBusy] = useState(false);
@@ -145,6 +126,22 @@ export default function HomePage() {
       setCash(c); setOptions(o); setDataSummary(d);
     } catch (e) { setError(e instanceof Error ? e.message : "The cash plan could not refresh."); }
   }
+  // Ask Munim answers from the server's scripted dialogue over the same
+  // calculated plan and action history (not a language model).
+  async function ask(text: string) {
+    try {
+      const reply = await get<{ text: string }>("/api/munim", body({ question: text }));
+      setAnswer(reply.text);
+    } catch (e) { setError(e instanceof Error ? e.message : "Munim could not answer."); }
+  }
+  useEffect(() => {
+    // Re-answer when the plan changes so the reply never describes an old state.
+    if (screen !== "munim") return;
+    let active = true;
+    get<{ text: string }>("/api/munim", body({ question })).then(reply => { if (active) setAnswer(reply.text); }).catch(() => {});
+    return () => { active = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screen, cash]);
   async function refreshEvidence() {
     try {
       const [log, checked] = await Promise.all([get<{ entries: Entry[] }>("/api/evidence"), get<Verification>("/api/evidence/verify")]);
@@ -195,7 +192,7 @@ export default function HomePage() {
       const response = await fetch("/api/flows/start", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ intentId }) });
       const result = await response.json() as { error?: string };
       if (!response.ok) throw new Error(result.error || "The task could not start.");
-      setScreen("munim");
+      setScreen("munim"); setFocusTask(value => value + 1);
     } catch (e) { setError(e instanceof Error ? e.message : "The task could not start."); }
     finally { setTaskBusy(false); }
   }
@@ -293,9 +290,9 @@ export default function HomePage() {
             {whatIf && <div className="pm-note"><b>Stock reduction · illustrative</b><p>{choices.find(item => item.id === "cut_stock")?.conditions.join(" ")}</p><p>Payment amounts do not reveal which products sold.</p><button type="button" onClick={() => setWhatIf(false)}>Close</button></div>}
           </div>}
           {screen === "munim" && <div className="pm-screen pm-chat">
-            <form className="pm-ask-form" onSubmit={event => { event.preventDefault(); setAnswer(answerFor(question, cash, options, outletForecast)); }}><label htmlFor="pm-question">Ask about cash, outlets, stock, suppliers, or lenders</label><input id="pm-question" value={question} onChange={event => setQuestion(event.target.value)}/><button type="submit" className="pm-primary">Ask Munim<ArrowRight size={17}/></button></form>
-            <div className="pm-answer"><span><Sparkles size={18}/></span><div><b>Munim</b><p>{answer || answerFor(question, cash, options, outletForecast)}</p><small>Scripted demo response · numbers from backend tools</small></div></div>
-            <FlowMerchant/>
+            <form className="pm-ask-form" onSubmit={event => { event.preventDefault(); void ask(question); }}><label htmlFor="pm-question">Ask about cash, outlets, suppliers, or lenders</label><input id="pm-question" value={question} onChange={event => setQuestion(event.target.value)}/><button type="submit" className="pm-primary">Ask Munim<ArrowRight size={17}/></button></form>
+            <div className="pm-answer"><span><Sparkles size={18}/></span><div><b>Munim</b><p>{answer || "Ask a question about cash, suppliers, lenders or outlets."}</p><small>Scripted demo dialogue · numbers from the calculated plan · not an AI model</small></div></div>
+            <FlowMerchant focusKey={focusTask}/>
             <Heading title="Choose what to explore"/>
             <button type="button" className="pm-row" onClick={() => setScreen("plan")}><Activity size={19}/><span><b>See cash gap and options</b><small>Calculated plan and relief</small></span><ChevronRight size={18}/></button>
             <button type="button" className="pm-row" onClick={() => setScreen("supplier")}><Handshake size={19}/><span><b>Supplier terms</b><small>What the Gupta task negotiates</small></span><ChevronRight size={18}/></button>
