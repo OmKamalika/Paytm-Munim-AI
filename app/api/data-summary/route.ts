@@ -1,11 +1,11 @@
-import { getSimulatorStore } from '../../../lib/simulator-store.js';
+import { getFlowRuntime } from '../../../lib/flow-runtime.js';
 import { activeSource } from '../../../lib/active-source.js';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const aaEvent = getSimulatorStore().getActiveResponse('aa');
-  const aaAvailable = aaEvent?.payload?.status === 'available';
+  // Bank history is released only after a tracked run received an available AA response.
+  const aaAvailable = (await (await getFlowRuntime()).getLedger()).aaReleased;
   const gupta = activeSource.supplierSummary.find((row) => row.id === 'gupta');
   const fullInvoice = activeSource.invoices.find(row => row.row === 'INV-07');
   return Response.json({
@@ -14,7 +14,7 @@ export async function GET() {
     sources: {
       paytm: 'Supplied synthetic Paytm transactions; Home is Paytm-only through 12:40 pm on 30 Oct.',
       allChannels: 'Supplied synthetic shift handovers; 12 complete months Oct 2025–Sep 2026.',
-      bank: 'Supplied synthetic bank statement, represented as an AA sample only after simulator dispatch.',
+      bank: 'Supplied synthetic bank statement, released to the guard only after a tracked run receives an available AA response.',
       supplierIdentity: 'Current ReBIT narration is matched to the supplier registry; test label columns and ambiguous matches are excluded from the ceiling.',
       invoice: 'The current source includes the header-only GD-1182 photo and full 212-line PDF body; tracked tasks request the relevant evidence.',
     },

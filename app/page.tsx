@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Activity, ArrowLeft, ArrowRight, BadgeCheck, Bell, Check, CheckCircle2, ChevronRight, CircleAlert, FileText, Handshake, Home, Info, Landmark, LockKeyhole, RotateCcw, ShieldCheck, Sparkles, Store, Wallet } from "lucide-react";
-import RiskOps, { type CaseRecord } from "../components/RiskOps";
+import { Activity, ArrowLeft, ArrowRight, BadgeCheck, Bell, CheckCircle2, ChevronRight, CircleAlert, FileText, Handshake, Home, Info, Landmark, RotateCcw, ShieldCheck, Sparkles, Store, Wallet } from "lucide-react";
+import FlowRiskOps from "../components/FlowRiskOps";
 import FlowMerchant from "../components/FlowMerchant";
 
 type Screen = "home" | "plan" | "munim" | "supplier" | "mandate" | "guard" | "capital" | "data" | "evidence";
-type Kind = "supplier" | "aa" | "lenders";
 type Cash = {
   business: { name: string; owner: string; outlets: string[] };
   homePaytmToday: { totalInr: number; outlets: { outlet: string; amountInr: number }[] };
@@ -14,28 +13,19 @@ type Cash = {
   cashPlan: { label: string; dailyBalanceNote: string;
     anchors: { firstNegativeDate: string; lowestDate: string; lowestBalanceInr: number; recoveryAboveZeroDate: string };
     dailyBalanceSeries?: { date: string; balanceInr: number; inflowForecastInr: number; knownOutflowsInr: number }[] | null;
-    outflows: { id: string; date: string; payee: string; amountInr: number; quality: string; invoiceId?: string; outletSplit?: { outlet: string; amountInr: number }[] }[];
+    outflows: { id: string; date: string; payee: string; amountInr: number; quality: string; status?: string; invoiceId?: string; deferredFrom?: string; outletSplit?: { outlet: string; amountInr: number }[] }[];
+    afterHorizon?: { id: string; date: string; payee: string; amountInr: number; invoiceId?: string; note?: string }[];
+    appliedRelief?: { id: string; type: string; label: string }[];
+    pendingActions?: { id: string; type: string; amountInr: number; label: string }[];
   };
 };
-type Option = { id: string; rank: number; title: string; costLabel: string; amountInr?: number; destinationAccountMasked?: string; conditions: string[]; effectOn5Nov: { balanceInr: number | null; note?: string } };
-type Options = { basis: string; options: Option[] };
+type Option = { id: string; rank: number; title: string; costLabel: string; amountInr?: number; destinationAccountMasked?: string; conditions: string[]; accepted?: boolean; calculated?: boolean; effectOn5Nov: { balanceInr: number | null; note?: string } };
+type Options = { basis: string; options: Option[]; recommendation?: { status: string; text: string } };
 type Lender = { id: string; name: string; type: string; aprPercent: number; tenorMonths: number; emiInr: number; totalInterestInr: number; totalMonthlyEmiInr: number; underCap: boolean; earlyRepayment?: { afterDays: number; estimatedInterestInr: number } };
 type Lenders = { scheduleLabel: string; emiCap: { monthlyCollectionsInr: number; existingMonthlyEmiInr: number; percentage: number; maxTotalMonthlyEmiInr: number }; offers: Lender[] };
-type Event = { seq: number; kind: Kind; scenarioId: string; requestId?: string | null; timestamp: string; payload: {
-  candidate?: { totalAmount: number; upfrontPercent: number; supplierId: string; supplierAccount: string; beneficiaryName?: string; supplierMessage?: string };
-  offers?: Lender[];
-  emiCap?: Lenders["emiCap"];
-  status?: string;
-  source?: string;
-} };
-type Simulator = { latestSeq: number; latest: Record<Kind, Event | null>; events: Event[] };
-type RequestState = { cursor: number; requestId?: string; event?: Event; waiting: boolean };
-type Action = Record<string, string | number | undefined>;
-type Guard = { decision: "PASS" | "BLOCK" | "ESCALATE"; checks: { id: string; status: string; detail: string }[]; approval_id?: string; action_hash?: string; needs_verification?: boolean; reason?: string; evidence_entry?: Entry | null };
-type Execution = { outcome: "done-simulated" | "requested-waiting" | "blocked"; balance_on_5_nov?: number; ledger_effect?: number; reason?: string };
-type Entry = { seq: number; timestamp: string; actor?: string; outcome?: string; hash?: string; action?: Record<string, unknown> };
+type Session = { sessionId: string; sessionStartedAt: string; revision: number; paused: boolean };
+type Entry = { seq: number; timestamp: string; actor?: string; outcome?: string; event?: string; summary?: string; ledgerRef?: string | null; disclosure?: { id: string; version: number; hash: string; type: string } | null; hash?: string };
 type Verification = { ok: boolean; first_broken_seq?: number | null };
-type PauseState = { paused: boolean; scope: string; durable: boolean };
 type DataSummary = {
   synthetic: boolean;
   asOf: string;
@@ -137,108 +127,77 @@ export default function HomePage() {
   const [stockResult, setStockResult] = useState<StockCoverage | null>(null);
   const [stockError, setStockError] = useState("");
   const [stockBusy, setStockBusy] = useState(false);
-  const [requests, setRequests] = useState<Partial<Record<Kind, RequestState>>>({});
-  const [cases, setCases] = useState<CaseRecord[]>([]);
-  const [latestCase, setLatestCase] = useState<CaseRecord | null>(null);
   const [paused, setPaused] = useState(false);
   const [question, setQuestion] = useState("Diwali ke liye paisa kahan se aayega?");
   const [answer, setAnswer] = useState("");
   const [whatIf, setWhatIf] = useState(false);
   const [selectedLender, setSelectedLender] = useState("A");
-  const [action, setAction] = useState<Action | null>(null);
-  const [guard, setGuard] = useState<Guard | null>(null);
-  const [execution, setExecution] = useState<Execution | null>(null);
-  const [pin, setPin] = useState("");
-  const [idempotencyKey, setIdempotencyKey] = useState("");
+  const [taskBusy, setTaskBusy] = useState(false);
+  const [resetNotice, setResetNotice] = useState(false);
+  const [online, setOnline] = useState(true);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [verification, setVerification] = useState<Verification | null>(null);
-  const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    Promise.all([get<Cash>("/api/cashplan"), get<Options>("/api/options"), get<Lenders>("/api/lenders")])
-      .then(([c, o, l]) => { setCash(c); setOptions(o); setLenders(l); })
-      .catch(e => setError(e instanceof Error ? e.message : "Synthetic data could not load."));
-    get<DataSummary>("/api/data-summary").then(setDataSummary)
-      .catch(() => setError("Outlet and bank-data summary could not load."));
-    get<OutletForecast>("/api/outlet-forecast").then(setOutletForecast)
-      .catch(e => setForecastError(e instanceof Error ? e.message : "Outlet forecast could not load."));
-    get<PauseState>("/api/control/pause").then(state => setPaused(state.paused))
-      .catch(() => setError("Pause status could not load."));
-  }, []);
-  const aaEventSeq = requests.aa?.event?.seq;
-  useEffect(() => {
-    if (!aaEventSeq) return;
-    get<DataSummary>("/api/data-summary").then(setDataSummary)
-      .catch(() => setError("The bank-data summary could not refresh."));
-  }, [aaEventSeq]);
-  useEffect(() => {
-    if (!Object.values(requests).some(item => item?.waiting)) return;
-    const timer = setInterval(() => {
-      get<Simulator>("/api/simulator/state").then(state => {
-        setRequests(previous => {
-          const next = { ...previous };
-          let changed = false;
-          for (const kind of ["supplier", "aa", "lenders"] as Kind[]) {
-            const request = previous[kind];
-            const event = state.latest?.[kind];
-            // Only a newer response to this exact request counts.
-            if (request?.waiting && event && event.seq > request.cursor && event.requestId === request.requestId) {
-              next[kind] = { cursor: request.cursor, requestId: request.requestId, event, waiting: false };
-              changed = true;
-            }
-          }
-          return changed ? next : previous;
-        });
-      }).catch(() => {});
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [requests]);
-  const choices = useMemo(() => [...(options?.options || [])].sort((a, b) => a.rank - b.rank), [options]);
-  const drawdown = choices.find(item => item.id === "drawdown");
-  const gupta = cash?.cashPlan.outflows.find(item => item.id === "gupta");
-  const supplierEvent = requests.supplier?.event;
-  const receivedCandidate = supplierEvent?.payload.candidate;
-  const receivedUpfrontRaw = receivedCandidate && Number.isSafeInteger(receivedCandidate.totalAmount) &&
-    receivedCandidate.totalAmount > 0 &&
-    typeof receivedCandidate.upfrontPercent === "number" &&
-    receivedCandidate.upfrontPercent > 0 && receivedCandidate.upfrontPercent <= 100
-    ? receivedCandidate.totalAmount * receivedCandidate.upfrontPercent / 100 : null;
-  const receivedUpfront = Number.isSafeInteger(receivedUpfrontRaw) ? receivedUpfrontRaw : null;
-  const aaEvent = requests.aa?.event;
-  const lenderEvent = requests.lenders?.event;
-  const visibleLenders = lenderEvent?.payload?.offers ? { ...lenders, offers: lenderEvent.payload.offers as Lender[], emiCap: lenderEvent.payload.emiCap as Lenders["emiCap"] } : null;
-
+  async function refreshPlan() {
+    try {
+      const [c, o, d] = await Promise.all([get<Cash>("/api/cashplan"), get<Options>("/api/options"), get<DataSummary>("/api/data-summary")]);
+      setCash(c); setOptions(o); setDataSummary(d);
+    } catch (e) { setError(e instanceof Error ? e.message : "The cash plan could not refresh."); }
+  }
   async function refreshEvidence() {
     try {
       const [log, checked] = await Promise.all([get<{ entries: Entry[] }>("/api/evidence"), get<Verification>("/api/evidence/verify")]);
       setEntries(log.entries || []); setVerification(checked);
     } catch (e) { setVerification(null); setError(e instanceof Error ? e.message : "Evidence unavailable."); }
   }
-  async function changePause(next: boolean) {
-    try {
-      const state = await get<PauseState>("/api/control/pause", body({ paused: next }));
-      setPaused(state.paused);
-    } catch (e) { setError(e instanceof Error ? e.message : "Pause control unavailable."); }
-  }
   useEffect(() => {
-    if (screen !== "evidence") return;
+    get<Lenders>("/api/lenders").then(setLenders).catch(() => setError("Lender comparison could not load."));
+    get<OutletForecast>("/api/outlet-forecast").then(setOutletForecast)
+      .catch(e => setForecastError(e instanceof Error ? e.message : "Outlet forecast could not load."));
+  }, []);
+  // One session poll keeps Home, Plan, options and Evidence on the server's
+  // current action history, and notices a server restart (new session id).
+  useEffect(() => {
     let active = true;
-    Promise.all([get<{ entries: Entry[] }>("/api/evidence"), get<Verification>("/api/evidence/verify")])
-      .then(([log, checked]) => {
-        if (active) { setEntries(log.entries || []); setVerification(checked); }
-      })
-      .catch(e => {
-        if (active) { setVerification(null); setError(e instanceof Error ? e.message : "Evidence unavailable."); }
-      });
-    return () => { active = false; };
-  }, [screen]);
-  async function request(kind: Kind) {
-    setError("");
+    let known: Session | null = null;
+    const tick = async () => {
+      try {
+        const next = await get<Session>("/api/session");
+        if (!active) return;
+        setOnline(true); setPaused(next.paused);
+        if (known && known.sessionId !== next.sessionId) {
+          setResetNotice(true); setScreen("home"); setEntries([]); setVerification(null);
+        }
+        if (!known || known.sessionId !== next.sessionId || known.revision !== next.revision) {
+          known = next;
+          await Promise.all([refreshPlan(), refreshEvidence()]);
+        }
+      } catch { if (active) setOnline(false); }
+    };
+    void tick();
+    const timer = window.setInterval(() => { void tick(); }, 2000);
+    const connectivity = () => setOnline(navigator.onLine);
+    window.addEventListener("online", connectivity); window.addEventListener("offline", connectivity);
+    return () => { active = false; window.clearInterval(timer); window.removeEventListener("online", connectivity); window.removeEventListener("offline", connectivity); };
+  }, []);
+  const choices = useMemo(() => [...(options?.options || [])].sort((a, b) => a.rank - b.rank), [options]);
+  const drawdown = choices.find(item => item.id === "drawdown");
+  const gupta = cash?.cashPlan.outflows.find(item => item.id === "gupta");
+  const anchors = cash?.cashPlan.anchors;
+  const covered = typeof anchors?.lowestBalanceInr === "number" && anchors.lowestBalanceInr >= 0;
+  const aaReleased = Boolean(dataSummary?.supplier?.aaAvailable);
+  // Every supplier and capital action starts as a tracked task: correlated
+  // requests, disclosure, PIN, fenced rail instruction and journal.
+  async function startTask(intentId: "supplier_stock" | "supplier_header_review" | "capital_standard" | "capital_extended") {
+    setTaskBusy(true); setError("");
     try {
-      const started = await get<{ kind: Kind; cursor: number; requestId: string }>("/api/simulator/request", body({ kind }));
-      setRequests(previous => ({ ...previous, [kind]: { cursor: started.cursor, requestId: started.requestId, waiting: true } }));
-    } catch (e) { setError(e instanceof Error ? e.message : "Simulator unavailable."); }
+      const response = await fetch("/api/flows/start", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ intentId }) });
+      const result = await response.json() as { error?: string };
+      if (!response.ok) throw new Error(result.error || "The task could not start.");
+      setScreen("munim");
+    } catch (e) { setError(e instanceof Error ? e.message : "The task could not start."); }
+    finally { setTaskBusy(false); }
   }
   function updateStockField(field: keyof StockInput, value: string) {
     setStockInput(previous => ({ ...previous, [field]: value }));
@@ -269,57 +228,6 @@ export default function HomePage() {
       setStockError(e instanceof Error ? e.message : "Stock coverage could not be checked.");
     } finally { setStockBusy(false); }
   }
-  async function evaluateAction(next: Action) {
-    setBusy(true); setError(""); setAction(next); setGuard(null); setExecution(null); setPin("");
-    setIdempotencyKey(crypto.randomUUID());
-    try {
-      const result = await get<Guard>("/api/guard/evaluate", body({ action: next }));
-      setGuard(result); setScreen("guard"); await refreshEvidence();
-    } catch (e) { setError(e instanceof Error ? e.message : "Guard check failed."); }
-    finally { setBusy(false); }
-  }
-  async function evaluateDrawdown() {
-    if (!drawdown?.amountInr || !visibleLenders) return;
-    await evaluateAction({ type: "drawdown", lender_id: "A", amount: drawdown.amountInr, destination_account: drawdown.destinationAccountMasked || "**4029", invoice_id: "GD-1182" });
-  }
-  async function evaluateSupplier() {
-    if (!supplierEvent || !gupta) return;
-    const candidate = supplierEvent.payload.candidate;
-    if (!candidate) {
-      setError("The received response has no supplier quote. No payment action was prepared.");
-      return;
-    }
-    const proposedPayment = candidate.totalAmount * candidate.upfrontPercent / 100;
-    if (!Number.isSafeInteger(candidate.totalAmount) || candidate.totalAmount <= 0 ||
-      typeof candidate.upfrontPercent !== "number" || candidate.upfrontPercent <= 0 ||
-      candidate.upfrontPercent > 100 || !Number.isSafeInteger(proposedPayment) || proposedPayment <= 0) {
-      setError("The received quote lacks valid price or upfront terms. No payment action was prepared.");
-      return;
-    }
-    setBusy(true); setError(""); setExecution(null); setPin("");
-    try {
-      const raw = await get<Omit<CaseRecord, "id" | "timestamp">>("/api/analyze", body({ event_seq: supplierEvent.seq }));
-      const reviewed: CaseRecord = { ...raw, id: "EP-" + crypto.randomUUID().slice(0, 8).toUpperCase(), timestamp: new Date().toISOString() };
-      setLatestCase(reviewed); setCases(previous => [reviewed, ...previous].slice(0, 20));
-      const next: Action = { type: "supplier_payment", supplier_id: "gupta", amount: proposedPayment,
-        simulator_event_seq: supplierEvent.seq,
-        beneficiary_name: candidate.beneficiaryName || "Gupta Distributors",
-        beneficiary_account: candidate.supplierAccount || "XXXX7781", invoice_id: gupta.invoiceId || "GD-1182" };
-      setAction(next);
-      const result = await get<Guard>("/api/guard/evaluate", body({ action: next }));
-      setGuard(result); setScreen("guard"); await refreshEvidence();
-    } catch (e) { setError(e instanceof Error ? e.message : "Supplier check failed."); }
-    finally { setBusy(false); }
-  }
-  async function execute() {
-    if (!action || !guard?.approval_id || !pin || !idempotencyKey) return;
-    setBusy(true); setError("");
-    try {
-      const result = await get<Execution>("/api/execute", body({ action, approval_id: guard.approval_id, pin, idempotency_key: idempotencyKey }));
-      setExecution(result); setPin(""); await refreshEvidence();
-    } catch (e) { setError(e instanceof Error ? e.message : "Simulated action refused."); }
-    finally { setBusy(false); }
-  }
   function choose(item: Option) {
     if (item.id === "supplier_deferral") setScreen("supplier");
     else if (item.id === "drawdown") setScreen("capital");
@@ -327,14 +235,13 @@ export default function HomePage() {
   }
   function resetView() {
     setMode("merchant"); setScreen("home"); setQuestion("Diwali ke liye paisa kahan se aayega?");
-    setAnswer(""); setWhatIf(false); setSelectedLender("A"); setAction(null); setGuard(null);
-    setExecution(null); setPin(""); setError("");
+    setAnswer(""); setWhatIf(false); setSelectedLender("A"); setError(""); setResetNotice(false);
   }
   function back() {
-    const previous: Partial<Record<Screen, Screen>> = { plan: "home", munim: "home", supplier: "plan", mandate: "supplier", guard: action?.type === "drawdown" ? "capital" : "supplier", capital: "plan", data: "home", evidence: "home" };
+    const previous: Partial<Record<Screen, Screen>> = { plan: "home", munim: "home", supplier: "plan", mandate: "supplier", guard: "munim", capital: "plan", data: "home", evidence: "home" };
     setScreen(previous[screen] || "home");
   }
-  if (mode === "riskops") return <RiskOps cases={cases} paused={paused} onPauseChange={next => void changePause(next)} onBack={() => setMode("merchant")} />;
+  if (mode === "riskops") return <main className="pm-riskops-mode"><button type="button" className="pm-secondary" onClick={() => setMode("merchant")}><ArrowLeft size={17}/>Back to merchant app</button><FlowRiskOps/></main>;
   return <main className="pm-shell">
     <aside className="pm-side" aria-label="Demo navigation">
       <div className="pm-side-brand"><span>paytm</span><small>for Business</small><strong>Munim</strong></div>
@@ -353,29 +260,36 @@ export default function HomePage() {
         <div className="pm-synthetic"><span/>Synthetic demo data - nothing here is real.<em>30 Oct 2026</em></div>
         <div className="pm-scroll" key={screen}>
           {error && <div className="pm-error" role="alert"><CircleAlert size={17}/>{error}<button type="button" aria-label="Dismiss" onClick={() => setError("")}>×</button></div>}
+          {paused && <div className="pm-hold" role="status"><CircleAlert size={18}/><span><b>RiskOps has paused demo checks</b><small>No task can advance or pay until RiskOps resumes.</small></span></div>}
+          {!online && <div className="pm-hold" role="status"><CircleAlert size={18}/><span><b>Offline · nothing is being sent</b><small>The demo server cannot be reached. Approvals and payments are disabled until the connection returns; the screen will refresh from the server then.</small></span></div>}
+          {resetNotice && <div className="pm-hold" role="status"><CircleAlert size={18}/><span><b>The demo server restarted</b><small>Earlier tasks, approvals, payments and evidence from that session are gone. Nothing shown here is from before the restart.</small></span><button type="button" onClick={() => setResetNotice(false)}>OK</button></div>}
           {screen === "home" && <div className="pm-screen">
             <p className="pm-greeting">Good evening, {cash?.business.owner || "Rakesh"}</p>
             <button type="button" className="pm-ask" onClick={() => setScreen("munim")}><span><Sparkles size={22}/></span><b>Ask Munim AI<small>“Diwali ke liye paisa kahan se aayega?”</small></b><ArrowRight size={18}/></button>
-            <div className="pm-gap"><div className="pm-gap-top"><span><Activity size={16}/>Upcoming payout planning</span><Pill tone="amber">Projected</Pill></div><p>Cash may run short on <b>{dateLabel(cash?.cashPlan.anchors.lowestDate)}</b></p><strong>{money(cash?.cashPlan.anchors.lowestBalanceInr)}</strong><div className="pm-gap-notes"><span>Gupta stock · rent · bonus</span><span>Above zero on {dateLabel(cash?.cashPlan.anchors.recoveryAboveZeroDate)}</span></div><button type="button" className="pm-primary" onClick={() => setScreen("plan")}>Review relief options &amp; scenarios<ArrowRight size={18}/></button></div>
+            <div className="pm-gap"><div className="pm-gap-top"><span><Activity size={16}/>Upcoming payout planning</span><Pill tone="amber">Projected</Pill></div>{covered ? <p>Cash stays above zero · lowest on <b>{dateLabel(anchors?.lowestDate)}</b></p> : <p>Cash may run short on <b>{dateLabel(anchors?.lowestDate)}</b></p>}<strong>{money(anchors?.lowestBalanceInr)}</strong><div className="pm-gap-notes"><span>{cash?.cashPlan.pendingActions?.length ? "A payment is pending reconciliation" : cash?.cashPlan.appliedRelief?.length ? "Includes completed relief" : "Gupta stock · rent · bonus"}</span><span>{covered ? "All outlets · one account" : "Above zero on " + dateLabel(anchors?.recoveryAboveZeroDate)}</span></div><button type="button" className="pm-primary" onClick={() => setScreen("plan")}>Review relief options &amp; scenarios<ArrowRight size={18}/></button></div>
             <Heading title="Today on Paytm" action="See sources" onAction={() => setScreen("data")}/>
             <div className="pm-today"><strong>{money(cash?.homePaytmToday.totalInr)}</strong><small>Collections to 12:40 pm · synthetic Paytm-only sample</small><div>{cash?.homePaytmToday.outlets.map(item => <span key={item.outlet}>{item.outlet} <b>{money(item.amountInr)}</b></span>)}</div></div>
             <button type="button" className="pm-row" onClick={() => setScreen("data")}><span className="pm-row-icon pm-green-bg"><Store size={19}/></span><span><b>How each outlet is doing</b><small>Payment pace and last Diwali&apos;s demand signal</small></span><ChevronRight size={18}/></button>
             <Heading title="Needs your attention" action="View all" onAction={() => setScreen("evidence")}/>
             <button type="button" className="pm-row" onClick={() => setScreen("munim")}><span className="pm-row-icon"><ShieldCheck size={19}/></span><span><b>Delegate and track a task</b><small>Supplier negotiation, evidence, and capital consent</small></span><ChevronRight size={18}/></button>
-            <button type="button" className="pm-row" onClick={() => setScreen("supplier")}><span className="pm-row-icon"><Handshake size={19}/></span><span><b>Supplier terms</b><small>Ask Gupta to defer or split GD-1182</small></span><ChevronRight size={18}/></button>
+            <button type="button" className="pm-row" onClick={() => setScreen("supplier")}><span className="pm-row-icon"><Handshake size={19}/></span><span><b>Supplier terms</b><small>Negotiate GD-1182 as a tracked task</small></span><ChevronRight size={18}/></button>
             <button type="button" className="pm-row" onClick={() => setScreen("data")}><span className="pm-row-icon pm-green-bg"><BadgeCheck size={19}/></span><span><b>Sources and gaps</b><small>See what is supplied and missing</small></span><ChevronRight size={18}/></button>
-            <button type="button" className="pm-capital-tile" onClick={() => setScreen("capital")}><Landmark size={20}/><span><b>Capital when you need it</b><small>Request illustrative lender offers</small></span><ChevronRight size={18}/></button>
+            <button type="button" className="pm-capital-tile" onClick={() => setScreen("capital")}><Landmark size={20}/><span><b>Capital when you need it</b><small>Compare offers · drawdown runs as a tracked task</small></span><ChevronRight size={18}/></button>
           </div>}
           {screen === "plan" && <div className="pm-screen">
-            <div className="pm-lead"><p>30 Oct–7 Nov · all outlets</p><h2>A gap before Diwali</h2><span>Projected low on {dateLabel(cash?.cashPlan.anchors.lowestDate)}</span><strong className="pm-negative">{money(cash?.cashPlan.anchors.lowestBalanceInr)}</strong></div>
+            <div className="pm-lead"><p>30 Oct–20 Nov · all outlets · one bank account</p><h2>{covered ? "No shortfall left" : "A gap before Diwali"}</h2><span>{covered ? "Lowest closing" : "Projected low"} on {dateLabel(anchors?.lowestDate)}</span><strong className={covered ? "" : "pm-negative"}>{money(anchors?.lowestBalanceInr)}</strong></div>
+            {!!cash?.cashPlan.pendingActions?.length && <div className="pm-hold" role="status"><CircleAlert size={18}/><span><b>Payment pending reconciliation</b>{cash.cashPlan.pendingActions.map(item => <small key={item.id}>{item.label}</small>)}</span></div>}
+            {!!cash?.cashPlan.appliedRelief?.length && <div className="pm-success"><CheckCircle2 size={20}/><span><b>Completed relief in this plan</b>{cash.cashPlan.appliedRelief.map(item => <small key={item.id}>{item.label}</small>)}</span></div>}
+            {options?.recommendation?.text && <div className="pm-note"><b>Munim&apos;s recommendation · calculated</b><p>{options.recommendation.text}</p></div>}
             <p className="pm-chart-label">{cash?.cashPlan.label || "Illustrative projection from the listed bills - not a measured future"}</p>
             <AnchorChart cash={cash}/>
-            {!!cash?.cashPlan.dailyBalanceSeries?.length && <div className="pm-daily-series" aria-label="Modeled closing cash from 4 to 7 November"><b>Modeled closing cash · decision window</b>{cash.cashPlan.dailyBalanceSeries.filter(item => item.date >= "2026-11-04" && item.date <= "2026-11-07").map(item => <div key={item.date}><span>{dateLabel(item.date)}</span><strong className={item.balanceInr < 0 ? "negative" : "positive"}>{money(item.balanceInr)}</strong></div>)}<small>Forecast inflows and listed outflows; no future bank balance is measured.</small></div>}
+            {!!cash?.cashPlan.dailyBalanceSeries?.length && <div className="pm-daily-series" aria-label="Modeled closing cash from 4 to 7 November"><b>Modeled closing cash · decision window</b>{cash.cashPlan.dailyBalanceSeries.filter(item => item.date >= "2026-11-04" && item.date <= "2026-11-07").map(item => <div key={item.date}><span>{dateLabel(item.date)}</span><strong className={item.balanceInr < 0 ? "negative" : "positive"}>{money(item.balanceInr)}</strong></div>)}<small>Expected collections, completed relief and listed bills; no future bank balance is measured.</small></div>}
             <div className="pm-source"><Info size={16}/>{cash?.cashPlan.dailyBalanceNote || "This view highlights three modeled dates."}<button type="button" onClick={() => setScreen("data")}>Sources</button></div>
             <Heading title="Planned outflows"/>
-            <div className="pm-ledger">{cash?.cashPlan.outflows.map(item => <div key={item.id}><span>{dateLabel(item.date)}</span><span>{item.payee}{item.invoiceId ? " · " + item.invoiceId : ""}{item.quality === "estimate" && <Pill tone="amber">Estimate</Pill>}</span><b>{money(item.amountInr)}</b></div>)}</div>
-            <Heading title="Three ways to cover the gap"/>
-            {choices.map(item => <button type="button" className="pm-option" key={item.id} onClick={() => choose(item)}><i>{item.rank}</i><span><b>{item.title}</b><small>{item.costLabel}</small><em>{typeof item.effectOn5Nov.balanceInr === "number" ? "5 Nov: " + money(item.effectOn5Nov.balanceInr) + (item.id === "cut_stock" ? " · illustrative arithmetic" : "") : item.effectOn5Nov.note || "Effect not supplied"}</em></span><ChevronRight size={18}/></button>)}
+            <div className="pm-ledger">{cash?.cashPlan.outflows.map(item => <div key={item.id}><span>{dateLabel(item.date)}</span><span>{item.payee}{item.invoiceId ? " · " + item.invoiceId : ""}{item.status === "paid_simulated" && <Pill tone="green">Paid · simulated</Pill>}{item.status === "payment_pending" && <Pill tone="amber">Payment pending</Pill>}{item.deferredFrom && <Pill tone="blue">Moved</Pill>}{item.quality === "estimate" && <Pill tone="amber">Estimate</Pill>}</span><b>{money(item.amountInr)}</b></div>)}
+              {cash?.cashPlan.afterHorizon?.map(item => <div key={item.id}><span>{dateLabel(item.date)}</span><span>{item.payee}{item.invoiceId ? " · " + item.invoiceId : ""}<Pill tone="amber">Still owed</Pill></span><b>{money(item.amountInr)}</b></div>)}</div>
+            <Heading title={covered ? "Relief options (no gap left)" : "Three ways to cover the gap"}/>
+            {choices.map(item => <button type="button" className="pm-option" key={item.id} onClick={() => choose(item)}><i>{item.rank}</i><span><b>{item.title}</b><small>{item.costLabel}</small><em>{typeof item.effectOn5Nov.balanceInr === "number" ? "5 Nov: " + money(item.effectOn5Nov.balanceInr) + (item.calculated === false ? " · assumption, not calculated" : "") : item.effectOn5Nov.note || "Effect not supplied"}</em></span><ChevronRight size={18}/></button>)}
             {whatIf && <div className="pm-note"><b>Stock reduction · illustrative</b><p>{choices.find(item => item.id === "cut_stock")?.conditions.join(" ")}</p><p>Payment amounts do not reveal which products sold.</p><button type="button" onClick={() => setWhatIf(false)}>Close</button></div>}
           </div>}
           {screen === "munim" && <div className="pm-screen pm-chat">
@@ -383,52 +297,38 @@ export default function HomePage() {
             <div className="pm-answer"><span><Sparkles size={18}/></span><div><b>Munim</b><p>{answer || answerFor(question, cash, options, outletForecast)}</p><small>Scripted demo response · numbers from backend tools</small></div></div>
             <FlowMerchant/>
             <Heading title="Choose what to explore"/>
-            <button type="button" className="pm-row" onClick={() => setScreen("plan")}><Activity size={19}/><span><b>See cash gap and options</b><small>Supplied anchors and outflows</small></span><ChevronRight size={18}/></button>
-            <button type="button" className="pm-row" onClick={() => setScreen("supplier")}><Handshake size={19}/><span><b>Ask Gupta for terms</b><small>Wait for a simulated supplier reply</small></span><ChevronRight size={18}/></button>
+            <button type="button" className="pm-row" onClick={() => setScreen("plan")}><Activity size={19}/><span><b>See cash gap and options</b><small>Calculated plan and relief</small></span><ChevronRight size={18}/></button>
+            <button type="button" className="pm-row" onClick={() => setScreen("supplier")}><Handshake size={19}/><span><b>Supplier terms</b><small>What the Gupta task negotiates</small></span><ChevronRight size={18}/></button>
             <button type="button" className="pm-row" onClick={() => setScreen("capital")}><Landmark size={19}/><span><b>Compare lenders</b><small>Owner PIN controls a passing drawdown</small></span><ChevronRight size={18}/></button>
           </div>}
           {screen === "supplier" && <div className="pm-screen">
-            <button type="button" className="pm-primary pm-full" onClick={() => setScreen("munim")}>Delegate and track a negotiation<ArrowRight size={18}/></button>
             <div className="pm-lead"><p>Gupta Distributors · invoice {gupta?.invoiceId || "GD-1182"}</p><h2>Ask for room to stock up</h2><span>Deferral or a split costs ₹0 only if Gupta agrees. No revised terms are guaranteed.</span></div>
             <div className="pm-intent"><div><Handshake size={17}/><b>Listed supplier bill</b></div><p>{money(gupta?.amountInr)} due {dateLabel(gupta?.date)}. No supplier is contacted by this demo.</p></div>
             <button type="button" className="pm-row pm-mandate-link" onClick={() => setScreen("mandate")}><ShieldCheck size={19}/><span><b>View guard boundaries</b><small>Identity, account, amount limit, and owner approval</small></span><ChevronRight size={18}/></button>
-            <button type="button" className="pm-primary pm-full" onClick={() => void request("supplier")}>Request supplier response<ArrowRight size={18}/></button>
-            {requests.supplier?.waiting && <div className="pm-hold"><CircleAlert size={18}/><span><b>Requested - waiting (simulated)</b><small>Waiting for Gupta&apos;s response.</small></span></div>}
-            {supplierEvent && !requests.supplier?.waiting && <div className="pm-loan-step"><div><Handshake size={19}/><b>Supplier response received</b></div><p>{String(receivedCandidate?.supplierMessage || "A supplier response was received.")}</p><small>{receivedCandidate?.beneficiaryName ? "Proposed beneficiary name: " + String(receivedCandidate.beneficiaryName) : "Registered payee on file: Gupta Distributors; reply did not supply a name."}</small><small>Conditional upfront payment from quote: {money(receivedUpfront)}. The listed {money(gupta?.amountInr)} invoice stays in the baseline plan.</small><small>Received after this request · event #{supplierEvent.seq}</small><button type="button" className="pm-primary pm-full" disabled={busy} onClick={() => void evaluateSupplier()}>{busy ? "Checking…" : "Check received response"}<ArrowRight size={18}/></button></div>}
-            <p className="pm-caption">{aaEvent && dataSummary?.supplier.aaAvailable ? "The synthetic AA sample has released observed Gupta payments for the guard." : "Request a simulated AA response before the guard uses observed Gupta payments."} This single-quote check uses header-only evidence. A tracked negotiation can request the full invoice, sign-off, and rail outcome.</p>
+            <button type="button" className="pm-primary pm-full" disabled={taskBusy || !online} onClick={() => void startTask("supplier_stock")}>{taskBusy ? "Starting…" : "Start the tracked Gupta negotiation"}<ArrowRight size={18}/></button>
+            <button type="button" className="pm-secondary pm-full" disabled={taskBusy || !online} onClick={() => void startTask("supplier_header_review")}>Start from the header-only GD-1182 photo<ArrowRight size={18}/></button>
+            <p className="pm-caption">Gupta&apos;s reply, the invoice evidence, the AA bank sample and the payment rail each arrive as a request in the simulator inbox. The advance needs your sign-off on the exact disclosure and your PIN.</p>
           </div>}
           {screen === "mandate" && <div className="pm-screen">
             <div className="pm-lead"><p>Owner boundaries</p><h2>What the guard can verify</h2><span>Missing requirements fail closed.</span></div>
-            <div className="pm-mandate-table"><div><span>Drawdown destination</span><b>Owner account **4029</b></div><div><span>Drawdown ceiling</span><b>₹2,00,000</b></div><div><span>Approved lenders</span><b>Lender A, B, C</b></div><div><span>Supplier name</span><b>Gupta Distributors exactly</b></div><div><span>Supplier payment ceiling</span><b>{aaEvent && dataSummary?.supplier.aaAvailable ? money(dataSummary.supplier.derivedLimit) : "Awaiting AA sample"}</b></div></div>
-            <div className="pm-hold"><CircleAlert size={18}/><span><b>Evidence follows the task</b><small>{aaEvent && dataSummary?.supplier.aaAvailable ? "The current ceiling uses clearly matched bank narrations across the complete prior financial year." : "Request the synthetic AA response before the guard uses observed Gupta payments."} The tracked task checks the selected header-only or full invoice version before any sign-off.</small></span></div>
-            <button type="button" className="pm-primary pm-full" onClick={() => setScreen("supplier")}>Return to supplier request<ArrowRight size={18}/></button>
+            <div className="pm-mandate-table"><div><span>Drawdown destination</span><b>Owner account **4029</b></div><div><span>Drawdown ceiling</span><b>₹2,00,000</b></div><div><span>Approved lenders</span><b>Lender A, B, C</b></div><div><span>Supplier name</span><b>Gupta Distributors exactly</b></div><div><span>Supplier payment ceiling</span><b>{aaReleased && dataSummary ? money(dataSummary.supplier.derivedLimit) : "Awaiting AA sample"}</b></div></div>
+            <div className="pm-hold"><CircleAlert size={18}/><span><b>Evidence follows the task</b><small>{aaReleased ? "The current ceiling uses clearly matched bank narrations across the complete prior financial year." : "Request the synthetic AA response before the guard uses observed Gupta payments."} The tracked task checks the selected header-only or full invoice version before any sign-off.</small></span></div>
+            <button type="button" className="pm-primary pm-full" onClick={() => setScreen("supplier")}>Return to supplier terms<ArrowRight size={18}/></button>
           </div>}
           {screen === "guard" && <div className="pm-screen" aria-live="polite">
-            {!guard ? <div className="pm-empty"><ShieldCheck size={30}/><h2>No guard check yet</h2><p>Request an offer or supplier response to run the deterministic check.</p><button type="button" className="pm-primary" onClick={() => setScreen("capital")}>Go to Capital<ArrowRight size={18}/></button></div> : <>
-              <div className={"pm-result pm-result-" + guard.decision.toLowerCase()}><Pill tone={guard.decision === "PASS" ? "green" : guard.decision === "BLOCK" ? "red" : "amber"}>{guard.decision === "PASS" ? "Guard passed" : guard.decision === "BLOCK" ? "Blocked" : "Needs owner"}</Pill><h2>{guard.decision === "PASS" ? "Requested - waiting (simulated)" : "This action cannot proceed"}</h2><p>{guard.reason || guard.checks.find(item => item.status !== "PASS")?.detail || "The checks are recorded below."}</p></div>
-              {latestCase && action?.type === "supplier_payment" && <div className="pm-guard-summary"><span>Supplier intent check</span><b>{latestCase.decision}</b><small>{latestCase.reasons?.[0]?.message || "Runtime action compared with merchant intent."}</small></div>}
-              <div className="pm-guard-summary"><span>Server guard action</span><b>{action?.type === "drawdown" ? "Lender A drawdown of " + money(Number(action.amount)) : "Supplier payment to " + action?.beneficiary_name}</b><small>{guard.needs_verification ? "Needs verification · no execution" : "Owner PIN is required for simulated execution."}</small></div>
-              <Heading title="Rules and drift checks"/><div className="pm-checks">{guard.checks.map((item, index) => <div key={item.id + index}><span className={item.status === "PASS" ? "pass" : item.status === "BLOCK" ? "block" : "warn"}>{item.status === "PASS" ? <Check size={15}/> : <CircleAlert size={15}/>}</span><div><b>{item.id.replaceAll("_", " ")}</b><small>{item.detail} · {item.status === "NEEDS_VERIFICATION" ? "Needs verification" : item.status}</small></div></div>)}</div>
-              <div className="pm-ai-note"><ShieldCheck size={19}/><div><b>AI can stop or escalate, never approve</b><small>Fixed limits are enforced in code. Only the owner PIN can approve a passing action.</small></div></div>
-              {guard.action_hash && <div className="pm-evidence-hash"><FileText size={16}/><span>Action hash</span><code>{guard.action_hash.slice(0, 16)}…</code></div>}
-              {guard.decision === "PASS" && !execution && action?.type === "drawdown" && <div className="pm-consent"><b>Owner approval · simulated</b><p>This request is waiting. Enter the owner PIN to attempt the simulated drawdown. No real money moves.</p><label htmlFor="pm-pin">Owner PIN</label><input id="pm-pin" type="password" autoComplete="off" value={pin} onChange={event => setPin(event.target.value)} placeholder="Enter PIN"/><button type="button" className="pm-primary pm-full" disabled={!pin || busy} onClick={() => void execute()}>{busy ? "Checking…" : "Approve and simulate"}<LockKeyhole size={17}/></button></div>}
-              {execution?.outcome === "done-simulated" && <div className="pm-success"><CheckCircle2 size={20}/><span><b>Done (simulated){typeof execution.balance_on_5_nov === "number" ? " - 5 Nov now " + money(execution.balance_on_5_nov) : ""}</b><small>One simulated ledger effect was recorded. No real funds moved.</small></span></div>}
-              {execution?.outcome === "blocked" && <div className="pm-hold"><CircleAlert size={18}/><span><b>Execution refused</b><small>{execution.reason || "Zero ledger effect."}</small></span></div>}
-              {guard.decision !== "PASS" && <div className="pm-hold"><CircleAlert size={18}/><span><b>{guard.needs_verification ? "Needs verification" : "Held for review"}</b><small>{guard.evidence_entry ? "No action can proceed. The blocked check was recorded in the server evidence log." : "No action can proceed. Evidence recording failed; this check has no log entry."}</small></span></div>}
-              <button type="button" className="pm-secondary pm-full" onClick={() => setScreen("evidence")}>View evidence and verify chain<ArrowRight size={18}/></button>
-            </>}
+            <div className="pm-lead"><p>Intent Guard</p><h2>Every action runs as a tracked task</h2><span>Checks, disclosures, approvals and rail outcomes for each task appear below and in RiskOps.</span></div>
+            <FlowMerchant/>
+            <div className="pm-ai-note"><ShieldCheck size={19}/><div><b>AI can stop or escalate, never approve</b><small>Fixed limits are enforced in code. Only the owner PIN can approve a passing action.</small></div></div>
+            <button type="button" className="pm-secondary pm-full" onClick={() => setScreen("evidence")}>View evidence and verify chain<ArrowRight size={18}/></button>
           </div>}
           {screen === "capital" && <div className="pm-screen">
-            <div className="pm-lead"><p>Partner financing · separate from supplier terms</p><h2>Compare capital offers</h2><span>Request a simulated lender response to see the illustrative schedule.</span></div>
-            <button type="button" className="pm-primary pm-full" onClick={() => void request("lenders")}>Request lender offers<ArrowRight size={18}/></button>
-            {requests.lenders?.waiting && <div className="pm-hold"><CircleAlert size={18}/><span><b>Requested - waiting (simulated)</b><small>Waiting for lender offers.</small></span></div>}
-            {visibleLenders && !requests.lenders?.waiting && <><p className="pm-caption">{lenders?.scheduleLabel}</p><div className="pm-note"><b>Monthly EMI cap: {money(visibleLenders.emiCap.maxTotalMonthlyEmiInr)}</b><p>{money(visibleLenders.emiCap.monthlyCollectionsInr)} collections × {visibleLenders.emiCap.percentage}%. Existing EMI: {money(visibleLenders.emiCap.existingMonthlyEmiInr)}.</p></div>
-              <div className="pm-offer-list">{visibleLenders.offers.map(item => <button type="button" key={item.id} className={"pm-loan pm-offer-choice " + (selectedLender === item.id ? "selected" : "")} onClick={() => setSelectedLender(item.id)}><div><Landmark size={21}/><Pill tone={item.underCap ? "green" : "red"}>{item.underCap ? "Under cap" : "Over cap"}</Pill></div><b>{item.name} · {item.type}</b><p>{item.aprPercent}% APR · {item.tenorMonths} months · {money(item.totalInterestInr)} total interest</p><div><span>Monthly EMI <strong>{money(item.emiInr)}</strong></span><span>With existing <strong>{money(item.totalMonthlyEmiInr)}</strong></span></div>{item.earlyRepayment && <small>After {item.earlyRepayment.afterDays} days: about {money(item.earlyRepayment.estimatedInterestInr)} interest</small>}</button>)}</div>
-              {selectedLender === "A" ? <div className="pm-loan-step"><div><ShieldCheck size={19}/><b>Review Lender A drawdown</b></div><p>{money(drawdown?.amountInr)} enters the owner account {drawdown?.destinationAccountMasked || "**4029"} once. Gupta invoice {gupta?.invoiceId || "GD-1182"} remains a full {money(gupta?.amountInr)} outflow.</p><small>5 Nov becomes {money(drawdown?.effectOn5Nov.balanceInr)} only after a completed simulated drawdown. A request alone changes nothing.</small><button type="button" className="pm-primary pm-full" disabled={!drawdown || busy} onClick={() => void evaluateDrawdown()}>Review guard and owner PIN<ArrowRight size={18}/></button></div> : <div className="pm-note"><b>Comparison only</b><p>Select Lender A to run the guarded drawdown simulation.</p></div>}
-            </>}
+            <div className="pm-lead"><p>Partner financing · separate from supplier terms</p><h2>Compare capital offers</h2><span>Illustrative schedules. The drawdown itself runs as a tracked task with AA data, bureau consent, lender reply, disclosure and your PIN.</span></div>
+            {lenders && <><p className="pm-caption">{lenders.scheduleLabel}</p><div className="pm-note"><b>Monthly EMI cap: {money(lenders.emiCap.maxTotalMonthlyEmiInr)}</b><p>{money(lenders.emiCap.monthlyCollectionsInr)} collections × {lenders.emiCap.percentage}%. Existing EMI: {money(lenders.emiCap.existingMonthlyEmiInr)}.</p></div>
+              <div className="pm-offer-list">{lenders.offers.map(item => <button type="button" key={item.id} className={"pm-loan pm-offer-choice " + (selectedLender === item.id ? "selected" : "")} onClick={() => setSelectedLender(item.id)}><div><Landmark size={21}/><Pill tone={item.underCap ? "green" : "red"}>{item.underCap ? "Under cap" : "Over cap"}</Pill></div><b>{item.name} · {item.type}</b><p>{item.aprPercent}% APR · {item.tenorMonths} months · {money(item.totalInterestInr)} total interest</p><div><span>Monthly EMI <strong>{money(item.emiInr)}</strong></span><span>With existing <strong>{money(item.totalMonthlyEmiInr)}</strong></span></div>{item.earlyRepayment && <small>After {item.earlyRepayment.afterDays} days: about {money(item.earlyRepayment.estimatedInterestInr)} interest</small>}</button>)}</div></>}
+            {selectedLender === "A" ? <div className="pm-loan-step"><div><ShieldCheck size={19}/><b>Lender A drawdown · tracked task</b></div><p>{money(drawdown?.amountInr)} enters the owner account {drawdown?.destinationAccountMasked || "**4029"} once. Gupta invoice {gupta?.invoiceId || "GD-1182"} remains a full {money(gupta?.amountInr)} outflow.</p><small>{typeof drawdown?.effectOn5Nov.balanceInr === "number" ? "With it, 5 Nov closes at " + money(drawdown.effectOn5Nov.balanceInr) + ". " : ""}The plan changes only after the rail confirms the drawdown.</small><button type="button" className="pm-primary pm-full" disabled={taskBusy || !online} onClick={() => void startTask("capital_standard")}>{taskBusy ? "Starting…" : "Start the tracked ₹2 lakh drawdown"}<ArrowRight size={18}/></button><button type="button" className="pm-secondary pm-full" disabled={taskBusy || !online} onClick={() => void startTask("capital_extended")}>₹2.5 lakh with Know Your Agent<ArrowRight size={18}/></button></div> : <div className="pm-note"><b>Comparison only</b><p>The tracked drawdown uses Lender A&apos;s offer. Select Lender A to start it.</p></div>}
           </div>}
           {screen === "data" && <div className="pm-screen">
-            <div className="pm-lead"><p>Sources and limits</p><h2>Where the plan&apos;s numbers come from</h2><span>Cash anchors are illustrative, not measured future balances.</span></div>
+            <div className="pm-lead"><p>Sources and limits</p><h2>Where the plan&apos;s numbers come from</h2><span>The cash plan is calculated from listed bills and each outlet&apos;s collection forecast. It is not a measured future.</span></div>
             <div className="pm-data-row"><Wallet size={19}/><span><b>Paytm collections</b><small>{money(cash?.homePaytmToday.totalInr)} to 12:40 pm in the synthetic Paytm-only channel.</small></span><Pill tone="green">Sample</Pill></div>
             <div className="pm-data-row"><Activity size={19}/><span><b>Projected cash low</b><small>{money(cash?.cashPlan.anchors.lowestBalanceInr)} on {dateLabel(cash?.cashPlan.anchors.lowestDate)} from the synthetic cash model.</small></span><Pill tone="amber">Projected</Pill></div>
             <div className="pm-data-row"><Store size={19}/><span><b>Outlet payment signals</b><small>Paytm activity by mapped device and last year&apos;s Diwali uplift. No SKU or unit data.</small></span><Pill>Sample</Pill></div>
@@ -470,17 +370,14 @@ export default function HomePage() {
             </form>
             {stockError && <div className="pm-hold" role="alert"><CircleAlert size={18}/><span><b>Coverage not calculated</b><small>{stockError}</small></span></div>}
             {stockResult && <div className={"pm-stock-result pm-stock-result-" + stockResult.state} role="status"><div className="pm-stock-result-head"><b>{stockResult.state === "likely_shortage" ? "Likely shortfall — review replenishment" : stockResult.state === "possible_surplus" ? "Possible surplus — review the order" : "Coverage needs monitoring"}</b><Pill tone={stockResult.state === "likely_shortage" ? "red" : "amber"}>Proxy</Pill></div><p>{stockResult.outlet.name} · {dateLabel(stockResult.horizon.from)} to {dateLabel(stockResult.horizon.to)} · {stockResult.horizon.coverageDays} festival days covered</p><div><span>Estimated units needed<b>{stockResult.estimatedDemandUnits.point}</b><small>Historical range {stockResult.estimatedDemandUnits.low}–{stockResult.estimatedDemandUnits.high}</small></span><span>Units on hand<b>{stockResult.assumptions.unitsOnHand}</b><small>Entered by owner</small></span></div><p>{stockResult.explanation}</p>{stockResult.recommendedReviewUnits > 0 && <strong>Point-scenario gap: {stockResult.recommendedReviewUnits} units to review with the supplier.</strong>}<small>No SKU sales were observed. This check does not place an order or payment.</small></div>}
-            <div className="pm-data-row"><Landmark size={19}/><span><b>Supplier payment history</b><small>{aaEvent && dataSummary?.supplier.aaAvailable ? `${dataSummary.supplier.priorFyDebitCount} clearly matched synthetic Gupta debits total ${money(dataSummary.supplier.priorFyDebitTotal)}. 110% ceiling: ${money(dataSummary.supplier.derivedLimit)}. ${dataSummary.supplier.completeFinancialYear ? "The prior FY is complete." : "The available period is partial."} Uncertain matches are excluded.` : "Observed Gupta payments are inferred from current bank narrations. Request an AA sample response before the guard uses them."}</small></span><Pill tone={aaEvent && dataSummary?.supplier.aaAvailable ? "green" : "amber"}>{aaEvent && dataSummary?.supplier.aaAvailable ? "Sample ready" : "Awaiting"}</Pill></div>
+            <div className="pm-data-row"><Landmark size={19}/><span><b>Supplier payment history</b><small>{aaReleased && dataSummary ? `${dataSummary.supplier.priorFyDebitCount} clearly matched synthetic Gupta debits total ${money(dataSummary.supplier.priorFyDebitTotal)}. 110% ceiling: ${money(dataSummary.supplier.derivedLimit)}. ${dataSummary.supplier.completeFinancialYear ? "The prior FY is complete." : "The available period is partial."} Uncertain matches are excluded.` : "Observed Gupta payments are inferred from current bank narrations. A tracked task releases them when the simulator returns an available AA response."}</small></span><Pill tone={aaReleased ? "green" : "amber"}>{aaReleased ? "Sample ready" : "Awaiting"}</Pill></div>
             <div className="pm-data-row"><FileText size={19}/><span><b>GD-1182 invoice</b><small>The source includes a header-only photo and full 212-line document. A tracked task checks the selected version, arithmetic, account, duplicates, and instructions.</small></span><Pill tone="green">V4 supplied</Pill></div>
-            <button type="button" className="pm-primary pm-full" onClick={() => void request("aa")}>Request sample AA response<ArrowRight size={18}/></button>
-            {requests.aa?.waiting && <div className="pm-hold"><CircleAlert size={18}/><span><b>Requested - waiting (simulated)</b><small>Waiting for the bank data response.</small></span></div>}
-            {aaEvent && !requests.aa?.waiting && <div className="pm-note"><b>AA response received</b><p>{String(aaEvent.payload.status || aaEvent.payload.source || "Sample status received")}. {dataSummary?.supplier.aaAvailable ? "The server can now check the synthetic bank rows for the supplier limit." : "The bank sample is not available for this request."} No real AA rail was contacted.</p></div>}
             <p className="pm-caption">{cash?.sourceNote}</p>
           </div>}
           {screen === "evidence" && <div className="pm-screen">
-            <div className="pm-lead"><p>Server evidence log</p><h2>What the guard recorded</h2><span>Only demo attempts appear here. The hash-chain check runs on the server.</span></div>
+            <div className="pm-lead"><p>Server evidence log</p><h2>What the guard recorded</h2><span>The same journal RiskOps reads: requests, responses, disclosures, approvals and outcomes. Resets when the server restarts.</span></div>
             <div className={verification?.ok && entries.length > 0 ? "pm-success" : "pm-hold"}>{verification?.ok && entries.length > 0 ? <CheckCircle2 size={20}/> : <CircleAlert size={20}/>}<span><b>{verification ? entries.length === 0 ? "No entries to verify" : verification.ok ? "Hash chain verified" : "Hash chain failed" : "Verification unavailable"}</b><small>{verification && !verification.ok ? "First broken sequence: " + String(verification.first_broken_seq ?? "unknown") : "Read from the verification endpoint."}</small></span></div>
-            {entries.length === 0 ? <div className="pm-empty"><FileText size={28}/><h2>No attempts yet</h2><p>Run a guard check to create the first evidence entry.</p><button type="button" className="pm-primary" onClick={() => setScreen("capital")}>Go to Capital<ArrowRight size={18}/></button></div> : <div className="pm-case-list">{[...entries].reverse().map(item => <div className="pm-evidence-entry" key={item.seq}><span><b>#{item.seq} · {item.outcome || "Recorded"}</b><small>{item.timestamp}</small></span><code>{item.hash?.slice(0, 20)}…</code></div>)}</div>}
+            {entries.length === 0 ? <div className="pm-empty"><FileText size={28}/><h2>No attempts yet</h2><p>Start a tracked task to create the first evidence entry.</p><button type="button" className="pm-primary" onClick={() => setScreen("munim")}>Delegate a task<ArrowRight size={18}/></button></div> : <div className="pm-case-list">{[...entries].reverse().map(item => <div className="pm-evidence-entry" key={item.seq}><span><b>#{item.seq} · {(item.event || item.outcome || "Recorded").replaceAll("_", " ")}</b><small>{item.summary}</small><small>{item.timestamp}{item.disclosure ? " · disclosure v" + item.disclosure.version + " " + item.disclosure.hash.slice(0, 12) + "…" : ""}{item.ledgerRef ? " · ledger " + item.ledgerRef.slice(0, 8) : ""}</small></span><code>{item.hash?.slice(0, 20)}…</code></div>)}</div>}
             <button type="button" className="pm-secondary pm-full" onClick={() => void refreshEvidence()}>Verify again<ArrowRight size={18}/></button>
             <button type="button" className="pm-secondary pm-full" onClick={() => setMode("riskops")}>Open RiskOps trace<ArrowRight size={18}/></button>
             <p className="pm-caption">This log records checks and outcomes, not a payment receipt.</p>
@@ -490,10 +387,10 @@ export default function HomePage() {
       </div>
     </section>
     <aside className="pm-right" aria-label="Demo controls">
-      <div className="pm-control"><span>Journey control</span><h2>From projected gap to guarded action</h2><p>Compare the choices, request an external response, then inspect the guard and evidence.</p><button type="button" className="pm-primary pm-full" onClick={() => setScreen("plan")}>Review cash plan<ArrowRight size={18}/></button></div>
+      <div className="pm-control"><span>Journey control</span><h2>From projected gap to guarded action</h2><p>Start a tracked task, answer its requests in the simulator, then review the disclosure, PIN, outcome and evidence.</p><button type="button" className="pm-primary pm-full" onClick={() => setScreen("plan")}>Review cash plan<ArrowRight size={18}/></button></div>
       <div className="pm-right-card"><span>Decision outcomes</span><p><CheckCircle2 size={17} className="pm-green"/>Requested - waiting</p><p><CircleAlert size={17} className="pm-amber"/>Needs verification</p><p><ShieldCheck size={17} className="pm-red"/>Blocked action</p></div>
-      <div className="pm-right-card"><span>Source truth</span><p><b>Paytm</b> sees payment amounts by outlet, not products sold.</p><p><b>Cash plan</b> is a synthetic model, not a measured future.</p><p><b>Supplier cap</b> comes from prior-FY bank debits after a simulated AA response.</p></div>
-      <button type="button" className="pm-open-risk" onClick={() => setMode("riskops")}><ShieldCheck size={20}/><span><b>Open RiskOps</b><small>Inspect cases and evidence</small></span><ArrowRight size={18}/></button>
+      <div className="pm-right-card"><span>Source truth</span><p><b>Paytm</b> sees payment amounts by outlet, not products sold.</p><p><b>Cash plan</b> is a synthetic model, not a measured future.</p><p><b>Supplier cap</b> comes from prior-FY bank debits after a tracked AA response.</p></div>
+      <button type="button" className="pm-open-risk" onClick={() => setMode("riskops")}><ShieldCheck size={20}/><span><b>Open RiskOps</b><small>Same journal as Evidence</small></span><ArrowRight size={18}/></button>
     </aside>
   </main>;
 }
