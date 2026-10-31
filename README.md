@@ -29,8 +29,14 @@ The 15 source CSVs, workbook, two generator scripts, and source README in `data/
 - The supplied GD-1182 invoice row contains amount, due date, account suffix, and a description, but no full invoice body. Supplier negotiation and intent drift can be demonstrated; a supplier payment remains **Needs verification** because the original body cannot be checked for instruction injection. The supplied changed-account, duplicate, and injected-description rows are test fixtures.
 - The owner's drawdown destination `**4029` comes from the demo brief. The synthetic operating bank-statement account ends `4521`; these are distinct accounts and are not silently substituted for each other. Drawdowns are capped at ₹2,00,000 for this demo. Larger amounts require a future Know Your Agent flow and cannot execute here.
 
+## Outlet demand and stock coverage (Milestone 2)
+
+`GET /api/outlet-forecast` produces a seven-day 4–10 November collection estimate for each outlet from complete all-channel shift handovers through 29 October. It uses a recent same-weekday median, a bounded recent trend, and the measured 2025 Diwali uplift. Low and high values are historical residual scenarios, **not** a calibrated confidence interval. The partial 30 October Paytm sample is excluded. This separate forecast does not overwrite the workbook cash plan or its 5 November low.
+
+In the existing **Your data** screen, an owner can enter an outlet, product label, unit price, assumed share of outlet revenue, units on hand, and the number of festival days to cover from 4 November. `POST /api/stock-coverage` returns a low/point/high **unit proxy** and a manual replenishment or surplus review suggestion. It does not model supplier lead time or record an order, supplier message, payment, or inventory update. Without owner inputs, no SKU unit estimate is shown.
+
 ## Boundaries
 
 Simulator requests and dispatches, approvals, pause state, ledger effects, and evidence live in server memory and reset on restart. RiskOps hashes are not independently anchored audit evidence. The multilingual golden-evals workbook is an unrun specification; `npm test` covers the implemented demo paths only. The interface was built locally against the supplied Stitch reference; its page source was not imported.
 
-See `docs/MILESTONE.md` for what this checkpoint covers and the product work that remains.
+See `docs/MILESTONE.md` for the first checkpoint and `docs/MILESTONE-2.md` for the outlet forecast boundary.

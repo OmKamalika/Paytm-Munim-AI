@@ -125,6 +125,13 @@ const source = {
     },
   },
   outletMetrics,
+  handoverShifts: handovers.rows.map((row) => ({
+    date: row.date,
+    outletId: row.outlet_id,
+    shift: row.shift,
+    status: row.status,
+    collectedTotalInr: Number(row.collected_total_inr),
+  })),
   supplierSummary,
   aaDebits: debitRows,
   invoice: {
