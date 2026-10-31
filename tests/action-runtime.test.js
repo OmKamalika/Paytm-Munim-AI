@@ -91,7 +91,7 @@ test('replay is refused and exactly one drawdown effect is recorded', async () =
   const first = await runtime.execute({ action, approval_id: evaluation.approval_id, pin, idempotency_key: key });
   const replay = await runtime.execute({ action, approval_id: evaluation.approval_id, pin, idempotency_key: key });
   assert.equal(first.outcome, 'done-simulated');
-  assert.equal(first.balance_on_5_nov, -69892);
+  assert.equal(first.balance_on_5_nov, -68279);
   assert.equal(replay.outcome, 'blocked');
   assert.equal(replay.reason, 'REPLAY');
   assert.equal((await runtime.getLedger()).effects.length, 1);
@@ -132,7 +132,7 @@ test('valid drawdown requires exact approved payload and owner account', async (
   assert.equal((await runtime.getLedger()).effects.length, 0);
   const accepted = await runtime.execute({ action, approval_id: evaluation.approval_id, pin, idempotency_key: crypto.randomUUID() });
   assert.equal(accepted.outcome, 'done-simulated');
-  assert.equal(accepted.balance_on_5_nov, -69892);
+  assert.equal(accepted.balance_on_5_nov, -68279);
   assert.equal((await runtime.getLedger()).effects.length, 1);
 });
 

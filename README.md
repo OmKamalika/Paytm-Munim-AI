@@ -1,18 +1,60 @@
 # PayTMunim demo
 
-A local, synthetic merchant and RiskOps demonstration. The merchant sees a projected Diwali cash gap, compares three relief options, requests external responses, and reviews guarded actions. A separate simulator console sends supplier, Account Aggregator (AA), and lender responses. No real payment, supplier message, AA fetch, bureau request, or loan submission occurs.
+A synthetic merchant cash-planning and Intent Guard demonstration for Sharma General Stores (Dadar, Matunga, Sion). The merchant sees a projected Diwali cash gap, delegates supplier and capital tasks to Munim, and approves only the exact disclosure shown, with a private PIN. An operator console sends every external response (supplier, invoice evidence, AA, bureau, lender, payment rail). RiskOps watches the same journal. **All data, rails and responses are simulated; no real money, supplier, AA, bureau or lender is contacted.**
 
-## Run locally
+## Run from a clean clone
 
-Node.js 22.13 or newer is required.
+Requires Node.js 22.13 or newer. No database, API key or private hosting file is needed.
 
-```powershell
-npm install
+```bash
+git clone https://github.com/OmKamalika/Paytm-Munim-AI.git
+```
+
+```bash
+cd Paytm-Munim-AI
+```
+
+```bash
+npm ci
+```
+
+```bash
 npm run configure:pin
+```
+
+`configure:pin` asks for a 6–12 digit owner PIN in the terminal (input hidden) and writes only its SHA-256 hash to the ignored `.env.local`. Nothing secret is committed; `.env.example` documents the variable without a value. Without a PIN hash, approvals fail closed.
+
+Development server (hot reload):
+
+```bash
 npm run dev
 ```
 
-PIN setup prompts privately in the terminal and saves only its SHA-256 hash in ignored `.env.local`. Restart the dev server if the PIN is configured or changed while it is running. No PIN value is bundled with this project. Without a configured hash, the guard fails closed and the drawdown cannot complete.
+Production build, started locally (this is the tested release path):
+
+```bash
+npm run build
+```
+
+```bash
+npm run start
+```
+
+`npm run start` serves the build at `http://127.0.0.1:8787` and passes the PIN hash to the built worker through the ignored `dist/server/.dev.vars`. Set `HOST=0.0.0.0` to reach it from a phone on the same network. If `.openai/hosting.json` (a hosting-scaffold file, gitignored) is absent, the build runs without database or storage bindings, which this app does not use.
+
+Release checks (also run in CI on every push and pull request):
+
+```bash
+npm run verify:sources && npm test && npm run lint && npx tsc --noEmit && npm run build
+```
+
+## Open three views
+
+- Merchant (phone): `/`
+- Operator: `/simulator`
+- RiskOps: `/riskops`
+
+### Install on a phone
 
 Open the local URL printed by the dev server in three tabs: `/` for the merchant, `/simulator` for the operator, and `/riskops` for live review. In the merchant app, open **Ask Munim → Delegate and track** and choose a business intent. Its next external request appears in the simulator inbox. Select that exact request and respond; the merchant receives the result and RiskOps refreshes the same run, intent delta, guard action, disclosure, and trace every second. The merchant cannot select a supplier, judge, or rail scenario.
 
@@ -27,8 +69,11 @@ Open the local URL printed by the dev server in three tabs: `/` for the merchant
 
 Responses bind to one open request and stale responses are rejected. A shared payment reservation prevents the tracked and single-step demos from paying or drawing against the same invoice twice. Successful rail outcomes create one local ledger effect. The journal records source/tool decisions, actors, original/runtime intents, deltas, simulated judge flags, exact disclosures, consent outcomes, and hashes. The judge fixture can add escalation and cannot overrule deterministic failures.
 For the drawdown journey, request lender offers, dispatch the A/B/C fixture, select Lender A, review the server guard, and enter the owner PIN. The demo records one in-memory ledger effect only after the guard, payload, PIN, and evidence checks pass. Evidence and RiskOps show the resulting hash chain. `npm test` runs isolated unit and acceptance checks, including the release-gate regressions in `tests/regression-gate.test.js`.
+The app is an installable PWA (manifest, PNG and maskable icons, service worker). Installation needs HTTPS or `localhost`. Serve the build over HTTPS (any host that runs the Cloudflare Worker build, or a tunnel to `npm run start`), open it in Chrome on Android or Safari on iOS, then **Install app** / **Add to Home Screen**. The service worker caches only an offline page and icons, never `/api` data, so an offline phone shows an honest offline screen and never shows an old balance or success as current.
 
-## Synthetic data and calculations
+## How the demo runs
+
+Every money-moving action is a **tracked task** with one pipeline: correlated request → simulator response → guard checks → disclosure (versioned, hashed) → owner PIN → fenced rail instruction → success, failure or pending → ledger → recalculated plan → journal. The earlier single-step guard/execute routes are retired (HTTP 410) and their screens start tracked tasks instead.
 
 The active data adapter is `lib/active-source.js`, using the supplied v4 bundle at `data/synthetic-v4/`. Earlier versions remain in `data/synthetic/` and `data/synthetic-v3/`. All supplied CSV, Excel, invoice JSON, ReBIT XML/JSON, README, and generator code are preserved. The 25 strategy/PRD markdown files, earlier workbooks/JSON fixture, and pasted briefs are in `specs/`. `specs/SOURCE_MANIFEST.json` records hashes for all 120 source files, including five Excel workbooks. Run `npm run verify:sources` to check the bundle. Our importers derive compact runtime snapshots without running the supplied Python generators. No PostgreSQL database is created or used.
 
@@ -50,25 +95,48 @@ The active data adapter is `lib/active-source.js`, using the supplied v4 bundle 
 - The supplier payment ceiling is 110% of prior-financial-year same-supplier debits in the simulated bank statement. The Gupta fixture has 49 labeled debits totaling ₹59,18,310, yielding a ₹65,10,141 ceiling. The bank's `label_*` fields are synthetic generator ground truth, not bank-attested payee identity. This fixture is released to the merchant and guard only after an available AA response is dispatched in the simulator.
 - The supplied GD-1182 invoice row contains amount, due date, account suffix, and a description, but no full invoice body, so a payment against GD-1182 stays **Needs verification**. A separate, clearly labelled synthetic revision, **GD-1182-R1** (`lib/invoice-gd-1182-r1.generated.js`, built by `scripts/build-revised-invoice.mjs`), has a full body: 12 outlet × SKU lines, ₹5,20,000, 50% upfront on delivery, balance in 45 days, 50% buyback, pay to Gupta's verified account ending 7781 (supplier assumed to be on Paytm for Business). It was authored for the demo and is not part of the supplied data. The supplied changed-account, duplicate, and injected-description rows are test fixtures.
 - The owner's drawdown destination `**4029` comes from the demo brief. The synthetic operating bank-statement account ends `4521`; these are distinct accounts and are not silently substituted for each other. Drawdowns are capped at ₹2,00,000 for this demo. Larger amounts require a future Know Your Agent flow and cannot execute here.
+**Simulator sequencing.** A task opens one request at a time. In `/simulator`, select the request marked *open* and choose a response for its kind. A response to an answered, superseded or unknown request is refused. Typical sequences:
 
-## Outlet demand and stock coverage (Milestone 2)
+| Journey | Merchant starts | Operator responses, in order | Merchant decisions |
+|---|---|---|---|
+| Eligible success (₹2 lakh drawdown) | Capital → *Start the tracked ₹2 lakh drawdown* | AA available → OTP passed → Lender A offer → *Rail pending* → *Rail successful* | Approve bureau purpose (PIN); approve loan (PIN) |
+| Permitted drift | Supplier terms → *Start the tracked Gupta negotiation* | Counteroffer (60%, 30 days, no buyback) → judge clear → full GD-1182 (INV-07) → AA available → rail successful | Approve the changed terms (PIN); separately approve the ₹3,12,000 advance (PIN) |
+| Hard block | Gupta negotiation | Changed payee and account | None possible: blocked, no disclosure |
+| Missing-evidence hold | Supplier terms → *Start from the header-only GD-1182 photo* | Header-only photo (INV-01) | None: paused until full evidence is requested |
+| Pending → reconciliation | Any payment step | *Rail pending*, then later *Rail successful* or *Rail failed* | None: the same instruction is reconciled, never resent |
 
-`GET /api/outlet-forecast` produces a seven-day 4–10 November collection estimate for each outlet from complete all-channel shift handovers through 29 October. It uses a recent same-weekday median, a bounded recent trend, and the measured 2025 Diwali uplift. Low and high values are historical residual scenarios, **not** a calibrated confidence interval. The partial 30 October Paytm sample is excluded. Since Milestone 3, the cash plan uses the same model over 30 Oct–20 Nov as its expected collections (an owner decision; see `docs/MILESTONE-3.md`).
+**Rehearsal reset.** State is process memory. Stop the server (Ctrl+C) and start it again to reset every task, approval, ledger effect, pause and journal entry. Open pages notice the new session, say so, and drop earlier results. There is no reset endpoint. An invoice can have only one successful effect per action type in a session, so restart between full repetitions.
 
-In the existing **Your data** screen, an owner can enter an outlet, product label, unit price, assumed share of outlet revenue, units on hand, and the number of festival days to cover from 4 November. `POST /api/stock-coverage` returns a low/point/high **unit proxy** and a manual replenishment or surplus review suggestion. It does not model supplier lead time or record an order, supplier message, payment, or inventory update. Without owner inputs, no SKU unit estimate is shown.
+## Cash plan and relief
 
-## Outlet order and supplier payment (Milestone 3)
+`lib/cash-engine.js` calculates the plan from inputs mapped in `lib/cash-inputs.js`; each input is checked against its source in tests.
 
-- `lib/outlet-order.js` splits the owner's 400-box, ₹5,20,000 Gupta order across outlets and SKUs: Milestone 2's stock-coverage calculation gives each outlet × SKU unit gap from the Diwali-week forecast, and the 400 boxes are split in proportion, in whole case packs of 5. Result: **Dadar 220, Matunga 115, Sion 65**. The SKU inputs (four ₹1,300 gift-box SKUs, each SKU's assumed share of outlet festival collections, units on hand, delivery addresses) are a synthetic fixture in `data/synthetic-ext/`, authored for the demo and outside the 49-file source manifest. The forecast itself points to only about 81 boxes short for Diwali week, so the order is large and the 50% buyback matters.
-- The delegate's order carries the outlet × SKU split. The intent check escalates a supplier reply that changes it (`supplier_delivery_drift`). The guard checks GD-1182-R1 line by line against the accepted order, its pay-to account, total and upfront amount, scans its body for injected instructions, and blocks a second payment for the same order under either invoice number. With the AA sample released and simulator reply `supplier_outlet_order`, the ₹2,60,000 upfront payment passes and executes once with the owner PIN (simulated). This path is API-only until the Stitch screens are wired.
+- **Opening** ₹4,50,000 = v4 bank close 29 Oct ₹3,52,730 + till cash ₹97,270 (v4 workbook `Cash_Plan!B2`). Not shown in the API.
+- **Expected collections** = the sum of the Dadar, Matunga and Sion forecasts per day (Milestone 2 model: same-weekday median, bounded trend, last Diwali's uplift on 4–10 Nov only), 30 Oct–20 Nov. A point estimate, not a measured future.
+- **Bills**: the seven rows of `upcoming_outflows.csv` plus v4 recurring EMI, electricity and broadband from bank narrations. Rent, salary and GST are listed once.
+- **Result**: low **−₹2,68,279 on 5 Nov**, back above zero on 8 Nov. On the workbook's fixed ₹70,000/₹1,20,000 collections the same engine reproduces the v4 workbook `Cash_Plan` exactly (−₹1,84,500).
+- **Relief counts only after a confirmed action** from the tracked ledger: a drawdown adds one inflow (the Gupta bill stays at ₹5,20,000); a supplier advance is marked paid on its due date and the balance moves to the agreed credit date, never deducted twice; a **pending** instruction changes nothing, flags the bill, and suppresses any suggestion that would prompt a second payment.
+- **Recommendation** (calculated): ask Gupta first (₹0; the requested 50/45 terms leave −₹8,279), then a ₹50,000 top-up drawdown (about ₹700 interest). A drawdown alone would need ₹2,70,000, above the ₹2,00,000 owner cap. When no shortfall remains, the plan says so and recommends nothing.
 
-Simulator scenarios added: `supplier_outlet_order` (accepts terms and split, attaches GD-1182-R1) and `supplier_delivery_drift` (accepts terms but delivers everything to Dadar).
+## Sources
 
-## Boundaries
+The active adapter `lib/active-source.js` uses the supplied v4 bundle in `data/synthetic-v4/`; v2 (`data/synthetic/`) and v3 are preserved. `specs/SOURCE_MANIFEST.json` hashes all 120 supplied files (CSV, five Excel workbooks, invoice JSON, ReBIT XML/JSON, generators, 25 PRD markdown files); `npm run verify:sources` checks them.
+
+- GD-1182: the owner's photo (INV-01) is header-only and fails closed; the full 212-line upload (INV-07) is supplied and can pass evidence checks. No invoice is authored to make a payment succeed.
+- Gupta's supplier ceiling: 53 high-confidence narration matches over the full prior FY total ₹62,86,960, so 110% is ₹69,15,656. Narration attribution is inferred, not bank-attested.
+- Operating and drawdown account both end `4029`.
+- `data/synthetic-ext/` is a separate, labelled fixture authored for the outlet order split (four gift-box SKUs, shares, stock). It is not supplied data and is outside the manifest.
 
 Simulator requests and dispatches, approvals, pause state, ledger reservations/effects, and evidence live in server memory and reset on restart. Demo roles are actor labels; production authentication and tenant isolation are not implemented. RiskOps hashes are not independently anchored audit evidence. The simulated judge does not call an LLM. The full multilingual golden-evals workbook remains a specification; the selected flow evaluations run real local code. The interface was built against the supplied Stitch reference; its page source was not imported.
 
 See `docs/MILESTONE.md`, `docs/MILESTONE-2.md`, and `docs/MILESTONE-3.md` for the checkpoint scope and remaining boundaries.
 See `docs/MILESTONE.md`, `docs/MILESTONE-2.md` and `docs/MILESTONE-3.md` for each checkpoint's scope and boundaries.
+## Known limits
 
-The build reads `.openai/hosting.json` only if it exists (it is gitignored); without it, the app runs with no database or storage bindings, which it does not use.
+- Synthetic rails, responses and judge; no live payment, AA, bureau, lender or supplier integration.
+- Ask Munim is a scripted keyword dialogue over calculated results (`/api/munim`), not a language model or Hindi understanding. The judge is a fixture that can only add escalation.
+- Session-only state: tasks, approvals, ledger, pause and journal reset on restart. The hash chain is not externally anchored. Roles are labels, not authenticated users.
+- Forecasts are point estimates from payment and handover history; SKU shares and stock in `data/synthetic-ext/` are assumptions. The outlet order split is advisory and not yet part of the tracked supplier task.
+- The multilingual golden-evals workbook is not run.
+
+See `docs/M4-RELEASE.md` for this release's verification record, and `docs/MILESTONE*.md` for earlier checkpoints.

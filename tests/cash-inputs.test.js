@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { cashInputs } from '../lib/cash-inputs.js';
+import { activeSource } from '../lib/active-source.js';
 
 const root = new URL('../', import.meta.url);
 function csv(path) {
@@ -14,7 +15,7 @@ function csv(path) {
 }
 
 test('every upcoming outflow in the CSV is mapped with the same date and amount', () => {
-  const source = csv('data/synthetic/upcoming_outflows.csv');
+  const source = csv('data/synthetic-v4/csv/upcoming_outflows.csv');
   for (const row of source) {
     const mapped = cashInputs.outflows.find((item) => item.sourceId === row.outflow_id);
     assert.ok(mapped, `${row.outflow_id} is mapped`);
@@ -24,28 +25,30 @@ test('every upcoming outflow in the CSV is mapped with the same date and amount'
   }
 });
 
-test('the existing EMI comes from existing_emis.csv on its debit day', () => {
-  const [emi] = csv('data/synthetic/existing_emis.csv');
-  const mapped = cashInputs.outflows.find((item) => item.sourceId === emi.loan_id);
+test('the existing EMI is a v4 recurring bill and agrees with existing_emis.csv', () => {
+  const [emi] = csv('data/synthetic-v4/csv/existing_emis.csv');
+  const mapped = cashInputs.outflows.find((item) => item.id === 'recurring_emi');
   assert.equal(mapped.amountInr, Number(emi.emi_inr));
   assert.equal(Number(mapped.date.slice(8)), Number(emi.debit_day));
   assert.ok(mapped.date <= emi.ends_on);
 });
 
-test('only mapped sources become outflows: nothing is read from bank-debit history', () => {
-  const sourceIds = new Set([...csv('data/synthetic/upcoming_outflows.csv').map((row) => row.outflow_id), ...csv('data/synthetic/existing_emis.csv').map((row) => row.loan_id)]);
-  assert.deepEqual(cashInputs.outflows.map((item) => item.sourceId).filter((id) => !sourceIds.has(id)), []);
+test('only mapped sources become outflows: upcoming bills plus v4 recurring bills flagged for the cash plan', () => {
+  const upcoming = new Set(csv('data/synthetic-v4/csv/upcoming_outflows.csv').map((row) => row.outflow_id));
+  const recurring = new Set(activeSource.recurringBills.filter((bill) => bill.includeInCashPlan).map((bill) => `recurringBills.${bill.id}`));
+  assert.deepEqual(cashInputs.outflows.map((item) => item.sourceId).filter((id) => !upcoming.has(id) && !recurring.has(id)), []);
+  // Streams already in upcoming_outflows.csv are excluded by v4 and must stay out.
+  assert.deepEqual(activeSource.recurringBills.filter((bill) => !bill.includeInCashPlan).map((bill) => bill.id), ['rent', 'salary', 'gst']);
 });
 
-test('the opening balance is the 29 Oct bank close plus till cash, as in workbook Cash_Plan!B2', () => {
-  const bank = csv('data/synthetic/bank_statement.csv');
+test('the opening balance is the 29 Oct v4 bank close plus till cash, as in v4 workbook Cash_Plan!B2', () => {
+  const bank = csv('data/synthetic-v4/csv/bank_statement.csv');
   const last = bank.at(-1);
-  assert.equal(last.txnId, 'BNK007793');
   const bankClose = cashInputs.openingBalance.components.find((item) => item.id === 'bank_close_29_oct');
-  assert.equal(bankClose.amountInr, Number(last.currentBalance));
+  assert.equal(bankClose.amountInr, Number(last.transactionalBalance ?? last.currentBalance));
   const till = cashInputs.openingBalance.components.find((item) => item.id === 'till_cash_29_oct');
-  // Workbook Assumptions!B6 (the value is recorded here; the workbook is not parsed in tests).
-  assert.equal(till.amountInr, 95844);
+  // v4 workbook Assumptions!B6 (the value is recorded here; the workbook is not parsed in tests).
+  assert.equal(till.amountInr, 97270);
   assert.equal(cashInputs.openingBalance.amountInr, Math.round(bankClose.amountInr + till.amountInr));
 });
 

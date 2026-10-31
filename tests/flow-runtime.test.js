@@ -160,6 +160,8 @@ test('capital path records bureau purpose disclosure, verified consent and final
   assert.equal(run.ledgerEffect.amountInr, 200000);
   assert.equal(run.ledgerEffect.account, '**4029');
   assert.equal(run.ledgerEffect.projected5NovInr, 15500);
+  // The 5 Nov figure now comes from the cash engine (tests/cash-state.test.js), not the run.
+  assert.equal('projected5NovInr' in run.ledgerEffect, false);
 });
 
 test('higher capital requires KYA scope, expiry and revocation checks before bureau consent', async () => {
@@ -181,6 +183,7 @@ test('higher capital requires KYA scope, expiry and revocation checks before bur
   run = await approve(runtime, run, pin);
   run = await reply(runtime, run, 'payment_success');
   assert.equal(run.ledgerEffect.projected5NovInr, 65500);
+  assert.equal(run.ledgerEffect.amountInr, 250000);
 });
 
 test('failed bureau or lender response never fabricates a successful loan', async () => {

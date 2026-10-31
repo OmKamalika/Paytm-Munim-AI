@@ -1,6 +1,5 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import FlowSimulator from '../../components/FlowSimulator';
 import './simulator.css';
@@ -44,53 +43,13 @@ function eventSummary(event: SimEvent) {
   return 'Lender A, B and C offers sent';
 }
 
+// Operator console. It answers only the open, correlated requests of tracked
+// merchant tasks; the earlier single-step dispatcher is retired.
 export default function SimulatorPage() {
-  const [state, setState] = useState<SimState | null>(null);
-  const [busyId, setBusyId] = useState<string | null>(null);
-  const [error, setError] = useState('');
-  const [lastSent, setLastSent] = useState<number | null>(null);
-
-  const load = useCallback(async () => {
-    try {
-      const response = await fetch('/api/simulator/state', { cache: 'no-store' });
-      if (!response.ok) throw new Error('Could not load simulator state.');
-      setState(await response.json() as SimState);
-      setError('');
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Could not load simulator state.');
-    }
-  }, []);
-
-  useEffect(() => {
-    const initial = window.setTimeout(() => { void load(); }, 0);
-    const timer = window.setInterval(() => { void load(); }, 3000);
-    return () => { window.clearTimeout(initial); window.clearInterval(timer); };
-  }, [load]);
-
-  async function dispatch(scenarioId: string) {
-    setBusyId(scenarioId);
-    setError('');
-    try {
-      const response = await fetch('/api/simulator/dispatch', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ scenarioId }),
-      });
-      const result = await response.json() as { event?: SimEvent; state?: SimState; error?: string };
-      if (!response.ok || !result.event || !result.state) throw new Error(result.error ?? 'Could not send response.');
-      setState(result.state);
-      setLastSent(result.event.seq);
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Could not send response.');
-    } finally {
-      setBusyId(null);
-    }
-  }
-
   return <main className="sim-page">
     <header className="sim-topbar">
       <div className="sim-brand"><span>paytm</span><small>Munim</small><strong>Simulator console</strong></div>
-      <Link className="sim-merchant-link" href="/">Open merchant demo <span aria-hidden="true">↗</span></Link>
+      <Link prefetch={false} className="sim-merchant-link" href="/">Open merchant demo <span aria-hidden="true">↗</span></Link>
     </header>
     <div className="sim-ribbon">Synthetic demo data - nothing here is real.</div>
     <div className="sim-content">
@@ -144,6 +103,11 @@ export default function SimulatorPage() {
         </aside>
       </div>
       </details>
+          <p>Each merchant task opens one request at a time. Pick that request and choose a synthetic response for its current step. A response to an older or answered request is rejected. The merchant sees the result and RiskOps sees the same decision trail.</p>
+        </div>
+        <div className="sim-sequence"><span>Runtime</span><strong>Local</strong><small>Synthetic responses only · resets on server restart</small></div>
+      </section>
+      <FlowSimulator/>
     </div>
   </main>;
 }

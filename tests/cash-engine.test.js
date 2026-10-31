@@ -5,27 +5,31 @@ import {
   balanceOn, computeCashPlan, deferralAdjustment, drawdownAdjustment, minimumDrawdownInr, simpleInterestInr,
 } from '../lib/cash-engine.js';
 
-// Workbook data/synthetic/PayTMunim_Synthetic_Data.xlsx, Cash_Plan!D5:D26 (cached values).
-const WORKBOOK_CLOSINGS = [520000, 300000, 115000, 185000, 255000, -145000, -184500, -64500, 55500, 175500, 295500,
+// v4 workbook data/synthetic-v4/PayTMunim_Synthetic_Data.xlsx, Cash_Plan!E5:E26 (cached values; includes Recurring_Bills).
+const WORKBOOK_V4_CLOSINGS = [520000, 300000, 115000, 185000, 255000, -145000, -184500, -64500, 33500, 153500, 273500,
+  393500, 513500, 611437, 731437, 851437, 967897, 1087897, 1207897, 1327897, 1447897, 1525897];
+// v2 workbook data/synthetic/PayTMunim_Synthetic_Data.xlsx, Cash_Plan!D5:D26: the same bills without recurring ones.
+const WORKBOOK_V2_CLOSINGS = [520000, 300000, 115000, 185000, 255000, -145000, -184500, -64500, 55500, 175500, 295500,
   415500, 535500, 655500, 775500, 895500, 1015500, 1135500, 1255500, 1375500, 1495500, 1573500];
 // The arithmetic tests use the workbook's fixed collections so they can be checked against the workbook.
 const workbook = { ...structuredClone(cashInputs), collectionsBasis: 'workbook_fixed', expectedCollections: structuredClone(WORKBOOK_FIXED_COLLECTIONS) };
 const withChanges = (change) => { const copy = structuredClone(workbook); change(copy); return copy; };
 const totalOwed = (plan) => [...plan.outflows, ...plan.afterHorizon].reduce((sum, item) => sum + item.amountInr, 0);
 
-test('without the EMI the engine reproduces the workbook Cash_Plan closings exactly', () => {
-  const plan = computeCashPlan(withChanges((i) => { i.outflows = i.outflows.filter((item) => item.id !== 'existing_emi'); }));
-  assert.deepEqual(plan.days.map((day) => day.balanceInr), WORKBOOK_CLOSINGS);
+test('on fixed collections the engine reproduces the v4 workbook Cash_Plan closings exactly', () => {
+  const plan = computeCashPlan(workbook);
+  assert.equal(plan.ok, true);
+  assert.deepEqual(plan.days.map((day) => day.balanceInr), WORKBOOK_V4_CLOSINGS);
   assert.deepEqual(plan.anchors, { firstNegativeDate: '2026-11-04', lowestDate: '2026-11-05', lowestBalanceInr: -184500, recoveryAboveZeroDate: '2026-11-07' });
 });
 
-test('on fixed collections, the plan differs from the workbook only by the ₹22,000 EMI from 7 Nov', () => {
-  const plan = computeCashPlan(workbook);
-  assert.equal(plan.ok, true);
-  plan.days.forEach((day, index) => {
-    assert.equal(day.balanceInr, WORKBOOK_CLOSINGS[index] - (day.date >= '2026-11-07' ? 22000 : 0), day.date);
-  });
-  assert.deepEqual(plan.anchors, { firstNegativeDate: '2026-11-04', lowestDate: '2026-11-05', lowestBalanceInr: -184500, recoveryAboveZeroDate: '2026-11-07' });
+test('without the v4 recurring bills it reproduces the earlier v2 workbook, so each bill is counted once', () => {
+  const plan = computeCashPlan(withChanges((i) => { i.outflows = i.outflows.filter((item) => !item.id.startsWith('recurring_')); }));
+  assert.deepEqual(plan.days.map((day) => day.balanceInr), WORKBOOK_V2_CLOSINGS);
+  const recurring = cashInputs.outflows.filter((item) => item.id.startsWith('recurring_'));
+  assert.deepEqual(recurring.map((item) => item.id), ['recurring_emi', 'recurring_electricity_dadar', 'recurring_electricity_matunga', 'recurring_electricity_sion', 'recurring_broadband']);
+  // Rent, salary and GST are in upcoming_outflows.csv and must not appear twice.
+  for (const category of ['rent', 'salaries', 'gst']) assert.equal(cashInputs.outflows.filter((item) => item.category === category).length, 1);
 });
 
 test('changing an input amount or date changes the result', () => {
@@ -110,12 +114,12 @@ test('the default basis is the per-outlet forecast, summed by day', () => {
 test('per-outlet basis: a deeper gap that needs deferral plus a small drawdown', () => {
   const plan = computeCashPlan(cashInputs);
   assert.equal(plan.ok, true);
-  assert.deepEqual(plan.anchors, { firstNegativeDate: '2026-11-04', lowestDate: '2026-11-05', lowestBalanceInr: -269892, recoveryAboveZeroDate: '2026-11-08' });
+  assert.deepEqual(plan.anchors, { firstNegativeDate: '2026-11-04', lowestDate: '2026-11-05', lowestBalanceInr: -268279, recoveryAboveZeroDate: '2026-11-08' });
   const drawdownOnly = computeCashPlan(cashInputs, [drawdownAdjustment(cashInputs)]);
-  assert.equal(drawdownOnly.anchors.lowestBalanceInr, -69892);
+  assert.equal(drawdownOnly.anchors.lowestBalanceInr, -68279);
   assert.equal(minimumDrawdownInr(cashInputs, plan), 270000);
   const deferred = computeCashPlan(cashInputs, [deferralAdjustment(cashInputs, { upfrontPercent: 50, creditDays: 45 })]);
-  assert.equal(deferred.anchors.lowestBalanceInr, -9892);
+  assert.equal(deferred.anchors.lowestBalanceInr, -8279);
   assert.equal(minimumDrawdownInr(cashInputs, deferred), 50000);
   const both = computeCashPlan(cashInputs, [deferralAdjustment(cashInputs, { upfrontPercent: 50, creditDays: 45 }), drawdownAdjustment(cashInputs, 50000)]);
   assert.ok(both.anchors.lowestBalanceInr >= 0);

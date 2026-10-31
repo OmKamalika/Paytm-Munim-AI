@@ -38,11 +38,11 @@ test('daily cash closings use the per-outlet forecast without exposing opening b
   assert.equal(series.length, 22);
   const close = (date) => series.find((row) => row.date === date)?.balanceInr;
   // Workbook-basis figures are checked in tests/cash-engine.test.js; these use the outlet forecast.
-  assert.equal(close('2026-11-04'), -216003);
-  assert.equal(close('2026-11-05'), -269892);
-  assert.equal(close('2026-11-06'), -176448);
-  assert.equal(close('2026-11-07'), -92301);
-  assert.equal(close('2026-11-08'), 13262);
+  assert.equal(close('2026-11-04'), -214966);
+  assert.equal(close('2026-11-05'), -268279);
+  assert.equal(close('2026-11-06'), -172243);
+  assert.equal(close('2026-11-07'), -87289);
+  assert.equal(close('2026-11-08'), 20400);
   assert.equal('openingBalance' in cashPlanFixture.cashPlan, false);
   assert.equal('openingBalanceInr' in cashPlanFixture.cashPlan, false);
 });
