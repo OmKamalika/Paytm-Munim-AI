@@ -41,8 +41,8 @@ async function capitalToPayment(runtime, pin) {
 
 test('before any confirmed action the plan is the baseline, whatever was negotiated', async () => {
   const { runtime } = fixture();
-  let run = (await runtime.start('supplier_stock')).run;
-  run = await reply(runtime, run, 'supplier_agreed');
+  const run = (await runtime.start('supplier_stock')).run;
+  await reply(runtime, run, 'supplier_agreed');
   const { relief, cash } = await views(runtime);
   assert.deepEqual(relief, []);
   assert.equal(cash.cashPlan.anchors.lowestBalanceInr, -268279);
@@ -87,7 +87,7 @@ test('a pending payment changes no balance, is flagged, and the plan never promp
   assert.match(options.recommendation.text, /Reconcile that same instruction/);
 
   // Reconciling the same instruction resolves it exactly once.
-  run = await reply(runtime, run, 'payment_success');
+  await reply(runtime, run, 'payment_success');
   ({ cash } = await views(runtime));
   assert.equal(cash.cashPlan.pendingActions.length, 0);
   assert.equal(day(cash, '2026-11-05'), -8279);
@@ -103,8 +103,7 @@ test('a pending payment changes no balance, is flagged, and the plan never promp
 
 test('a completed drawdown adds cash once and keeps the full supplier bill', async () => {
   const { pin, runtime } = fixture();
-  let run = await capitalToPayment(runtime, pin);
-  run = await reply(runtime, run, 'payment_success');
+  await reply(runtime, await capitalToPayment(runtime, pin), 'payment_success');
   const { cash, options } = await views(runtime);
   assert.equal(day(cash, '2026-11-05'), -68279);
   assert.equal(cash.cashPlan.dailyBalanceSeries.reduce((sum, row) => sum + row.reliefInflowInr, 0), 200000);
@@ -116,10 +115,8 @@ test('a completed drawdown adds cash once and keeps the full supplier bill', asy
 
 test('deferral plus drawdown clears the gap, and the plan then stops recommending relief', async () => {
   const { pin, runtime } = fixture();
-  let supplier = await supplierToPayment(runtime, pin);
-  supplier = await reply(runtime, supplier, 'payment_success');
-  let capital = await capitalToPayment(runtime, pin);
-  capital = await reply(runtime, capital, 'payment_success');
+  await reply(runtime, await supplierToPayment(runtime, pin), 'payment_success');
+  await reply(runtime, await capitalToPayment(runtime, pin), 'payment_success');
   const { cash, options } = await views(runtime);
   assert.ok(cash.cashPlan.anchors.lowestBalanceInr >= 0);
   assert.equal(cash.cashPlan.anchors.firstNegativeDate, null);
