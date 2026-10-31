@@ -1,0 +1,8518 @@
+{
+ "schema_version": "2.0",
+ "synthetic": true,
+ "correction_note": "v2 corrected to canonical Oct 27 deck/wireframe numbers; supersedes v1 (19:46).",
+ "business": {
+  "id": "SHARMA-DEMO",
+  "name": "Sharma General Stores",
+  "outlets": [
+   {
+    "id": "DAD",
+    "name": "Dadar"
+   },
+   {
+    "id": "MAT",
+    "name": "Matunga"
+   },
+   {
+    "id": "SIO",
+    "name": "Sion"
+   }
+  ]
+ },
+ "as_of": "2026-10-30",
+ "history_start": "2025-05-01",
+ "history_end": "2026-10-29",
+ "opening_liquid_cash_inr": 450000,
+ "channel_scope_note": "collections history = TOTAL all-channel daily collections (simulated). Home-screen 10140 = same-day Paytm-channel till 7pm (4980/3120/2040). Different metrics; never merge.",
+ "home_paytm_today": {
+  "as_of_time": "19:00",
+  "total": 10140,
+  "DAD": 4980,
+  "MAT": 3120,
+  "SIO": 2040
+ },
+ "collections": [
+  {
+   "date": "2025-05-01",
+   "outlet": "DAD",
+   "amount_inr": 33471
+  },
+  {
+   "date": "2025-05-02",
+   "outlet": "DAD",
+   "amount_inr": 34519
+  },
+  {
+   "date": "2025-05-03",
+   "outlet": "DAD",
+   "amount_inr": 38451
+  },
+  {
+   "date": "2025-05-04",
+   "outlet": "DAD",
+   "amount_inr": 33731
+  },
+  {
+   "date": "2025-05-05",
+   "outlet": "DAD",
+   "amount_inr": 31413
+  },
+  {
+   "date": "2025-05-06",
+   "outlet": "DAD",
+   "amount_inr": 31928
+  },
+  {
+   "date": "2025-05-07",
+   "outlet": "DAD",
+   "amount_inr": 32078
+  },
+  {
+   "date": "2025-05-08",
+   "outlet": "DAD",
+   "amount_inr": 32757
+  },
+  {
+   "date": "2025-05-09",
+   "outlet": "DAD",
+   "amount_inr": 33934
+  },
+  {
+   "date": "2025-05-10",
+   "outlet": "DAD",
+   "amount_inr": 37121
+  },
+  {
+   "date": "2025-05-11",
+   "outlet": "DAD",
+   "amount_inr": 36394
+  },
+  {
+   "date": "2025-05-12",
+   "outlet": "DAD",
+   "amount_inr": 29848
+  },
+  {
+   "date": "2025-05-13",
+   "outlet": "DAD",
+   "amount_inr": 30659
+  },
+  {
+   "date": "2025-05-14",
+   "outlet": "DAD",
+   "amount_inr": 32157
+  },
+  {
+   "date": "2025-05-15",
+   "outlet": "DAD",
+   "amount_inr": 33856
+  },
+  {
+   "date": "2025-05-16",
+   "outlet": "DAD",
+   "amount_inr": 35556
+  },
+  {
+   "date": "2025-05-17",
+   "outlet": "DAD",
+   "amount_inr": 37231
+  },
+  {
+   "date": "2025-05-18",
+   "outlet": "DAD",
+   "amount_inr": 34837
+  },
+  {
+   "date": "2025-05-19",
+   "outlet": "DAD",
+   "amount_inr": 30300
+  },
+  {
+   "date": "2025-05-20",
+   "outlet": "DAD",
+   "amount_inr": 32949
+  },
+  {
+   "date": "2025-05-21",
+   "outlet": "DAD",
+   "amount_inr": 32701
+  },
+  {
+   "date": "2025-05-22",
+   "outlet": "DAD",
+   "amount_inr": 33128
+  },
+  {
+   "date": "2025-05-23",
+   "outlet": "DAD",
+   "amount_inr": 35177
+  },
+  {
+   "date": "2025-05-24",
+   "outlet": "DAD",
+   "amount_inr": 36485
+  },
+  {
+   "date": "2025-05-25",
+   "outlet": "DAD",
+   "amount_inr": 35412
+  },
+  {
+   "date": "2025-05-26",
+   "outlet": "DAD",
+   "amount_inr": 30269
+  },
+  {
+   "date": "2025-05-27",
+   "outlet": "DAD",
+   "amount_inr": 32793
+  },
+  {
+   "date": "2025-05-28",
+   "outlet": "DAD",
+   "amount_inr": 32440
+  },
+  {
+   "date": "2025-05-29",
+   "outlet": "DAD",
+   "amount_inr": 33721
+  },
+  {
+   "date": "2025-05-30",
+   "outlet": "DAD",
+   "amount_inr": 35507
+  },
+  {
+   "date": "2025-05-31",
+   "outlet": "DAD",
+   "amount_inr": 37858
+  },
+  {
+   "date": "2025-06-01",
+   "outlet": "DAD",
+   "amount_inr": 33726
+  },
+  {
+   "date": "2025-06-02",
+   "outlet": "DAD",
+   "amount_inr": 31792
+  },
+  {
+   "date": "2025-06-03",
+   "outlet": "DAD",
+   "amount_inr": 30966
+  },
+  {
+   "date": "2025-06-04",
+   "outlet": "DAD",
+   "amount_inr": 32167
+  },
+  {
+   "date": "2025-06-05",
+   "outlet": "DAD",
+   "amount_inr": 33643
+  },
+  {
+   "date": "2025-06-06",
+   "outlet": "DAD",
+   "amount_inr": 33642
+  },
+  {
+   "date": "2025-06-07",
+   "outlet": "DAD",
+   "amount_inr": 36367
+  },
+  {
+   "date": "2025-06-08",
+   "outlet": "DAD",
+   "amount_inr": 35711
+  },
+  {
+   "date": "2025-06-09",
+   "outlet": "DAD",
+   "amount_inr": 29808
+  },
+  {
+   "date": "2025-06-10",
+   "outlet": "DAD",
+   "amount_inr": 31749
+  },
+  {
+   "date": "2025-06-11",
+   "outlet": "DAD",
+   "amount_inr": 31684
+  },
+  {
+   "date": "2025-06-12",
+   "outlet": "DAD",
+   "amount_inr": 34608
+  },
+  {
+   "date": "2025-06-13",
+   "outlet": "DAD",
+   "amount_inr": 34194
+  },
+  {
+   "date": "2025-06-14",
+   "outlet": "DAD",
+   "amount_inr": 37769
+  },
+  {
+   "date": "2025-06-15",
+   "outlet": "DAD",
+   "amount_inr": 36298
+  },
+  {
+   "date": "2025-06-16",
+   "outlet": "DAD",
+   "amount_inr": 30158
+  },
+  {
+   "date": "2025-06-17",
+   "outlet": "DAD",
+   "amount_inr": 30764
+  },
+  {
+   "date": "2025-06-18",
+   "outlet": "DAD",
+   "amount_inr": 33451
+  },
+  {
+   "date": "2025-06-19",
+   "outlet": "DAD",
+   "amount_inr": 34649
+  },
+  {
+   "date": "2025-06-20",
+   "outlet": "DAD",
+   "amount_inr": 33326
+  },
+  {
+   "date": "2025-06-21",
+   "outlet": "DAD",
+   "amount_inr": 39017
+  },
+  {
+   "date": "2025-06-22",
+   "outlet": "DAD",
+   "amount_inr": 34070
+  },
+  {
+   "date": "2025-06-23",
+   "outlet": "DAD",
+   "amount_inr": 30668
+  },
+  {
+   "date": "2025-06-24",
+   "outlet": "DAD",
+   "amount_inr": 31251
+  },
+  {
+   "date": "2025-06-25",
+   "outlet": "DAD",
+   "amount_inr": 32118
+  },
+  {
+   "date": "2025-06-26",
+   "outlet": "DAD",
+   "amount_inr": 33023
+  },
+  {
+   "date": "2025-06-27",
+   "outlet": "DAD",
+   "amount_inr": 35493
+  },
+  {
+   "date": "2025-06-28",
+   "outlet": "DAD",
+   "amount_inr": 37828
+  },
+  {
+   "date": "2025-06-29",
+   "outlet": "DAD",
+   "amount_inr": 34518
+  },
+  {
+   "date": "2025-06-30",
+   "outlet": "DAD",
+   "amount_inr": 31673
+  },
+  {
+   "date": "2025-07-01",
+   "outlet": "DAD",
+   "amount_inr": 31914
+  },
+  {
+   "date": "2025-07-02",
+   "outlet": "DAD",
+   "amount_inr": 32083
+  },
+  {
+   "date": "2025-07-03",
+   "outlet": "DAD",
+   "amount_inr": 33645
+  },
+  {
+   "date": "2025-07-04",
+   "outlet": "DAD",
+   "amount_inr": 33904
+  },
+  {
+   "date": "2025-07-05",
+   "outlet": "DAD",
+   "amount_inr": 38887
+  },
+  {
+   "date": "2025-07-06",
+   "outlet": "DAD",
+   "amount_inr": 36152
+  },
+  {
+   "date": "2025-07-07",
+   "outlet": "DAD",
+   "amount_inr": 31230
+  },
+  {
+   "date": "2025-07-08",
+   "outlet": "DAD",
+   "amount_inr": 30812
+  },
+  {
+   "date": "2025-07-09",
+   "outlet": "DAD",
+   "amount_inr": 34089
+  },
+  {
+   "date": "2025-07-10",
+   "outlet": "DAD",
+   "amount_inr": 34108
+  },
+  {
+   "date": "2025-07-11",
+   "outlet": "DAD",
+   "amount_inr": 35504
+  },
+  {
+   "date": "2025-07-12",
+   "outlet": "DAD",
+   "amount_inr": 37510
+  },
+  {
+   "date": "2025-07-13",
+   "outlet": "DAD",
+   "amount_inr": 34266
+  },
+  {
+   "date": "2025-07-14",
+   "outlet": "DAD",
+   "amount_inr": 31689
+  },
+  {
+   "date": "2025-07-15",
+   "outlet": "DAD",
+   "amount_inr": 30731
+  },
+  {
+   "date": "2025-07-16",
+   "outlet": "DAD",
+   "amount_inr": 33791
+  },
+  {
+   "date": "2025-07-17",
+   "outlet": "DAD",
+   "amount_inr": 34128
+  },
+  {
+   "date": "2025-07-18",
+   "outlet": "DAD",
+   "amount_inr": 34215
+  },
+  {
+   "date": "2025-07-19",
+   "outlet": "DAD",
+   "amount_inr": 38532
+  },
+  {
+   "date": "2025-07-20",
+   "outlet": "DAD",
+   "amount_inr": 36597
+  },
+  {
+   "date": "2025-07-21",
+   "outlet": "DAD",
+   "amount_inr": 31903
+  },
+  {
+   "date": "2025-07-22",
+   "outlet": "DAD",
+   "amount_inr": 31565
+  },
+  {
+   "date": "2025-07-23",
+   "outlet": "DAD",
+   "amount_inr": 32455
+  },
+  {
+   "date": "2025-07-24",
+   "outlet": "DAD",
+   "amount_inr": 34156
+  },
+  {
+   "date": "2025-07-25",
+   "outlet": "DAD",
+   "amount_inr": 34281
+  },
+  {
+   "date": "2025-07-26",
+   "outlet": "DAD",
+   "amount_inr": 36704
+  },
+  {
+   "date": "2025-07-27",
+   "outlet": "DAD",
+   "amount_inr": 34074
+  },
+  {
+   "date": "2025-07-28",
+   "outlet": "DAD",
+   "amount_inr": 29899
+  },
+  {
+   "date": "2025-07-29",
+   "outlet": "DAD",
+   "amount_inr": 32547
+  },
+  {
+   "date": "2025-07-30",
+   "outlet": "DAD",
+   "amount_inr": 32720
+  },
+  {
+   "date": "2025-07-31",
+   "outlet": "DAD",
+   "amount_inr": 34315
+  },
+  {
+   "date": "2025-08-01",
+   "outlet": "DAD",
+   "amount_inr": 35730
+  },
+  {
+   "date": "2025-08-02",
+   "outlet": "DAD",
+   "amount_inr": 37261
+  },
+  {
+   "date": "2025-08-03",
+   "outlet": "DAD",
+   "amount_inr": 34583
+  },
+  {
+   "date": "2025-08-04",
+   "outlet": "DAD",
+   "amount_inr": 30934
+  },
+  {
+   "date": "2025-08-05",
+   "outlet": "DAD",
+   "amount_inr": 33219
+  },
+  {
+   "date": "2025-08-06",
+   "outlet": "DAD",
+   "amount_inr": 34047
+  },
+  {
+   "date": "2025-08-07",
+   "outlet": "DAD",
+   "amount_inr": 34411
+  },
+  {
+   "date": "2025-08-08",
+   "outlet": "DAD",
+   "amount_inr": 35910
+  },
+  {
+   "date": "2025-08-09",
+   "outlet": "DAD",
+   "amount_inr": 36987
+  },
+  {
+   "date": "2025-08-10",
+   "outlet": "DAD",
+   "amount_inr": 34446
+  },
+  {
+   "date": "2025-08-11",
+   "outlet": "DAD",
+   "amount_inr": 30570
+  },
+  {
+   "date": "2025-08-12",
+   "outlet": "DAD",
+   "amount_inr": 30801
+  },
+  {
+   "date": "2025-08-13",
+   "outlet": "DAD",
+   "amount_inr": 32513
+  },
+  {
+   "date": "2025-08-14",
+   "outlet": "DAD",
+   "amount_inr": 35010
+  },
+  {
+   "date": "2025-08-15",
+   "outlet": "DAD",
+   "amount_inr": 35954
+  },
+  {
+   "date": "2025-08-16",
+   "outlet": "DAD",
+   "amount_inr": 39047
+  },
+  {
+   "date": "2025-08-17",
+   "outlet": "DAD",
+   "amount_inr": 34304
+  },
+  {
+   "date": "2025-08-18",
+   "outlet": "DAD",
+   "amount_inr": 30067
+  },
+  {
+   "date": "2025-08-19",
+   "outlet": "DAD",
+   "amount_inr": 31104
+  },
+  {
+   "date": "2025-08-20",
+   "outlet": "DAD",
+   "amount_inr": 32153
+  },
+  {
+   "date": "2025-08-21",
+   "outlet": "DAD",
+   "amount_inr": 32474
+  },
+  {
+   "date": "2025-08-22",
+   "outlet": "DAD",
+   "amount_inr": 33416
+  },
+  {
+   "date": "2025-08-23",
+   "outlet": "DAD",
+   "amount_inr": 37868
+  },
+  {
+   "date": "2025-08-24",
+   "outlet": "DAD",
+   "amount_inr": 34806
+  },
+  {
+   "date": "2025-08-25",
+   "outlet": "DAD",
+   "amount_inr": 30016
+  },
+  {
+   "date": "2025-08-26",
+   "outlet": "DAD",
+   "amount_inr": 32720
+  },
+  {
+   "date": "2025-08-27",
+   "outlet": "DAD",
+   "amount_inr": 34171
+  },
+  {
+   "date": "2025-08-28",
+   "outlet": "DAD",
+   "amount_inr": 32537
+  },
+  {
+   "date": "2025-08-29",
+   "outlet": "DAD",
+   "amount_inr": 35115
+  },
+  {
+   "date": "2025-08-30",
+   "outlet": "DAD",
+   "amount_inr": 38143
+  },
+  {
+   "date": "2025-08-31",
+   "outlet": "DAD",
+   "amount_inr": 34369
+  },
+  {
+   "date": "2025-09-01",
+   "outlet": "DAD",
+   "amount_inr": 31146
+  },
+  {
+   "date": "2025-09-02",
+   "outlet": "DAD",
+   "amount_inr": 31330
+  },
+  {
+   "date": "2025-09-03",
+   "outlet": "DAD",
+   "amount_inr": 32787
+  },
+  {
+   "date": "2025-09-04",
+   "outlet": "DAD",
+   "amount_inr": 34348
+  },
+  {
+   "date": "2025-09-05",
+   "outlet": "DAD",
+   "amount_inr": 35819
+  },
+  {
+   "date": "2025-09-06",
+   "outlet": "DAD",
+   "amount_inr": 36877
+  },
+  {
+   "date": "2025-09-07",
+   "outlet": "DAD",
+   "amount_inr": 35633
+  },
+  {
+   "date": "2025-09-08",
+   "outlet": "DAD",
+   "amount_inr": 30342
+  },
+  {
+   "date": "2025-09-09",
+   "outlet": "DAD",
+   "amount_inr": 32673
+  },
+  {
+   "date": "2025-09-10",
+   "outlet": "DAD",
+   "amount_inr": 34057
+  },
+  {
+   "date": "2025-09-11",
+   "outlet": "DAD",
+   "amount_inr": 33135
+  },
+  {
+   "date": "2025-09-12",
+   "outlet": "DAD",
+   "amount_inr": 35662
+  },
+  {
+   "date": "2025-09-13",
+   "outlet": "DAD",
+   "amount_inr": 38971
+  },
+  {
+   "date": "2025-09-14",
+   "outlet": "DAD",
+   "amount_inr": 35826
+  },
+  {
+   "date": "2025-09-15",
+   "outlet": "DAD",
+   "amount_inr": 30228
+  },
+  {
+   "date": "2025-09-16",
+   "outlet": "DAD",
+   "amount_inr": 31437
+  },
+  {
+   "date": "2025-09-17",
+   "outlet": "DAD",
+   "amount_inr": 32019
+  },
+  {
+   "date": "2025-09-18",
+   "outlet": "DAD",
+   "amount_inr": 34752
+  },
+  {
+   "date": "2025-09-19",
+   "outlet": "DAD",
+   "amount_inr": 35306
+  },
+  {
+   "date": "2025-09-20",
+   "outlet": "DAD",
+   "amount_inr": 39157
+  },
+  {
+   "date": "2025-09-21",
+   "outlet": "DAD",
+   "amount_inr": 34248
+  },
+  {
+   "date": "2025-09-22",
+   "outlet": "DAD",
+   "amount_inr": 30556
+  },
+  {
+   "date": "2025-09-23",
+   "outlet": "DAD",
+   "amount_inr": 32926
+  },
+  {
+   "date": "2025-09-24",
+   "outlet": "DAD",
+   "amount_inr": 32566
+  },
+  {
+   "date": "2025-09-25",
+   "outlet": "DAD",
+   "amount_inr": 32568
+  },
+  {
+   "date": "2025-09-26",
+   "outlet": "DAD",
+   "amount_inr": 35140
+  },
+  {
+   "date": "2025-09-27",
+   "outlet": "DAD",
+   "amount_inr": 37759
+  },
+  {
+   "date": "2025-09-28",
+   "outlet": "DAD",
+   "amount_inr": 35113
+  },
+  {
+   "date": "2025-09-29",
+   "outlet": "DAD",
+   "amount_inr": 30756
+  },
+  {
+   "date": "2025-09-30",
+   "outlet": "DAD",
+   "amount_inr": 32662
+  },
+  {
+   "date": "2025-10-01",
+   "outlet": "DAD",
+   "amount_inr": 32250
+  },
+  {
+   "date": "2025-10-02",
+   "outlet": "DAD",
+   "amount_inr": 34341
+  },
+  {
+   "date": "2025-10-03",
+   "outlet": "DAD",
+   "amount_inr": 36125
+  },
+  {
+   "date": "2025-10-04",
+   "outlet": "DAD",
+   "amount_inr": 38174
+  },
+  {
+   "date": "2025-10-05",
+   "outlet": "DAD",
+   "amount_inr": 35047
+  },
+  {
+   "date": "2025-10-06",
+   "outlet": "DAD",
+   "amount_inr": 30272
+  },
+  {
+   "date": "2025-10-07",
+   "outlet": "DAD",
+   "amount_inr": 33382
+  },
+  {
+   "date": "2025-10-08",
+   "outlet": "DAD",
+   "amount_inr": 33731
+  },
+  {
+   "date": "2025-10-09",
+   "outlet": "DAD",
+   "amount_inr": 34762
+  },
+  {
+   "date": "2025-10-10",
+   "outlet": "DAD",
+   "amount_inr": 33500
+  },
+  {
+   "date": "2025-10-11",
+   "outlet": "DAD",
+   "amount_inr": 36604
+  },
+  {
+   "date": "2025-10-12",
+   "outlet": "DAD",
+   "amount_inr": 34503
+  },
+  {
+   "date": "2025-10-13",
+   "outlet": "DAD",
+   "amount_inr": 32038
+  },
+  {
+   "date": "2025-10-14",
+   "outlet": "DAD",
+   "amount_inr": 31031
+  },
+  {
+   "date": "2025-10-15",
+   "outlet": "DAD",
+   "amount_inr": 31978
+  },
+  {
+   "date": "2025-10-16",
+   "outlet": "DAD",
+   "amount_inr": 32639
+  },
+  {
+   "date": "2025-10-17",
+   "outlet": "DAD",
+   "amount_inr": 61811
+  },
+  {
+   "date": "2025-10-18",
+   "outlet": "DAD",
+   "amount_inr": 68354
+  },
+  {
+   "date": "2025-10-19",
+   "outlet": "DAD",
+   "amount_inr": 65350
+  },
+  {
+   "date": "2025-10-20",
+   "outlet": "DAD",
+   "amount_inr": 58054
+  },
+  {
+   "date": "2025-10-21",
+   "outlet": "DAD",
+   "amount_inr": 59008
+  },
+  {
+   "date": "2025-10-22",
+   "outlet": "DAD",
+   "amount_inr": 61760
+  },
+  {
+   "date": "2025-10-23",
+   "outlet": "DAD",
+   "amount_inr": 62524
+  },
+  {
+   "date": "2025-10-24",
+   "outlet": "DAD",
+   "amount_inr": 35640
+  },
+  {
+   "date": "2025-10-25",
+   "outlet": "DAD",
+   "amount_inr": 39041
+  },
+  {
+   "date": "2025-10-26",
+   "outlet": "DAD",
+   "amount_inr": 34990
+  },
+  {
+   "date": "2025-10-27",
+   "outlet": "DAD",
+   "amount_inr": 31408
+  },
+  {
+   "date": "2025-10-28",
+   "outlet": "DAD",
+   "amount_inr": 32458
+  },
+  {
+   "date": "2025-10-29",
+   "outlet": "DAD",
+   "amount_inr": 33216
+  },
+  {
+   "date": "2025-10-30",
+   "outlet": "DAD",
+   "amount_inr": 35222
+  },
+  {
+   "date": "2025-10-31",
+   "outlet": "DAD",
+   "amount_inr": 35929
+  },
+  {
+   "date": "2025-11-01",
+   "outlet": "DAD",
+   "amount_inr": 37649
+  },
+  {
+   "date": "2025-11-02",
+   "outlet": "DAD",
+   "amount_inr": 36028
+  },
+  {
+   "date": "2025-11-03",
+   "outlet": "DAD",
+   "amount_inr": 30221
+  },
+  {
+   "date": "2025-11-04",
+   "outlet": "DAD",
+   "amount_inr": 31684
+  },
+  {
+   "date": "2025-11-05",
+   "outlet": "DAD",
+   "amount_inr": 32213
+  },
+  {
+   "date": "2025-11-06",
+   "outlet": "DAD",
+   "amount_inr": 34508
+  },
+  {
+   "date": "2025-11-07",
+   "outlet": "DAD",
+   "amount_inr": 35855
+  },
+  {
+   "date": "2025-11-08",
+   "outlet": "DAD",
+   "amount_inr": 38939
+  },
+  {
+   "date": "2025-11-09",
+   "outlet": "DAD",
+   "amount_inr": 36544
+  },
+  {
+   "date": "2025-11-10",
+   "outlet": "DAD",
+   "amount_inr": 32436
+  },
+  {
+   "date": "2025-11-11",
+   "outlet": "DAD",
+   "amount_inr": 33418
+  },
+  {
+   "date": "2025-11-12",
+   "outlet": "DAD",
+   "amount_inr": 32403
+  },
+  {
+   "date": "2025-11-13",
+   "outlet": "DAD",
+   "amount_inr": 33400
+  },
+  {
+   "date": "2025-11-14",
+   "outlet": "DAD",
+   "amount_inr": 33580
+  },
+  {
+   "date": "2025-11-15",
+   "outlet": "DAD",
+   "amount_inr": 38482
+  },
+  {
+   "date": "2025-11-16",
+   "outlet": "DAD",
+   "amount_inr": 35562
+  },
+  {
+   "date": "2025-11-17",
+   "outlet": "DAD",
+   "amount_inr": 31299
+  },
+  {
+   "date": "2025-11-18",
+   "outlet": "DAD",
+   "amount_inr": 32401
+  },
+  {
+   "date": "2025-11-19",
+   "outlet": "DAD",
+   "amount_inr": 33088
+  },
+  {
+   "date": "2025-11-20",
+   "outlet": "DAD",
+   "amount_inr": 33809
+  },
+  {
+   "date": "2025-11-21",
+   "outlet": "DAD",
+   "amount_inr": 35834
+  },
+  {
+   "date": "2025-11-22",
+   "outlet": "DAD",
+   "amount_inr": 38581
+  },
+  {
+   "date": "2025-11-23",
+   "outlet": "DAD",
+   "amount_inr": 36900
+  },
+  {
+   "date": "2025-11-24",
+   "outlet": "DAD",
+   "amount_inr": 31378
+  },
+  {
+   "date": "2025-11-25",
+   "outlet": "DAD",
+   "amount_inr": 33248
+  },
+  {
+   "date": "2025-11-26",
+   "outlet": "DAD",
+   "amount_inr": 32403
+  },
+  {
+   "date": "2025-11-27",
+   "outlet": "DAD",
+   "amount_inr": 32674
+  },
+  {
+   "date": "2025-11-28",
+   "outlet": "DAD",
+   "amount_inr": 34636
+  },
+  {
+   "date": "2025-11-29",
+   "outlet": "DAD",
+   "amount_inr": 38898
+  },
+  {
+   "date": "2025-11-30",
+   "outlet": "DAD",
+   "amount_inr": 35482
+  },
+  {
+   "date": "2025-12-01",
+   "outlet": "DAD",
+   "amount_inr": 32323
+  },
+  {
+   "date": "2025-12-02",
+   "outlet": "DAD",
+   "amount_inr": 31166
+  },
+  {
+   "date": "2025-12-03",
+   "outlet": "DAD",
+   "amount_inr": 34439
+  },
+  {
+   "date": "2025-12-04",
+   "outlet": "DAD",
+   "amount_inr": 34407
+  },
+  {
+   "date": "2025-12-05",
+   "outlet": "DAD",
+   "amount_inr": 34873
+  },
+  {
+   "date": "2025-12-06",
+   "outlet": "DAD",
+   "amount_inr": 38933
+  },
+  {
+   "date": "2025-12-07",
+   "outlet": "DAD",
+   "amount_inr": 36237
+  },
+  {
+   "date": "2025-12-08",
+   "outlet": "DAD",
+   "amount_inr": 30540
+  },
+  {
+   "date": "2025-12-09",
+   "outlet": "DAD",
+   "amount_inr": 31605
+  },
+  {
+   "date": "2025-12-10",
+   "outlet": "DAD",
+   "amount_inr": 32550
+  },
+  {
+   "date": "2025-12-11",
+   "outlet": "DAD",
+   "amount_inr": 34877
+  },
+  {
+   "date": "2025-12-12",
+   "outlet": "DAD",
+   "amount_inr": 34510
+  },
+  {
+   "date": "2025-12-13",
+   "outlet": "DAD",
+   "amount_inr": 37256
+  },
+  {
+   "date": "2025-12-14",
+   "outlet": "DAD",
+   "amount_inr": 36945
+  },
+  {
+   "date": "2025-12-15",
+   "outlet": "DAD",
+   "amount_inr": 32011
+  },
+  {
+   "date": "2025-12-16",
+   "outlet": "DAD",
+   "amount_inr": 32542
+  },
+  {
+   "date": "2025-12-17",
+   "outlet": "DAD",
+   "amount_inr": 33833
+  },
+  {
+   "date": "2025-12-18",
+   "outlet": "DAD",
+   "amount_inr": 34155
+  },
+  {
+   "date": "2025-12-19",
+   "outlet": "DAD",
+   "amount_inr": 34983
+  },
+  {
+   "date": "2025-12-20",
+   "outlet": "DAD",
+   "amount_inr": 37609
+  },
+  {
+   "date": "2025-12-21",
+   "outlet": "DAD",
+   "amount_inr": 36827
+  },
+  {
+   "date": "2025-12-22",
+   "outlet": "DAD",
+   "amount_inr": 32590
+  },
+  {
+   "date": "2025-12-23",
+   "outlet": "DAD",
+   "amount_inr": 33565
+  },
+  {
+   "date": "2025-12-24",
+   "outlet": "DAD",
+   "amount_inr": 34702
+  },
+  {
+   "date": "2025-12-25",
+   "outlet": "DAD",
+   "amount_inr": 34792
+  },
+  {
+   "date": "2025-12-26",
+   "outlet": "DAD",
+   "amount_inr": 34385
+  },
+  {
+   "date": "2025-12-27",
+   "outlet": "DAD",
+   "amount_inr": 39425
+  },
+  {
+   "date": "2025-12-28",
+   "outlet": "DAD",
+   "amount_inr": 35459
+  },
+  {
+   "date": "2025-12-29",
+   "outlet": "DAD",
+   "amount_inr": 32494
+  },
+  {
+   "date": "2025-12-30",
+   "outlet": "DAD",
+   "amount_inr": 33294
+  },
+  {
+   "date": "2025-12-31",
+   "outlet": "DAD",
+   "amount_inr": 33018
+  },
+  {
+   "date": "2026-01-01",
+   "outlet": "DAD",
+   "amount_inr": 35344
+  },
+  {
+   "date": "2026-01-02",
+   "outlet": "DAD",
+   "amount_inr": 34651
+  },
+  {
+   "date": "2026-01-03",
+   "outlet": "DAD",
+   "amount_inr": 38751
+  },
+  {
+   "date": "2026-01-04",
+   "outlet": "DAD",
+   "amount_inr": 35844
+  },
+  {
+   "date": "2026-01-05",
+   "outlet": "DAD",
+   "amount_inr": 30891
+  },
+  {
+   "date": "2026-01-06",
+   "outlet": "DAD",
+   "amount_inr": 33601
+  },
+  {
+   "date": "2026-01-07",
+   "outlet": "DAD",
+   "amount_inr": 34011
+  },
+  {
+   "date": "2026-01-08",
+   "outlet": "DAD",
+   "amount_inr": 33015
+  },
+  {
+   "date": "2026-01-09",
+   "outlet": "DAD",
+   "amount_inr": 34892
+  },
+  {
+   "date": "2026-01-10",
+   "outlet": "DAD",
+   "amount_inr": 36851
+  },
+  {
+   "date": "2026-01-11",
+   "outlet": "DAD",
+   "amount_inr": 35094
+  },
+  {
+   "date": "2026-01-12",
+   "outlet": "DAD",
+   "amount_inr": 30577
+  },
+  {
+   "date": "2026-01-13",
+   "outlet": "DAD",
+   "amount_inr": 33496
+  },
+  {
+   "date": "2026-01-14",
+   "outlet": "DAD",
+   "amount_inr": 34256
+  },
+  {
+   "date": "2026-01-15",
+   "outlet": "DAD",
+   "amount_inr": 34724
+  },
+  {
+   "date": "2026-01-16",
+   "outlet": "DAD",
+   "amount_inr": 35268
+  },
+  {
+   "date": "2026-01-17",
+   "outlet": "DAD",
+   "amount_inr": 39235
+  },
+  {
+   "date": "2026-01-18",
+   "outlet": "DAD",
+   "amount_inr": 37019
+  },
+  {
+   "date": "2026-01-19",
+   "outlet": "DAD",
+   "amount_inr": 30433
+  },
+  {
+   "date": "2026-01-20",
+   "outlet": "DAD",
+   "amount_inr": 33344
+  },
+  {
+   "date": "2026-01-21",
+   "outlet": "DAD",
+   "amount_inr": 34369
+  },
+  {
+   "date": "2026-01-22",
+   "outlet": "DAD",
+   "amount_inr": 34186
+  },
+  {
+   "date": "2026-01-23",
+   "outlet": "DAD",
+   "amount_inr": 35972
+  },
+  {
+   "date": "2026-01-24",
+   "outlet": "DAD",
+   "amount_inr": 39230
+  },
+  {
+   "date": "2026-01-25",
+   "outlet": "DAD",
+   "amount_inr": 37004
+  },
+  {
+   "date": "2026-01-26",
+   "outlet": "DAD",
+   "amount_inr": 32514
+  },
+  {
+   "date": "2026-01-27",
+   "outlet": "DAD",
+   "amount_inr": 33244
+  },
+  {
+   "date": "2026-01-28",
+   "outlet": "DAD",
+   "amount_inr": 34249
+  },
+  {
+   "date": "2026-01-29",
+   "outlet": "DAD",
+   "amount_inr": 34140
+  },
+  {
+   "date": "2026-01-30",
+   "outlet": "DAD",
+   "amount_inr": 36122
+  },
+  {
+   "date": "2026-01-31",
+   "outlet": "DAD",
+   "amount_inr": 37399
+  },
+  {
+   "date": "2026-02-01",
+   "outlet": "DAD",
+   "amount_inr": 34878
+  },
+  {
+   "date": "2026-02-02",
+   "outlet": "DAD",
+   "amount_inr": 30288
+  },
+  {
+   "date": "2026-02-03",
+   "outlet": "DAD",
+   "amount_inr": 32781
+  },
+  {
+   "date": "2026-02-04",
+   "outlet": "DAD",
+   "amount_inr": 33053
+  },
+  {
+   "date": "2026-02-05",
+   "outlet": "DAD",
+   "amount_inr": 33935
+  },
+  {
+   "date": "2026-02-06",
+   "outlet": "DAD",
+   "amount_inr": 35840
+  },
+  {
+   "date": "2026-02-07",
+   "outlet": "DAD",
+   "amount_inr": 38462
+  },
+  {
+   "date": "2026-02-08",
+   "outlet": "DAD",
+   "amount_inr": 36289
+  },
+  {
+   "date": "2026-02-09",
+   "outlet": "DAD",
+   "amount_inr": 32051
+  },
+  {
+   "date": "2026-02-10",
+   "outlet": "DAD",
+   "amount_inr": 33117
+  },
+  {
+   "date": "2026-02-11",
+   "outlet": "DAD",
+   "amount_inr": 33512
+  },
+  {
+   "date": "2026-02-12",
+   "outlet": "DAD",
+   "amount_inr": 33020
+  },
+  {
+   "date": "2026-02-13",
+   "outlet": "DAD",
+   "amount_inr": 36002
+  },
+  {
+   "date": "2026-02-14",
+   "outlet": "DAD",
+   "amount_inr": 37020
+  },
+  {
+   "date": "2026-02-15",
+   "outlet": "DAD",
+   "amount_inr": 35996
+  },
+  {
+   "date": "2026-02-16",
+   "outlet": "DAD",
+   "amount_inr": 30443
+  },
+  {
+   "date": "2026-02-17",
+   "outlet": "DAD",
+   "amount_inr": 33691
+  },
+  {
+   "date": "2026-02-18",
+   "outlet": "DAD",
+   "amount_inr": 33714
+  },
+  {
+   "date": "2026-02-19",
+   "outlet": "DAD",
+   "amount_inr": 35541
+  },
+  {
+   "date": "2026-02-20",
+   "outlet": "DAD",
+   "amount_inr": 35335
+  },
+  {
+   "date": "2026-02-21",
+   "outlet": "DAD",
+   "amount_inr": 39137
+  },
+  {
+   "date": "2026-02-22",
+   "outlet": "DAD",
+   "amount_inr": 36115
+  },
+  {
+   "date": "2026-02-23",
+   "outlet": "DAD",
+   "amount_inr": 30956
+  },
+  {
+   "date": "2026-02-24",
+   "outlet": "DAD",
+   "amount_inr": 32409
+  },
+  {
+   "date": "2026-02-25",
+   "outlet": "DAD",
+   "amount_inr": 33938
+  },
+  {
+   "date": "2026-02-26",
+   "outlet": "DAD",
+   "amount_inr": 33268
+  },
+  {
+   "date": "2026-02-27",
+   "outlet": "DAD",
+   "amount_inr": 34347
+  },
+  {
+   "date": "2026-02-28",
+   "outlet": "DAD",
+   "amount_inr": 38442
+  },
+  {
+   "date": "2026-03-01",
+   "outlet": "DAD",
+   "amount_inr": 37327
+  },
+  {
+   "date": "2026-03-02",
+   "outlet": "DAD",
+   "amount_inr": 30839
+  },
+  {
+   "date": "2026-03-03",
+   "outlet": "DAD",
+   "amount_inr": 33049
+  },
+  {
+   "date": "2026-03-04",
+   "outlet": "DAD",
+   "amount_inr": 34825
+  },
+  {
+   "date": "2026-03-05",
+   "outlet": "DAD",
+   "amount_inr": 33889
+  },
+  {
+   "date": "2026-03-06",
+   "outlet": "DAD",
+   "amount_inr": 34014
+  },
+  {
+   "date": "2026-03-07",
+   "outlet": "DAD",
+   "amount_inr": 38078
+  },
+  {
+   "date": "2026-03-08",
+   "outlet": "DAD",
+   "amount_inr": 37334
+  },
+  {
+   "date": "2026-03-09",
+   "outlet": "DAD",
+   "amount_inr": 30878
+  },
+  {
+   "date": "2026-03-10",
+   "outlet": "DAD",
+   "amount_inr": 32270
+  },
+  {
+   "date": "2026-03-11",
+   "outlet": "DAD",
+   "amount_inr": 32346
+  },
+  {
+   "date": "2026-03-12",
+   "outlet": "DAD",
+   "amount_inr": 34555
+  },
+  {
+   "date": "2026-03-13",
+   "outlet": "DAD",
+   "amount_inr": 35641
+  },
+  {
+   "date": "2026-03-14",
+   "outlet": "DAD",
+   "amount_inr": 38325
+  },
+  {
+   "date": "2026-03-15",
+   "outlet": "DAD",
+   "amount_inr": 35640
+  },
+  {
+   "date": "2026-03-16",
+   "outlet": "DAD",
+   "amount_inr": 31389
+  },
+  {
+   "date": "2026-03-17",
+   "outlet": "DAD",
+   "amount_inr": 33179
+  },
+  {
+   "date": "2026-03-18",
+   "outlet": "DAD",
+   "amount_inr": 33197
+  },
+  {
+   "date": "2026-03-19",
+   "outlet": "DAD",
+   "amount_inr": 33989
+  },
+  {
+   "date": "2026-03-20",
+   "outlet": "DAD",
+   "amount_inr": 36281
+  },
+  {
+   "date": "2026-03-21",
+   "outlet": "DAD",
+   "amount_inr": 39200
+  },
+  {
+   "date": "2026-03-22",
+   "outlet": "DAD",
+   "amount_inr": 34656
+  },
+  {
+   "date": "2026-03-23",
+   "outlet": "DAD",
+   "amount_inr": 32442
+  },
+  {
+   "date": "2026-03-24",
+   "outlet": "DAD",
+   "amount_inr": 32291
+  },
+  {
+   "date": "2026-03-25",
+   "outlet": "DAD",
+   "amount_inr": 32735
+  },
+  {
+   "date": "2026-03-26",
+   "outlet": "DAD",
+   "amount_inr": 33250
+  },
+  {
+   "date": "2026-03-27",
+   "outlet": "DAD",
+   "amount_inr": 35823
+  },
+  {
+   "date": "2026-03-28",
+   "outlet": "DAD",
+   "amount_inr": 37815
+  },
+  {
+   "date": "2026-03-29",
+   "outlet": "DAD",
+   "amount_inr": 36577
+  },
+  {
+   "date": "2026-03-30",
+   "outlet": "DAD",
+   "amount_inr": 31439
+  },
+  {
+   "date": "2026-03-31",
+   "outlet": "DAD",
+   "amount_inr": 33632
+  },
+  {
+   "date": "2026-04-01",
+   "outlet": "DAD",
+   "amount_inr": 33647
+  },
+  {
+   "date": "2026-04-02",
+   "outlet": "DAD",
+   "amount_inr": 35042
+  },
+  {
+   "date": "2026-04-03",
+   "outlet": "DAD",
+   "amount_inr": 34021
+  },
+  {
+   "date": "2026-04-04",
+   "outlet": "DAD",
+   "amount_inr": 37397
+  },
+  {
+   "date": "2026-04-05",
+   "outlet": "DAD",
+   "amount_inr": 34881
+  },
+  {
+   "date": "2026-04-06",
+   "outlet": "DAD",
+   "amount_inr": 30487
+  },
+  {
+   "date": "2026-04-07",
+   "outlet": "DAD",
+   "amount_inr": 33270
+  },
+  {
+   "date": "2026-04-08",
+   "outlet": "DAD",
+   "amount_inr": 33629
+  },
+  {
+   "date": "2026-04-09",
+   "outlet": "DAD",
+   "amount_inr": 34414
+  },
+  {
+   "date": "2026-04-10",
+   "outlet": "DAD",
+   "amount_inr": 34600
+  },
+  {
+   "date": "2026-04-11",
+   "outlet": "DAD",
+   "amount_inr": 38967
+  },
+  {
+   "date": "2026-04-12",
+   "outlet": "DAD",
+   "amount_inr": 37476
+  },
+  {
+   "date": "2026-04-13",
+   "outlet": "DAD",
+   "amount_inr": 32164
+  },
+  {
+   "date": "2026-04-14",
+   "outlet": "DAD",
+   "amount_inr": 31741
+  },
+  {
+   "date": "2026-04-15",
+   "outlet": "DAD",
+   "amount_inr": 33692
+  },
+  {
+   "date": "2026-04-16",
+   "outlet": "DAD",
+   "amount_inr": 33045
+  },
+  {
+   "date": "2026-04-17",
+   "outlet": "DAD",
+   "amount_inr": 36002
+  },
+  {
+   "date": "2026-04-18",
+   "outlet": "DAD",
+   "amount_inr": 39236
+  },
+  {
+   "date": "2026-04-19",
+   "outlet": "DAD",
+   "amount_inr": 36664
+  },
+  {
+   "date": "2026-04-20",
+   "outlet": "DAD",
+   "amount_inr": 31660
+  },
+  {
+   "date": "2026-04-21",
+   "outlet": "DAD",
+   "amount_inr": 33565
+  },
+  {
+   "date": "2026-04-22",
+   "outlet": "DAD",
+   "amount_inr": 35038
+  },
+  {
+   "date": "2026-04-23",
+   "outlet": "DAD",
+   "amount_inr": 33991
+  },
+  {
+   "date": "2026-04-24",
+   "outlet": "DAD",
+   "amount_inr": 34498
+  },
+  {
+   "date": "2026-04-25",
+   "outlet": "DAD",
+   "amount_inr": 38155
+  },
+  {
+   "date": "2026-04-26",
+   "outlet": "DAD",
+   "amount_inr": 35700
+  },
+  {
+   "date": "2026-04-27",
+   "outlet": "DAD",
+   "amount_inr": 30786
+  },
+  {
+   "date": "2026-04-28",
+   "outlet": "DAD",
+   "amount_inr": 32315
+  },
+  {
+   "date": "2026-04-29",
+   "outlet": "DAD",
+   "amount_inr": 32922
+  },
+  {
+   "date": "2026-04-30",
+   "outlet": "DAD",
+   "amount_inr": 33942
+  },
+  {
+   "date": "2026-05-01",
+   "outlet": "DAD",
+   "amount_inr": 35267
+  },
+  {
+   "date": "2026-05-02",
+   "outlet": "DAD",
+   "amount_inr": 37428
+  },
+  {
+   "date": "2026-05-03",
+   "outlet": "DAD",
+   "amount_inr": 35280
+  },
+  {
+   "date": "2026-05-04",
+   "outlet": "DAD",
+   "amount_inr": 32268
+  },
+  {
+   "date": "2026-05-05",
+   "outlet": "DAD",
+   "amount_inr": 31774
+  },
+  {
+   "date": "2026-05-06",
+   "outlet": "DAD",
+   "amount_inr": 33377
+  },
+  {
+   "date": "2026-05-07",
+   "outlet": "DAD",
+   "amount_inr": 35417
+  },
+  {
+   "date": "2026-05-08",
+   "outlet": "DAD",
+   "amount_inr": 35683
+  },
+  {
+   "date": "2026-05-09",
+   "outlet": "DAD",
+   "amount_inr": 38752
+  },
+  {
+   "date": "2026-05-10",
+   "outlet": "DAD",
+   "amount_inr": 37502
+  },
+  {
+   "date": "2026-05-11",
+   "outlet": "DAD",
+   "amount_inr": 32259
+  },
+  {
+   "date": "2026-05-12",
+   "outlet": "DAD",
+   "amount_inr": 32594
+  },
+  {
+   "date": "2026-05-13",
+   "outlet": "DAD",
+   "amount_inr": 35108
+  },
+  {
+   "date": "2026-05-14",
+   "outlet": "DAD",
+   "amount_inr": 34084
+  },
+  {
+   "date": "2026-05-15",
+   "outlet": "DAD",
+   "amount_inr": 35546
+  },
+  {
+   "date": "2026-05-16",
+   "outlet": "DAD",
+   "amount_inr": 39104
+  },
+  {
+   "date": "2026-05-17",
+   "outlet": "DAD",
+   "amount_inr": 34857
+  },
+  {
+   "date": "2026-05-18",
+   "outlet": "DAD",
+   "amount_inr": 32421
+  },
+  {
+   "date": "2026-05-19",
+   "outlet": "DAD",
+   "amount_inr": 33255
+  },
+  {
+   "date": "2026-05-20",
+   "outlet": "DAD",
+   "amount_inr": 33290
+  },
+  {
+   "date": "2026-05-21",
+   "outlet": "DAD",
+   "amount_inr": 34999
+  },
+  {
+   "date": "2026-05-22",
+   "outlet": "DAD",
+   "amount_inr": 34825
+  },
+  {
+   "date": "2026-05-23",
+   "outlet": "DAD",
+   "amount_inr": 37603
+  },
+  {
+   "date": "2026-05-24",
+   "outlet": "DAD",
+   "amount_inr": 37154
+  },
+  {
+   "date": "2026-05-25",
+   "outlet": "DAD",
+   "amount_inr": 32058
+  },
+  {
+   "date": "2026-05-26",
+   "outlet": "DAD",
+   "amount_inr": 31876
+  },
+  {
+   "date": "2026-05-27",
+   "outlet": "DAD",
+   "amount_inr": 33184
+  },
+  {
+   "date": "2026-05-28",
+   "outlet": "DAD",
+   "amount_inr": 33239
+  },
+  {
+   "date": "2026-05-29",
+   "outlet": "DAD",
+   "amount_inr": 35143
+  },
+  {
+   "date": "2026-05-30",
+   "outlet": "DAD",
+   "amount_inr": 37363
+  },
+  {
+   "date": "2026-05-31",
+   "outlet": "DAD",
+   "amount_inr": 36339
+  },
+  {
+   "date": "2026-06-01",
+   "outlet": "DAD",
+   "amount_inr": 31073
+  },
+  {
+   "date": "2026-06-02",
+   "outlet": "DAD",
+   "amount_inr": 32635
+  },
+  {
+   "date": "2026-06-03",
+   "outlet": "DAD",
+   "amount_inr": 33588
+  },
+  {
+   "date": "2026-06-04",
+   "outlet": "DAD",
+   "amount_inr": 33616
+  },
+  {
+   "date": "2026-06-05",
+   "outlet": "DAD",
+   "amount_inr": 34750
+  },
+  {
+   "date": "2026-06-06",
+   "outlet": "DAD",
+   "amount_inr": 40145
+  },
+  {
+   "date": "2026-06-07",
+   "outlet": "DAD",
+   "amount_inr": 36044
+  },
+  {
+   "date": "2026-06-08",
+   "outlet": "DAD",
+   "amount_inr": 30645
+  },
+  {
+   "date": "2026-06-09",
+   "outlet": "DAD",
+   "amount_inr": 31618
+  },
+  {
+   "date": "2026-06-10",
+   "outlet": "DAD",
+   "amount_inr": 32815
+  },
+  {
+   "date": "2026-06-11",
+   "outlet": "DAD",
+   "amount_inr": 35163
+  },
+  {
+   "date": "2026-06-12",
+   "outlet": "DAD",
+   "amount_inr": 35386
+  },
+  {
+   "date": "2026-06-13",
+   "outlet": "DAD",
+   "amount_inr": 37959
+  },
+  {
+   "date": "2026-06-14",
+   "outlet": "DAD",
+   "amount_inr": 36653
+  },
+  {
+   "date": "2026-06-15",
+   "outlet": "DAD",
+   "amount_inr": 30964
+  },
+  {
+   "date": "2026-06-16",
+   "outlet": "DAD",
+   "amount_inr": 33048
+  },
+  {
+   "date": "2026-06-17",
+   "outlet": "DAD",
+   "amount_inr": 33292
+  },
+  {
+   "date": "2026-06-18",
+   "outlet": "DAD",
+   "amount_inr": 35786
+  },
+  {
+   "date": "2026-06-19",
+   "outlet": "DAD",
+   "amount_inr": 34642
+  },
+  {
+   "date": "2026-06-20",
+   "outlet": "DAD",
+   "amount_inr": 38832
+  },
+  {
+   "date": "2026-06-21",
+   "outlet": "DAD",
+   "amount_inr": 36613
+  },
+  {
+   "date": "2026-06-22",
+   "outlet": "DAD",
+   "amount_inr": 32078
+  },
+  {
+   "date": "2026-06-23",
+   "outlet": "DAD",
+   "amount_inr": 33076
+  },
+  {
+   "date": "2026-06-24",
+   "outlet": "DAD",
+   "amount_inr": 34944
+  },
+  {
+   "date": "2026-06-25",
+   "outlet": "DAD",
+   "amount_inr": 33519
+  },
+  {
+   "date": "2026-06-26",
+   "outlet": "DAD",
+   "amount_inr": 36416
+  },
+  {
+   "date": "2026-06-27",
+   "outlet": "DAD",
+   "amount_inr": 39995
+  },
+  {
+   "date": "2026-06-28",
+   "outlet": "DAD",
+   "amount_inr": 35261
+  },
+  {
+   "date": "2026-06-29",
+   "outlet": "DAD",
+   "amount_inr": 32394
+  },
+  {
+   "date": "2026-06-30",
+   "outlet": "DAD",
+   "amount_inr": 32953
+  },
+  {
+   "date": "2026-07-01",
+   "outlet": "DAD",
+   "amount_inr": 33546
+  },
+  {
+   "date": "2026-07-02",
+   "outlet": "DAD",
+   "amount_inr": 33475
+  },
+  {
+   "date": "2026-07-03",
+   "outlet": "DAD",
+   "amount_inr": 35432
+  },
+  {
+   "date": "2026-07-04",
+   "outlet": "DAD",
+   "amount_inr": 38906
+  },
+  {
+   "date": "2026-07-05",
+   "outlet": "DAD",
+   "amount_inr": 36697
+  },
+  {
+   "date": "2026-07-06",
+   "outlet": "DAD",
+   "amount_inr": 32272
+  },
+  {
+   "date": "2026-07-07",
+   "outlet": "DAD",
+   "amount_inr": 32336
+  },
+  {
+   "date": "2026-07-08",
+   "outlet": "DAD",
+   "amount_inr": 34743
+  },
+  {
+   "date": "2026-07-09",
+   "outlet": "DAD",
+   "amount_inr": 34908
+  },
+  {
+   "date": "2026-07-10",
+   "outlet": "DAD",
+   "amount_inr": 35294
+  },
+  {
+   "date": "2026-07-11",
+   "outlet": "DAD",
+   "amount_inr": 40302
+  },
+  {
+   "date": "2026-07-12",
+   "outlet": "DAD",
+   "amount_inr": 36617
+  },
+  {
+   "date": "2026-07-13",
+   "outlet": "DAD",
+   "amount_inr": 30710
+  },
+  {
+   "date": "2026-07-14",
+   "outlet": "DAD",
+   "amount_inr": 33906
+  },
+  {
+   "date": "2026-07-15",
+   "outlet": "DAD",
+   "amount_inr": 34585
+  },
+  {
+   "date": "2026-07-16",
+   "outlet": "DAD",
+   "amount_inr": 34311
+  },
+  {
+   "date": "2026-07-17",
+   "outlet": "DAD",
+   "amount_inr": 36155
+  },
+  {
+   "date": "2026-07-18",
+   "outlet": "DAD",
+   "amount_inr": 38998
+  },
+  {
+   "date": "2026-07-19",
+   "outlet": "DAD",
+   "amount_inr": 36610
+  },
+  {
+   "date": "2026-07-20",
+   "outlet": "DAD",
+   "amount_inr": 32668
+  },
+  {
+   "date": "2026-07-21",
+   "outlet": "DAD",
+   "amount_inr": 32371
+  },
+  {
+   "date": "2026-07-22",
+   "outlet": "DAD",
+   "amount_inr": 34589
+  },
+  {
+   "date": "2026-07-23",
+   "outlet": "DAD",
+   "amount_inr": 34687
+  },
+  {
+   "date": "2026-07-24",
+   "outlet": "DAD",
+   "amount_inr": 36224
+  },
+  {
+   "date": "2026-07-25",
+   "outlet": "DAD",
+   "amount_inr": 39695
+  },
+  {
+   "date": "2026-07-26",
+   "outlet": "DAD",
+   "amount_inr": 36370
+  },
+  {
+   "date": "2026-07-27",
+   "outlet": "DAD",
+   "amount_inr": 31988
+  },
+  {
+   "date": "2026-07-28",
+   "outlet": "DAD",
+   "amount_inr": 31923
+  },
+  {
+   "date": "2026-07-29",
+   "outlet": "DAD",
+   "amount_inr": 35239
+  },
+  {
+   "date": "2026-07-30",
+   "outlet": "DAD",
+   "amount_inr": 33791
+  },
+  {
+   "date": "2026-07-31",
+   "outlet": "DAD",
+   "amount_inr": 36438
+  },
+  {
+   "date": "2026-08-01",
+   "outlet": "DAD",
+   "amount_inr": 38057
+  },
+  {
+   "date": "2026-08-02",
+   "outlet": "DAD",
+   "amount_inr": 36435
+  },
+  {
+   "date": "2026-08-03",
+   "outlet": "DAD",
+   "amount_inr": 32720
+  },
+  {
+   "date": "2026-08-04",
+   "outlet": "DAD",
+   "amount_inr": 33605
+  },
+  {
+   "date": "2026-08-05",
+   "outlet": "DAD",
+   "amount_inr": 34168
+  },
+  {
+   "date": "2026-08-06",
+   "outlet": "DAD",
+   "amount_inr": 35895
+  },
+  {
+   "date": "2026-08-07",
+   "outlet": "DAD",
+   "amount_inr": 36948
+  },
+  {
+   "date": "2026-08-08",
+   "outlet": "DAD",
+   "amount_inr": 38504
+  },
+  {
+   "date": "2026-08-09",
+   "outlet": "DAD",
+   "amount_inr": 36646
+  },
+  {
+   "date": "2026-08-10",
+   "outlet": "DAD",
+   "amount_inr": 30781
+  },
+  {
+   "date": "2026-08-11",
+   "outlet": "DAD",
+   "amount_inr": 33957
+  },
+  {
+   "date": "2026-08-12",
+   "outlet": "DAD",
+   "amount_inr": 33873
+  },
+  {
+   "date": "2026-08-13",
+   "outlet": "DAD",
+   "amount_inr": 34385
+  },
+  {
+   "date": "2026-08-14",
+   "outlet": "DAD",
+   "amount_inr": 35480
+  },
+  {
+   "date": "2026-08-15",
+   "outlet": "DAD",
+   "amount_inr": 38159
+  },
+  {
+   "date": "2026-08-16",
+   "outlet": "DAD",
+   "amount_inr": 35873
+  },
+  {
+   "date": "2026-08-17",
+   "outlet": "DAD",
+   "amount_inr": 32982
+  },
+  {
+   "date": "2026-08-18",
+   "outlet": "DAD",
+   "amount_inr": 31871
+  },
+  {
+   "date": "2026-08-19",
+   "outlet": "DAD",
+   "amount_inr": 32815
+  },
+  {
+   "date": "2026-08-20",
+   "outlet": "DAD",
+   "amount_inr": 34015
+  },
+  {
+   "date": "2026-08-21",
+   "outlet": "DAD",
+   "amount_inr": 35542
+  },
+  {
+   "date": "2026-08-22",
+   "outlet": "DAD",
+   "amount_inr": 38767
+  },
+  {
+   "date": "2026-08-23",
+   "outlet": "DAD",
+   "amount_inr": 35170
+  },
+  {
+   "date": "2026-08-24",
+   "outlet": "DAD",
+   "amount_inr": 32766
+  },
+  {
+   "date": "2026-08-25",
+   "outlet": "DAD",
+   "amount_inr": 33338
+  },
+  {
+   "date": "2026-08-26",
+   "outlet": "DAD",
+   "amount_inr": 35113
+  },
+  {
+   "date": "2026-08-27",
+   "outlet": "DAD",
+   "amount_inr": 34490
+  },
+  {
+   "date": "2026-08-28",
+   "outlet": "DAD",
+   "amount_inr": 35483
+  },
+  {
+   "date": "2026-08-29",
+   "outlet": "DAD",
+   "amount_inr": 38635
+  },
+  {
+   "date": "2026-08-30",
+   "outlet": "DAD",
+   "amount_inr": 36070
+  },
+  {
+   "date": "2026-08-31",
+   "outlet": "DAD",
+   "amount_inr": 31270
+  },
+  {
+   "date": "2026-09-01",
+   "outlet": "DAD",
+   "amount_inr": 32827
+  },
+  {
+   "date": "2026-09-02",
+   "outlet": "DAD",
+   "amount_inr": 34134
+  },
+  {
+   "date": "2026-09-03",
+   "outlet": "DAD",
+   "amount_inr": 36228
+  },
+  {
+   "date": "2026-09-04",
+   "outlet": "DAD",
+   "amount_inr": 36608
+  },
+  {
+   "date": "2026-09-05",
+   "outlet": "DAD",
+   "amount_inr": 40133
+  },
+  {
+   "date": "2026-09-06",
+   "outlet": "DAD",
+   "amount_inr": 36266
+  },
+  {
+   "date": "2026-09-07",
+   "outlet": "DAD",
+   "amount_inr": 32248
+  },
+  {
+   "date": "2026-09-08",
+   "outlet": "DAD",
+   "amount_inr": 32768
+  },
+  {
+   "date": "2026-09-09",
+   "outlet": "DAD",
+   "amount_inr": 34759
+  },
+  {
+   "date": "2026-09-10",
+   "outlet": "DAD",
+   "amount_inr": 35527
+  },
+  {
+   "date": "2026-09-11",
+   "outlet": "DAD",
+   "amount_inr": 36946
+  },
+  {
+   "date": "2026-09-12",
+   "outlet": "DAD",
+   "amount_inr": 39624
+  },
+  {
+   "date": "2026-09-13",
+   "outlet": "DAD",
+   "amount_inr": 37549
+  },
+  {
+   "date": "2026-09-14",
+   "outlet": "DAD",
+   "amount_inr": 32250
+  },
+  {
+   "date": "2026-09-15",
+   "outlet": "DAD",
+   "amount_inr": 33418
+  },
+  {
+   "date": "2026-09-16",
+   "outlet": "DAD",
+   "amount_inr": 34567
+  },
+  {
+   "date": "2026-09-17",
+   "outlet": "DAD",
+   "amount_inr": 35410
+  },
+  {
+   "date": "2026-09-18",
+   "outlet": "DAD",
+   "amount_inr": 35545
+  },
+  {
+   "date": "2026-09-19",
+   "outlet": "DAD",
+   "amount_inr": 38714
+  },
+  {
+   "date": "2026-09-20",
+   "outlet": "DAD",
+   "amount_inr": 37142
+  },
+  {
+   "date": "2026-09-21",
+   "outlet": "DAD",
+   "amount_inr": 31902
+  },
+  {
+   "date": "2026-09-22",
+   "outlet": "DAD",
+   "amount_inr": 32740
+  },
+  {
+   "date": "2026-09-23",
+   "outlet": "DAD",
+   "amount_inr": 33236
+  },
+  {
+   "date": "2026-09-24",
+   "outlet": "DAD",
+   "amount_inr": 33950
+  },
+  {
+   "date": "2026-09-25",
+   "outlet": "DAD",
+   "amount_inr": 35278
+  },
+  {
+   "date": "2026-09-26",
+   "outlet": "DAD",
+   "amount_inr": 40454
+  },
+  {
+   "date": "2026-09-27",
+   "outlet": "DAD",
+   "amount_inr": 35253
+  },
+  {
+   "date": "2026-09-28",
+   "outlet": "DAD",
+   "amount_inr": 31243
+  },
+  {
+   "date": "2026-09-29",
+   "outlet": "DAD",
+   "amount_inr": 33953
+  },
+  {
+   "date": "2026-09-30",
+   "outlet": "DAD",
+   "amount_inr": 34108
+  },
+  {
+   "date": "2026-10-01",
+   "outlet": "DAD",
+   "amount_inr": 34214
+  },
+  {
+   "date": "2026-10-02",
+   "outlet": "DAD",
+   "amount_inr": 35084
+  },
+  {
+   "date": "2026-10-03",
+   "outlet": "DAD",
+   "amount_inr": 39298
+  },
+  {
+   "date": "2026-10-04",
+   "outlet": "DAD",
+   "amount_inr": 36848
+  },
+  {
+   "date": "2026-10-05",
+   "outlet": "DAD",
+   "amount_inr": 32128
+  },
+  {
+   "date": "2026-10-06",
+   "outlet": "DAD",
+   "amount_inr": 33061
+  },
+  {
+   "date": "2026-10-07",
+   "outlet": "DAD",
+   "amount_inr": 33948
+  },
+  {
+   "date": "2026-10-08",
+   "outlet": "DAD",
+   "amount_inr": 35760
+  },
+  {
+   "date": "2026-10-09",
+   "outlet": "DAD",
+   "amount_inr": 36369
+  },
+  {
+   "date": "2026-10-10",
+   "outlet": "DAD",
+   "amount_inr": 39643
+  },
+  {
+   "date": "2026-10-11",
+   "outlet": "DAD",
+   "amount_inr": 35753
+  },
+  {
+   "date": "2026-10-12",
+   "outlet": "DAD",
+   "amount_inr": 31800
+  },
+  {
+   "date": "2026-10-13",
+   "outlet": "DAD",
+   "amount_inr": 33252
+  },
+  {
+   "date": "2026-10-14",
+   "outlet": "DAD",
+   "amount_inr": 35140
+  },
+  {
+   "date": "2026-10-15",
+   "outlet": "DAD",
+   "amount_inr": 35584
+  },
+  {
+   "date": "2026-10-16",
+   "outlet": "DAD",
+   "amount_inr": 35549
+  },
+  {
+   "date": "2026-10-17",
+   "outlet": "DAD",
+   "amount_inr": 39038
+  },
+  {
+   "date": "2026-10-18",
+   "outlet": "DAD",
+   "amount_inr": 37930
+  },
+  {
+   "date": "2026-10-19",
+   "outlet": "DAD",
+   "amount_inr": 32783
+  },
+  {
+   "date": "2026-10-20",
+   "outlet": "DAD",
+   "amount_inr": 33870
+  },
+  {
+   "date": "2026-10-21",
+   "outlet": "DAD",
+   "amount_inr": 33334
+  },
+  {
+   "date": "2026-10-22",
+   "outlet": "DAD",
+   "amount_inr": 34804
+  },
+  {
+   "date": "2026-10-23",
+   "outlet": "DAD",
+   "amount_inr": 34787
+  },
+  {
+   "date": "2026-10-24",
+   "outlet": "DAD",
+   "amount_inr": 38391
+  },
+  {
+   "date": "2026-10-25",
+   "outlet": "DAD",
+   "amount_inr": 35766
+  },
+  {
+   "date": "2026-10-26",
+   "outlet": "DAD",
+   "amount_inr": 31815
+  },
+  {
+   "date": "2026-10-27",
+   "outlet": "DAD",
+   "amount_inr": 33267
+  },
+  {
+   "date": "2026-10-28",
+   "outlet": "DAD",
+   "amount_inr": 33523
+  },
+  {
+   "date": "2026-10-29",
+   "outlet": "DAD",
+   "amount_inr": 35605
+  },
+  {
+   "date": "2025-05-01",
+   "outlet": "MAT",
+   "amount_inr": 18744
+  },
+  {
+   "date": "2025-05-02",
+   "outlet": "MAT",
+   "amount_inr": 19331
+  },
+  {
+   "date": "2025-05-03",
+   "outlet": "MAT",
+   "amount_inr": 21533
+  },
+  {
+   "date": "2025-05-04",
+   "outlet": "MAT",
+   "amount_inr": 18889
+  },
+  {
+   "date": "2025-05-05",
+   "outlet": "MAT",
+   "amount_inr": 17591
+  },
+  {
+   "date": "2025-05-06",
+   "outlet": "MAT",
+   "amount_inr": 17880
+  },
+  {
+   "date": "2025-05-07",
+   "outlet": "MAT",
+   "amount_inr": 17964
+  },
+  {
+   "date": "2025-05-08",
+   "outlet": "MAT",
+   "amount_inr": 18344
+  },
+  {
+   "date": "2025-05-09",
+   "outlet": "MAT",
+   "amount_inr": 19003
+  },
+  {
+   "date": "2025-05-10",
+   "outlet": "MAT",
+   "amount_inr": 20788
+  },
+  {
+   "date": "2025-05-11",
+   "outlet": "MAT",
+   "amount_inr": 20381
+  },
+  {
+   "date": "2025-05-12",
+   "outlet": "MAT",
+   "amount_inr": 16715
+  },
+  {
+   "date": "2025-05-13",
+   "outlet": "MAT",
+   "amount_inr": 17169
+  },
+  {
+   "date": "2025-05-14",
+   "outlet": "MAT",
+   "amount_inr": 18008
+  },
+  {
+   "date": "2025-05-15",
+   "outlet": "MAT",
+   "amount_inr": 18959
+  },
+  {
+   "date": "2025-05-16",
+   "outlet": "MAT",
+   "amount_inr": 19912
+  },
+  {
+   "date": "2025-05-17",
+   "outlet": "MAT",
+   "amount_inr": 20849
+  },
+  {
+   "date": "2025-05-18",
+   "outlet": "MAT",
+   "amount_inr": 19509
+  },
+  {
+   "date": "2025-05-19",
+   "outlet": "MAT",
+   "amount_inr": 16968
+  },
+  {
+   "date": "2025-05-20",
+   "outlet": "MAT",
+   "amount_inr": 18451
+  },
+  {
+   "date": "2025-05-21",
+   "outlet": "MAT",
+   "amount_inr": 18313
+  },
+  {
+   "date": "2025-05-22",
+   "outlet": "MAT",
+   "amount_inr": 18552
+  },
+  {
+   "date": "2025-05-23",
+   "outlet": "MAT",
+   "amount_inr": 19699
+  },
+  {
+   "date": "2025-05-24",
+   "outlet": "MAT",
+   "amount_inr": 20432
+  },
+  {
+   "date": "2025-05-25",
+   "outlet": "MAT",
+   "amount_inr": 19831
+  },
+  {
+   "date": "2025-05-26",
+   "outlet": "MAT",
+   "amount_inr": 16951
+  },
+  {
+   "date": "2025-05-27",
+   "outlet": "MAT",
+   "amount_inr": 18364
+  },
+  {
+   "date": "2025-05-28",
+   "outlet": "MAT",
+   "amount_inr": 18166
+  },
+  {
+   "date": "2025-05-29",
+   "outlet": "MAT",
+   "amount_inr": 18884
+  },
+  {
+   "date": "2025-05-30",
+   "outlet": "MAT",
+   "amount_inr": 19884
+  },
+  {
+   "date": "2025-05-31",
+   "outlet": "MAT",
+   "amount_inr": 21200
+  },
+  {
+   "date": "2025-06-01",
+   "outlet": "MAT",
+   "amount_inr": 18886
+  },
+  {
+   "date": "2025-06-02",
+   "outlet": "MAT",
+   "amount_inr": 17804
+  },
+  {
+   "date": "2025-06-03",
+   "outlet": "MAT",
+   "amount_inr": 17341
+  },
+  {
+   "date": "2025-06-04",
+   "outlet": "MAT",
+   "amount_inr": 18014
+  },
+  {
+   "date": "2025-06-05",
+   "outlet": "MAT",
+   "amount_inr": 18840
+  },
+  {
+   "date": "2025-06-06",
+   "outlet": "MAT",
+   "amount_inr": 18839
+  },
+  {
+   "date": "2025-06-07",
+   "outlet": "MAT",
+   "amount_inr": 20366
+  },
+  {
+   "date": "2025-06-08",
+   "outlet": "MAT",
+   "amount_inr": 19998
+  },
+  {
+   "date": "2025-06-09",
+   "outlet": "MAT",
+   "amount_inr": 16692
+  },
+  {
+   "date": "2025-06-10",
+   "outlet": "MAT",
+   "amount_inr": 17780
+  },
+  {
+   "date": "2025-06-11",
+   "outlet": "MAT",
+   "amount_inr": 17743
+  },
+  {
+   "date": "2025-06-12",
+   "outlet": "MAT",
+   "amount_inr": 19380
+  },
+  {
+   "date": "2025-06-13",
+   "outlet": "MAT",
+   "amount_inr": 19149
+  },
+  {
+   "date": "2025-06-14",
+   "outlet": "MAT",
+   "amount_inr": 21151
+  },
+  {
+   "date": "2025-06-15",
+   "outlet": "MAT",
+   "amount_inr": 20327
+  },
+  {
+   "date": "2025-06-16",
+   "outlet": "MAT",
+   "amount_inr": 16888
+  },
+  {
+   "date": "2025-06-17",
+   "outlet": "MAT",
+   "amount_inr": 17228
+  },
+  {
+   "date": "2025-06-18",
+   "outlet": "MAT",
+   "amount_inr": 18732
+  },
+  {
+   "date": "2025-06-19",
+   "outlet": "MAT",
+   "amount_inr": 19403
+  },
+  {
+   "date": "2025-06-20",
+   "outlet": "MAT",
+   "amount_inr": 18663
+  },
+  {
+   "date": "2025-06-21",
+   "outlet": "MAT",
+   "amount_inr": 21850
+  },
+  {
+   "date": "2025-06-22",
+   "outlet": "MAT",
+   "amount_inr": 19079
+  },
+  {
+   "date": "2025-06-23",
+   "outlet": "MAT",
+   "amount_inr": 17174
+  },
+  {
+   "date": "2025-06-24",
+   "outlet": "MAT",
+   "amount_inr": 17500
+  },
+  {
+   "date": "2025-06-25",
+   "outlet": "MAT",
+   "amount_inr": 17986
+  },
+  {
+   "date": "2025-06-26",
+   "outlet": "MAT",
+   "amount_inr": 18493
+  },
+  {
+   "date": "2025-06-27",
+   "outlet": "MAT",
+   "amount_inr": 19876
+  },
+  {
+   "date": "2025-06-28",
+   "outlet": "MAT",
+   "amount_inr": 21184
+  },
+  {
+   "date": "2025-06-29",
+   "outlet": "MAT",
+   "amount_inr": 19330
+  },
+  {
+   "date": "2025-06-30",
+   "outlet": "MAT",
+   "amount_inr": 17737
+  },
+  {
+   "date": "2025-07-01",
+   "outlet": "MAT",
+   "amount_inr": 17872
+  },
+  {
+   "date": "2025-07-02",
+   "outlet": "MAT",
+   "amount_inr": 17966
+  },
+  {
+   "date": "2025-07-03",
+   "outlet": "MAT",
+   "amount_inr": 18841
+  },
+  {
+   "date": "2025-07-04",
+   "outlet": "MAT",
+   "amount_inr": 18986
+  },
+  {
+   "date": "2025-07-05",
+   "outlet": "MAT",
+   "amount_inr": 21777
+  },
+  {
+   "date": "2025-07-06",
+   "outlet": "MAT",
+   "amount_inr": 20245
+  },
+  {
+   "date": "2025-07-07",
+   "outlet": "MAT",
+   "amount_inr": 17489
+  },
+  {
+   "date": "2025-07-08",
+   "outlet": "MAT",
+   "amount_inr": 17255
+  },
+  {
+   "date": "2025-07-09",
+   "outlet": "MAT",
+   "amount_inr": 19090
+  },
+  {
+   "date": "2025-07-10",
+   "outlet": "MAT",
+   "amount_inr": 19101
+  },
+  {
+   "date": "2025-07-11",
+   "outlet": "MAT",
+   "amount_inr": 19882
+  },
+  {
+   "date": "2025-07-12",
+   "outlet": "MAT",
+   "amount_inr": 21006
+  },
+  {
+   "date": "2025-07-13",
+   "outlet": "MAT",
+   "amount_inr": 19189
+  },
+  {
+   "date": "2025-07-14",
+   "outlet": "MAT",
+   "amount_inr": 17746
+  },
+  {
+   "date": "2025-07-15",
+   "outlet": "MAT",
+   "amount_inr": 17209
+  },
+  {
+   "date": "2025-07-16",
+   "outlet": "MAT",
+   "amount_inr": 18923
+  },
+  {
+   "date": "2025-07-17",
+   "outlet": "MAT",
+   "amount_inr": 19112
+  },
+  {
+   "date": "2025-07-18",
+   "outlet": "MAT",
+   "amount_inr": 19161
+  },
+  {
+   "date": "2025-07-19",
+   "outlet": "MAT",
+   "amount_inr": 21578
+  },
+  {
+   "date": "2025-07-20",
+   "outlet": "MAT",
+   "amount_inr": 20494
+  },
+  {
+   "date": "2025-07-21",
+   "outlet": "MAT",
+   "amount_inr": 17866
+  },
+  {
+   "date": "2025-07-22",
+   "outlet": "MAT",
+   "amount_inr": 17676
+  },
+  {
+   "date": "2025-07-23",
+   "outlet": "MAT",
+   "amount_inr": 18175
+  },
+  {
+   "date": "2025-07-24",
+   "outlet": "MAT",
+   "amount_inr": 19128
+  },
+  {
+   "date": "2025-07-25",
+   "outlet": "MAT",
+   "amount_inr": 19197
+  },
+  {
+   "date": "2025-07-26",
+   "outlet": "MAT",
+   "amount_inr": 20554
+  },
+  {
+   "date": "2025-07-27",
+   "outlet": "MAT",
+   "amount_inr": 19081
+  },
+  {
+   "date": "2025-07-28",
+   "outlet": "MAT",
+   "amount_inr": 16743
+  },
+  {
+   "date": "2025-07-29",
+   "outlet": "MAT",
+   "amount_inr": 18226
+  },
+  {
+   "date": "2025-07-30",
+   "outlet": "MAT",
+   "amount_inr": 18323
+  },
+  {
+   "date": "2025-07-31",
+   "outlet": "MAT",
+   "amount_inr": 19216
+  },
+  {
+   "date": "2025-08-01",
+   "outlet": "MAT",
+   "amount_inr": 20009
+  },
+  {
+   "date": "2025-08-02",
+   "outlet": "MAT",
+   "amount_inr": 20866
+  },
+  {
+   "date": "2025-08-03",
+   "outlet": "MAT",
+   "amount_inr": 19367
+  },
+  {
+   "date": "2025-08-04",
+   "outlet": "MAT",
+   "amount_inr": 17323
+  },
+  {
+   "date": "2025-08-05",
+   "outlet": "MAT",
+   "amount_inr": 18603
+  },
+  {
+   "date": "2025-08-06",
+   "outlet": "MAT",
+   "amount_inr": 19066
+  },
+  {
+   "date": "2025-08-07",
+   "outlet": "MAT",
+   "amount_inr": 19270
+  },
+  {
+   "date": "2025-08-08",
+   "outlet": "MAT",
+   "amount_inr": 20110
+  },
+  {
+   "date": "2025-08-09",
+   "outlet": "MAT",
+   "amount_inr": 20712
+  },
+  {
+   "date": "2025-08-10",
+   "outlet": "MAT",
+   "amount_inr": 19290
+  },
+  {
+   "date": "2025-08-11",
+   "outlet": "MAT",
+   "amount_inr": 17119
+  },
+  {
+   "date": "2025-08-12",
+   "outlet": "MAT",
+   "amount_inr": 17248
+  },
+  {
+   "date": "2025-08-13",
+   "outlet": "MAT",
+   "amount_inr": 18207
+  },
+  {
+   "date": "2025-08-14",
+   "outlet": "MAT",
+   "amount_inr": 19606
+  },
+  {
+   "date": "2025-08-15",
+   "outlet": "MAT",
+   "amount_inr": 20134
+  },
+  {
+   "date": "2025-08-16",
+   "outlet": "MAT",
+   "amount_inr": 21866
+  },
+  {
+   "date": "2025-08-17",
+   "outlet": "MAT",
+   "amount_inr": 19210
+  },
+  {
+   "date": "2025-08-18",
+   "outlet": "MAT",
+   "amount_inr": 16838
+  },
+  {
+   "date": "2025-08-19",
+   "outlet": "MAT",
+   "amount_inr": 17418
+  },
+  {
+   "date": "2025-08-20",
+   "outlet": "MAT",
+   "amount_inr": 18006
+  },
+  {
+   "date": "2025-08-21",
+   "outlet": "MAT",
+   "amount_inr": 18185
+  },
+  {
+   "date": "2025-08-22",
+   "outlet": "MAT",
+   "amount_inr": 18713
+  },
+  {
+   "date": "2025-08-23",
+   "outlet": "MAT",
+   "amount_inr": 21206
+  },
+  {
+   "date": "2025-08-24",
+   "outlet": "MAT",
+   "amount_inr": 19491
+  },
+  {
+   "date": "2025-08-25",
+   "outlet": "MAT",
+   "amount_inr": 16809
+  },
+  {
+   "date": "2025-08-26",
+   "outlet": "MAT",
+   "amount_inr": 18323
+  },
+  {
+   "date": "2025-08-27",
+   "outlet": "MAT",
+   "amount_inr": 19136
+  },
+  {
+   "date": "2025-08-28",
+   "outlet": "MAT",
+   "amount_inr": 18221
+  },
+  {
+   "date": "2025-08-29",
+   "outlet": "MAT",
+   "amount_inr": 19664
+  },
+  {
+   "date": "2025-08-30",
+   "outlet": "MAT",
+   "amount_inr": 21360
+  },
+  {
+   "date": "2025-08-31",
+   "outlet": "MAT",
+   "amount_inr": 19247
+  },
+  {
+   "date": "2025-09-01",
+   "outlet": "MAT",
+   "amount_inr": 17442
+  },
+  {
+   "date": "2025-09-02",
+   "outlet": "MAT",
+   "amount_inr": 17545
+  },
+  {
+   "date": "2025-09-03",
+   "outlet": "MAT",
+   "amount_inr": 18361
+  },
+  {
+   "date": "2025-09-04",
+   "outlet": "MAT",
+   "amount_inr": 19235
+  },
+  {
+   "date": "2025-09-05",
+   "outlet": "MAT",
+   "amount_inr": 20058
+  },
+  {
+   "date": "2025-09-06",
+   "outlet": "MAT",
+   "amount_inr": 20651
+  },
+  {
+   "date": "2025-09-07",
+   "outlet": "MAT",
+   "amount_inr": 19954
+  },
+  {
+   "date": "2025-09-08",
+   "outlet": "MAT",
+   "amount_inr": 16991
+  },
+  {
+   "date": "2025-09-09",
+   "outlet": "MAT",
+   "amount_inr": 18297
+  },
+  {
+   "date": "2025-09-10",
+   "outlet": "MAT",
+   "amount_inr": 19072
+  },
+  {
+   "date": "2025-09-11",
+   "outlet": "MAT",
+   "amount_inr": 18556
+  },
+  {
+   "date": "2025-09-12",
+   "outlet": "MAT",
+   "amount_inr": 19971
+  },
+  {
+   "date": "2025-09-13",
+   "outlet": "MAT",
+   "amount_inr": 21824
+  },
+  {
+   "date": "2025-09-14",
+   "outlet": "MAT",
+   "amount_inr": 20063
+  },
+  {
+   "date": "2025-09-15",
+   "outlet": "MAT",
+   "amount_inr": 16928
+  },
+  {
+   "date": "2025-09-16",
+   "outlet": "MAT",
+   "amount_inr": 17605
+  },
+  {
+   "date": "2025-09-17",
+   "outlet": "MAT",
+   "amount_inr": 17930
+  },
+  {
+   "date": "2025-09-18",
+   "outlet": "MAT",
+   "amount_inr": 19461
+  },
+  {
+   "date": "2025-09-19",
+   "outlet": "MAT",
+   "amount_inr": 19772
+  },
+  {
+   "date": "2025-09-20",
+   "outlet": "MAT",
+   "amount_inr": 21928
+  },
+  {
+   "date": "2025-09-21",
+   "outlet": "MAT",
+   "amount_inr": 19179
+  },
+  {
+   "date": "2025-09-22",
+   "outlet": "MAT",
+   "amount_inr": 17111
+  },
+  {
+   "date": "2025-09-23",
+   "outlet": "MAT",
+   "amount_inr": 18438
+  },
+  {
+   "date": "2025-09-24",
+   "outlet": "MAT",
+   "amount_inr": 18237
+  },
+  {
+   "date": "2025-09-25",
+   "outlet": "MAT",
+   "amount_inr": 18238
+  },
+  {
+   "date": "2025-09-26",
+   "outlet": "MAT",
+   "amount_inr": 19679
+  },
+  {
+   "date": "2025-09-27",
+   "outlet": "MAT",
+   "amount_inr": 21145
+  },
+  {
+   "date": "2025-09-28",
+   "outlet": "MAT",
+   "amount_inr": 19663
+  },
+  {
+   "date": "2025-09-29",
+   "outlet": "MAT",
+   "amount_inr": 17223
+  },
+  {
+   "date": "2025-09-30",
+   "outlet": "MAT",
+   "amount_inr": 18290
+  },
+  {
+   "date": "2025-10-01",
+   "outlet": "MAT",
+   "amount_inr": 18060
+  },
+  {
+   "date": "2025-10-02",
+   "outlet": "MAT",
+   "amount_inr": 19231
+  },
+  {
+   "date": "2025-10-03",
+   "outlet": "MAT",
+   "amount_inr": 20230
+  },
+  {
+   "date": "2025-10-04",
+   "outlet": "MAT",
+   "amount_inr": 21377
+  },
+  {
+   "date": "2025-10-05",
+   "outlet": "MAT",
+   "amount_inr": 19626
+  },
+  {
+   "date": "2025-10-06",
+   "outlet": "MAT",
+   "amount_inr": 16952
+  },
+  {
+   "date": "2025-10-07",
+   "outlet": "MAT",
+   "amount_inr": 18694
+  },
+  {
+   "date": "2025-10-08",
+   "outlet": "MAT",
+   "amount_inr": 18890
+  },
+  {
+   "date": "2025-10-09",
+   "outlet": "MAT",
+   "amount_inr": 19467
+  },
+  {
+   "date": "2025-10-10",
+   "outlet": "MAT",
+   "amount_inr": 18760
+  },
+  {
+   "date": "2025-10-11",
+   "outlet": "MAT",
+   "amount_inr": 20498
+  },
+  {
+   "date": "2025-10-12",
+   "outlet": "MAT",
+   "amount_inr": 19322
+  },
+  {
+   "date": "2025-10-13",
+   "outlet": "MAT",
+   "amount_inr": 17941
+  },
+  {
+   "date": "2025-10-14",
+   "outlet": "MAT",
+   "amount_inr": 17377
+  },
+  {
+   "date": "2025-10-15",
+   "outlet": "MAT",
+   "amount_inr": 17908
+  },
+  {
+   "date": "2025-10-16",
+   "outlet": "MAT",
+   "amount_inr": 18278
+  },
+  {
+   "date": "2025-10-17",
+   "outlet": "MAT",
+   "amount_inr": 28845
+  },
+  {
+   "date": "2025-10-18",
+   "outlet": "MAT",
+   "amount_inr": 31899
+  },
+  {
+   "date": "2025-10-19",
+   "outlet": "MAT",
+   "amount_inr": 30496
+  },
+  {
+   "date": "2025-10-20",
+   "outlet": "MAT",
+   "amount_inr": 27092
+  },
+  {
+   "date": "2025-10-21",
+   "outlet": "MAT",
+   "amount_inr": 27537
+  },
+  {
+   "date": "2025-10-22",
+   "outlet": "MAT",
+   "amount_inr": 28821
+  },
+  {
+   "date": "2025-10-23",
+   "outlet": "MAT",
+   "amount_inr": 29178
+  },
+  {
+   "date": "2025-10-24",
+   "outlet": "MAT",
+   "amount_inr": 19959
+  },
+  {
+   "date": "2025-10-25",
+   "outlet": "MAT",
+   "amount_inr": 21863
+  },
+  {
+   "date": "2025-10-26",
+   "outlet": "MAT",
+   "amount_inr": 19594
+  },
+  {
+   "date": "2025-10-27",
+   "outlet": "MAT",
+   "amount_inr": 17589
+  },
+  {
+   "date": "2025-10-28",
+   "outlet": "MAT",
+   "amount_inr": 18177
+  },
+  {
+   "date": "2025-10-29",
+   "outlet": "MAT",
+   "amount_inr": 18601
+  },
+  {
+   "date": "2025-10-30",
+   "outlet": "MAT",
+   "amount_inr": 19724
+  },
+  {
+   "date": "2025-10-31",
+   "outlet": "MAT",
+   "amount_inr": 20120
+  },
+  {
+   "date": "2025-11-01",
+   "outlet": "MAT",
+   "amount_inr": 21083
+  },
+  {
+   "date": "2025-11-02",
+   "outlet": "MAT",
+   "amount_inr": 20176
+  },
+  {
+   "date": "2025-11-03",
+   "outlet": "MAT",
+   "amount_inr": 16924
+  },
+  {
+   "date": "2025-11-04",
+   "outlet": "MAT",
+   "amount_inr": 17743
+  },
+  {
+   "date": "2025-11-05",
+   "outlet": "MAT",
+   "amount_inr": 18040
+  },
+  {
+   "date": "2025-11-06",
+   "outlet": "MAT",
+   "amount_inr": 19324
+  },
+  {
+   "date": "2025-11-07",
+   "outlet": "MAT",
+   "amount_inr": 20079
+  },
+  {
+   "date": "2025-11-08",
+   "outlet": "MAT",
+   "amount_inr": 21806
+  },
+  {
+   "date": "2025-11-09",
+   "outlet": "MAT",
+   "amount_inr": 20464
+  },
+  {
+   "date": "2025-11-10",
+   "outlet": "MAT",
+   "amount_inr": 18164
+  },
+  {
+   "date": "2025-11-11",
+   "outlet": "MAT",
+   "amount_inr": 18714
+  },
+  {
+   "date": "2025-11-12",
+   "outlet": "MAT",
+   "amount_inr": 18146
+  },
+  {
+   "date": "2025-11-13",
+   "outlet": "MAT",
+   "amount_inr": 18704
+  },
+  {
+   "date": "2025-11-14",
+   "outlet": "MAT",
+   "amount_inr": 18805
+  },
+  {
+   "date": "2025-11-15",
+   "outlet": "MAT",
+   "amount_inr": 21550
+  },
+  {
+   "date": "2025-11-16",
+   "outlet": "MAT",
+   "amount_inr": 19915
+  },
+  {
+   "date": "2025-11-17",
+   "outlet": "MAT",
+   "amount_inr": 17527
+  },
+  {
+   "date": "2025-11-18",
+   "outlet": "MAT",
+   "amount_inr": 18144
+  },
+  {
+   "date": "2025-11-19",
+   "outlet": "MAT",
+   "amount_inr": 18529
+  },
+  {
+   "date": "2025-11-20",
+   "outlet": "MAT",
+   "amount_inr": 18933
+  },
+  {
+   "date": "2025-11-21",
+   "outlet": "MAT",
+   "amount_inr": 20067
+  },
+  {
+   "date": "2025-11-22",
+   "outlet": "MAT",
+   "amount_inr": 21605
+  },
+  {
+   "date": "2025-11-23",
+   "outlet": "MAT",
+   "amount_inr": 20664
+  },
+  {
+   "date": "2025-11-24",
+   "outlet": "MAT",
+   "amount_inr": 17571
+  },
+  {
+   "date": "2025-11-25",
+   "outlet": "MAT",
+   "amount_inr": 18619
+  },
+  {
+   "date": "2025-11-26",
+   "outlet": "MAT",
+   "amount_inr": 18146
+  },
+  {
+   "date": "2025-11-27",
+   "outlet": "MAT",
+   "amount_inr": 18298
+  },
+  {
+   "date": "2025-11-28",
+   "outlet": "MAT",
+   "amount_inr": 19396
+  },
+  {
+   "date": "2025-11-29",
+   "outlet": "MAT",
+   "amount_inr": 21783
+  },
+  {
+   "date": "2025-11-30",
+   "outlet": "MAT",
+   "amount_inr": 19870
+  },
+  {
+   "date": "2025-12-01",
+   "outlet": "MAT",
+   "amount_inr": 18101
+  },
+  {
+   "date": "2025-12-02",
+   "outlet": "MAT",
+   "amount_inr": 17453
+  },
+  {
+   "date": "2025-12-03",
+   "outlet": "MAT",
+   "amount_inr": 19286
+  },
+  {
+   "date": "2025-12-04",
+   "outlet": "MAT",
+   "amount_inr": 19268
+  },
+  {
+   "date": "2025-12-05",
+   "outlet": "MAT",
+   "amount_inr": 19529
+  },
+  {
+   "date": "2025-12-06",
+   "outlet": "MAT",
+   "amount_inr": 21803
+  },
+  {
+   "date": "2025-12-07",
+   "outlet": "MAT",
+   "amount_inr": 20293
+  },
+  {
+   "date": "2025-12-08",
+   "outlet": "MAT",
+   "amount_inr": 17102
+  },
+  {
+   "date": "2025-12-09",
+   "outlet": "MAT",
+   "amount_inr": 17699
+  },
+  {
+   "date": "2025-12-10",
+   "outlet": "MAT",
+   "amount_inr": 18228
+  },
+  {
+   "date": "2025-12-11",
+   "outlet": "MAT",
+   "amount_inr": 19531
+  },
+  {
+   "date": "2025-12-12",
+   "outlet": "MAT",
+   "amount_inr": 19325
+  },
+  {
+   "date": "2025-12-13",
+   "outlet": "MAT",
+   "amount_inr": 20864
+  },
+  {
+   "date": "2025-12-14",
+   "outlet": "MAT",
+   "amount_inr": 20689
+  },
+  {
+   "date": "2025-12-15",
+   "outlet": "MAT",
+   "amount_inr": 17926
+  },
+  {
+   "date": "2025-12-16",
+   "outlet": "MAT",
+   "amount_inr": 18223
+  },
+  {
+   "date": "2025-12-17",
+   "outlet": "MAT",
+   "amount_inr": 18947
+  },
+  {
+   "date": "2025-12-18",
+   "outlet": "MAT",
+   "amount_inr": 19127
+  },
+  {
+   "date": "2025-12-19",
+   "outlet": "MAT",
+   "amount_inr": 19590
+  },
+  {
+   "date": "2025-12-20",
+   "outlet": "MAT",
+   "amount_inr": 21061
+  },
+  {
+   "date": "2025-12-21",
+   "outlet": "MAT",
+   "amount_inr": 20623
+  },
+  {
+   "date": "2025-12-22",
+   "outlet": "MAT",
+   "amount_inr": 18250
+  },
+  {
+   "date": "2025-12-23",
+   "outlet": "MAT",
+   "amount_inr": 18797
+  },
+  {
+   "date": "2025-12-24",
+   "outlet": "MAT",
+   "amount_inr": 19433
+  },
+  {
+   "date": "2025-12-25",
+   "outlet": "MAT",
+   "amount_inr": 19484
+  },
+  {
+   "date": "2025-12-26",
+   "outlet": "MAT",
+   "amount_inr": 19256
+  },
+  {
+   "date": "2025-12-27",
+   "outlet": "MAT",
+   "amount_inr": 22078
+  },
+  {
+   "date": "2025-12-28",
+   "outlet": "MAT",
+   "amount_inr": 19857
+  },
+  {
+   "date": "2025-12-29",
+   "outlet": "MAT",
+   "amount_inr": 18197
+  },
+  {
+   "date": "2025-12-30",
+   "outlet": "MAT",
+   "amount_inr": 18644
+  },
+  {
+   "date": "2025-12-31",
+   "outlet": "MAT",
+   "amount_inr": 18490
+  },
+  {
+   "date": "2026-01-01",
+   "outlet": "MAT",
+   "amount_inr": 19793
+  },
+  {
+   "date": "2026-01-02",
+   "outlet": "MAT",
+   "amount_inr": 19404
+  },
+  {
+   "date": "2026-01-03",
+   "outlet": "MAT",
+   "amount_inr": 21700
+  },
+  {
+   "date": "2026-01-04",
+   "outlet": "MAT",
+   "amount_inr": 20073
+  },
+  {
+   "date": "2026-01-05",
+   "outlet": "MAT",
+   "amount_inr": 17299
+  },
+  {
+   "date": "2026-01-06",
+   "outlet": "MAT",
+   "amount_inr": 18817
+  },
+  {
+   "date": "2026-01-07",
+   "outlet": "MAT",
+   "amount_inr": 19046
+  },
+  {
+   "date": "2026-01-08",
+   "outlet": "MAT",
+   "amount_inr": 18489
+  },
+  {
+   "date": "2026-01-09",
+   "outlet": "MAT",
+   "amount_inr": 19539
+  },
+  {
+   "date": "2026-01-10",
+   "outlet": "MAT",
+   "amount_inr": 20637
+  },
+  {
+   "date": "2026-01-11",
+   "outlet": "MAT",
+   "amount_inr": 19653
+  },
+  {
+   "date": "2026-01-12",
+   "outlet": "MAT",
+   "amount_inr": 17123
+  },
+  {
+   "date": "2026-01-13",
+   "outlet": "MAT",
+   "amount_inr": 18757
+  },
+  {
+   "date": "2026-01-14",
+   "outlet": "MAT",
+   "amount_inr": 19184
+  },
+  {
+   "date": "2026-01-15",
+   "outlet": "MAT",
+   "amount_inr": 19445
+  },
+  {
+   "date": "2026-01-16",
+   "outlet": "MAT",
+   "amount_inr": 19750
+  },
+  {
+   "date": "2026-01-17",
+   "outlet": "MAT",
+   "amount_inr": 21971
+  },
+  {
+   "date": "2026-01-18",
+   "outlet": "MAT",
+   "amount_inr": 20731
+  },
+  {
+   "date": "2026-01-19",
+   "outlet": "MAT",
+   "amount_inr": 17042
+  },
+  {
+   "date": "2026-01-20",
+   "outlet": "MAT",
+   "amount_inr": 18673
+  },
+  {
+   "date": "2026-01-21",
+   "outlet": "MAT",
+   "amount_inr": 19247
+  },
+  {
+   "date": "2026-01-22",
+   "outlet": "MAT",
+   "amount_inr": 19144
+  },
+  {
+   "date": "2026-01-23",
+   "outlet": "MAT",
+   "amount_inr": 20144
+  },
+  {
+   "date": "2026-01-24",
+   "outlet": "MAT",
+   "amount_inr": 21969
+  },
+  {
+   "date": "2026-01-25",
+   "outlet": "MAT",
+   "amount_inr": 20722
+  },
+  {
+   "date": "2026-01-26",
+   "outlet": "MAT",
+   "amount_inr": 18208
+  },
+  {
+   "date": "2026-01-27",
+   "outlet": "MAT",
+   "amount_inr": 18616
+  },
+  {
+   "date": "2026-01-28",
+   "outlet": "MAT",
+   "amount_inr": 19179
+  },
+  {
+   "date": "2026-01-29",
+   "outlet": "MAT",
+   "amount_inr": 19118
+  },
+  {
+   "date": "2026-01-30",
+   "outlet": "MAT",
+   "amount_inr": 20228
+  },
+  {
+   "date": "2026-01-31",
+   "outlet": "MAT",
+   "amount_inr": 20943
+  },
+  {
+   "date": "2026-02-01",
+   "outlet": "MAT",
+   "amount_inr": 19532
+  },
+  {
+   "date": "2026-02-02",
+   "outlet": "MAT",
+   "amount_inr": 16961
+  },
+  {
+   "date": "2026-02-03",
+   "outlet": "MAT",
+   "amount_inr": 18357
+  },
+  {
+   "date": "2026-02-04",
+   "outlet": "MAT",
+   "amount_inr": 18510
+  },
+  {
+   "date": "2026-02-05",
+   "outlet": "MAT",
+   "amount_inr": 19003
+  },
+  {
+   "date": "2026-02-06",
+   "outlet": "MAT",
+   "amount_inr": 20070
+  },
+  {
+   "date": "2026-02-07",
+   "outlet": "MAT",
+   "amount_inr": 21539
+  },
+  {
+   "date": "2026-02-08",
+   "outlet": "MAT",
+   "amount_inr": 20322
+  },
+  {
+   "date": "2026-02-09",
+   "outlet": "MAT",
+   "amount_inr": 17948
+  },
+  {
+   "date": "2026-02-10",
+   "outlet": "MAT",
+   "amount_inr": 18545
+  },
+  {
+   "date": "2026-02-11",
+   "outlet": "MAT",
+   "amount_inr": 18767
+  },
+  {
+   "date": "2026-02-12",
+   "outlet": "MAT",
+   "amount_inr": 18491
+  },
+  {
+   "date": "2026-02-13",
+   "outlet": "MAT",
+   "amount_inr": 20161
+  },
+  {
+   "date": "2026-02-14",
+   "outlet": "MAT",
+   "amount_inr": 20731
+  },
+  {
+   "date": "2026-02-15",
+   "outlet": "MAT",
+   "amount_inr": 20158
+  },
+  {
+   "date": "2026-02-16",
+   "outlet": "MAT",
+   "amount_inr": 17048
+  },
+  {
+   "date": "2026-02-17",
+   "outlet": "MAT",
+   "amount_inr": 18867
+  },
+  {
+   "date": "2026-02-18",
+   "outlet": "MAT",
+   "amount_inr": 18880
+  },
+  {
+   "date": "2026-02-19",
+   "outlet": "MAT",
+   "amount_inr": 19903
+  },
+  {
+   "date": "2026-02-20",
+   "outlet": "MAT",
+   "amount_inr": 19788
+  },
+  {
+   "date": "2026-02-21",
+   "outlet": "MAT",
+   "amount_inr": 21917
+  },
+  {
+   "date": "2026-02-22",
+   "outlet": "MAT",
+   "amount_inr": 20224
+  },
+  {
+   "date": "2026-02-23",
+   "outlet": "MAT",
+   "amount_inr": 17335
+  },
+  {
+   "date": "2026-02-24",
+   "outlet": "MAT",
+   "amount_inr": 18149
+  },
+  {
+   "date": "2026-02-25",
+   "outlet": "MAT",
+   "amount_inr": 19005
+  },
+  {
+   "date": "2026-02-26",
+   "outlet": "MAT",
+   "amount_inr": 18630
+  },
+  {
+   "date": "2026-02-27",
+   "outlet": "MAT",
+   "amount_inr": 19234
+  },
+  {
+   "date": "2026-02-28",
+   "outlet": "MAT",
+   "amount_inr": 21528
+  },
+  {
+   "date": "2026-03-01",
+   "outlet": "MAT",
+   "amount_inr": 20903
+  },
+  {
+   "date": "2026-03-02",
+   "outlet": "MAT",
+   "amount_inr": 17270
+  },
+  {
+   "date": "2026-03-03",
+   "outlet": "MAT",
+   "amount_inr": 18507
+  },
+  {
+   "date": "2026-03-04",
+   "outlet": "MAT",
+   "amount_inr": 19502
+  },
+  {
+   "date": "2026-03-05",
+   "outlet": "MAT",
+   "amount_inr": 18978
+  },
+  {
+   "date": "2026-03-06",
+   "outlet": "MAT",
+   "amount_inr": 19048
+  },
+  {
+   "date": "2026-03-07",
+   "outlet": "MAT",
+   "amount_inr": 21324
+  },
+  {
+   "date": "2026-03-08",
+   "outlet": "MAT",
+   "amount_inr": 20907
+  },
+  {
+   "date": "2026-03-09",
+   "outlet": "MAT",
+   "amount_inr": 17291
+  },
+  {
+   "date": "2026-03-10",
+   "outlet": "MAT",
+   "amount_inr": 18071
+  },
+  {
+   "date": "2026-03-11",
+   "outlet": "MAT",
+   "amount_inr": 18114
+  },
+  {
+   "date": "2026-03-12",
+   "outlet": "MAT",
+   "amount_inr": 19351
+  },
+  {
+   "date": "2026-03-13",
+   "outlet": "MAT",
+   "amount_inr": 19959
+  },
+  {
+   "date": "2026-03-14",
+   "outlet": "MAT",
+   "amount_inr": 21462
+  },
+  {
+   "date": "2026-03-15",
+   "outlet": "MAT",
+   "amount_inr": 19958
+  },
+  {
+   "date": "2026-03-16",
+   "outlet": "MAT",
+   "amount_inr": 17578
+  },
+  {
+   "date": "2026-03-17",
+   "outlet": "MAT",
+   "amount_inr": 18580
+  },
+  {
+   "date": "2026-03-18",
+   "outlet": "MAT",
+   "amount_inr": 18590
+  },
+  {
+   "date": "2026-03-19",
+   "outlet": "MAT",
+   "amount_inr": 19034
+  },
+  {
+   "date": "2026-03-20",
+   "outlet": "MAT",
+   "amount_inr": 20317
+  },
+  {
+   "date": "2026-03-21",
+   "outlet": "MAT",
+   "amount_inr": 21952
+  },
+  {
+   "date": "2026-03-22",
+   "outlet": "MAT",
+   "amount_inr": 19408
+  },
+  {
+   "date": "2026-03-23",
+   "outlet": "MAT",
+   "amount_inr": 18167
+  },
+  {
+   "date": "2026-03-24",
+   "outlet": "MAT",
+   "amount_inr": 18083
+  },
+  {
+   "date": "2026-03-25",
+   "outlet": "MAT",
+   "amount_inr": 18331
+  },
+  {
+   "date": "2026-03-26",
+   "outlet": "MAT",
+   "amount_inr": 18620
+  },
+  {
+   "date": "2026-03-27",
+   "outlet": "MAT",
+   "amount_inr": 20061
+  },
+  {
+   "date": "2026-03-28",
+   "outlet": "MAT",
+   "amount_inr": 21176
+  },
+  {
+   "date": "2026-03-29",
+   "outlet": "MAT",
+   "amount_inr": 20483
+  },
+  {
+   "date": "2026-03-30",
+   "outlet": "MAT",
+   "amount_inr": 17606
+  },
+  {
+   "date": "2026-03-31",
+   "outlet": "MAT",
+   "amount_inr": 18834
+  },
+  {
+   "date": "2026-04-01",
+   "outlet": "MAT",
+   "amount_inr": 18842
+  },
+  {
+   "date": "2026-04-02",
+   "outlet": "MAT",
+   "amount_inr": 19624
+  },
+  {
+   "date": "2026-04-03",
+   "outlet": "MAT",
+   "amount_inr": 19052
+  },
+  {
+   "date": "2026-04-04",
+   "outlet": "MAT",
+   "amount_inr": 20942
+  },
+  {
+   "date": "2026-04-05",
+   "outlet": "MAT",
+   "amount_inr": 19534
+  },
+  {
+   "date": "2026-04-06",
+   "outlet": "MAT",
+   "amount_inr": 17073
+  },
+  {
+   "date": "2026-04-07",
+   "outlet": "MAT",
+   "amount_inr": 18631
+  },
+  {
+   "date": "2026-04-08",
+   "outlet": "MAT",
+   "amount_inr": 18832
+  },
+  {
+   "date": "2026-04-09",
+   "outlet": "MAT",
+   "amount_inr": 19272
+  },
+  {
+   "date": "2026-04-10",
+   "outlet": "MAT",
+   "amount_inr": 19376
+  },
+  {
+   "date": "2026-04-11",
+   "outlet": "MAT",
+   "amount_inr": 21822
+  },
+  {
+   "date": "2026-04-12",
+   "outlet": "MAT",
+   "amount_inr": 20987
+  },
+  {
+   "date": "2026-04-13",
+   "outlet": "MAT",
+   "amount_inr": 18012
+  },
+  {
+   "date": "2026-04-14",
+   "outlet": "MAT",
+   "amount_inr": 17775
+  },
+  {
+   "date": "2026-04-15",
+   "outlet": "MAT",
+   "amount_inr": 18867
+  },
+  {
+   "date": "2026-04-16",
+   "outlet": "MAT",
+   "amount_inr": 18505
+  },
+  {
+   "date": "2026-04-17",
+   "outlet": "MAT",
+   "amount_inr": 20161
+  },
+  {
+   "date": "2026-04-18",
+   "outlet": "MAT",
+   "amount_inr": 21972
+  },
+  {
+   "date": "2026-04-19",
+   "outlet": "MAT",
+   "amount_inr": 20532
+  },
+  {
+   "date": "2026-04-20",
+   "outlet": "MAT",
+   "amount_inr": 17730
+  },
+  {
+   "date": "2026-04-21",
+   "outlet": "MAT",
+   "amount_inr": 18796
+  },
+  {
+   "date": "2026-04-22",
+   "outlet": "MAT",
+   "amount_inr": 19621
+  },
+  {
+   "date": "2026-04-23",
+   "outlet": "MAT",
+   "amount_inr": 19035
+  },
+  {
+   "date": "2026-04-24",
+   "outlet": "MAT",
+   "amount_inr": 19319
+  },
+  {
+   "date": "2026-04-25",
+   "outlet": "MAT",
+   "amount_inr": 21367
+  },
+  {
+   "date": "2026-04-26",
+   "outlet": "MAT",
+   "amount_inr": 19992
+  },
+  {
+   "date": "2026-04-27",
+   "outlet": "MAT",
+   "amount_inr": 17240
+  },
+  {
+   "date": "2026-04-28",
+   "outlet": "MAT",
+   "amount_inr": 18097
+  },
+  {
+   "date": "2026-04-29",
+   "outlet": "MAT",
+   "amount_inr": 18436
+  },
+  {
+   "date": "2026-04-30",
+   "outlet": "MAT",
+   "amount_inr": 19007
+  },
+  {
+   "date": "2026-05-01",
+   "outlet": "MAT",
+   "amount_inr": 19750
+  },
+  {
+   "date": "2026-05-02",
+   "outlet": "MAT",
+   "amount_inr": 20960
+  },
+  {
+   "date": "2026-05-03",
+   "outlet": "MAT",
+   "amount_inr": 19757
+  },
+  {
+   "date": "2026-05-04",
+   "outlet": "MAT",
+   "amount_inr": 18070
+  },
+  {
+   "date": "2026-05-05",
+   "outlet": "MAT",
+   "amount_inr": 17794
+  },
+  {
+   "date": "2026-05-06",
+   "outlet": "MAT",
+   "amount_inr": 18691
+  },
+  {
+   "date": "2026-05-07",
+   "outlet": "MAT",
+   "amount_inr": 19833
+  },
+  {
+   "date": "2026-05-08",
+   "outlet": "MAT",
+   "amount_inr": 19982
+  },
+  {
+   "date": "2026-05-09",
+   "outlet": "MAT",
+   "amount_inr": 21701
+  },
+  {
+   "date": "2026-05-10",
+   "outlet": "MAT",
+   "amount_inr": 21001
+  },
+  {
+   "date": "2026-05-11",
+   "outlet": "MAT",
+   "amount_inr": 18065
+  },
+  {
+   "date": "2026-05-12",
+   "outlet": "MAT",
+   "amount_inr": 18253
+  },
+  {
+   "date": "2026-05-13",
+   "outlet": "MAT",
+   "amount_inr": 19661
+  },
+  {
+   "date": "2026-05-14",
+   "outlet": "MAT",
+   "amount_inr": 19087
+  },
+  {
+   "date": "2026-05-15",
+   "outlet": "MAT",
+   "amount_inr": 19906
+  },
+  {
+   "date": "2026-05-16",
+   "outlet": "MAT",
+   "amount_inr": 21898
+  },
+  {
+   "date": "2026-05-17",
+   "outlet": "MAT",
+   "amount_inr": 19520
+  },
+  {
+   "date": "2026-05-18",
+   "outlet": "MAT",
+   "amount_inr": 18156
+  },
+  {
+   "date": "2026-05-19",
+   "outlet": "MAT",
+   "amount_inr": 18623
+  },
+  {
+   "date": "2026-05-20",
+   "outlet": "MAT",
+   "amount_inr": 18642
+  },
+  {
+   "date": "2026-05-21",
+   "outlet": "MAT",
+   "amount_inr": 19600
+  },
+  {
+   "date": "2026-05-22",
+   "outlet": "MAT",
+   "amount_inr": 19502
+  },
+  {
+   "date": "2026-05-23",
+   "outlet": "MAT",
+   "amount_inr": 21058
+  },
+  {
+   "date": "2026-05-24",
+   "outlet": "MAT",
+   "amount_inr": 20806
+  },
+  {
+   "date": "2026-05-25",
+   "outlet": "MAT",
+   "amount_inr": 17952
+  },
+  {
+   "date": "2026-05-26",
+   "outlet": "MAT",
+   "amount_inr": 17850
+  },
+  {
+   "date": "2026-05-27",
+   "outlet": "MAT",
+   "amount_inr": 18583
+  },
+  {
+   "date": "2026-05-28",
+   "outlet": "MAT",
+   "amount_inr": 18614
+  },
+  {
+   "date": "2026-05-29",
+   "outlet": "MAT",
+   "amount_inr": 19680
+  },
+  {
+   "date": "2026-05-30",
+   "outlet": "MAT",
+   "amount_inr": 20923
+  },
+  {
+   "date": "2026-05-31",
+   "outlet": "MAT",
+   "amount_inr": 20350
+  },
+  {
+   "date": "2026-06-01",
+   "outlet": "MAT",
+   "amount_inr": 17401
+  },
+  {
+   "date": "2026-06-02",
+   "outlet": "MAT",
+   "amount_inr": 18275
+  },
+  {
+   "date": "2026-06-03",
+   "outlet": "MAT",
+   "amount_inr": 18809
+  },
+  {
+   "date": "2026-06-04",
+   "outlet": "MAT",
+   "amount_inr": 18825
+  },
+  {
+   "date": "2026-06-05",
+   "outlet": "MAT",
+   "amount_inr": 19460
+  },
+  {
+   "date": "2026-06-06",
+   "outlet": "MAT",
+   "amount_inr": 22481
+  },
+  {
+   "date": "2026-06-07",
+   "outlet": "MAT",
+   "amount_inr": 20185
+  },
+  {
+   "date": "2026-06-08",
+   "outlet": "MAT",
+   "amount_inr": 17161
+  },
+  {
+   "date": "2026-06-09",
+   "outlet": "MAT",
+   "amount_inr": 17706
+  },
+  {
+   "date": "2026-06-10",
+   "outlet": "MAT",
+   "amount_inr": 18376
+  },
+  {
+   "date": "2026-06-11",
+   "outlet": "MAT",
+   "amount_inr": 19691
+  },
+  {
+   "date": "2026-06-12",
+   "outlet": "MAT",
+   "amount_inr": 19816
+  },
+  {
+   "date": "2026-06-13",
+   "outlet": "MAT",
+   "amount_inr": 21257
+  },
+  {
+   "date": "2026-06-14",
+   "outlet": "MAT",
+   "amount_inr": 20526
+  },
+  {
+   "date": "2026-06-15",
+   "outlet": "MAT",
+   "amount_inr": 17340
+  },
+  {
+   "date": "2026-06-16",
+   "outlet": "MAT",
+   "amount_inr": 18507
+  },
+  {
+   "date": "2026-06-17",
+   "outlet": "MAT",
+   "amount_inr": 18644
+  },
+  {
+   "date": "2026-06-18",
+   "outlet": "MAT",
+   "amount_inr": 20040
+  },
+  {
+   "date": "2026-06-19",
+   "outlet": "MAT",
+   "amount_inr": 19400
+  },
+  {
+   "date": "2026-06-20",
+   "outlet": "MAT",
+   "amount_inr": 21746
+  },
+  {
+   "date": "2026-06-21",
+   "outlet": "MAT",
+   "amount_inr": 20503
+  },
+  {
+   "date": "2026-06-22",
+   "outlet": "MAT",
+   "amount_inr": 17964
+  },
+  {
+   "date": "2026-06-23",
+   "outlet": "MAT",
+   "amount_inr": 18523
+  },
+  {
+   "date": "2026-06-24",
+   "outlet": "MAT",
+   "amount_inr": 19569
+  },
+  {
+   "date": "2026-06-25",
+   "outlet": "MAT",
+   "amount_inr": 18771
+  },
+  {
+   "date": "2026-06-26",
+   "outlet": "MAT",
+   "amount_inr": 20393
+  },
+  {
+   "date": "2026-06-27",
+   "outlet": "MAT",
+   "amount_inr": 22397
+  },
+  {
+   "date": "2026-06-28",
+   "outlet": "MAT",
+   "amount_inr": 19746
+  },
+  {
+   "date": "2026-06-29",
+   "outlet": "MAT",
+   "amount_inr": 18141
+  },
+  {
+   "date": "2026-06-30",
+   "outlet": "MAT",
+   "amount_inr": 18454
+  },
+  {
+   "date": "2026-07-01",
+   "outlet": "MAT",
+   "amount_inr": 18786
+  },
+  {
+   "date": "2026-07-02",
+   "outlet": "MAT",
+   "amount_inr": 18746
+  },
+  {
+   "date": "2026-07-03",
+   "outlet": "MAT",
+   "amount_inr": 19842
+  },
+  {
+   "date": "2026-07-04",
+   "outlet": "MAT",
+   "amount_inr": 21787
+  },
+  {
+   "date": "2026-07-05",
+   "outlet": "MAT",
+   "amount_inr": 20550
+  },
+  {
+   "date": "2026-07-06",
+   "outlet": "MAT",
+   "amount_inr": 18072
+  },
+  {
+   "date": "2026-07-07",
+   "outlet": "MAT",
+   "amount_inr": 18108
+  },
+  {
+   "date": "2026-07-08",
+   "outlet": "MAT",
+   "amount_inr": 19456
+  },
+  {
+   "date": "2026-07-09",
+   "outlet": "MAT",
+   "amount_inr": 19549
+  },
+  {
+   "date": "2026-07-10",
+   "outlet": "MAT",
+   "amount_inr": 19764
+  },
+  {
+   "date": "2026-07-11",
+   "outlet": "MAT",
+   "amount_inr": 22569
+  },
+  {
+   "date": "2026-07-12",
+   "outlet": "MAT",
+   "amount_inr": 20505
+  },
+  {
+   "date": "2026-07-13",
+   "outlet": "MAT",
+   "amount_inr": 17197
+  },
+  {
+   "date": "2026-07-14",
+   "outlet": "MAT",
+   "amount_inr": 18987
+  },
+  {
+   "date": "2026-07-15",
+   "outlet": "MAT",
+   "amount_inr": 19367
+  },
+  {
+   "date": "2026-07-16",
+   "outlet": "MAT",
+   "amount_inr": 19214
+  },
+  {
+   "date": "2026-07-17",
+   "outlet": "MAT",
+   "amount_inr": 20247
+  },
+  {
+   "date": "2026-07-18",
+   "outlet": "MAT",
+   "amount_inr": 21839
+  },
+  {
+   "date": "2026-07-19",
+   "outlet": "MAT",
+   "amount_inr": 20502
+  },
+  {
+   "date": "2026-07-20",
+   "outlet": "MAT",
+   "amount_inr": 18294
+  },
+  {
+   "date": "2026-07-21",
+   "outlet": "MAT",
+   "amount_inr": 18127
+  },
+  {
+   "date": "2026-07-22",
+   "outlet": "MAT",
+   "amount_inr": 19370
+  },
+  {
+   "date": "2026-07-23",
+   "outlet": "MAT",
+   "amount_inr": 19425
+  },
+  {
+   "date": "2026-07-24",
+   "outlet": "MAT",
+   "amount_inr": 20285
+  },
+  {
+   "date": "2026-07-25",
+   "outlet": "MAT",
+   "amount_inr": 22229
+  },
+  {
+   "date": "2026-07-26",
+   "outlet": "MAT",
+   "amount_inr": 20367
+  },
+  {
+   "date": "2026-07-27",
+   "outlet": "MAT",
+   "amount_inr": 17913
+  },
+  {
+   "date": "2026-07-28",
+   "outlet": "MAT",
+   "amount_inr": 17877
+  },
+  {
+   "date": "2026-07-29",
+   "outlet": "MAT",
+   "amount_inr": 19734
+  },
+  {
+   "date": "2026-07-30",
+   "outlet": "MAT",
+   "amount_inr": 18923
+  },
+  {
+   "date": "2026-07-31",
+   "outlet": "MAT",
+   "amount_inr": 20406
+  },
+  {
+   "date": "2026-08-01",
+   "outlet": "MAT",
+   "amount_inr": 21312
+  },
+  {
+   "date": "2026-08-02",
+   "outlet": "MAT",
+   "amount_inr": 20403
+  },
+  {
+   "date": "2026-08-03",
+   "outlet": "MAT",
+   "amount_inr": 18323
+  },
+  {
+   "date": "2026-08-04",
+   "outlet": "MAT",
+   "amount_inr": 18819
+  },
+  {
+   "date": "2026-08-05",
+   "outlet": "MAT",
+   "amount_inr": 19134
+  },
+  {
+   "date": "2026-08-06",
+   "outlet": "MAT",
+   "amount_inr": 20101
+  },
+  {
+   "date": "2026-08-07",
+   "outlet": "MAT",
+   "amount_inr": 20691
+  },
+  {
+   "date": "2026-08-08",
+   "outlet": "MAT",
+   "amount_inr": 21562
+  },
+  {
+   "date": "2026-08-09",
+   "outlet": "MAT",
+   "amount_inr": 20522
+  },
+  {
+   "date": "2026-08-10",
+   "outlet": "MAT",
+   "amount_inr": 17237
+  },
+  {
+   "date": "2026-08-11",
+   "outlet": "MAT",
+   "amount_inr": 19016
+  },
+  {
+   "date": "2026-08-12",
+   "outlet": "MAT",
+   "amount_inr": 18969
+  },
+  {
+   "date": "2026-08-13",
+   "outlet": "MAT",
+   "amount_inr": 19256
+  },
+  {
+   "date": "2026-08-14",
+   "outlet": "MAT",
+   "amount_inr": 19869
+  },
+  {
+   "date": "2026-08-15",
+   "outlet": "MAT",
+   "amount_inr": 21369
+  },
+  {
+   "date": "2026-08-16",
+   "outlet": "MAT",
+   "amount_inr": 20089
+  },
+  {
+   "date": "2026-08-17",
+   "outlet": "MAT",
+   "amount_inr": 18470
+  },
+  {
+   "date": "2026-08-18",
+   "outlet": "MAT",
+   "amount_inr": 17848
+  },
+  {
+   "date": "2026-08-19",
+   "outlet": "MAT",
+   "amount_inr": 18376
+  },
+  {
+   "date": "2026-08-20",
+   "outlet": "MAT",
+   "amount_inr": 19048
+  },
+  {
+   "date": "2026-08-21",
+   "outlet": "MAT",
+   "amount_inr": 19904
+  },
+  {
+   "date": "2026-08-22",
+   "outlet": "MAT",
+   "amount_inr": 21709
+  },
+  {
+   "date": "2026-08-23",
+   "outlet": "MAT",
+   "amount_inr": 19695
+  },
+  {
+   "date": "2026-08-24",
+   "outlet": "MAT",
+   "amount_inr": 18349
+  },
+  {
+   "date": "2026-08-25",
+   "outlet": "MAT",
+   "amount_inr": 18669
+  },
+  {
+   "date": "2026-08-26",
+   "outlet": "MAT",
+   "amount_inr": 19663
+  },
+  {
+   "date": "2026-08-27",
+   "outlet": "MAT",
+   "amount_inr": 19314
+  },
+  {
+   "date": "2026-08-28",
+   "outlet": "MAT",
+   "amount_inr": 19871
+  },
+  {
+   "date": "2026-08-29",
+   "outlet": "MAT",
+   "amount_inr": 21635
+  },
+  {
+   "date": "2026-08-30",
+   "outlet": "MAT",
+   "amount_inr": 20199
+  },
+  {
+   "date": "2026-08-31",
+   "outlet": "MAT",
+   "amount_inr": 17511
+  },
+  {
+   "date": "2026-09-01",
+   "outlet": "MAT",
+   "amount_inr": 18383
+  },
+  {
+   "date": "2026-09-02",
+   "outlet": "MAT",
+   "amount_inr": 19115
+  },
+  {
+   "date": "2026-09-03",
+   "outlet": "MAT",
+   "amount_inr": 20288
+  },
+  {
+   "date": "2026-09-04",
+   "outlet": "MAT",
+   "amount_inr": 20500
+  },
+  {
+   "date": "2026-09-05",
+   "outlet": "MAT",
+   "amount_inr": 22474
+  },
+  {
+   "date": "2026-09-06",
+   "outlet": "MAT",
+   "amount_inr": 20309
+  },
+  {
+   "date": "2026-09-07",
+   "outlet": "MAT",
+   "amount_inr": 18059
+  },
+  {
+   "date": "2026-09-08",
+   "outlet": "MAT",
+   "amount_inr": 18350
+  },
+  {
+   "date": "2026-09-09",
+   "outlet": "MAT",
+   "amount_inr": 19465
+  },
+  {
+   "date": "2026-09-10",
+   "outlet": "MAT",
+   "amount_inr": 19895
+  },
+  {
+   "date": "2026-09-11",
+   "outlet": "MAT",
+   "amount_inr": 20690
+  },
+  {
+   "date": "2026-09-12",
+   "outlet": "MAT",
+   "amount_inr": 22190
+  },
+  {
+   "date": "2026-09-13",
+   "outlet": "MAT",
+   "amount_inr": 21027
+  },
+  {
+   "date": "2026-09-14",
+   "outlet": "MAT",
+   "amount_inr": 18060
+  },
+  {
+   "date": "2026-09-15",
+   "outlet": "MAT",
+   "amount_inr": 18714
+  },
+  {
+   "date": "2026-09-16",
+   "outlet": "MAT",
+   "amount_inr": 19358
+  },
+  {
+   "date": "2026-09-17",
+   "outlet": "MAT",
+   "amount_inr": 19830
+  },
+  {
+   "date": "2026-09-18",
+   "outlet": "MAT",
+   "amount_inr": 19905
+  },
+  {
+   "date": "2026-09-19",
+   "outlet": "MAT",
+   "amount_inr": 21680
+  },
+  {
+   "date": "2026-09-20",
+   "outlet": "MAT",
+   "amount_inr": 20800
+  },
+  {
+   "date": "2026-09-21",
+   "outlet": "MAT",
+   "amount_inr": 17865
+  },
+  {
+   "date": "2026-09-22",
+   "outlet": "MAT",
+   "amount_inr": 18334
+  },
+  {
+   "date": "2026-09-23",
+   "outlet": "MAT",
+   "amount_inr": 18612
+  },
+  {
+   "date": "2026-09-24",
+   "outlet": "MAT",
+   "amount_inr": 19012
+  },
+  {
+   "date": "2026-09-25",
+   "outlet": "MAT",
+   "amount_inr": 19756
+  },
+  {
+   "date": "2026-09-26",
+   "outlet": "MAT",
+   "amount_inr": 22654
+  },
+  {
+   "date": "2026-09-27",
+   "outlet": "MAT",
+   "amount_inr": 19742
+  },
+  {
+   "date": "2026-09-28",
+   "outlet": "MAT",
+   "amount_inr": 17496
+  },
+  {
+   "date": "2026-09-29",
+   "outlet": "MAT",
+   "amount_inr": 19014
+  },
+  {
+   "date": "2026-09-30",
+   "outlet": "MAT",
+   "amount_inr": 19100
+  },
+  {
+   "date": "2026-10-01",
+   "outlet": "MAT",
+   "amount_inr": 19160
+  },
+  {
+   "date": "2026-10-02",
+   "outlet": "MAT",
+   "amount_inr": 19647
+  },
+  {
+   "date": "2026-10-03",
+   "outlet": "MAT",
+   "amount_inr": 22007
+  },
+  {
+   "date": "2026-10-04",
+   "outlet": "MAT",
+   "amount_inr": 20635
+  },
+  {
+   "date": "2026-10-05",
+   "outlet": "MAT",
+   "amount_inr": 17992
+  },
+  {
+   "date": "2026-10-06",
+   "outlet": "MAT",
+   "amount_inr": 18514
+  },
+  {
+   "date": "2026-10-07",
+   "outlet": "MAT",
+   "amount_inr": 19011
+  },
+  {
+   "date": "2026-10-08",
+   "outlet": "MAT",
+   "amount_inr": 20026
+  },
+  {
+   "date": "2026-10-09",
+   "outlet": "MAT",
+   "amount_inr": 20367
+  },
+  {
+   "date": "2026-10-10",
+   "outlet": "MAT",
+   "amount_inr": 22200
+  },
+  {
+   "date": "2026-10-11",
+   "outlet": "MAT",
+   "amount_inr": 20022
+  },
+  {
+   "date": "2026-10-12",
+   "outlet": "MAT",
+   "amount_inr": 17808
+  },
+  {
+   "date": "2026-10-13",
+   "outlet": "MAT",
+   "amount_inr": 18621
+  },
+  {
+   "date": "2026-10-14",
+   "outlet": "MAT",
+   "amount_inr": 19678
+  },
+  {
+   "date": "2026-10-15",
+   "outlet": "MAT",
+   "amount_inr": 19927
+  },
+  {
+   "date": "2026-10-16",
+   "outlet": "MAT",
+   "amount_inr": 19908
+  },
+  {
+   "date": "2026-10-17",
+   "outlet": "MAT",
+   "amount_inr": 21861
+  },
+  {
+   "date": "2026-10-18",
+   "outlet": "MAT",
+   "amount_inr": 21241
+  },
+  {
+   "date": "2026-10-19",
+   "outlet": "MAT",
+   "amount_inr": 18359
+  },
+  {
+   "date": "2026-10-20",
+   "outlet": "MAT",
+   "amount_inr": 18967
+  },
+  {
+   "date": "2026-10-21",
+   "outlet": "MAT",
+   "amount_inr": 18667
+  },
+  {
+   "date": "2026-10-22",
+   "outlet": "MAT",
+   "amount_inr": 19490
+  },
+  {
+   "date": "2026-10-23",
+   "outlet": "MAT",
+   "amount_inr": 19481
+  },
+  {
+   "date": "2026-10-24",
+   "outlet": "MAT",
+   "amount_inr": 21499
+  },
+  {
+   "date": "2026-10-25",
+   "outlet": "MAT",
+   "amount_inr": 20029
+  },
+  {
+   "date": "2026-10-26",
+   "outlet": "MAT",
+   "amount_inr": 17816
+  },
+  {
+   "date": "2026-10-27",
+   "outlet": "MAT",
+   "amount_inr": 18629
+  },
+  {
+   "date": "2026-10-28",
+   "outlet": "MAT",
+   "amount_inr": 18773
+  },
+  {
+   "date": "2026-10-29",
+   "outlet": "MAT",
+   "amount_inr": 19939
+  },
+  {
+   "date": "2025-05-01",
+   "outlet": "SIO",
+   "amount_inr": 14727
+  },
+  {
+   "date": "2025-05-02",
+   "outlet": "SIO",
+   "amount_inr": 15188
+  },
+  {
+   "date": "2025-05-03",
+   "outlet": "SIO",
+   "amount_inr": 16919
+  },
+  {
+   "date": "2025-05-04",
+   "outlet": "SIO",
+   "amount_inr": 14842
+  },
+  {
+   "date": "2025-05-05",
+   "outlet": "SIO",
+   "amount_inr": 13822
+  },
+  {
+   "date": "2025-05-06",
+   "outlet": "SIO",
+   "amount_inr": 14048
+  },
+  {
+   "date": "2025-05-07",
+   "outlet": "SIO",
+   "amount_inr": 14114
+  },
+  {
+   "date": "2025-05-08",
+   "outlet": "SIO",
+   "amount_inr": 14413
+  },
+  {
+   "date": "2025-05-09",
+   "outlet": "SIO",
+   "amount_inr": 14931
+  },
+  {
+   "date": "2025-05-10",
+   "outlet": "SIO",
+   "amount_inr": 16333
+  },
+  {
+   "date": "2025-05-11",
+   "outlet": "SIO",
+   "amount_inr": 16013
+  },
+  {
+   "date": "2025-05-12",
+   "outlet": "SIO",
+   "amount_inr": 13133
+  },
+  {
+   "date": "2025-05-13",
+   "outlet": "SIO",
+   "amount_inr": 13490
+  },
+  {
+   "date": "2025-05-14",
+   "outlet": "SIO",
+   "amount_inr": 14149
+  },
+  {
+   "date": "2025-05-15",
+   "outlet": "SIO",
+   "amount_inr": 14897
+  },
+  {
+   "date": "2025-05-16",
+   "outlet": "SIO",
+   "amount_inr": 15645
+  },
+  {
+   "date": "2025-05-17",
+   "outlet": "SIO",
+   "amount_inr": 16382
+  },
+  {
+   "date": "2025-05-18",
+   "outlet": "SIO",
+   "amount_inr": 15328
+  },
+  {
+   "date": "2025-05-19",
+   "outlet": "SIO",
+   "amount_inr": 13332
+  },
+  {
+   "date": "2025-05-20",
+   "outlet": "SIO",
+   "amount_inr": 14497
+  },
+  {
+   "date": "2025-05-21",
+   "outlet": "SIO",
+   "amount_inr": 14389
+  },
+  {
+   "date": "2025-05-22",
+   "outlet": "SIO",
+   "amount_inr": 14576
+  },
+  {
+   "date": "2025-05-23",
+   "outlet": "SIO",
+   "amount_inr": 15478
+  },
+  {
+   "date": "2025-05-24",
+   "outlet": "SIO",
+   "amount_inr": 16054
+  },
+  {
+   "date": "2025-05-25",
+   "outlet": "SIO",
+   "amount_inr": 15581
+  },
+  {
+   "date": "2025-05-26",
+   "outlet": "SIO",
+   "amount_inr": 13318
+  },
+  {
+   "date": "2025-05-27",
+   "outlet": "SIO",
+   "amount_inr": 14429
+  },
+  {
+   "date": "2025-05-28",
+   "outlet": "SIO",
+   "amount_inr": 14273
+  },
+  {
+   "date": "2025-05-29",
+   "outlet": "SIO",
+   "amount_inr": 14837
+  },
+  {
+   "date": "2025-05-30",
+   "outlet": "SIO",
+   "amount_inr": 15623
+  },
+  {
+   "date": "2025-05-31",
+   "outlet": "SIO",
+   "amount_inr": 16657
+  },
+  {
+   "date": "2025-06-01",
+   "outlet": "SIO",
+   "amount_inr": 14839
+  },
+  {
+   "date": "2025-06-02",
+   "outlet": "SIO",
+   "amount_inr": 13989
+  },
+  {
+   "date": "2025-06-03",
+   "outlet": "SIO",
+   "amount_inr": 13625
+  },
+  {
+   "date": "2025-06-04",
+   "outlet": "SIO",
+   "amount_inr": 14154
+  },
+  {
+   "date": "2025-06-05",
+   "outlet": "SIO",
+   "amount_inr": 14803
+  },
+  {
+   "date": "2025-06-06",
+   "outlet": "SIO",
+   "amount_inr": 14802
+  },
+  {
+   "date": "2025-06-07",
+   "outlet": "SIO",
+   "amount_inr": 16002
+  },
+  {
+   "date": "2025-06-08",
+   "outlet": "SIO",
+   "amount_inr": 15713
+  },
+  {
+   "date": "2025-06-09",
+   "outlet": "SIO",
+   "amount_inr": 13115
+  },
+  {
+   "date": "2025-06-10",
+   "outlet": "SIO",
+   "amount_inr": 13970
+  },
+  {
+   "date": "2025-06-11",
+   "outlet": "SIO",
+   "amount_inr": 13941
+  },
+  {
+   "date": "2025-06-12",
+   "outlet": "SIO",
+   "amount_inr": 15227
+  },
+  {
+   "date": "2025-06-13",
+   "outlet": "SIO",
+   "amount_inr": 15045
+  },
+  {
+   "date": "2025-06-14",
+   "outlet": "SIO",
+   "amount_inr": 16618
+  },
+  {
+   "date": "2025-06-15",
+   "outlet": "SIO",
+   "amount_inr": 15971
+  },
+  {
+   "date": "2025-06-16",
+   "outlet": "SIO",
+   "amount_inr": 13269
+  },
+  {
+   "date": "2025-06-17",
+   "outlet": "SIO",
+   "amount_inr": 13536
+  },
+  {
+   "date": "2025-06-18",
+   "outlet": "SIO",
+   "amount_inr": 14718
+  },
+  {
+   "date": "2025-06-19",
+   "outlet": "SIO",
+   "amount_inr": 15245
+  },
+  {
+   "date": "2025-06-20",
+   "outlet": "SIO",
+   "amount_inr": 14663
+  },
+  {
+   "date": "2025-06-21",
+   "outlet": "SIO",
+   "amount_inr": 17168
+  },
+  {
+   "date": "2025-06-22",
+   "outlet": "SIO",
+   "amount_inr": 14991
+  },
+  {
+   "date": "2025-06-23",
+   "outlet": "SIO",
+   "amount_inr": 13494
+  },
+  {
+   "date": "2025-06-24",
+   "outlet": "SIO",
+   "amount_inr": 13750
+  },
+  {
+   "date": "2025-06-25",
+   "outlet": "SIO",
+   "amount_inr": 14132
+  },
+  {
+   "date": "2025-06-26",
+   "outlet": "SIO",
+   "amount_inr": 14530
+  },
+  {
+   "date": "2025-06-27",
+   "outlet": "SIO",
+   "amount_inr": 15617
+  },
+  {
+   "date": "2025-06-28",
+   "outlet": "SIO",
+   "amount_inr": 16644
+  },
+  {
+   "date": "2025-06-29",
+   "outlet": "SIO",
+   "amount_inr": 15188
+  },
+  {
+   "date": "2025-06-30",
+   "outlet": "SIO",
+   "amount_inr": 13936
+  },
+  {
+   "date": "2025-07-01",
+   "outlet": "SIO",
+   "amount_inr": 14042
+  },
+  {
+   "date": "2025-07-02",
+   "outlet": "SIO",
+   "amount_inr": 14116
+  },
+  {
+   "date": "2025-07-03",
+   "outlet": "SIO",
+   "amount_inr": 14804
+  },
+  {
+   "date": "2025-07-04",
+   "outlet": "SIO",
+   "amount_inr": 14918
+  },
+  {
+   "date": "2025-07-05",
+   "outlet": "SIO",
+   "amount_inr": 17110
+  },
+  {
+   "date": "2025-07-06",
+   "outlet": "SIO",
+   "amount_inr": 15907
+  },
+  {
+   "date": "2025-07-07",
+   "outlet": "SIO",
+   "amount_inr": 13741
+  },
+  {
+   "date": "2025-07-08",
+   "outlet": "SIO",
+   "amount_inr": 13557
+  },
+  {
+   "date": "2025-07-09",
+   "outlet": "SIO",
+   "amount_inr": 14999
+  },
+  {
+   "date": "2025-07-10",
+   "outlet": "SIO",
+   "amount_inr": 15008
+  },
+  {
+   "date": "2025-07-11",
+   "outlet": "SIO",
+   "amount_inr": 15622
+  },
+  {
+   "date": "2025-07-12",
+   "outlet": "SIO",
+   "amount_inr": 16505
+  },
+  {
+   "date": "2025-07-13",
+   "outlet": "SIO",
+   "amount_inr": 15077
+  },
+  {
+   "date": "2025-07-14",
+   "outlet": "SIO",
+   "amount_inr": 13943
+  },
+  {
+   "date": "2025-07-15",
+   "outlet": "SIO",
+   "amount_inr": 13521
+  },
+  {
+   "date": "2025-07-16",
+   "outlet": "SIO",
+   "amount_inr": 14868
+  },
+  {
+   "date": "2025-07-17",
+   "outlet": "SIO",
+   "amount_inr": 15016
+  },
+  {
+   "date": "2025-07-18",
+   "outlet": "SIO",
+   "amount_inr": 15055
+  },
+  {
+   "date": "2025-07-19",
+   "outlet": "SIO",
+   "amount_inr": 16954
+  },
+  {
+   "date": "2025-07-20",
+   "outlet": "SIO",
+   "amount_inr": 16103
+  },
+  {
+   "date": "2025-07-21",
+   "outlet": "SIO",
+   "amount_inr": 14037
+  },
+  {
+   "date": "2025-07-22",
+   "outlet": "SIO",
+   "amount_inr": 13889
+  },
+  {
+   "date": "2025-07-23",
+   "outlet": "SIO",
+   "amount_inr": 14280
+  },
+  {
+   "date": "2025-07-24",
+   "outlet": "SIO",
+   "amount_inr": 15029
+  },
+  {
+   "date": "2025-07-25",
+   "outlet": "SIO",
+   "amount_inr": 15084
+  },
+  {
+   "date": "2025-07-26",
+   "outlet": "SIO",
+   "amount_inr": 16150
+  },
+  {
+   "date": "2025-07-27",
+   "outlet": "SIO",
+   "amount_inr": 14992
+  },
+  {
+   "date": "2025-07-28",
+   "outlet": "SIO",
+   "amount_inr": 13155
+  },
+  {
+   "date": "2025-07-29",
+   "outlet": "SIO",
+   "amount_inr": 14321
+  },
+  {
+   "date": "2025-07-30",
+   "outlet": "SIO",
+   "amount_inr": 14397
+  },
+  {
+   "date": "2025-07-31",
+   "outlet": "SIO",
+   "amount_inr": 15099
+  },
+  {
+   "date": "2025-08-01",
+   "outlet": "SIO",
+   "amount_inr": 15721
+  },
+  {
+   "date": "2025-08-02",
+   "outlet": "SIO",
+   "amount_inr": 16395
+  },
+  {
+   "date": "2025-08-03",
+   "outlet": "SIO",
+   "amount_inr": 15217
+  },
+  {
+   "date": "2025-08-04",
+   "outlet": "SIO",
+   "amount_inr": 13611
+  },
+  {
+   "date": "2025-08-05",
+   "outlet": "SIO",
+   "amount_inr": 14616
+  },
+  {
+   "date": "2025-08-06",
+   "outlet": "SIO",
+   "amount_inr": 14981
+  },
+  {
+   "date": "2025-08-07",
+   "outlet": "SIO",
+   "amount_inr": 15141
+  },
+  {
+   "date": "2025-08-08",
+   "outlet": "SIO",
+   "amount_inr": 15800
+  },
+  {
+   "date": "2025-08-09",
+   "outlet": "SIO",
+   "amount_inr": 16274
+  },
+  {
+   "date": "2025-08-10",
+   "outlet": "SIO",
+   "amount_inr": 15156
+  },
+  {
+   "date": "2025-08-11",
+   "outlet": "SIO",
+   "amount_inr": 13451
+  },
+  {
+   "date": "2025-08-12",
+   "outlet": "SIO",
+   "amount_inr": 13552
+  },
+  {
+   "date": "2025-08-13",
+   "outlet": "SIO",
+   "amount_inr": 14306
+  },
+  {
+   "date": "2025-08-14",
+   "outlet": "SIO",
+   "amount_inr": 15404
+  },
+  {
+   "date": "2025-08-15",
+   "outlet": "SIO",
+   "amount_inr": 15820
+  },
+  {
+   "date": "2025-08-16",
+   "outlet": "SIO",
+   "amount_inr": 17180
+  },
+  {
+   "date": "2025-08-17",
+   "outlet": "SIO",
+   "amount_inr": 15094
+  },
+  {
+   "date": "2025-08-18",
+   "outlet": "SIO",
+   "amount_inr": 13230
+  },
+  {
+   "date": "2025-08-19",
+   "outlet": "SIO",
+   "amount_inr": 13686
+  },
+  {
+   "date": "2025-08-20",
+   "outlet": "SIO",
+   "amount_inr": 14147
+  },
+  {
+   "date": "2025-08-21",
+   "outlet": "SIO",
+   "amount_inr": 14288
+  },
+  {
+   "date": "2025-08-22",
+   "outlet": "SIO",
+   "amount_inr": 14703
+  },
+  {
+   "date": "2025-08-23",
+   "outlet": "SIO",
+   "amount_inr": 16662
+  },
+  {
+   "date": "2025-08-24",
+   "outlet": "SIO",
+   "amount_inr": 15314
+  },
+  {
+   "date": "2025-08-25",
+   "outlet": "SIO",
+   "amount_inr": 13207
+  },
+  {
+   "date": "2025-08-26",
+   "outlet": "SIO",
+   "amount_inr": 14397
+  },
+  {
+   "date": "2025-08-27",
+   "outlet": "SIO",
+   "amount_inr": 15035
+  },
+  {
+   "date": "2025-08-28",
+   "outlet": "SIO",
+   "amount_inr": 14316
+  },
+  {
+   "date": "2025-08-29",
+   "outlet": "SIO",
+   "amount_inr": 15451
+  },
+  {
+   "date": "2025-08-30",
+   "outlet": "SIO",
+   "amount_inr": 16783
+  },
+  {
+   "date": "2025-08-31",
+   "outlet": "SIO",
+   "amount_inr": 15122
+  },
+  {
+   "date": "2025-09-01",
+   "outlet": "SIO",
+   "amount_inr": 13704
+  },
+  {
+   "date": "2025-09-02",
+   "outlet": "SIO",
+   "amount_inr": 13785
+  },
+  {
+   "date": "2025-09-03",
+   "outlet": "SIO",
+   "amount_inr": 14426
+  },
+  {
+   "date": "2025-09-04",
+   "outlet": "SIO",
+   "amount_inr": 15113
+  },
+  {
+   "date": "2025-09-05",
+   "outlet": "SIO",
+   "amount_inr": 15760
+  },
+  {
+   "date": "2025-09-06",
+   "outlet": "SIO",
+   "amount_inr": 16226
+  },
+  {
+   "date": "2025-09-07",
+   "outlet": "SIO",
+   "amount_inr": 15678
+  },
+  {
+   "date": "2025-09-08",
+   "outlet": "SIO",
+   "amount_inr": 13350
+  },
+  {
+   "date": "2025-09-09",
+   "outlet": "SIO",
+   "amount_inr": 14376
+  },
+  {
+   "date": "2025-09-10",
+   "outlet": "SIO",
+   "amount_inr": 14985
+  },
+  {
+   "date": "2025-09-11",
+   "outlet": "SIO",
+   "amount_inr": 14579
+  },
+  {
+   "date": "2025-09-12",
+   "outlet": "SIO",
+   "amount_inr": 15691
+  },
+  {
+   "date": "2025-09-13",
+   "outlet": "SIO",
+   "amount_inr": 17147
+  },
+  {
+   "date": "2025-09-14",
+   "outlet": "SIO",
+   "amount_inr": 15764
+  },
+  {
+   "date": "2025-09-15",
+   "outlet": "SIO",
+   "amount_inr": 13300
+  },
+  {
+   "date": "2025-09-16",
+   "outlet": "SIO",
+   "amount_inr": 13832
+  },
+  {
+   "date": "2025-09-17",
+   "outlet": "SIO",
+   "amount_inr": 14088
+  },
+  {
+   "date": "2025-09-18",
+   "outlet": "SIO",
+   "amount_inr": 15291
+  },
+  {
+   "date": "2025-09-19",
+   "outlet": "SIO",
+   "amount_inr": 15535
+  },
+  {
+   "date": "2025-09-20",
+   "outlet": "SIO",
+   "amount_inr": 17229
+  },
+  {
+   "date": "2025-09-21",
+   "outlet": "SIO",
+   "amount_inr": 15069
+  },
+  {
+   "date": "2025-09-22",
+   "outlet": "SIO",
+   "amount_inr": 13445
+  },
+  {
+   "date": "2025-09-23",
+   "outlet": "SIO",
+   "amount_inr": 14487
+  },
+  {
+   "date": "2025-09-24",
+   "outlet": "SIO",
+   "amount_inr": 14329
+  },
+  {
+   "date": "2025-09-25",
+   "outlet": "SIO",
+   "amount_inr": 14330
+  },
+  {
+   "date": "2025-09-26",
+   "outlet": "SIO",
+   "amount_inr": 15462
+  },
+  {
+   "date": "2025-09-27",
+   "outlet": "SIO",
+   "amount_inr": 16614
+  },
+  {
+   "date": "2025-09-28",
+   "outlet": "SIO",
+   "amount_inr": 15450
+  },
+  {
+   "date": "2025-09-29",
+   "outlet": "SIO",
+   "amount_inr": 13532
+  },
+  {
+   "date": "2025-09-30",
+   "outlet": "SIO",
+   "amount_inr": 14371
+  },
+  {
+   "date": "2025-10-01",
+   "outlet": "SIO",
+   "amount_inr": 14190
+  },
+  {
+   "date": "2025-10-02",
+   "outlet": "SIO",
+   "amount_inr": 15110
+  },
+  {
+   "date": "2025-10-03",
+   "outlet": "SIO",
+   "amount_inr": 15895
+  },
+  {
+   "date": "2025-10-04",
+   "outlet": "SIO",
+   "amount_inr": 16796
+  },
+  {
+   "date": "2025-10-05",
+   "outlet": "SIO",
+   "amount_inr": 15421
+  },
+  {
+   "date": "2025-10-06",
+   "outlet": "SIO",
+   "amount_inr": 13320
+  },
+  {
+   "date": "2025-10-07",
+   "outlet": "SIO",
+   "amount_inr": 14688
+  },
+  {
+   "date": "2025-10-08",
+   "outlet": "SIO",
+   "amount_inr": 14842
+  },
+  {
+   "date": "2025-10-09",
+   "outlet": "SIO",
+   "amount_inr": 15295
+  },
+  {
+   "date": "2025-10-10",
+   "outlet": "SIO",
+   "amount_inr": 14740
+  },
+  {
+   "date": "2025-10-11",
+   "outlet": "SIO",
+   "amount_inr": 16106
+  },
+  {
+   "date": "2025-10-12",
+   "outlet": "SIO",
+   "amount_inr": 15182
+  },
+  {
+   "date": "2025-10-13",
+   "outlet": "SIO",
+   "amount_inr": 14097
+  },
+  {
+   "date": "2025-10-14",
+   "outlet": "SIO",
+   "amount_inr": 13654
+  },
+  {
+   "date": "2025-10-15",
+   "outlet": "SIO",
+   "amount_inr": 14070
+  },
+  {
+   "date": "2025-10-16",
+   "outlet": "SIO",
+   "amount_inr": 14361
+  },
+  {
+   "date": "2025-10-17",
+   "outlet": "SIO",
+   "amount_inr": 22664
+  },
+  {
+   "date": "2025-10-18",
+   "outlet": "SIO",
+   "amount_inr": 25063
+  },
+  {
+   "date": "2025-10-19",
+   "outlet": "SIO",
+   "amount_inr": 23962
+  },
+  {
+   "date": "2025-10-20",
+   "outlet": "SIO",
+   "amount_inr": 21287
+  },
+  {
+   "date": "2025-10-21",
+   "outlet": "SIO",
+   "amount_inr": 21636
+  },
+  {
+   "date": "2025-10-22",
+   "outlet": "SIO",
+   "amount_inr": 22645
+  },
+  {
+   "date": "2025-10-23",
+   "outlet": "SIO",
+   "amount_inr": 22925
+  },
+  {
+   "date": "2025-10-24",
+   "outlet": "SIO",
+   "amount_inr": 15682
+  },
+  {
+   "date": "2025-10-25",
+   "outlet": "SIO",
+   "amount_inr": 17178
+  },
+  {
+   "date": "2025-10-26",
+   "outlet": "SIO",
+   "amount_inr": 15395
+  },
+  {
+   "date": "2025-10-27",
+   "outlet": "SIO",
+   "amount_inr": 13820
+  },
+  {
+   "date": "2025-10-28",
+   "outlet": "SIO",
+   "amount_inr": 14282
+  },
+  {
+   "date": "2025-10-29",
+   "outlet": "SIO",
+   "amount_inr": 14615
+  },
+  {
+   "date": "2025-10-30",
+   "outlet": "SIO",
+   "amount_inr": 15498
+  },
+  {
+   "date": "2025-10-31",
+   "outlet": "SIO",
+   "amount_inr": 15809
+  },
+  {
+   "date": "2025-11-01",
+   "outlet": "SIO",
+   "amount_inr": 16566
+  },
+  {
+   "date": "2025-11-02",
+   "outlet": "SIO",
+   "amount_inr": 15852
+  },
+  {
+   "date": "2025-11-03",
+   "outlet": "SIO",
+   "amount_inr": 13297
+  },
+  {
+   "date": "2025-11-04",
+   "outlet": "SIO",
+   "amount_inr": 13941
+  },
+  {
+   "date": "2025-11-05",
+   "outlet": "SIO",
+   "amount_inr": 14174
+  },
+  {
+   "date": "2025-11-06",
+   "outlet": "SIO",
+   "amount_inr": 15184
+  },
+  {
+   "date": "2025-11-07",
+   "outlet": "SIO",
+   "amount_inr": 15776
+  },
+  {
+   "date": "2025-11-08",
+   "outlet": "SIO",
+   "amount_inr": 17133
+  },
+  {
+   "date": "2025-11-09",
+   "outlet": "SIO",
+   "amount_inr": 16079
+  },
+  {
+   "date": "2025-11-10",
+   "outlet": "SIO",
+   "amount_inr": 14272
+  },
+  {
+   "date": "2025-11-11",
+   "outlet": "SIO",
+   "amount_inr": 14704
+  },
+  {
+   "date": "2025-11-12",
+   "outlet": "SIO",
+   "amount_inr": 14258
+  },
+  {
+   "date": "2025-11-13",
+   "outlet": "SIO",
+   "amount_inr": 14696
+  },
+  {
+   "date": "2025-11-14",
+   "outlet": "SIO",
+   "amount_inr": 14775
+  },
+  {
+   "date": "2025-11-15",
+   "outlet": "SIO",
+   "amount_inr": 16932
+  },
+  {
+   "date": "2025-11-16",
+   "outlet": "SIO",
+   "amount_inr": 15647
+  },
+  {
+   "date": "2025-11-17",
+   "outlet": "SIO",
+   "amount_inr": 13772
+  },
+  {
+   "date": "2025-11-18",
+   "outlet": "SIO",
+   "amount_inr": 14256
+  },
+  {
+   "date": "2025-11-19",
+   "outlet": "SIO",
+   "amount_inr": 14559
+  },
+  {
+   "date": "2025-11-20",
+   "outlet": "SIO",
+   "amount_inr": 14876
+  },
+  {
+   "date": "2025-11-21",
+   "outlet": "SIO",
+   "amount_inr": 15767
+  },
+  {
+   "date": "2025-11-22",
+   "outlet": "SIO",
+   "amount_inr": 16976
+  },
+  {
+   "date": "2025-11-23",
+   "outlet": "SIO",
+   "amount_inr": 16236
+  },
+  {
+   "date": "2025-11-24",
+   "outlet": "SIO",
+   "amount_inr": 13806
+  },
+  {
+   "date": "2025-11-25",
+   "outlet": "SIO",
+   "amount_inr": 14629
+  },
+  {
+   "date": "2025-11-26",
+   "outlet": "SIO",
+   "amount_inr": 14257
+  },
+  {
+   "date": "2025-11-27",
+   "outlet": "SIO",
+   "amount_inr": 14377
+  },
+  {
+   "date": "2025-11-28",
+   "outlet": "SIO",
+   "amount_inr": 15240
+  },
+  {
+   "date": "2025-11-29",
+   "outlet": "SIO",
+   "amount_inr": 17115
+  },
+  {
+   "date": "2025-11-30",
+   "outlet": "SIO",
+   "amount_inr": 15612
+  },
+  {
+   "date": "2025-12-01",
+   "outlet": "SIO",
+   "amount_inr": 14222
+  },
+  {
+   "date": "2025-12-02",
+   "outlet": "SIO",
+   "amount_inr": 13713
+  },
+  {
+   "date": "2025-12-03",
+   "outlet": "SIO",
+   "amount_inr": 15153
+  },
+  {
+   "date": "2025-12-04",
+   "outlet": "SIO",
+   "amount_inr": 15139
+  },
+  {
+   "date": "2025-12-05",
+   "outlet": "SIO",
+   "amount_inr": 15344
+  },
+  {
+   "date": "2025-12-06",
+   "outlet": "SIO",
+   "amount_inr": 17131
+  },
+  {
+   "date": "2025-12-07",
+   "outlet": "SIO",
+   "amount_inr": 15944
+  },
+  {
+   "date": "2025-12-08",
+   "outlet": "SIO",
+   "amount_inr": 13437
+  },
+  {
+   "date": "2025-12-09",
+   "outlet": "SIO",
+   "amount_inr": 13906
+  },
+  {
+   "date": "2025-12-10",
+   "outlet": "SIO",
+   "amount_inr": 14322
+  },
+  {
+   "date": "2025-12-11",
+   "outlet": "SIO",
+   "amount_inr": 15346
+  },
+  {
+   "date": "2025-12-12",
+   "outlet": "SIO",
+   "amount_inr": 15184
+  },
+  {
+   "date": "2025-12-13",
+   "outlet": "SIO",
+   "amount_inr": 16393
+  },
+  {
+   "date": "2025-12-14",
+   "outlet": "SIO",
+   "amount_inr": 16256
+  },
+  {
+   "date": "2025-12-15",
+   "outlet": "SIO",
+   "amount_inr": 14085
+  },
+  {
+   "date": "2025-12-16",
+   "outlet": "SIO",
+   "amount_inr": 14318
+  },
+  {
+   "date": "2025-12-17",
+   "outlet": "SIO",
+   "amount_inr": 14887
+  },
+  {
+   "date": "2025-12-18",
+   "outlet": "SIO",
+   "amount_inr": 15028
+  },
+  {
+   "date": "2025-12-19",
+   "outlet": "SIO",
+   "amount_inr": 15392
+  },
+  {
+   "date": "2025-12-20",
+   "outlet": "SIO",
+   "amount_inr": 16548
+  },
+  {
+   "date": "2025-12-21",
+   "outlet": "SIO",
+   "amount_inr": 16204
+  },
+  {
+   "date": "2025-12-22",
+   "outlet": "SIO",
+   "amount_inr": 14340
+  },
+  {
+   "date": "2025-12-23",
+   "outlet": "SIO",
+   "amount_inr": 14769
+  },
+  {
+   "date": "2025-12-24",
+   "outlet": "SIO",
+   "amount_inr": 15269
+  },
+  {
+   "date": "2025-12-25",
+   "outlet": "SIO",
+   "amount_inr": 15309
+  },
+  {
+   "date": "2025-12-26",
+   "outlet": "SIO",
+   "amount_inr": 15129
+  },
+  {
+   "date": "2025-12-27",
+   "outlet": "SIO",
+   "amount_inr": 17347
+  },
+  {
+   "date": "2025-12-28",
+   "outlet": "SIO",
+   "amount_inr": 15602
+  },
+  {
+   "date": "2025-12-29",
+   "outlet": "SIO",
+   "amount_inr": 14297
+  },
+  {
+   "date": "2025-12-30",
+   "outlet": "SIO",
+   "amount_inr": 14649
+  },
+  {
+   "date": "2025-12-31",
+   "outlet": "SIO",
+   "amount_inr": 14528
+  },
+  {
+   "date": "2026-01-01",
+   "outlet": "SIO",
+   "amount_inr": 15551
+  },
+  {
+   "date": "2026-01-02",
+   "outlet": "SIO",
+   "amount_inr": 15246
+  },
+  {
+   "date": "2026-01-03",
+   "outlet": "SIO",
+   "amount_inr": 17050
+  },
+  {
+   "date": "2026-01-04",
+   "outlet": "SIO",
+   "amount_inr": 15772
+  },
+  {
+   "date": "2026-01-05",
+   "outlet": "SIO",
+   "amount_inr": 13592
+  },
+  {
+   "date": "2026-01-06",
+   "outlet": "SIO",
+   "amount_inr": 14785
+  },
+  {
+   "date": "2026-01-07",
+   "outlet": "SIO",
+   "amount_inr": 14965
+  },
+  {
+   "date": "2026-01-08",
+   "outlet": "SIO",
+   "amount_inr": 14527
+  },
+  {
+   "date": "2026-01-09",
+   "outlet": "SIO",
+   "amount_inr": 15352
+  },
+  {
+   "date": "2026-01-10",
+   "outlet": "SIO",
+   "amount_inr": 16214
+  },
+  {
+   "date": "2026-01-11",
+   "outlet": "SIO",
+   "amount_inr": 15441
+  },
+  {
+   "date": "2026-01-12",
+   "outlet": "SIO",
+   "amount_inr": 13454
+  },
+  {
+   "date": "2026-01-13",
+   "outlet": "SIO",
+   "amount_inr": 14738
+  },
+  {
+   "date": "2026-01-14",
+   "outlet": "SIO",
+   "amount_inr": 15073
+  },
+  {
+   "date": "2026-01-15",
+   "outlet": "SIO",
+   "amount_inr": 15278
+  },
+  {
+   "date": "2026-01-16",
+   "outlet": "SIO",
+   "amount_inr": 15518
+  },
+  {
+   "date": "2026-01-17",
+   "outlet": "SIO",
+   "amount_inr": 17263
+  },
+  {
+   "date": "2026-01-18",
+   "outlet": "SIO",
+   "amount_inr": 16288
+  },
+  {
+   "date": "2026-01-19",
+   "outlet": "SIO",
+   "amount_inr": 13390
+  },
+  {
+   "date": "2026-01-20",
+   "outlet": "SIO",
+   "amount_inr": 14671
+  },
+  {
+   "date": "2026-01-21",
+   "outlet": "SIO",
+   "amount_inr": 15122
+  },
+  {
+   "date": "2026-01-22",
+   "outlet": "SIO",
+   "amount_inr": 15042
+  },
+  {
+   "date": "2026-01-23",
+   "outlet": "SIO",
+   "amount_inr": 15828
+  },
+  {
+   "date": "2026-01-24",
+   "outlet": "SIO",
+   "amount_inr": 17261
+  },
+  {
+   "date": "2026-01-25",
+   "outlet": "SIO",
+   "amount_inr": 16282
+  },
+  {
+   "date": "2026-01-26",
+   "outlet": "SIO",
+   "amount_inr": 14306
+  },
+  {
+   "date": "2026-01-27",
+   "outlet": "SIO",
+   "amount_inr": 14627
+  },
+  {
+   "date": "2026-01-28",
+   "outlet": "SIO",
+   "amount_inr": 15070
+  },
+  {
+   "date": "2026-01-29",
+   "outlet": "SIO",
+   "amount_inr": 15022
+  },
+  {
+   "date": "2026-01-30",
+   "outlet": "SIO",
+   "amount_inr": 15894
+  },
+  {
+   "date": "2026-01-31",
+   "outlet": "SIO",
+   "amount_inr": 16455
+  },
+  {
+   "date": "2026-02-01",
+   "outlet": "SIO",
+   "amount_inr": 15346
+  },
+  {
+   "date": "2026-02-02",
+   "outlet": "SIO",
+   "amount_inr": 13327
+  },
+  {
+   "date": "2026-02-03",
+   "outlet": "SIO",
+   "amount_inr": 14423
+  },
+  {
+   "date": "2026-02-04",
+   "outlet": "SIO",
+   "amount_inr": 14543
+  },
+  {
+   "date": "2026-02-05",
+   "outlet": "SIO",
+   "amount_inr": 14931
+  },
+  {
+   "date": "2026-02-06",
+   "outlet": "SIO",
+   "amount_inr": 15770
+  },
+  {
+   "date": "2026-02-07",
+   "outlet": "SIO",
+   "amount_inr": 16923
+  },
+  {
+   "date": "2026-02-08",
+   "outlet": "SIO",
+   "amount_inr": 15967
+  },
+  {
+   "date": "2026-02-09",
+   "outlet": "SIO",
+   "amount_inr": 14102
+  },
+  {
+   "date": "2026-02-10",
+   "outlet": "SIO",
+   "amount_inr": 14571
+  },
+  {
+   "date": "2026-02-11",
+   "outlet": "SIO",
+   "amount_inr": 14745
+  },
+  {
+   "date": "2026-02-12",
+   "outlet": "SIO",
+   "amount_inr": 14529
+  },
+  {
+   "date": "2026-02-13",
+   "outlet": "SIO",
+   "amount_inr": 15841
+  },
+  {
+   "date": "2026-02-14",
+   "outlet": "SIO",
+   "amount_inr": 16289
+  },
+  {
+   "date": "2026-02-15",
+   "outlet": "SIO",
+   "amount_inr": 15838
+  },
+  {
+   "date": "2026-02-16",
+   "outlet": "SIO",
+   "amount_inr": 13395
+  },
+  {
+   "date": "2026-02-17",
+   "outlet": "SIO",
+   "amount_inr": 14824
+  },
+  {
+   "date": "2026-02-18",
+   "outlet": "SIO",
+   "amount_inr": 14834
+  },
+  {
+   "date": "2026-02-19",
+   "outlet": "SIO",
+   "amount_inr": 15638
+  },
+  {
+   "date": "2026-02-20",
+   "outlet": "SIO",
+   "amount_inr": 15547
+  },
+  {
+   "date": "2026-02-21",
+   "outlet": "SIO",
+   "amount_inr": 17220
+  },
+  {
+   "date": "2026-02-22",
+   "outlet": "SIO",
+   "amount_inr": 15891
+  },
+  {
+   "date": "2026-02-23",
+   "outlet": "SIO",
+   "amount_inr": 13621
+  },
+  {
+   "date": "2026-02-24",
+   "outlet": "SIO",
+   "amount_inr": 14260
+  },
+  {
+   "date": "2026-02-25",
+   "outlet": "SIO",
+   "amount_inr": 14933
+  },
+  {
+   "date": "2026-02-26",
+   "outlet": "SIO",
+   "amount_inr": 14638
+  },
+  {
+   "date": "2026-02-27",
+   "outlet": "SIO",
+   "amount_inr": 15113
+  },
+  {
+   "date": "2026-02-28",
+   "outlet": "SIO",
+   "amount_inr": 16914
+  },
+  {
+   "date": "2026-03-01",
+   "outlet": "SIO",
+   "amount_inr": 16424
+  },
+  {
+   "date": "2026-03-02",
+   "outlet": "SIO",
+   "amount_inr": 13569
+  },
+  {
+   "date": "2026-03-03",
+   "outlet": "SIO",
+   "amount_inr": 14541
+  },
+  {
+   "date": "2026-03-04",
+   "outlet": "SIO",
+   "amount_inr": 15323
+  },
+  {
+   "date": "2026-03-05",
+   "outlet": "SIO",
+   "amount_inr": 14911
+  },
+  {
+   "date": "2026-03-06",
+   "outlet": "SIO",
+   "amount_inr": 14966
+  },
+  {
+   "date": "2026-03-07",
+   "outlet": "SIO",
+   "amount_inr": 16754
+  },
+  {
+   "date": "2026-03-08",
+   "outlet": "SIO",
+   "amount_inr": 16427
+  },
+  {
+   "date": "2026-03-09",
+   "outlet": "SIO",
+   "amount_inr": 13586
+  },
+  {
+   "date": "2026-03-10",
+   "outlet": "SIO",
+   "amount_inr": 14199
+  },
+  {
+   "date": "2026-03-11",
+   "outlet": "SIO",
+   "amount_inr": 14232
+  },
+  {
+   "date": "2026-03-12",
+   "outlet": "SIO",
+   "amount_inr": 15204
+  },
+  {
+   "date": "2026-03-13",
+   "outlet": "SIO",
+   "amount_inr": 15682
+  },
+  {
+   "date": "2026-03-14",
+   "outlet": "SIO",
+   "amount_inr": 16863
+  },
+  {
+   "date": "2026-03-15",
+   "outlet": "SIO",
+   "amount_inr": 15681
+  },
+  {
+   "date": "2026-03-16",
+   "outlet": "SIO",
+   "amount_inr": 13811
+  },
+  {
+   "date": "2026-03-17",
+   "outlet": "SIO",
+   "amount_inr": 14599
+  },
+  {
+   "date": "2026-03-18",
+   "outlet": "SIO",
+   "amount_inr": 14607
+  },
+  {
+   "date": "2026-03-19",
+   "outlet": "SIO",
+   "amount_inr": 14955
+  },
+  {
+   "date": "2026-03-20",
+   "outlet": "SIO",
+   "amount_inr": 15964
+  },
+  {
+   "date": "2026-03-21",
+   "outlet": "SIO",
+   "amount_inr": 17248
+  },
+  {
+   "date": "2026-03-22",
+   "outlet": "SIO",
+   "amount_inr": 15249
+  },
+  {
+   "date": "2026-03-23",
+   "outlet": "SIO",
+   "amount_inr": 14274
+  },
+  {
+   "date": "2026-03-24",
+   "outlet": "SIO",
+   "amount_inr": 14208
+  },
+  {
+   "date": "2026-03-25",
+   "outlet": "SIO",
+   "amount_inr": 14403
+  },
+  {
+   "date": "2026-03-26",
+   "outlet": "SIO",
+   "amount_inr": 14630
+  },
+  {
+   "date": "2026-03-27",
+   "outlet": "SIO",
+   "amount_inr": 15762
+  },
+  {
+   "date": "2026-03-28",
+   "outlet": "SIO",
+   "amount_inr": 16639
+  },
+  {
+   "date": "2026-03-29",
+   "outlet": "SIO",
+   "amount_inr": 16094
+  },
+  {
+   "date": "2026-03-30",
+   "outlet": "SIO",
+   "amount_inr": 13833
+  },
+  {
+   "date": "2026-03-31",
+   "outlet": "SIO",
+   "amount_inr": 14798
+  },
+  {
+   "date": "2026-04-01",
+   "outlet": "SIO",
+   "amount_inr": 14804
+  },
+  {
+   "date": "2026-04-02",
+   "outlet": "SIO",
+   "amount_inr": 15419
+  },
+  {
+   "date": "2026-04-03",
+   "outlet": "SIO",
+   "amount_inr": 14969
+  },
+  {
+   "date": "2026-04-04",
+   "outlet": "SIO",
+   "amount_inr": 16455
+  },
+  {
+   "date": "2026-04-05",
+   "outlet": "SIO",
+   "amount_inr": 15348
+  },
+  {
+   "date": "2026-04-06",
+   "outlet": "SIO",
+   "amount_inr": 13414
+  },
+  {
+   "date": "2026-04-07",
+   "outlet": "SIO",
+   "amount_inr": 14639
+  },
+  {
+   "date": "2026-04-08",
+   "outlet": "SIO",
+   "amount_inr": 14797
+  },
+  {
+   "date": "2026-04-09",
+   "outlet": "SIO",
+   "amount_inr": 15142
+  },
+  {
+   "date": "2026-04-10",
+   "outlet": "SIO",
+   "amount_inr": 15224
+  },
+  {
+   "date": "2026-04-11",
+   "outlet": "SIO",
+   "amount_inr": 17146
+  },
+  {
+   "date": "2026-04-12",
+   "outlet": "SIO",
+   "amount_inr": 16490
+  },
+  {
+   "date": "2026-04-13",
+   "outlet": "SIO",
+   "amount_inr": 14152
+  },
+  {
+   "date": "2026-04-14",
+   "outlet": "SIO",
+   "amount_inr": 13966
+  },
+  {
+   "date": "2026-04-15",
+   "outlet": "SIO",
+   "amount_inr": 14824
+  },
+  {
+   "date": "2026-04-16",
+   "outlet": "SIO",
+   "amount_inr": 14540
+  },
+  {
+   "date": "2026-04-17",
+   "outlet": "SIO",
+   "amount_inr": 15841
+  },
+  {
+   "date": "2026-04-18",
+   "outlet": "SIO",
+   "amount_inr": 17264
+  },
+  {
+   "date": "2026-04-19",
+   "outlet": "SIO",
+   "amount_inr": 16132
+  },
+  {
+   "date": "2026-04-20",
+   "outlet": "SIO",
+   "amount_inr": 13931
+  },
+  {
+   "date": "2026-04-21",
+   "outlet": "SIO",
+   "amount_inr": 14768
+  },
+  {
+   "date": "2026-04-22",
+   "outlet": "SIO",
+   "amount_inr": 15417
+  },
+  {
+   "date": "2026-04-23",
+   "outlet": "SIO",
+   "amount_inr": 14956
+  },
+  {
+   "date": "2026-04-24",
+   "outlet": "SIO",
+   "amount_inr": 15179
+  },
+  {
+   "date": "2026-04-25",
+   "outlet": "SIO",
+   "amount_inr": 16788
+  },
+  {
+   "date": "2026-04-26",
+   "outlet": "SIO",
+   "amount_inr": 15708
+  },
+  {
+   "date": "2026-04-27",
+   "outlet": "SIO",
+   "amount_inr": 13546
+  },
+  {
+   "date": "2026-04-28",
+   "outlet": "SIO",
+   "amount_inr": 14219
+  },
+  {
+   "date": "2026-04-29",
+   "outlet": "SIO",
+   "amount_inr": 14486
+  },
+  {
+   "date": "2026-04-30",
+   "outlet": "SIO",
+   "amount_inr": 14934
+  },
+  {
+   "date": "2026-05-01",
+   "outlet": "SIO",
+   "amount_inr": 15518
+  },
+  {
+   "date": "2026-05-02",
+   "outlet": "SIO",
+   "amount_inr": 16468
+  },
+  {
+   "date": "2026-05-03",
+   "outlet": "SIO",
+   "amount_inr": 15523
+  },
+  {
+   "date": "2026-05-04",
+   "outlet": "SIO",
+   "amount_inr": 14198
+  },
+  {
+   "date": "2026-05-05",
+   "outlet": "SIO",
+   "amount_inr": 13981
+  },
+  {
+   "date": "2026-05-06",
+   "outlet": "SIO",
+   "amount_inr": 14686
+  },
+  {
+   "date": "2026-05-07",
+   "outlet": "SIO",
+   "amount_inr": 15583
+  },
+  {
+   "date": "2026-05-08",
+   "outlet": "SIO",
+   "amount_inr": 15700
+  },
+  {
+   "date": "2026-05-09",
+   "outlet": "SIO",
+   "amount_inr": 17051
+  },
+  {
+   "date": "2026-05-10",
+   "outlet": "SIO",
+   "amount_inr": 16501
+  },
+  {
+   "date": "2026-05-11",
+   "outlet": "SIO",
+   "amount_inr": 14194
+  },
+  {
+   "date": "2026-05-12",
+   "outlet": "SIO",
+   "amount_inr": 14342
+  },
+  {
+   "date": "2026-05-13",
+   "outlet": "SIO",
+   "amount_inr": 15448
+  },
+  {
+   "date": "2026-05-14",
+   "outlet": "SIO",
+   "amount_inr": 14997
+  },
+  {
+   "date": "2026-05-15",
+   "outlet": "SIO",
+   "amount_inr": 15640
+  },
+  {
+   "date": "2026-05-16",
+   "outlet": "SIO",
+   "amount_inr": 17206
+  },
+  {
+   "date": "2026-05-17",
+   "outlet": "SIO",
+   "amount_inr": 15337
+  },
+  {
+   "date": "2026-05-18",
+   "outlet": "SIO",
+   "amount_inr": 14265
+  },
+  {
+   "date": "2026-05-19",
+   "outlet": "SIO",
+   "amount_inr": 14632
+  },
+  {
+   "date": "2026-05-20",
+   "outlet": "SIO",
+   "amount_inr": 14648
+  },
+  {
+   "date": "2026-05-21",
+   "outlet": "SIO",
+   "amount_inr": 15400
+  },
+  {
+   "date": "2026-05-22",
+   "outlet": "SIO",
+   "amount_inr": 15323
+  },
+  {
+   "date": "2026-05-23",
+   "outlet": "SIO",
+   "amount_inr": 16545
+  },
+  {
+   "date": "2026-05-24",
+   "outlet": "SIO",
+   "amount_inr": 16348
+  },
+  {
+   "date": "2026-05-25",
+   "outlet": "SIO",
+   "amount_inr": 14105
+  },
+  {
+   "date": "2026-05-26",
+   "outlet": "SIO",
+   "amount_inr": 14025
+  },
+  {
+   "date": "2026-05-27",
+   "outlet": "SIO",
+   "amount_inr": 14601
+  },
+  {
+   "date": "2026-05-28",
+   "outlet": "SIO",
+   "amount_inr": 14625
+  },
+  {
+   "date": "2026-05-29",
+   "outlet": "SIO",
+   "amount_inr": 15463
+  },
+  {
+   "date": "2026-05-30",
+   "outlet": "SIO",
+   "amount_inr": 16440
+  },
+  {
+   "date": "2026-05-31",
+   "outlet": "SIO",
+   "amount_inr": 15989
+  },
+  {
+   "date": "2026-06-01",
+   "outlet": "SIO",
+   "amount_inr": 13672
+  },
+  {
+   "date": "2026-06-02",
+   "outlet": "SIO",
+   "amount_inr": 14359
+  },
+  {
+   "date": "2026-06-03",
+   "outlet": "SIO",
+   "amount_inr": 14779
+  },
+  {
+   "date": "2026-06-04",
+   "outlet": "SIO",
+   "amount_inr": 14791
+  },
+  {
+   "date": "2026-06-05",
+   "outlet": "SIO",
+   "amount_inr": 15290
+  },
+  {
+   "date": "2026-06-06",
+   "outlet": "SIO",
+   "amount_inr": 17664
+  },
+  {
+   "date": "2026-06-07",
+   "outlet": "SIO",
+   "amount_inr": 15860
+  },
+  {
+   "date": "2026-06-08",
+   "outlet": "SIO",
+   "amount_inr": 13484
+  },
+  {
+   "date": "2026-06-09",
+   "outlet": "SIO",
+   "amount_inr": 13912
+  },
+  {
+   "date": "2026-06-10",
+   "outlet": "SIO",
+   "amount_inr": 14439
+  },
+  {
+   "date": "2026-06-11",
+   "outlet": "SIO",
+   "amount_inr": 15472
+  },
+  {
+   "date": "2026-06-12",
+   "outlet": "SIO",
+   "amount_inr": 15570
+  },
+  {
+   "date": "2026-06-13",
+   "outlet": "SIO",
+   "amount_inr": 16702
+  },
+  {
+   "date": "2026-06-14",
+   "outlet": "SIO",
+   "amount_inr": 16127
+  },
+  {
+   "date": "2026-06-15",
+   "outlet": "SIO",
+   "amount_inr": 13624
+  },
+  {
+   "date": "2026-06-16",
+   "outlet": "SIO",
+   "amount_inr": 14541
+  },
+  {
+   "date": "2026-06-17",
+   "outlet": "SIO",
+   "amount_inr": 14649
+  },
+  {
+   "date": "2026-06-18",
+   "outlet": "SIO",
+   "amount_inr": 15746
+  },
+  {
+   "date": "2026-06-19",
+   "outlet": "SIO",
+   "amount_inr": 15243
+  },
+  {
+   "date": "2026-06-20",
+   "outlet": "SIO",
+   "amount_inr": 17086
+  },
+  {
+   "date": "2026-06-21",
+   "outlet": "SIO",
+   "amount_inr": 16110
+  },
+  {
+   "date": "2026-06-22",
+   "outlet": "SIO",
+   "amount_inr": 14114
+  },
+  {
+   "date": "2026-06-23",
+   "outlet": "SIO",
+   "amount_inr": 14554
+  },
+  {
+   "date": "2026-06-24",
+   "outlet": "SIO",
+   "amount_inr": 15375
+  },
+  {
+   "date": "2026-06-25",
+   "outlet": "SIO",
+   "amount_inr": 14748
+  },
+  {
+   "date": "2026-06-26",
+   "outlet": "SIO",
+   "amount_inr": 16023
+  },
+  {
+   "date": "2026-06-27",
+   "outlet": "SIO",
+   "amount_inr": 17598
+  },
+  {
+   "date": "2026-06-28",
+   "outlet": "SIO",
+   "amount_inr": 15515
+  },
+  {
+   "date": "2026-06-29",
+   "outlet": "SIO",
+   "amount_inr": 14254
+  },
+  {
+   "date": "2026-06-30",
+   "outlet": "SIO",
+   "amount_inr": 14500
+  },
+  {
+   "date": "2026-07-01",
+   "outlet": "SIO",
+   "amount_inr": 14760
+  },
+  {
+   "date": "2026-07-02",
+   "outlet": "SIO",
+   "amount_inr": 14729
+  },
+  {
+   "date": "2026-07-03",
+   "outlet": "SIO",
+   "amount_inr": 15590
+  },
+  {
+   "date": "2026-07-04",
+   "outlet": "SIO",
+   "amount_inr": 17119
+  },
+  {
+   "date": "2026-07-05",
+   "outlet": "SIO",
+   "amount_inr": 16147
+  },
+  {
+   "date": "2026-07-06",
+   "outlet": "SIO",
+   "amount_inr": 14199
+  },
+  {
+   "date": "2026-07-07",
+   "outlet": "SIO",
+   "amount_inr": 14228
+  },
+  {
+   "date": "2026-07-08",
+   "outlet": "SIO",
+   "amount_inr": 15287
+  },
+  {
+   "date": "2026-07-09",
+   "outlet": "SIO",
+   "amount_inr": 15360
+  },
+  {
+   "date": "2026-07-10",
+   "outlet": "SIO",
+   "amount_inr": 15529
+  },
+  {
+   "date": "2026-07-11",
+   "outlet": "SIO",
+   "amount_inr": 17733
+  },
+  {
+   "date": "2026-07-12",
+   "outlet": "SIO",
+   "amount_inr": 16111
+  },
+  {
+   "date": "2026-07-13",
+   "outlet": "SIO",
+   "amount_inr": 13512
+  },
+  {
+   "date": "2026-07-14",
+   "outlet": "SIO",
+   "amount_inr": 14919
+  },
+  {
+   "date": "2026-07-15",
+   "outlet": "SIO",
+   "amount_inr": 15217
+  },
+  {
+   "date": "2026-07-16",
+   "outlet": "SIO",
+   "amount_inr": 15097
+  },
+  {
+   "date": "2026-07-17",
+   "outlet": "SIO",
+   "amount_inr": 15908
+  },
+  {
+   "date": "2026-07-18",
+   "outlet": "SIO",
+   "amount_inr": 17159
+  },
+  {
+   "date": "2026-07-19",
+   "outlet": "SIO",
+   "amount_inr": 16108
+  },
+  {
+   "date": "2026-07-20",
+   "outlet": "SIO",
+   "amount_inr": 14374
+  },
+  {
+   "date": "2026-07-21",
+   "outlet": "SIO",
+   "amount_inr": 14243
+  },
+  {
+   "date": "2026-07-22",
+   "outlet": "SIO",
+   "amount_inr": 15219
+  },
+  {
+   "date": "2026-07-23",
+   "outlet": "SIO",
+   "amount_inr": 15262
+  },
+  {
+   "date": "2026-07-24",
+   "outlet": "SIO",
+   "amount_inr": 15938
+  },
+  {
+   "date": "2026-07-25",
+   "outlet": "SIO",
+   "amount_inr": 17466
+  },
+  {
+   "date": "2026-07-26",
+   "outlet": "SIO",
+   "amount_inr": 16003
+  },
+  {
+   "date": "2026-07-27",
+   "outlet": "SIO",
+   "amount_inr": 14075
+  },
+  {
+   "date": "2026-07-28",
+   "outlet": "SIO",
+   "amount_inr": 14046
+  },
+  {
+   "date": "2026-07-29",
+   "outlet": "SIO",
+   "amount_inr": 15505
+  },
+  {
+   "date": "2026-07-30",
+   "outlet": "SIO",
+   "amount_inr": 14868
+  },
+  {
+   "date": "2026-07-31",
+   "outlet": "SIO",
+   "amount_inr": 16033
+  },
+  {
+   "date": "2026-08-01",
+   "outlet": "SIO",
+   "amount_inr": 16745
+  },
+  {
+   "date": "2026-08-02",
+   "outlet": "SIO",
+   "amount_inr": 16031
+  },
+  {
+   "date": "2026-08-03",
+   "outlet": "SIO",
+   "amount_inr": 14397
+  },
+  {
+   "date": "2026-08-04",
+   "outlet": "SIO",
+   "amount_inr": 14786
+  },
+  {
+   "date": "2026-08-05",
+   "outlet": "SIO",
+   "amount_inr": 15034
+  },
+  {
+   "date": "2026-08-06",
+   "outlet": "SIO",
+   "amount_inr": 15794
+  },
+  {
+   "date": "2026-08-07",
+   "outlet": "SIO",
+   "amount_inr": 16257
+  },
+  {
+   "date": "2026-08-08",
+   "outlet": "SIO",
+   "amount_inr": 16942
+  },
+  {
+   "date": "2026-08-09",
+   "outlet": "SIO",
+   "amount_inr": 16124
+  },
+  {
+   "date": "2026-08-10",
+   "outlet": "SIO",
+   "amount_inr": 13544
+  },
+  {
+   "date": "2026-08-11",
+   "outlet": "SIO",
+   "amount_inr": 14941
+  },
+  {
+   "date": "2026-08-12",
+   "outlet": "SIO",
+   "amount_inr": 14904
+  },
+  {
+   "date": "2026-08-13",
+   "outlet": "SIO",
+   "amount_inr": 15129
+  },
+  {
+   "date": "2026-08-14",
+   "outlet": "SIO",
+   "amount_inr": 15611
+  },
+  {
+   "date": "2026-08-15",
+   "outlet": "SIO",
+   "amount_inr": 16790
+  },
+  {
+   "date": "2026-08-16",
+   "outlet": "SIO",
+   "amount_inr": 15784
+  },
+  {
+   "date": "2026-08-17",
+   "outlet": "SIO",
+   "amount_inr": 14512
+  },
+  {
+   "date": "2026-08-18",
+   "outlet": "SIO",
+   "amount_inr": 14023
+  },
+  {
+   "date": "2026-08-19",
+   "outlet": "SIO",
+   "amount_inr": 14438
+  },
+  {
+   "date": "2026-08-20",
+   "outlet": "SIO",
+   "amount_inr": 14967
+  },
+  {
+   "date": "2026-08-21",
+   "outlet": "SIO",
+   "amount_inr": 15639
+  },
+  {
+   "date": "2026-08-22",
+   "outlet": "SIO",
+   "amount_inr": 17057
+  },
+  {
+   "date": "2026-08-23",
+   "outlet": "SIO",
+   "amount_inr": 15475
+  },
+  {
+   "date": "2026-08-24",
+   "outlet": "SIO",
+   "amount_inr": 14417
+  },
+  {
+   "date": "2026-08-25",
+   "outlet": "SIO",
+   "amount_inr": 14669
+  },
+  {
+   "date": "2026-08-26",
+   "outlet": "SIO",
+   "amount_inr": 15450
+  },
+  {
+   "date": "2026-08-27",
+   "outlet": "SIO",
+   "amount_inr": 15175
+  },
+  {
+   "date": "2026-08-28",
+   "outlet": "SIO",
+   "amount_inr": 15613
+  },
+  {
+   "date": "2026-08-29",
+   "outlet": "SIO",
+   "amount_inr": 16999
+  },
+  {
+   "date": "2026-08-30",
+   "outlet": "SIO",
+   "amount_inr": 15871
+  },
+  {
+   "date": "2026-08-31",
+   "outlet": "SIO",
+   "amount_inr": 13759
+  },
+  {
+   "date": "2026-09-01",
+   "outlet": "SIO",
+   "amount_inr": 14444
+  },
+  {
+   "date": "2026-09-02",
+   "outlet": "SIO",
+   "amount_inr": 15019
+  },
+  {
+   "date": "2026-09-03",
+   "outlet": "SIO",
+   "amount_inr": 15940
+  },
+  {
+   "date": "2026-09-04",
+   "outlet": "SIO",
+   "amount_inr": 16108
+  },
+  {
+   "date": "2026-09-05",
+   "outlet": "SIO",
+   "amount_inr": 17659
+  },
+  {
+   "date": "2026-09-06",
+   "outlet": "SIO",
+   "amount_inr": 15957
+  },
+  {
+   "date": "2026-09-07",
+   "outlet": "SIO",
+   "amount_inr": 14189
+  },
+  {
+   "date": "2026-09-08",
+   "outlet": "SIO",
+   "amount_inr": 14418
+  },
+  {
+   "date": "2026-09-09",
+   "outlet": "SIO",
+   "amount_inr": 15294
+  },
+  {
+   "date": "2026-09-10",
+   "outlet": "SIO",
+   "amount_inr": 15632
+  },
+  {
+   "date": "2026-09-11",
+   "outlet": "SIO",
+   "amount_inr": 16256
+  },
+  {
+   "date": "2026-09-12",
+   "outlet": "SIO",
+   "amount_inr": 17435
+  },
+  {
+   "date": "2026-09-13",
+   "outlet": "SIO",
+   "amount_inr": 16521
+  },
+  {
+   "date": "2026-09-14",
+   "outlet": "SIO",
+   "amount_inr": 14190
+  },
+  {
+   "date": "2026-09-15",
+   "outlet": "SIO",
+   "amount_inr": 14704
+  },
+  {
+   "date": "2026-09-16",
+   "outlet": "SIO",
+   "amount_inr": 15210
+  },
+  {
+   "date": "2026-09-17",
+   "outlet": "SIO",
+   "amount_inr": 15580
+  },
+  {
+   "date": "2026-09-18",
+   "outlet": "SIO",
+   "amount_inr": 15640
+  },
+  {
+   "date": "2026-09-19",
+   "outlet": "SIO",
+   "amount_inr": 17034
+  },
+  {
+   "date": "2026-09-20",
+   "outlet": "SIO",
+   "amount_inr": 16343
+  },
+  {
+   "date": "2026-09-21",
+   "outlet": "SIO",
+   "amount_inr": 14037
+  },
+  {
+   "date": "2026-09-22",
+   "outlet": "SIO",
+   "amount_inr": 14406
+  },
+  {
+   "date": "2026-09-23",
+   "outlet": "SIO",
+   "amount_inr": 14624
+  },
+  {
+   "date": "2026-09-24",
+   "outlet": "SIO",
+   "amount_inr": 14938
+  },
+  {
+   "date": "2026-09-25",
+   "outlet": "SIO",
+   "amount_inr": 15522
+  },
+  {
+   "date": "2026-09-26",
+   "outlet": "SIO",
+   "amount_inr": 17800
+  },
+  {
+   "date": "2026-09-27",
+   "outlet": "SIO",
+   "amount_inr": 15511
+  },
+  {
+   "date": "2026-09-28",
+   "outlet": "SIO",
+   "amount_inr": 13747
+  },
+  {
+   "date": "2026-09-29",
+   "outlet": "SIO",
+   "amount_inr": 14939
+  },
+  {
+   "date": "2026-09-30",
+   "outlet": "SIO",
+   "amount_inr": 15007
+  },
+  {
+   "date": "2026-10-01",
+   "outlet": "SIO",
+   "amount_inr": 15054
+  },
+  {
+   "date": "2026-10-02",
+   "outlet": "SIO",
+   "amount_inr": 15437
+  },
+  {
+   "date": "2026-10-03",
+   "outlet": "SIO",
+   "amount_inr": 17291
+  },
+  {
+   "date": "2026-10-04",
+   "outlet": "SIO",
+   "amount_inr": 16213
+  },
+  {
+   "date": "2026-10-05",
+   "outlet": "SIO",
+   "amount_inr": 14136
+  },
+  {
+   "date": "2026-10-06",
+   "outlet": "SIO",
+   "amount_inr": 14547
+  },
+  {
+   "date": "2026-10-07",
+   "outlet": "SIO",
+   "amount_inr": 14937
+  },
+  {
+   "date": "2026-10-08",
+   "outlet": "SIO",
+   "amount_inr": 15735
+  },
+  {
+   "date": "2026-10-09",
+   "outlet": "SIO",
+   "amount_inr": 16002
+  },
+  {
+   "date": "2026-10-10",
+   "outlet": "SIO",
+   "amount_inr": 17443
+  },
+  {
+   "date": "2026-10-11",
+   "outlet": "SIO",
+   "amount_inr": 15731
+  },
+  {
+   "date": "2026-10-12",
+   "outlet": "SIO",
+   "amount_inr": 13992
+  },
+  {
+   "date": "2026-10-13",
+   "outlet": "SIO",
+   "amount_inr": 14631
+  },
+  {
+   "date": "2026-10-14",
+   "outlet": "SIO",
+   "amount_inr": 15462
+  },
+  {
+   "date": "2026-10-15",
+   "outlet": "SIO",
+   "amount_inr": 15657
+  },
+  {
+   "date": "2026-10-16",
+   "outlet": "SIO",
+   "amount_inr": 15642
+  },
+  {
+   "date": "2026-10-17",
+   "outlet": "SIO",
+   "amount_inr": 17177
+  },
+  {
+   "date": "2026-10-18",
+   "outlet": "SIO",
+   "amount_inr": 16689
+  },
+  {
+   "date": "2026-10-19",
+   "outlet": "SIO",
+   "amount_inr": 14425
+  },
+  {
+   "date": "2026-10-20",
+   "outlet": "SIO",
+   "amount_inr": 14903
+  },
+  {
+   "date": "2026-10-21",
+   "outlet": "SIO",
+   "amount_inr": 14667
+  },
+  {
+   "date": "2026-10-22",
+   "outlet": "SIO",
+   "amount_inr": 15314
+  },
+  {
+   "date": "2026-10-23",
+   "outlet": "SIO",
+   "amount_inr": 15306
+  },
+  {
+   "date": "2026-10-24",
+   "outlet": "SIO",
+   "amount_inr": 16892
+  },
+  {
+   "date": "2026-10-25",
+   "outlet": "SIO",
+   "amount_inr": 15737
+  },
+  {
+   "date": "2026-10-26",
+   "outlet": "SIO",
+   "amount_inr": 13998
+  },
+  {
+   "date": "2026-10-27",
+   "outlet": "SIO",
+   "amount_inr": 14637
+  },
+  {
+   "date": "2026-10-28",
+   "outlet": "SIO",
+   "amount_inr": 14750
+  },
+  {
+   "date": "2026-10-29",
+   "outlet": "SIO",
+   "amount_inr": 15666
+  }
+ ],
+ "outflows": [
+  {
+   "id": "STOCK-PATEL",
+   "date": "2026-10-31",
+   "payee": "Patel Traders",
+   "category": "festival_stock",
+   "amount_inr": 290000,
+   "note": "canonical"
+  },
+  {
+   "id": "SAL-11",
+   "date": "2026-11-01",
+   "payee": "Staff pool (7 staff)",
+   "category": "salaries",
+   "amount_inr": 105000,
+   "note": "canonical"
+  },
+  {
+   "id": "STOCK-MEHTA",
+   "date": "2026-11-01",
+   "payee": "Mehta Dry Fruits",
+   "category": "festival_stock",
+   "amount_inr": 150000,
+   "note": "canonical"
+  },
+  {
+   "id": "STOCK-GUPTA",
+   "date": "2026-11-04",
+   "payee": "Gupta Distributors",
+   "category": "festival_stock",
+   "amount_inr": 520000,
+   "note": "canonical - invoice GD-1182"
+  },
+  {
+   "id": "RENT-11",
+   "date": "2026-11-05",
+   "payee": "Landlord (3 outlets)",
+   "category": "rent",
+   "amount_inr": 107000,
+   "note": "canonical"
+  },
+  {
+   "id": "BONUS-11",
+   "date": "2026-11-05",
+   "payee": "Staff pool",
+   "category": "diwali_bonus",
+   "amount_inr": 52500,
+   "note": "canonical"
+  },
+  {
+   "id": "GST-11",
+   "date": "2026-11-20",
+   "payee": "GST (October)",
+   "category": "gst",
+   "amount_inr": 42000,
+   "note": "canonical"
+  },
+  {
+   "id": "SAL-12",
+   "date": "2026-12-01",
+   "payee": "Staff pool (7 staff)",
+   "category": "salaries",
+   "amount_inr": 105000,
+   "note": "continuation assumption (recurring)"
+  },
+  {
+   "id": "RENT-12",
+   "date": "2026-12-05",
+   "payee": "Landlord (3 outlets)",
+   "category": "rent",
+   "amount_inr": 107000,
+   "note": "continuation assumption"
+  },
+  {
+   "id": "GST-12",
+   "date": "2026-12-20",
+   "payee": "GST (November)",
+   "category": "gst",
+   "amount_inr": 42000,
+   "note": "continuation assumption"
+  },
+  {
+   "id": "SAL-01",
+   "date": "2027-01-01",
+   "payee": "Staff pool (7 staff)",
+   "category": "salaries",
+   "amount_inr": 105000,
+   "note": "continuation assumption"
+  },
+  {
+   "id": "RENT-01",
+   "date": "2027-01-05",
+   "payee": "Landlord (3 outlets)",
+   "category": "rent",
+   "amount_inr": 107000,
+   "note": "continuation assumption"
+  },
+  {
+   "id": "GST-01",
+   "date": "2027-01-20",
+   "payee": "GST (December)",
+   "category": "gst",
+   "amount_inr": 42000,
+   "note": "continuation assumption"
+  },
+  {
+   "id": "UPI-01",
+   "date": "2027-01-31",
+   "payee": "UPI charges above Rs2,000",
+   "category": "upi_charges",
+   "amount_inr": 650,
+   "note": "canonical: expected from January, about Rs650/month"
+  },
+  {
+   "id": "EXISTING-EMI-11",
+   "date": "2026-11-01",
+   "payee": "Existing lender (simulated)",
+   "category": "existing_emi_assumed",
+   "amount_inr": 22000,
+   "note": "ASSUMED due date (1st monthly) - NOT in deck Coming-Up list; model basis only"
+  },
+  {
+   "id": "EXISTING-EMI-12",
+   "date": "2026-12-01",
+   "payee": "Existing lender (simulated)",
+   "category": "existing_emi_assumed",
+   "amount_inr": 22000,
+   "note": "ASSUMED due date (1st monthly) - NOT in deck Coming-Up list; model basis only"
+  },
+  {
+   "id": "EXISTING-EMI-01",
+   "date": "2027-01-01",
+   "payee": "Existing lender (simulated)",
+   "category": "existing_emi_assumed",
+   "amount_inr": 22000,
+   "note": "ASSUMED due date (1st monthly) - NOT in deck Coming-Up list; model basis only"
+  }
+ ],
+ "offers": [
+  {
+   "lender_id": "LENDER-A-DEMO",
+   "type": "bank",
+   "line_inr": 300000,
+   "apr": 0.185,
+   "tenor_months": 3,
+   "emi_inr": 68730,
+   "penal_pct_pa": 2,
+   "eligible": true,
+   "simulated": true
+  },
+  {
+   "lender_id": "LENDER-B-DEMO",
+   "type": "NBFC",
+   "line_inr": 250000,
+   "apr": 0.22,
+   "tenor_months": 3,
+   "emi_inr": 69130,
+   "penal_pct_pa": 3,
+   "eligible": true,
+   "simulated": true
+  },
+  {
+   "lender_id": "LENDER-C-DEMO",
+   "type": "NBFC",
+   "line_inr": 500000,
+   "apr": 0.265,
+   "tenor_months": 6,
+   "emi_inr": 35960,
+   "penal_pct_pa": 4,
+   "eligible": true,
+   "simulated": true
+  },
+  {
+   "lender_id": "LENDER-D-DEMO",
+   "eligible": false,
+   "reason": "minimum Rs5 lakh",
+   "simulated": true
+  },
+  {
+   "lender_id": "LENDER-E-DEMO",
+   "eligible": false,
+   "reason": "needs 24 months of GST filings",
+   "simulated": true
+  }
+ ],
+ "options": {
+  "deferral": {
+   "amount_inr": 200000,
+   "days": 15,
+   "repaid_date": "2026-11-19",
+   "fee_inr": 0,
+   "note": "zero fee if Gupta agrees; no later gap in canonical flows"
+  },
+  "drawdown": {
+   "amount_inr": 200000,
+   "date": "2026-11-04",
+   "early_repay_by": "2026-11-30",
+   "early_interest_estimate_inr": 2600,
+   "contractual_emi_inr": 68730,
+   "tenor_months": 3,
+   "repayment_paths": {
+    "early_in_full": {
+     "by": "2026-11-30",
+     "interest_estimate_inr": 2636,
+     "emis": 0
+    },
+    "contractual": {
+     "emi_inr": 68733,
+     "emi_dates": [
+      "2026-12-04",
+      "2027-01-04",
+      "2027-02-04"
+     ]
+    }
+   }
+  },
+  "buy_less": {
+   "amount_inr": 180000,
+   "margin_rate": 0.15,
+   "margin_at_risk_inr": 27000,
+   "partial_cover": true,
+   "residual_note": "does NOT fully close 5 Nov: residual -4,500 story basis; larger negative on model basis"
+  }
+ },
+ "policies": {
+  "is_synthetic": true,
+  "currency": "INR",
+  "credit_cap_rule": "all EMIs <= 8% of average daily collections",
+  "avg_daily_collections_for_cap_inr": "=1900000/30 unrounded (63333.33...)",
+  "credit_cap_monthly_equiv_inr": 152000,
+  "existing_monthly_emi_inr": 22000,
+  "drawdown_pin_above": 50000,
+  "refund_owner_above": 5000,
+  "cashier_refund_limit": 500,
+  "manager_refund_limit": 5000,
+  "owner_only_triggers": [
+   "new payee",
+   "changed bank account",
+   "drawdowns above 50000",
+   "refunds above 5000"
+  ],
+  "approved_suppliers": [
+   "GUPTA-DEMO",
+   "PATEL-DEMO",
+   "MEHTA-DEMO"
+  ],
+  "approved_lenders": [
+   "LENDER-A-DEMO",
+   "LENDER-B-DEMO",
+   "LENDER-C-DEMO"
+  ],
+  "avg_monthly_collections_for_cap_inr": 1900000
+ },
+ "forecast_config": {
+  "method": "formula-native: per-outlet 12-week same-weekday AVERAGEIFS; festival days x uplift inputs (matches deck D6). NOT Holt-Winters.",
+  "training_days": 84,
+  "festival_uplift": {
+   "DAD": 1.8,
+   "MAT": 1.5,
+   "SIO": 1.5
+  },
+  "festival_window": [
+   "2026-11-04",
+   "2026-11-08"
+  ],
+  "screen_rates": {
+   "normal_per_day": 70000,
+   "festival_per_day": 120000
+  },
+  "target_date": "2026-11-05",
+  "target_balance_inr": -184500,
+  "target_note": "reproduced by rollforward from stated screen rates (Options sheet), NOT calibrated",
+  "settlement_assumption": "100% of forecast collections available same day",
+  "existing_emi_assumed_first_due": "2026-11-01 (ASSUMED - not a source fact; model basis only; story anchor excludes it as the deck does)",
+  "anchor_note": "screen-story basis is PARTIAL (deck bills only) and illustrative; model basis includes assumed existing EMI; Rs2L drawdown lands differently on each"
+ }
+}

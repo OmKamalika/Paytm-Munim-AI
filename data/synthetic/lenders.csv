@@ -1,0 +1,6 @@
+lender,type,annual_rate,tenure_months,min_amount_inr,max_amount_inr,min_gst_months,offer_valid,processing_fee_pct
+Lender A,Bank,0.185,3,50000,1000000,12,True,0.0
+Lender B,NBFC,0.22,3,50000,800000,12,True,0.01
+Lender C,NBFC,0.265,6,25000,500000,6,True,0.015
+Lender D,NBFC,0.2,12,500000,5000000,12,True,0.01
+Lender E,Bank,0.165,12,100000,2000000,24,True,0.005

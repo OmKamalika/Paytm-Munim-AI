@@ -1,0 +1,12 @@
+{
+  "name": "PayTMunim Demo",
+  "short_name": "PayTMunim",
+  "description": "Synthetic merchant cash planning and intent guard demonstration",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#002e6e",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

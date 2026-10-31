@@ -1,0 +1,49 @@
+.sim-page{min-height:100dvh;background:#f3f6fa;color:#1d2d3e;font-family:Inter,"Segoe UI",Arial,sans-serif}
+.sim-topbar{height:74px;background:#002e6e;color:#fff;padding:0 clamp(20px,4vw,58px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.sim-brand{display:flex;align-items:baseline;gap:7px;white-space:nowrap}
+.sim-brand span{color:#00baf2;font-size:30px;font-weight:850;letter-spacing:-2.3px}
+.sim-brand small{font-size:12px;font-weight:800;color:#d4eefa}
+.sim-brand strong{font-size:15px;font-weight:650;margin-left:18px;border-left:1px solid #5683b5;padding-left:18px}
+.sim-merchant-link{color:#fff;text-decoration:none;border:1px solid #7aa2cd;border-radius:9px;min-height:44px;padding:12px 16px;font-size:12px;font-weight:700}
+.sim-merchant-link:hover{background:#124780}
+.sim-ribbon{background:#dff4fc;color:#164869;padding:9px clamp(20px,4vw,58px);font-size:12px;font-weight:700;border-bottom:1px solid #c3e4f2}
+.sim-content{max-width:1450px;margin:0 auto;padding:30px clamp(18px,4vw,58px) 54px}
+.sim-intro{display:flex;justify-content:space-between;align-items:start;gap:24px;margin-bottom:26px}
+.sim-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.3px;color:#0089b5;font-weight:800}
+.sim-intro h1{font-size:clamp(27px,3vw,39px);line-height:1.12;color:#002e6e;letter-spacing:-1.3px;margin:9px 0 10px}
+.sim-intro p{max-width:660px;margin:0;color:#5b6f82;font-size:14px;line-height:1.58}
+.sim-sequence{min-width:148px;background:#fff;border:1px solid #dce5ed;border-radius:13px;padding:15px 18px;box-shadow:0 7px 20px rgba(20,55,94,.04);display:grid;gap:3px}
+.sim-sequence span,.sim-sequence small{font-size:11px;color:#64768a}
+.sim-sequence strong{font-size:32px;color:#002e6e;letter-spacing:-1px}
+.sim-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;align-items:start;gap:24px}
+.sim-scenarios{display:grid;gap:18px}
+.sim-section,.sim-ledger{background:#fff;border:1px solid #dce5ed;border-radius:15px;box-shadow:0 7px 20px rgba(20,55,94,.04)}
+.sim-section{padding:19px}
+.sim-section-head{display:flex;justify-content:space-between;gap:16px;align-items:start;margin-bottom:14px}
+.sim-section h2,.sim-ledger h2{font-size:19px;color:#002e6e;letter-spacing:-.4px;margin:0 0 4px}
+.sim-section-head p{font-size:12px;color:#64768a;line-height:1.5;margin:0}
+.sim-kind{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;background:#edf7fc;color:#006d96;border-radius:99px;padding:5px 9px}
+.sim-card-list{display:grid;gap:9px}
+.sim-card{border:1px solid #e0e8ef;border-radius:10px;background:#fafcfe;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.sim-card h3{margin:0 0 4px;font-size:14px;color:#1d2d3e}
+.sim-card p{margin:0;color:#64768a;font-size:11px;line-height:1.45}
+.sim-card button{flex:none;border:0;border-radius:8px;background:#00baf2;color:#002e6e;padding:10px 13px;min-height:44px;min-width:135px;font-weight:800;font-size:11px}
+.sim-card button:hover:not(:disabled){background:#42cdf6}
+.sim-card button:disabled{opacity:.6}
+.sim-loading{color:#64768a;font-size:13px}
+.sim-ledger{padding:19px;position:sticky;top:18px}
+.sim-ledger-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}
+.sim-ledger-head h2{margin:5px 0 0}
+.sim-ledger-head button,.sim-error button{background:#fff;color:#002e6e;border:1px solid #c9d8e5;border-radius:8px;min-height:40px;padding:7px 11px;font-size:11px;font-weight:750}
+.sim-empty{background:#f5f9fc;border:1px dashed #c5d8e6;border-radius:10px;padding:21px 17px;text-align:center}
+.sim-empty strong{font-size:13px;color:#002e6e}
+.sim-empty p{font-size:11px;line-height:1.5;color:#64768a;margin:7px 0 0}
+.sim-events{list-style:none;counter-reset:none;margin:0;padding:0;display:grid;gap:9px;max-height:530px;overflow:auto}
+.sim-events li{border:1px solid #dce5ed;border-radius:10px;padding:12px}
+.sim-event-top{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:7px}
+.sim-event-top b{color:#00a4d4;font-size:12px}.sim-event-top span{font-size:10px;color:#64768a;text-transform:uppercase;font-weight:750}
+.sim-events li>strong{display:block;font-size:12px;color:#002e6e}.sim-events li>p{font-size:11px;color:#5b6f82;line-height:1.4;margin:5px 0 7px}.sim-events time{font-size:10px;color:#8292a1}
+.sim-footnote{font-size:11px;color:#728398;line-height:1.5;margin:15px 2px 0}
+.sim-error{background:#fff2ef;border:1px solid #efc2b9;color:#9d3f32;padding:11px 14px;border-radius:9px;margin-bottom:17px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}
+@media(max-width:850px){.sim-grid{grid-template-columns:1fr}.sim-ledger{position:static}.sim-events{max-height:300px}}
+@media(max-width:560px){.sim-topbar{height:auto;min-height:68px;padding:10px 17px}.sim-brand span{font-size:25px}.sim-brand small{font-size:10px}.sim-brand strong{display:none}.sim-merchant-link{font-size:10px;padding:9px;min-height:42px}.sim-content{padding:23px 15px 40px}.sim-intro{gap:12px}.sim-intro p{font-size:12px}.sim-sequence{min-width:104px;padding:10px}.sim-sequence strong{font-size:24px}.sim-sequence small{font-size:9px}.sim-card{align-items:stretch;flex-direction:column}.sim-card button{width:100%;min-height:48px}}

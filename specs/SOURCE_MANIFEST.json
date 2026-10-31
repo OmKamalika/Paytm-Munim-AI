@@ -1,0 +1,257 @@
+{
+  "description": "User-supplied synthetic source files and project references; all hashes are SHA-256.",
+  "counts": {
+    "prdMarkdown": 25,
+    "excelWorkbooks": 3,
+    "syntheticCsv": 15,
+    "sourceGenerators": 2,
+    "legacyJsonFixture": 1
+  },
+  "files": [
+    {
+      "path": "data/synthetic/PayTMunim_Synthetic_Data.xlsx",
+      "bytes": 13079165,
+      "sha256": "d57d8d23b35d7731733e0f7ea26ee7d6aced5ac7bf1a51f3a21148c238ae5c90"
+    },
+    {
+      "path": "data/synthetic/SOURCE-README.md",
+      "bytes": 5040,
+      "sha256": "d4697ccaca2133f8364f442230f7165cefd490d8c418328cbb613016f5dc3f64"
+    },
+    {
+      "path": "data/synthetic/bank_statement.csv",
+      "bytes": 1188346,
+      "sha256": "2dcc82d24b3193cc54ec23de5d3b6493b4c78f7c57918500517fcc2e05611377"
+    },
+    {
+      "path": "data/synthetic/build_xlsx.py",
+      "bytes": 23898,
+      "sha256": "54445128b33545aac3b8686e2d63d4d021891fa27779f8db5f86d1caf33ce779"
+    },
+    {
+      "path": "data/synthetic/business.csv",
+      "bytes": 190,
+      "sha256": "5b64f4bebb23f3f89afdbf132ba45611bd16a5b7644ce3dd179e04d83ad11022"
+    },
+    {
+      "path": "data/synthetic/device_map.csv",
+      "bytes": 596,
+      "sha256": "aae44a625ace0d27e5d7f94323ddf8a1f57c7dc68838d1011dfe6b11793668a4"
+    },
+    {
+      "path": "data/synthetic/existing_emis.csv",
+      "bytes": 94,
+      "sha256": "975e3ec216078fa0aa36ca1d6c28168b09f81bdcaec8904ae29b393a712df2b9"
+    },
+    {
+      "path": "data/synthetic/generate.py",
+      "bytes": 32180,
+      "sha256": "bb2a8783322fd204383323150a622f7798ac8de51906e97cfd6b5d678221dc50"
+    },
+    {
+      "path": "data/synthetic/gst_returns.csv",
+      "bytes": 1505,
+      "sha256": "c8944815518ff71f541d5f78a4a3f2c9930c60d00e67d27050089c80441381e4"
+    },
+    {
+      "path": "data/synthetic/invoices.csv",
+      "bytes": 1050,
+      "sha256": "ccce378d1f1f3ac26838e460418eec4cd124574e33efbe06bad8d59658172a28"
+    },
+    {
+      "path": "data/synthetic/lenders.csv",
+      "bytes": 364,
+      "sha256": "ce8ef49229cd3ac1465ad9aed1ed92509f1db727c47113c11b8c0fb002b11306"
+    },
+    {
+      "path": "data/synthetic/other_qrs.csv",
+      "bytes": 89,
+      "sha256": "ff8e506b1c16d2404bd4c21f6b087c6b1741b117cd8b2e3279db40c5348e107c"
+    },
+    {
+      "path": "data/synthetic/outlets.csv",
+      "bytes": 241,
+      "sha256": "48483f89c8fcead1c40c2343f5174349fbcb9da804cc9b7f3cf24c2817230fab"
+    },
+    {
+      "path": "data/synthetic/owner_mandate.csv",
+      "bytes": 508,
+      "sha256": "7a1af33cb6a64cf92704f8a3578e2c4a2c72c140abc6d6896747e5b126511c14"
+    },
+    {
+      "path": "data/synthetic/paytm_transactions.csv",
+      "bytes": 15854161,
+      "sha256": "e39cbafc179573d9d096b62facf9bb4b6f92f3d90a3662f72ccfeeeb223d7045"
+    },
+    {
+      "path": "data/synthetic/shift_handovers.csv",
+      "bytes": 269974,
+      "sha256": "3f996065e6edc9cdbf92c780d69cc6f453278dd23100638995165d2c618d0da2"
+    },
+    {
+      "path": "data/synthetic/staff.csv",
+      "bytes": 844,
+      "sha256": "ebd8aa589386634f2ea2a8e74de57a3d9a47a88ed79f7fd88bfc22c33364cdc3"
+    },
+    {
+      "path": "data/synthetic/suppliers.csv",
+      "bytes": 480,
+      "sha256": "3099f9ad0fe3e61c3898319958c275d7f074e0274f667724bae7f65eefec1723"
+    },
+    {
+      "path": "data/synthetic/upcoming_outflows.csv",
+      "bytes": 563,
+      "sha256": "e15b02f24e04d88776308ac544eb94e8f1e9ebcb4b2784341f188b1db4fa7694"
+    },
+    {
+      "path": "specs/legacy-fixture/AI_Munim_Synthetic_Data_v2.json-0acdf745.txt",
+      "bytes": 133941,
+      "sha256": "b7bf1dfd422c92d61424261c920f10087e9317d0900d6f8d0e5bd82117c8ea54"
+    },
+    {
+      "path": "specs/prds/00-vision-mission-strategy.md",
+      "bytes": 20469,
+      "sha256": "40911352013a211fcea27560831f1f7877cb038cbf1e561795ce8250c625cd3f"
+    },
+    {
+      "path": "specs/prds/01-seeded-data-and-ingestion.md",
+      "bytes": 12633,
+      "sha256": "8c4b97d3aa66afbd0f848a1b59167219351990f0fe14668ac7cb3e5a6b463cb2"
+    },
+    {
+      "path": "specs/prds/02-munim-agent.md",
+      "bytes": 13752,
+      "sha256": "2cb2a73d4c9ae8f95ddf2794d09d99de6ecd22fbde58ff8138168b78787dcceb"
+    },
+    {
+      "path": "specs/prds/03-sales-forecast.md",
+      "bytes": 10066,
+      "sha256": "34ab5c608d9e1ae9397f0a05bfc3d0ba72f98bb46707c29979c8f3a95f3a04d2"
+    },
+    {
+      "path": "specs/prds/04-outflow-detection.md",
+      "bytes": 8804,
+      "sha256": "58857f4b300e8c01ddfcc46bf302b0478511803de93850b7483ca04ddfe60019"
+    },
+    {
+      "path": "specs/prds/05-cash-plan-and-options.md",
+      "bytes": 12450,
+      "sha256": "fb0cb7db57e3fd3b11bcdb08a7fd7ea2d1deda27af7490f92e35154b02370fde"
+    },
+    {
+      "path": "specs/prds/06-capital-tab-offers.md",
+      "bytes": 12801,
+      "sha256": "63c1eaed0543bdf21aa46e78b2b2a9012c42a3cfa80d9464f060e12031ba3662"
+    },
+    {
+      "path": "specs/prds/07-intent-guard-rules.md",
+      "bytes": 14433,
+      "sha256": "50a8c7370c290ba8216ce683d62d2e0c5beafee28d99ee58c580f89f944324d4"
+    },
+    {
+      "path": "specs/prds/08-ai-intent-check.md",
+      "bytes": 10005,
+      "sha256": "d5eaa7248df04d58722f776c18992f4aa936c5424f621f847c137a811bda9d07"
+    },
+    {
+      "path": "specs/prds/09-owner-confirmation.md",
+      "bytes": 9883,
+      "sha256": "cf814a822639a3a773dfa5ceb591056130cdcda1f64c9d892377b238ccc45359"
+    },
+    {
+      "path": "specs/prds/10-evidence-log.md",
+      "bytes": 9804,
+      "sha256": "83880b031e9fc4fe414a2cbaf74d61603992da12cda274578d2e94897fcb637f"
+    },
+    {
+      "path": "specs/prds/11-safety-test-suite.md",
+      "bytes": 9964,
+      "sha256": "1e1d9810feb5f3d405b4b74ba43b6d997f6530339187bc37316e315715109c01"
+    },
+    {
+      "path": "specs/prds/12-hindi-language-layer.md",
+      "bytes": 7079,
+      "sha256": "6ae1e251063c691eb824e0c5c4ebc19a61f8d1b7a3892422f9560a6c11e7669c"
+    },
+    {
+      "path": "specs/prds/13-munim-home.md",
+      "bytes": 6318,
+      "sha256": "af1aebfb74c31cf428c1e62821761c5229b8931f6f08e1d01ca98fea57f1efe5"
+    },
+    {
+      "path": "specs/prds/14-outlet-mapping.md",
+      "bytes": 7527,
+      "sha256": "9e5b702a161b20a1ab38b1db155d1fe529a2ed189b5a8548d440b37780393403"
+    },
+    {
+      "path": "specs/prds/15-data-consent.md",
+      "bytes": 10821,
+      "sha256": "d474e948a445369f14663ffea38c330023d87e956280c90dd0ba3caa2b645441"
+    },
+    {
+      "path": "specs/prds/16-owner-rules-setup.md",
+      "bytes": 13148,
+      "sha256": "ebda72dba803c10f54dc06a27e01cfd755186d31efe7d23664515f239bf9a785"
+    },
+    {
+      "path": "specs/prds/17-cost-rules.md",
+      "bytes": 6942,
+      "sha256": "2c5a6c4aa2ac8b2c56c42905653839bb7645d9dd88399c28d1b0ebf4b5e6cb67"
+    },
+    {
+      "path": "specs/prds/18-profit-per-outlet.md",
+      "bytes": 8014,
+      "sha256": "833d270dfac9eec735ef9160c0d9b0b0edd884b14e4a3af4671c0c812ba4fa07"
+    },
+    {
+      "path": "specs/prds/19-shift-check.md",
+      "bytes": 9039,
+      "sha256": "d21f972a2e3d33371a68f0b90bcaa326ff62f062d246c14a27681fe08ee602ce"
+    },
+    {
+      "path": "specs/prds/20-cashier-view-and-shift-close.md",
+      "bytes": 8414,
+      "sha256": "f71b8b0ede0dc0d09fc8ceb048d3372808f63f5dbc384a36957bf9dd16fa08f4"
+    },
+    {
+      "path": "specs/prds/21-soundbox-voice-close-and-expenses.md",
+      "bytes": 8898,
+      "sha256": "0945888eef900b21a2cf5b2fc76559e1b7f6501fe7265b43a45852fb0537ec10"
+    },
+    {
+      "path": "specs/prds/22-shelf-photo-check.md",
+      "bytes": 7230,
+      "sha256": "4d2c4ad05e22cb9d0c1a98def6e7f371433b567d594315da2f96af5b23950f3e"
+    },
+    {
+      "path": "specs/prds/23-ca-pack.md",
+      "bytes": 6488,
+      "sha256": "8c24d723c2a3c43cbb81a50432416c9f501df403291cc0d9cd315581f519a270"
+    },
+    {
+      "path": "specs/prds/24-membership-and-billing.md",
+      "bytes": 8744,
+      "sha256": "9d4a4ba879e2ae61529d22115c5b623a5ea3383a296dd2d5b568cca077a3f610"
+    },
+    {
+      "path": "specs/source-notes/demo-build-brief-pasted.txt",
+      "bytes": 9508,
+      "sha256": "464d9cba904225e111db15a92882960a583f3614692407fc3f22f9cb689cd6d6"
+    },
+    {
+      "path": "specs/source-notes/original-vision-pasted.txt",
+      "bytes": 20774,
+      "sha256": "d9bc4edd984dbbdced680ed0cdef23a76d274de43b9ea786b2221bc975725f76"
+    },
+    {
+      "path": "specs/workbooks/AI_Munim_Agent_Intent_Golden_Evals-a7878fff.xlsx",
+      "bytes": 107068,
+      "sha256": "8931c0f316a9ab0b9997218a41a50f494dcd51e8e491e0aa222c961a5770888a"
+    },
+    {
+      "path": "specs/workbooks/AI_Munim_Forecast_and_Cash_Plan_v2-25436feb.xlsx",
+      "bytes": 97708,
+      "sha256": "7c76f4e0b1b8db54c6685661d5b1227c15c770068b049ba5cad8378cdee66dd6"
+    }
+  ]
+}
