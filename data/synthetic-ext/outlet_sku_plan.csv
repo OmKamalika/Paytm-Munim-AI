@@ -1,0 +1,13 @@
+outlet_id,sku_id,festival_revenue_share_pct,units_on_hand
+DAD,GB-DRY,10,4
+DAD,GB-CHOC,7,3
+DAD,GB-PUJA,4,2
+DAD,GB-SWT,6,5
+MAT,GB-DRY,7,2
+MAT,GB-CHOC,6,2
+MAT,GB-PUJA,5,1
+MAT,GB-SWT,6,3
+SIO,GB-DRY,5,1
+SIO,GB-CHOC,5,2
+SIO,GB-PUJA,6,0
+SIO,GB-SWT,6,2

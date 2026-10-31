@@ -53,14 +53,14 @@ const cases = [
     assert.ok(result.checks.some((check) => check.id === 'invoice_injection' && check.status === 'ESCALATE'));
     assert.equal((await runtime.getLedger()).effects.length, 0);
   }],
-  ['Approved drawdown adds one inflow and 5 Nov becomes +₹15,500', async () => {
+  ['Approved drawdown adds one inflow and 5 Nov becomes −₹69,892 (drawdown alone is not enough)', async () => {
     const { pin, runtime } = await fresh();
     const action = drawdown();
     const check = await runtime.evaluate(action);
     assert.equal(check.decision, 'PASS');
     const result = await runtime.execute({ action, approval_id: check.approval_id, pin, idempotency_key: crypto.randomUUID() });
     assert.equal(result.outcome, 'done-simulated');
-    assert.equal(result.balance_on_5_nov, 15500);
+    assert.equal(result.balance_on_5_nov, -69892);
     assert.equal((await runtime.getLedger()).drawdownTotal, 200000);
     assert.equal((await runtime.getLedger()).effects.length, 1);
   }],
