@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "PayTMunim — Intent Guard demo",
-  description: "A private synthetic demo of merchant cash planning, delegated supplier terms and intent drift review.",
+  description: "A private demo of merchant cash planning, delegated supplier terms and intent drift review.",
   manifest: "/manifest.webmanifest",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" }
 };

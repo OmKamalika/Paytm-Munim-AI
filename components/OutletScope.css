@@ -1,0 +1,12 @@
+.os-selector { flex:none; display:flex; align-items:center; gap:11px; padding:9px 18px; background:#f1f8fc; border-bottom:1px solid #d5e5ef; }
+.os-selector label { display:flex; align-items:center; gap:6px; color:#365d7b; font-size:11px; font-weight:700; }
+.os-selector select { flex:1; min-width:0; min-height:38px; padding:7px 10px; border:1px solid #bdd3e3; border-radius:7px; color:#002e6e; background:white; font-size:12px; font-weight:650; }
+.os-business-note { margin:0; padding:9px 11px; border-left:3px solid #9dc9e2; border-radius:5px; color:#526f85; background:#edf5fa; font-size:10px; line-height:1.5; }
+.os-asof { flex:none; margin:0; padding:6px 18px; background:#fff; border-bottom:1px solid #e1eaf1; color:#617b8f; font-size:10px; }
+.pm-today .os-sales-empty { margin:10px 0 0; color:#365d7b; font-size:16px; font-weight:700; line-height:1.35; }
+.pm-today .os-sales-source { margin:9px 0 0; color:#60788b; font-size:10px; line-height:1.5; }
+.pm-today .os-sales-window { margin:7px 0 0; color:#426983; font-size:11px; line-height:1.5; }
+.os-recorded { border-color:#bcdce9; background:#f3fbff; }
+.os-recorded > strong { margin-top:8px; }
+.pm-outlet-today strong.os-outlet-empty { font-size:12px; line-height:1.4; }
+.os-sales-retry { min-height:44px; margin-top:8px; padding:7px 11px; border:1px solid #a5cbdc; border-radius:7px; color:#005c83; background:white; font-size:11px; font-weight:700; }

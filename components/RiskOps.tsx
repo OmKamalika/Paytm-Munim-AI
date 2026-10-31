@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import FlowRiskOps from "./FlowRiskOps";
+import { displayCopy } from "../lib/ui-copy.js";
 import "./RiskOps.css";
 
 export type CaseDecision = "PASS" | "ESCALATE" | "BLOCK";
@@ -42,10 +43,10 @@ function displayValue(value: unknown): string {
   if (value === null || value === undefined || value === "") return "Not set";
   if (typeof value === "boolean") return value ? "Yes" : "No";
   if (typeof value === "number") return new Intl.NumberFormat("en-IN").format(value);
-  if (typeof value === "string") return value;
+  if (typeof value === "string") return displayCopy(value);
   if (Array.isArray(value)) return value.map(displayValue).join(", ");
   try {
-    return JSON.stringify(value);
+    return displayCopy(JSON.stringify(value));
   } catch {
     return String(value);
   }
@@ -92,7 +93,7 @@ function TraceDetails({ details }: { details: unknown }) {
   if (details && typeof details === "object" && !Array.isArray(details)) {
     return (
       <dl className="rops-trace-facts">
-        {Object.entries(details as Record<string, unknown>).slice(0, 6).map(([key, value]) => (
+        {Object.entries(details as Record<string, unknown>).filter(([key]) => key !== "synthetic").slice(0, 6).map(([key, value]) => (
           <div key={key}><dt>{readableToken(key)}</dt><dd>{displayValue(value)}</dd></div>
         ))}
       </dl>
@@ -118,7 +119,7 @@ function decisionCopy(decision: CaseDecision): string {
 
 function caseTitle(item: CaseRecord): string {
   for (const value of [item.title, item.candidate?.displayName, item.candidate?.summary]) {
-    if (typeof value === "string" && value.trim()) return value;
+    if (typeof value === "string" && value.trim()) return displayCopy(value);
   }
   return "Supplier action check";
 }
@@ -190,7 +191,7 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
         <div className="rops-brand-lockup">
           <span className="rops-brand-mark" aria-hidden="true"><span /><span /><span /></span>
           <span className="rops-brand-name">PayTMunim <strong>RiskOps</strong></span>
-          <span className="rops-demo-tag">Synthetic demo</span>
+          <span className="rops-demo-tag">Demo</span>
         </div>
         <div className="rops-masthead-actions">
           <button className="rops-link-button" type="button" onClick={onBack}>
@@ -206,8 +207,6 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
           </button>
         </div>
       </header>
-
-      <div className="rops-synthetic-ribbon">Synthetic demo data - nothing here is real.</div>
 
       <FlowRiskOps/>
 
@@ -287,7 +286,7 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
                     >
                       <span className="rops-case-row-top"><span className={`rops-status-dot is-${tone}`} />{decisionCopy(item.decision)}</span>
                       <strong>{caseTitle(item)}</strong>
-                      {typeof item.candidate?.summary === "string" && <span className="rops-case-summary">{item.candidate.summary}</span>}
+                      {typeof item.candidate?.summary === "string" && <span className="rops-case-summary">{displayCopy(item.candidate.summary)}</span>}
                       <span className="rops-case-meta"><span>{item.id}</span><span>{formatTime(item.timestamp)}</span></span>
                     </button>
                   );
@@ -318,12 +317,12 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
                   <span className={`rops-explanation-rail is-${toneFor(selected.decision)}`} />
                   <div>
                     <strong>{selected.decision === "PASS" ? "The supplier reply matched the merchant's intent; payment still needs the final server guard." : selected.decision === "ESCALATE" ? "The proposed terms need the merchant." : "A hard rule stopped this action."}</strong>
-                    <p>{selected.reasons[0]?.message || (selected.decision === "PASS" ? "No divergence was found in this synthetic check." : "Inspect the checks below for the reason.")}</p>
+                    <p>{displayCopy(selected.reasons[0]?.message || (selected.decision === "PASS" ? "No divergence was found in this check." : "Inspect the checks below for the reason."))}</p>
                   </div>
                 </div>
                 {selectedActionEntry && <div className="rops-linked-action" role="status">
                   <strong>Final server action: {selectedActionEntry.outcome.replaceAll("-", " ")}</strong>
-                  <span>{selectedActionIssue?.detail || selectedActionEntry.reason || "See the server evidence chain for the final guard and execution outcome."}</span>
+                  <span>{displayCopy(selectedActionIssue?.detail || selectedActionEntry.reason || "See the server evidence chain for the final guard and execution outcome.")}</span>
                 </div>}
 
                 <section className="rops-section rops-compare-section" aria-labelledby="rops-compare-title">
@@ -353,7 +352,7 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
                       {selected.checks.map((check, index) => (
                         <li key={`${check.id}-${index}`}>
                           <span className={`rops-check-symbol is-${toneFor(check.status)}`} aria-hidden="true">{toneFor(check.status) === "clear" ? "✓" : toneFor(check.status) === "blocked" ? "×" : "!"}</span>
-                          <div><strong>{check.id}</strong><p>{check.detail}</p></div>
+                          <div><strong>{check.id}</strong><p>{displayCopy(check.detail)}</p></div>
                           <span className={`rops-check-status is-${toneFor(check.status)}`}>{check.status.replaceAll("_", " ").toLowerCase()}</span>
                         </li>
                       ))}
@@ -377,7 +376,7 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
                 </div>
 
                 <div className="rops-evidence">
-                  <div><strong>Evidence fingerprint</strong><p>Hash of this synthetic check. This demo does not provide an externally anchored audit log.</p></div>
+                  <div><strong>Evidence fingerprint</strong><p>Hash of this check. This demo does not provide an externally anchored audit log.</p></div>
                   <code>{selected.evidenceHash || "Not available"}</code>
                 </div>
               </>

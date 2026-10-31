@@ -18,6 +18,14 @@ Open the local URL printed by the dev server in three tabs: `/` for the merchant
 
 `npm test` runs unit and isolated acceptance checks. `npm run eval:flows` runs the selected delegated-flow evaluations with readable case names. Tests create their own private random approval inputs and never mutate the live demo state.
 
+## Merchant chat, outlet scope and agent setup
+
+**Ask Munim** opens a conversation with a persistent thread. An explicit stock-agent request offers setup; a message alone never activates a task. Setup separates the owner's goal, outlet/product scope, trigger, spending and supplier-term limits, permissions and final review. The mandate is stored with the run, disclosure and trace. Monitoring responses arrive through the operator console. Quotes/proposals may be prepared within the mandate; orders, payments, bureau checks and loans still require their separate sign-offs.
+
+The available GD-1182 invoice covers shared stock across the business. A different product or individual-outlet mandate can monitor, but pauses for matching evidence before approaching the supplier. Owner ceilings, expiry, fixed beneficiary and source rules remain binding.
+
+The persistent outlet selector scopes recorded sales and outlet forecasts, and pre-fills agent setup. Business-wide cash planning and credit limits remain labelled All outlets. Actual sales use **31 October 2026, 15:55 IST** as a fixed reporting cutoff. The transaction file ends on 30 October at 12:30:07 IST, so 31 October sales are unavailable, not zero. Observed 25–31 October net Paytm sales total ₹93,649; complete coverage is unverified. Future Diwali forecasts are shown separately. `node scripts/derive-sales-summary.mjs` reproduces the compact sales snapshot from the archived CSV without a database.
+
 ## Tracked simulations (Milestone 3)
 
 - **Supplier happy path:** start the Gupta intent; respond with agreed terms → simulated judge clear → full INV-07 invoice → AA available. The merchant reviews the amount, account, credit, buyback, source checks, risks, alternatives, and original intent, then approves with PIN. The operator returns payment success, failure, or pending. Pending instructions request status reconciliation rather than a second transfer.
