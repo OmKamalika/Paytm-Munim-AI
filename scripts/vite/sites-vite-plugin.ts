@@ -180,10 +180,6 @@ export function sites({ mockAuth = true } = {}): Plugin {
       await rm(outputDirectory, { recursive: true, force: true });
       await mkdir(outputDirectory, { recursive: true });
 
-      // The hosting platform injects this file; a fresh clone does not have it.
-      if (await exists(hostingConfig)) {
-        await cp(hostingConfig, resolve(outputDirectory, "hosting.json"));
-      }
       // The hosting config is optional locally (gitignored); copy it only when present.
       if (await exists(hostingConfig)) await cp(hostingConfig, resolve(outputDirectory, "hosting.json"));
       if (await exists(drizzleSource)) {
