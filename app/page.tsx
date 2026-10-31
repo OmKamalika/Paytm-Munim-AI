@@ -112,7 +112,7 @@ function answerFor(question: string, cash: Cash | null, options: Options | null,
     const named = forecast.outlets.find(item => question.toLowerCase().includes(item.name.toLowerCase()));
     if (named) return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, ${named.name} has an estimated ${money(named.total.pointInr)} in all-channel collections, with a historical low/high scenario of ${money(named.total.lowInr)}–${money(named.total.highInr)}. Count stock before deciding what to replenish; this is not SKU demand.`;
     const point = forecast.outlets.reduce((sum, item) => sum + item.total.pointInr, 0);
-    return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, the three outlets have an estimated ${money(point)} in all-channel collections. Review each outlet in Your data, then check actual SKU stock before placing orders. This estimate does not change the cash plan.`;
+    return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, the three outlets have an estimated ${money(point)} in all-channel collections. Review each outlet in Your data, then check actual SKU stock before placing orders. The cash plan uses this outlet estimate for its expected collections.`;
   }
   if (!cash || !options) return "Loading the synthetic cash plan.";
   const a = cash.cashPlan.anchors;
@@ -447,7 +447,7 @@ export default function HomePage() {
               <button type="button" className="pm-secondary pm-full" onClick={() => setScreen("munim")}>Negotiate and review a supplier commitment<ArrowRight size={17}/></button>
             </>}
             <Heading title="Diwali week collection estimate"/>
-            <div className="pm-forecast-intro"><span><Sparkles size={16}/>4–10 Nov · all-channel</span><p>This separate demand estimate does not change the cash plan&apos;s fixed synthetic inflows or its 5 Nov shortfall.</p></div>
+            <div className="pm-forecast-intro"><span><Sparkles size={16}/>4–10 Nov · all-channel</span><p>The cash plan&apos;s expected collections use this same outlet estimate, extended to 20 Nov.</p></div>
             {forecastError && <div className="pm-hold" role="alert"><CircleAlert size={18}/><span><b>Outlet estimate unavailable</b><small>{forecastError}</small></span><button type="button" onClick={() => { setForecastError(""); void get<OutletForecast>("/api/outlet-forecast").then(setOutletForecast).catch(e => setForecastError(e instanceof Error ? e.message : "Outlet forecast could not load.")); }}>Retry</button></div>}
             {outletForecast?.outlets?.length ? <>
               <div className="pm-forecast-source"><b>{money(outletForecast.outlets.reduce((sum, item) => sum + item.total.pointInr, 0))}</b><span>estimated collections across three outlets for the week</span><small>Complete shift handovers through {dateLabel(outletForecast.source.through)}. Partial 30 Oct payments are excluded.</small></div>

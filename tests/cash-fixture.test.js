@@ -2,16 +2,18 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { cashPlanFixture, optionsFixture, lendersFixture } from '../lib/cash-fixture.js';
 
-test('cash plan anchors are calculated and match the workbook daily closings', () => {
+test('cash plan anchors are calculated from the per-outlet forecast', () => {
   const { anchors } = cashPlanFixture.cashPlan;
   assert.deepEqual(anchors, {
     firstNegativeDate: '2026-11-04',
     lowestDate: '2026-11-05',
-    lowestBalanceInr: -184500,
-    recoveryAboveZeroDate: '2026-11-07',
+    lowestBalanceInr: -269892,
+    recoveryAboveZeroDate: '2026-11-08',
   });
   assert.equal(cashPlanFixture.cashPlan.dailyBalanceSeries.length, 22);
-  assert.equal(cashPlanFixture.cashPlan.dailyBalanceSeries.find((row) => row.date === '2026-11-05').balanceInr, -184500);
+  assert.equal(cashPlanFixture.cashPlan.dailyBalanceSeries.find((row) => row.date === '2026-11-05').balanceInr, -269892);
+  assert.deepEqual(cashPlanFixture.cashPlan.dailyBalanceSeries[0].collectionsByOutlet.map((item) => item.outletId), ['DAD', 'MAT', 'SIO']);
+  assert.equal(cashPlanFixture.engine.collectionsBasis, 'outlet_forecast');
   assert.equal(JSON.stringify(cashPlanFixture).toLowerCase().includes('openingbalance'), false);
   assert.equal(JSON.stringify(cashPlanFixture).toLowerCase().includes('opening_liquid_cash'), false);
 });
@@ -59,24 +61,25 @@ test('three cost-ordered options keep the Gupta invoice full and count drawdown 
   assert.equal(options[0].accepted, false);
   // Calculated as if Gupta accepts the requested terms; the plan itself is unchanged.
   assert.equal(options[0].effectOn5Nov.balanceInr, null);
-  assert.equal(options[0].effectOn5Nov.ifAcceptedBalanceInr, 75500);
-  assert.equal(cashPlanFixture.cashPlan.anchors.lowestBalanceInr, -184500);
+  assert.equal(options[0].effectOn5Nov.ifAcceptedBalanceInr, -9892);
+  assert.equal(cashPlanFixture.cashPlan.anchors.lowestBalanceInr, -269892);
   assert.equal(options[1].amountInr, 200000);
   assert.equal(options[1].destinationAccountMasked, '**4029');
-  assert.equal(options[1].effectOn5Nov.balanceInr, 15500);
+  assert.equal(options[1].effectOn5Nov.balanceInr, -69892);
   assert.equal(options[1].effectOn5Nov.inflowCount, 1);
   assert.equal(options[1].effectOn5Nov.guptaInvoiceOutflowInr, 520000);
   assert.equal(options[2].orderReductionInr, 185000);
-  assert.equal(options[2].effectOn5Nov.balanceInr, 500);
+  assert.equal(options[2].effectOn5Nov.balanceInr, -84892);
   assert.equal(options[2].calculated, false);
   assert.match(options[2].effectOn5Nov.balanceBasis, /assumption/);
 });
 
-test('the recommendation asks Gupta first and sizes the drawdown it would replace', () => {
+test('the recommendation combines the deferral with a small top-up drawdown', () => {
   const rec = optionsFixture.recommendation;
   assert.equal(rec.status, 'shortfall');
-  assert.deepEqual(rec.steps.map((step) => [step.option, step.amountInr ?? step.resultingLowestInr]), [['supplier_deferral', 75500], ['drawdown', 190000]]);
-  assert.equal(rec.steps[1].withinOwnerCap, true);
+  assert.deepEqual(rec.steps.map((step) => [step.option, step.amountInr ?? step.resultingLowestInr]), [['supplier_deferral', -9892], ['drawdown', 50000], ['drawdown', 270000]]);
+  assert.equal(rec.steps[1].reason, 'top_up_after_deferral');
+  assert.equal(rec.steps[2].withinOwnerCap, false);
 });
 
 test('lender schedules are illustrative and each passes the 8 percent EMI cap', () => {
