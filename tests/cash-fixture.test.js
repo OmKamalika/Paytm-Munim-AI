@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { cashPlanFixture, optionsFixture, lendersFixture } from '../lib/cash-fixture.js';
 
-test('cash plan anchors match the supplied workbook daily closings', () => {
+test('cash plan anchors are calculated and match the workbook daily closings', () => {
   const { anchors } = cashPlanFixture.cashPlan;
   assert.deepEqual(anchors, {
     firstNegativeDate: '2026-11-04',
@@ -20,12 +20,15 @@ test('listed outflows retain exact amounts, dates, invoice and rent split', () =
   const outflows = cashPlanFixture.cashPlan.outflows;
   assert.equal(outflows.length, 12);
   assert.deepEqual(outflows.filter(row => !row.id.startsWith('recurring_')).map((row) => [row.id, row.date, row.amountInr, row.quality]), [
+  assert.equal(outflows.length, 8);
+  assert.deepEqual(outflows.map((row) => [row.id, row.date, row.amountInr, row.quality]), [
     ['patel', '2026-10-31', 290000, 'exact'],
     ['salaries', '2026-11-01', 105000, 'exact'],
     ['mehta', '2026-11-01', 150000, 'exact'],
     ['gupta', '2026-11-04', 520000, 'exact'],
     ['rent', '2026-11-05', 107000, 'exact'],
     ['bonus', '2026-11-05', 52500, 'exact'],
+    ['existing_emi', '2026-11-07', 22000, 'exact'],
     ['gst', '2026-11-20', 42000, 'estimate'],
   ]);
   assert.equal(outflows.find((row) => row.id === 'gupta').invoiceId, 'GD-1182');
@@ -53,7 +56,11 @@ test('three cost-ordered options keep the Gupta invoice full and count drawdown 
   assert.deepEqual(options.map((item) => item.id), ['supplier_deferral', 'drawdown', 'cut_stock']);
   assert.deepEqual(options.map((item) => item.costInr), [0, 2600, 28000]);
   assert.equal(options[0].conditional, true);
+  assert.equal(options[0].accepted, false);
+  // Calculated as if Gupta accepts the requested terms; the plan itself is unchanged.
   assert.equal(options[0].effectOn5Nov.balanceInr, null);
+  assert.equal(options[0].effectOn5Nov.ifAcceptedBalanceInr, 75500);
+  assert.equal(cashPlanFixture.cashPlan.anchors.lowestBalanceInr, -184500);
   assert.equal(options[1].amountInr, 200000);
   assert.equal(options[1].destinationAccountMasked, '**4029');
   assert.equal(options[1].effectOn5Nov.balanceInr, 15500);
@@ -61,6 +68,15 @@ test('three cost-ordered options keep the Gupta invoice full and count drawdown 
   assert.equal(options[1].effectOn5Nov.guptaInvoiceOutflowInr, 520000);
   assert.equal(options[2].orderReductionInr, 185000);
   assert.equal(options[2].effectOn5Nov.balanceInr, 500);
+  assert.equal(options[2].calculated, false);
+  assert.match(options[2].effectOn5Nov.balanceBasis, /assumption/);
+});
+
+test('the recommendation asks Gupta first and sizes the drawdown it would replace', () => {
+  const rec = optionsFixture.recommendation;
+  assert.equal(rec.status, 'shortfall');
+  assert.deepEqual(rec.steps.map((step) => [step.option, step.amountInr ?? step.resultingLowestInr]), [['supplier_deferral', 75500], ['drawdown', 190000]]);
+  assert.equal(rec.steps[1].withinOwnerCap, true);
 });
 
 test('lender schedules are illustrative and each passes the 8 percent EMI cap', () => {
