@@ -10,7 +10,7 @@ export default function SimulatorPage() {
   return <main className="sim-page">
     <header className="sim-topbar">
       <div className="sim-brand"><span>paytm</span><small>Munim</small><strong>Simulator console</strong></div>
-      <Link className="sim-merchant-link" href="/">Open merchant demo <span aria-hidden="true">↗</span></Link>
+      <Link prefetch={false} className="sim-merchant-link" href="/">Open merchant demo <span aria-hidden="true">↗</span></Link>
     </header>
     <div className="sim-ribbon">Synthetic demo data - nothing here is real.</div>
     <div className="sim-content">
