@@ -1,0 +1,11 @@
+rule_key,value,unit,guard_rule
+cashier_refund_per_txn,500,INR,R02
+cashier_refund_per_day,2000,INR,R03
+manager_refund_per_txn,5000,INR,R02
+owner_pin_drawdown_above,50000,INR,R14
+owner_pin_refund_above,5000,INR,R14
+credit_cap_pct_of_monthly_collections,0.08,ratio,R11
+plan_purchase_tolerance,1.1,ratio,R15
+staff_quiet_hours,23:00-06:00,time,R16
+payee_account_change_cooling_days,30,days,R09
+always_ask,"new payee; changed account; drawdown > ₹50,000; refund > ₹5,000; rule changes",list,R07-R18

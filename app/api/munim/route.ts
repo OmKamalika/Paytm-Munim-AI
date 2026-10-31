@@ -3,7 +3,6 @@ import { currentRelief } from "../../../lib/cash-state.js";
 import { answerQuestion } from "../../../lib/munim-dialogue.js";
 import { getSimulatorStore } from "../../../lib/simulator-store.js";
 import { syntheticSource } from "../../../lib/synthetic-source.generated.js";
-import { revisedInvoice } from "../../../lib/invoice-gd-1182-r1.generated.js";
 import { outletOrder } from "../../../lib/outlet-order.js";
 
 export const dynamic = "force-dynamic";
@@ -24,7 +23,6 @@ export async function POST(request: Request) {
     cash: buildCashPlan(relief),
     options: buildOptions(relief),
     invoice: syntheticSource.invoice,
-    revisedInvoice,
     order: outletOrder,
     outlets: syntheticSource.outletMetrics,
     supplier: {

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createActionRuntime, sha256Hex, verifyEvidenceChain } from '../lib/action-runtime.js';
 import { createSimulatorStore } from '../lib/simulator-store.js';
+import { createPaymentFence } from '../lib/payment-fence.js';
 
 const drawdown = () => ({
   type: 'drawdown',
@@ -290,4 +291,54 @@ test('a second drawdown for the seeded invoice cannot exceed the cumulative cap 
   assert.ok(second.checks.some((check) => check.id === 'invoice_duplicate' && check.status === 'BLOCK'));
   assert.equal((await runtime.getLedger()).effects.length, 1);
   assert.equal((await runtime.getLedger()).drawdownTotal, 200000);
+});
+
+test('a pause queued during the initial execution check blocks after PIN hashing and releases the invoice', async () => {
+  let paused = false;
+  let queuePause = false;
+  const paymentFence = createPaymentFence();
+  const { pin, runtime } = await runtimeWithConfig({ paymentFence, pauseProvider: () => {
+    const initialValue = paused;
+    if (queuePause) { queuePause = false; queueMicrotask(() => { paused = true; }); }
+    return initialValue;
+  } });
+  const action = drawdown();
+  const approval = await runtime.evaluate(action);
+  queuePause = true;
+  const result = await runtime.execute({ action, approval_id: approval.approval_id, pin, idempotency_key: crypto.randomUUID() });
+  assert.equal(result.outcome, 'blocked');
+  assert.equal(result.reason, 'RISKOPS_PAUSED');
+  assert.equal(result.evidence_entry.outcome, 'blocked');
+  assert.equal(result.evidence_entry.approvalState, 'refused');
+  assert.ok(result.guard.checks.some((item) => item.id === 'demo_pause' && item.status === 'BLOCK'));
+  assert.equal((await runtime.getLedger()).effects.length, 0);
+  assert.equal(paymentFence.get('drawdown', 'GD-1182'), null);
+  assert.equal((await runtime.verifyEvidence()).ok, true);
+  paused = false;
+  const resumed = await runtime.execute({ action, approval_id: approval.approval_id, pin, idempotency_key: crypto.randomUUID() });
+  assert.equal(resumed.outcome, 'done-simulated');
+  assert.equal((await runtime.getLedger()).effects.length, 1);
+});
+
+test('a pause arriving during success-evidence preparation cannot leave a success receipt or effect', async () => {
+  let paused = false;
+  let pauseOnEvidence = false;
+  const paymentFence = createPaymentFence();
+  const { pin, runtime } = await runtimeWithConfig({ paymentFence, pauseProvider: () => paused, now: () => {
+    if (pauseOnEvidence) { pauseOnEvidence = false; paused = true; }
+    return '2026-10-31T10:00:00.000Z';
+  } });
+  const action = drawdown();
+  const approval = await runtime.evaluate(action);
+  pauseOnEvidence = true;
+  const result = await runtime.execute({ action, approval_id: approval.approval_id, pin, idempotency_key: crypto.randomUUID() });
+  assert.equal(result.outcome, 'blocked');
+  assert.equal(result.reason, 'RISKOPS_PAUSED');
+  const entries = (await runtime.getEvidence()).entries;
+  assert.equal(entries.length, 2);
+  assert.equal(entries.at(-1).outcome, 'blocked');
+  assert.equal(entries.some((entry) => entry.outcome === 'done-simulated'), false);
+  assert.equal((await runtime.getLedger()).drawdownTotal, 0);
+  assert.equal(paymentFence.get('drawdown', 'GD-1182'), null);
+  assert.equal((await runtime.verifyEvidence()).ok, true);
 });
