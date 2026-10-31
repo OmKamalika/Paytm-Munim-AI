@@ -1,0 +1,2 @@
+business_id,name,owner,gstin,paytm_mid,bank_account_masked,bank_ifsc,data_source
+BIZ-001,Sharma General Stores,Rakesh Sharma,27ABCDE1234F1Z5,PYTMSGS0042,XXXXXXXX4029,DEMO0004029,synthetic

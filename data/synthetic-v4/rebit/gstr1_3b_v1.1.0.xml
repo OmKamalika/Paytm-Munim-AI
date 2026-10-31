@@ -1,0 +1,1456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aa:Account xmlns:aa="http://api.rebit.org.in/FISchema/gstr1_3b" linkedAccRef="SYN-LINK-GST-91c4e2" maskedGstinNumber="27ABCDXXXXXX1Z5" type="gstr1_3b" version="1.1.0">
+  <aa:Profile>
+    <aa:BusinessDetails lgnm="RAKESH SHARMA" trdnm="SHARMA GENERAL STORES" apprvdt="03/06/2019" iscmp="N" dty="Regular" sts="Active">
+      <aa:CategoryList>
+        <aa:cat>Retail Business</aa:cat>
+        <aa:cat>Wholesale Business</aa:cat>
+      </aa:CategoryList>
+    </aa:BusinessDetails>
+    <aa:PlaceofBusiness>
+      <aa:Address bnm="Ganesh Niwas" bno="Shop 4" flno="Ground" st="Gokhale Road" loc="Dadar West" dst="Mumbai" stcd="Maharashtra" pncd="400028">
+        <aa:NatureOfBusinessList>
+          <aa:ntr>RETAIL_BUSINESS</aa:ntr>
+          <aa:ntr>WAREHOUSE_OR_DEPOT</aa:ntr>
+        </aa:NatureOfBusinessList>
+      </aa:Address>
+    </aa:PlaceofBusiness>
+  </aa:Profile>
+  <aa:Transactions strdt="01-04-2025" endt="30-09-2026">
+    <aa:Gstr1Details>
+      <aa:gstr1 ret_prd="042025" dof="11-05-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0401" idt="10-04-2025" val="16073.12" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6000.0" iamt="0.0" camt="150.0" samt="150.0" csamt="0.0"/>
+              <aa:itm txval="8726.0" iamt="0.0" camt="523.56" samt="523.56" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0402" idt="06-04-2025" val="4595.36" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4103.0" iamt="0.0" camt="246.18" samt="246.18" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0403" idt="12-04-2025" val="12829.96" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7020.0" iamt="0.0" camt="421.2" samt="421.2" csamt="0.0"/>
+              <aa:itm txval="4731.0" iamt="0.0" camt="118.28" samt="118.28" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0404" idt="02-04-2025" val="12853.58" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6228.0" iamt="0.0" camt="155.7" samt="155.7" csamt="0.0"/>
+              <aa:itm txval="5351.0" iamt="0.0" camt="481.59" samt="481.59" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0405" idt="15-04-2025" val="14011.76" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2289.0" iamt="0.0" camt="137.34" samt="137.34" csamt="0.0"/>
+              <aa:itm txval="1848.0" iamt="0.0" camt="46.2" samt="46.2" csamt="0.0"/>
+              <aa:itm txval="8489.0" iamt="0.0" camt="509.34" samt="509.34" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0406" idt="12-04-2025" val="7242.9" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3510.0" iamt="0.0" camt="87.75" samt="87.75" csamt="0.0"/>
+              <aa:itm txval="3388.0" iamt="0.0" camt="84.7" samt="84.7" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0407" idt="23-04-2025" val="2546.88" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2274.0" iamt="0.0" camt="136.44" samt="136.44" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="052025" dof="11-06-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0501" idt="18-05-2025" val="3150.0" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3000.0" iamt="0.0" camt="75.0" samt="75.0" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0502" idt="05-05-2025" val="3548.26" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3007.0" iamt="0.0" camt="270.63" samt="270.63" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0503" idt="16-05-2025" val="7965.62" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2057.0" iamt="0.0" camt="51.43" samt="51.43" csamt="0.0"/>
+              <aa:itm txval="2490.0" iamt="0.0" camt="224.1" samt="224.1" csamt="0.0"/>
+              <aa:itm txval="2731.0" iamt="0.0" camt="68.28" samt="68.28" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0504" idt="09-05-2025" val="14565.62" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4247.0" iamt="0.0" camt="106.18" samt="106.18" csamt="0.0"/>
+              <aa:itm txval="7382.0" iamt="0.0" camt="184.55" samt="184.55" csamt="0.0"/>
+              <aa:itm txval="2243.0" iamt="0.0" camt="56.08" samt="56.08" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0505" idt="24-05-2025" val="3141.16" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2662.0" iamt="0.0" camt="239.58" samt="239.58" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/25-26/B0506" idt="21-05-2025" val="2954.7" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2814.0" iamt="0.0" camt="70.35" samt="70.35" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0507" idt="04-05-2025" val="23594.56" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6710.0" iamt="0.0" camt="167.75" samt="167.75" csamt="0.0"/>
+              <aa:itm txval="7863.0" iamt="0.0" camt="196.58" samt="196.58" csamt="0.0"/>
+              <aa:itm txval="7898.0" iamt="0.0" camt="197.45" samt="197.45" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="062025" dof="11-07-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0601" idt="27-06-2025" val="9763.32" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8274.0" iamt="0.0" camt="744.66" samt="744.66" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0602" idt="02-06-2025" val="12928.08" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3610.0" iamt="0.0" camt="324.9" samt="324.9" csamt="0.0"/>
+              <aa:itm txval="7346.0" iamt="0.0" camt="661.14" samt="661.14" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0603" idt="08-06-2025" val="24981.22" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7202.0" iamt="0.0" camt="648.18" samt="648.18" csamt="0.0"/>
+              <aa:itm txval="7705.0" iamt="0.0" camt="693.45" samt="693.45" csamt="0.0"/>
+              <aa:itm txval="7039.0" iamt="0.0" camt="175.98" samt="175.98" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0604" idt="18-06-2025" val="23010.14" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5939.0" iamt="0.0" camt="356.34" samt="356.34" csamt="0.0"/>
+              <aa:itm txval="6305.0" iamt="0.0" camt="567.45" samt="567.45" csamt="0.0"/>
+              <aa:itm txval="7963.0" iamt="0.0" camt="477.78" samt="477.78" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0605" idt="17-06-2025" val="16390.14" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5601.0" iamt="0.0" camt="140.03" samt="140.03" csamt="0.0"/>
+              <aa:itm txval="8906.0" iamt="0.0" camt="801.54" samt="801.54" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/25-26/B0606" idt="02-06-2025" val="21553.38" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7205.0" iamt="0.0" camt="180.13" samt="180.13" csamt="0.0"/>
+              <aa:itm txval="7203.0" iamt="0.0" camt="180.08" samt="180.08" csamt="0.0"/>
+              <aa:itm txval="6119.0" iamt="0.0" camt="152.98" samt="152.98" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="072025" dof="11-08-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0701" idt="07-07-2025" val="17987.1" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7286.0" iamt="0.0" camt="182.15" samt="182.15" csamt="0.0"/>
+              <aa:itm txval="8760.0" iamt="0.0" camt="788.4" samt="788.4" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0702" idt="02-07-2025" val="15304.74" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7309.0" iamt="0.0" camt="657.81" samt="657.81" csamt="0.0"/>
+              <aa:itm txval="4673.0" iamt="0.0" camt="116.83" samt="116.83" csamt="0.0"/>
+              <aa:itm txval="1689.0" iamt="0.0" camt="42.23" samt="42.23" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0703" idt="09-07-2025" val="14704.68" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5541.0" iamt="0.0" camt="332.46" samt="332.46" csamt="0.0"/>
+              <aa:itm txval="4320.0" iamt="0.0" camt="259.2" samt="259.2" csamt="0.0"/>
+              <aa:itm txval="3102.0" iamt="0.0" camt="279.18" samt="279.18" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0704" idt="03-07-2025" val="2517.76" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2248.0" iamt="0.0" camt="134.88" samt="134.88" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/25-26/B0705" idt="13-07-2025" val="5821.2" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5544.0" iamt="0.0" camt="138.6" samt="138.6" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="082025" dof="11-09-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0801" idt="12-08-2025" val="14597.1" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7294.0" iamt="0.0" camt="182.35" samt="182.35" csamt="0.0"/>
+              <aa:itm txval="4187.0" iamt="0.0" camt="376.83" samt="376.83" csamt="0.0"/>
+              <aa:itm txval="1693.0" iamt="0.0" camt="152.37" samt="152.37" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/25-26/B0802" idt="17-08-2025" val="10272.64" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5152.0" iamt="0.0" camt="309.12" samt="309.12" csamt="0.0"/>
+              <aa:itm txval="4288.0" iamt="0.0" camt="107.2" samt="107.2" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0803" idt="14-08-2025" val="12700.94" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2693.0" iamt="0.0" camt="161.58" samt="161.58" csamt="0.0"/>
+              <aa:itm txval="5664.0" iamt="0.0" camt="339.84" samt="339.84" csamt="0.0"/>
+              <aa:itm txval="3182.0" iamt="0.0" camt="79.55" samt="79.55" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="092025" dof="11-10-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B0901" idt="01-09-2025" val="2203.96" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2099.0" iamt="0.0" camt="52.48" samt="52.48" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B0902" idt="08-09-2025" val="20460.96" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7858.0" iamt="0.0" camt="707.22" samt="707.22" csamt="0.0"/>
+              <aa:itm txval="7969.0" iamt="0.0" camt="478.14" samt="478.14" csamt="0.0"/>
+              <aa:itm txval="1918.0" iamt="0.0" camt="172.62" samt="172.62" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B0903" idt="15-09-2025" val="18138.06" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7154.0" iamt="0.0" camt="429.24" samt="429.24" csamt="0.0"/>
+              <aa:itm txval="8581.0" iamt="0.0" camt="772.29" samt="772.29" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="102025" dof="11-11-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B1001" idt="09-10-2025" val="5488.44" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="1762.0" iamt="0.0" camt="158.58" samt="158.58" csamt="0.0"/>
+              <aa:itm txval="3044.0" iamt="0.0" camt="182.64" samt="182.64" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B1002" idt="04-10-2025" val="6714.2" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5690.0" iamt="0.0" camt="512.1" samt="512.1" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/25-26/B1003" idt="25-10-2025" val="4991.92" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2319.0" iamt="0.0" camt="57.98" samt="57.98" csamt="0.0"/>
+              <aa:itm txval="2283.0" iamt="0.0" camt="136.98" samt="136.98" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/25-26/B1004" idt="15-10-2025" val="17559.72" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8978.0" iamt="0.0" camt="538.68" samt="538.68" csamt="0.0"/>
+              <aa:itm txval="7147.0" iamt="0.0" camt="178.68" samt="178.68" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B1005" idt="02-10-2025" val="4512.32" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3824.0" iamt="0.0" camt="344.16" samt="344.16" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B1006" idt="07-10-2025" val="2427.26" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2057.0" iamt="0.0" camt="185.13" samt="185.13" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B1007" idt="12-10-2025" val="3543.76" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3375.0" iamt="0.0" camt="84.38" samt="84.38" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="112025" dof="11-12-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B1101" idt="01-11-2025" val="13219.02" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3653.0" iamt="0.0" camt="91.33" samt="91.33" csamt="0.0"/>
+              <aa:itm txval="7952.0" iamt="0.0" camt="715.68" samt="715.68" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B1102" idt="17-11-2025" val="15620.12" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8774.0" iamt="0.0" camt="789.66" samt="789.66" csamt="0.0"/>
+              <aa:itm txval="5016.0" iamt="0.0" camt="125.4" samt="125.4" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/25-26/B1103" idt="14-11-2025" val="12137.48" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3582.0" iamt="0.0" camt="322.38" samt="322.38" csamt="0.0"/>
+              <aa:itm txval="6704.0" iamt="0.0" camt="603.36" samt="603.36" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="122025" dof="11-01-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/25-26/B1201" idt="05-12-2025" val="24050.18" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4348.0" iamt="0.0" camt="260.88" samt="260.88" csamt="0.0"/>
+              <aa:itm txval="8386.0" iamt="0.0" camt="503.16" samt="503.16" csamt="0.0"/>
+              <aa:itm txval="8295.0" iamt="0.0" camt="746.55" samt="746.55" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B1202" idt="21-12-2025" val="6289.4" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5330.0" iamt="0.0" camt="479.7" samt="479.7" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/25-26/B1203" idt="23-12-2025" val="11876.48" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7806.0" iamt="0.0" camt="468.36" samt="468.36" csamt="0.0"/>
+              <aa:itm txval="2798.0" iamt="0.0" camt="167.88" samt="167.88" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B1204" idt="14-12-2025" val="16615.0" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="1957.0" iamt="0.0" camt="176.13" samt="176.13" csamt="0.0"/>
+              <aa:itm txval="7093.0" iamt="0.0" camt="638.37" samt="638.37" csamt="0.0"/>
+              <aa:itm txval="5300.0" iamt="0.0" camt="318.0" samt="318.0" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/25-26/B1205" idt="21-12-2025" val="21884.24" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4166.0" iamt="0.0" camt="104.15" samt="104.15" csamt="0.0"/>
+              <aa:itm txval="6645.0" iamt="0.0" camt="166.13" samt="166.13" csamt="0.0"/>
+              <aa:itm txval="8926.0" iamt="0.0" camt="803.34" samt="803.34" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="012026" dof="11-02-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-26/B0101" idt="08-01-2026" val="4171.66" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3973.0" iamt="0.0" camt="99.33" samt="99.33" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-26/B0102" idt="17-01-2026" val="20134.6" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7722.0" iamt="0.0" camt="463.32" samt="463.32" csamt="0.0"/>
+              <aa:itm txval="7082.0" iamt="0.0" camt="177.05" samt="177.05" csamt="0.0"/>
+              <aa:itm txval="3857.0" iamt="0.0" camt="96.43" samt="96.43" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/26-26/B0103" idt="11-01-2026" val="14631.02" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4413.0" iamt="0.0" camt="397.17" samt="397.17" csamt="0.0"/>
+              <aa:itm txval="8414.0" iamt="0.0" camt="504.84" samt="504.84" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-26/B0104" idt="07-01-2026" val="16908.24" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2803.0" iamt="0.0" camt="70.08" samt="70.08" csamt="0.0"/>
+              <aa:itm txval="4243.0" iamt="0.0" camt="106.08" samt="106.08" csamt="0.0"/>
+              <aa:itm txval="8491.0" iamt="0.0" camt="509.46" samt="509.46" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-26/B0105" idt="17-01-2026" val="9550.24" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8527.0" iamt="0.0" camt="511.62" samt="511.62" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-26/B0106" idt="02-01-2026" val="18099.8" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7273.0" iamt="0.0" camt="181.83" samt="181.83" csamt="0.0"/>
+              <aa:itm txval="5451.0" iamt="0.0" camt="490.59" samt="490.59" csamt="0.0"/>
+              <aa:itm txval="3839.0" iamt="0.0" camt="95.98" samt="95.98" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="022026" dof="11-03-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-26/B0201" idt="03-02-2026" val="13677.24" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6349.0" iamt="0.0" camt="380.94" samt="380.94" csamt="0.0"/>
+              <aa:itm txval="3745.0" iamt="0.0" camt="224.7" samt="224.7" csamt="0.0"/>
+              <aa:itm txval="2259.0" iamt="0.0" camt="56.48" samt="56.48" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-26/B0202" idt="06-02-2026" val="26927.62" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7369.0" iamt="0.0" camt="663.21" samt="663.21" csamt="0.0"/>
+              <aa:itm txval="7574.0" iamt="0.0" camt="681.66" samt="681.66" csamt="0.0"/>
+              <aa:itm txval="8299.0" iamt="0.0" camt="497.94" samt="497.94" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-26/B0203" idt="04-02-2026" val="4756.64" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4247.0" iamt="0.0" camt="254.82" samt="254.82" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="032026" dof="11-04-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-26/B0301" idt="07-03-2026" val="5517.12" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4926.0" iamt="0.0" camt="295.56" samt="295.56" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-26/B0302" idt="18-03-2026" val="11764.94" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3091.0" iamt="0.0" camt="278.19" samt="278.19" csamt="0.0"/>
+              <aa:itm txval="7731.0" iamt="0.0" camt="193.28" samt="193.28" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-26/B0303" idt="24-03-2026" val="11470.3" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3560.0" iamt="0.0" camt="320.4" samt="320.4" csamt="0.0"/>
+              <aa:itm txval="2450.0" iamt="0.0" camt="147.0" samt="147.0" csamt="0.0"/>
+              <aa:itm txval="4310.0" iamt="0.0" camt="107.75" samt="107.75" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-26/B0304" idt="22-03-2026" val="16932.38" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4621.0" iamt="0.0" camt="115.53" samt="115.53" csamt="0.0"/>
+              <aa:itm txval="4247.0" iamt="0.0" camt="254.82" samt="254.82" csamt="0.0"/>
+              <aa:itm txval="6539.0" iamt="0.0" camt="392.34" samt="392.34" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="042026" dof="11-05-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-27/B0401" idt="05-04-2026" val="9854.18" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8351.0" iamt="0.0" camt="751.59" samt="751.59" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/26-27/B0402" idt="21-04-2026" val="20067.56" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6160.0" iamt="0.0" camt="154.0" samt="154.0" csamt="0.0"/>
+              <aa:itm txval="6548.0" iamt="0.0" camt="392.88" samt="392.88" csamt="0.0"/>
+              <aa:itm txval="5310.0" iamt="0.0" camt="477.9" samt="477.9" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0403" idt="13-04-2026" val="23456.22" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7584.0" iamt="0.0" camt="189.6" samt="189.6" csamt="0.0"/>
+              <aa:itm txval="5549.0" iamt="0.0" camt="138.73" samt="138.73" csamt="0.0"/>
+              <aa:itm txval="8192.0" iamt="0.0" camt="737.28" samt="737.28" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="052026" dof="11-06-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/26-27/B0501" idt="14-05-2026" val="12214.72" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4797.0" iamt="0.0" camt="287.82" samt="287.82" csamt="0.0"/>
+              <aa:itm txval="6109.0" iamt="0.0" camt="366.54" samt="366.54" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0502" idt="22-05-2026" val="18348.34" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7888.0" iamt="0.0" camt="709.92" samt="709.92" csamt="0.0"/>
+              <aa:itm txval="8610.0" iamt="0.0" camt="215.25" samt="215.25" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-27/B0503" idt="16-05-2026" val="25050.76" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5989.0" iamt="0.0" camt="359.34" samt="359.34" csamt="0.0"/>
+              <aa:itm txval="8084.0" iamt="0.0" camt="202.1" samt="202.1" csamt="0.0"/>
+              <aa:itm txval="8799.0" iamt="0.0" camt="527.94" samt="527.94" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-27/B0504" idt="01-05-2026" val="4676.34" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="3963.0" iamt="0.0" camt="356.67" samt="356.67" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="062026" dof="11-07-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0601" idt="04-06-2026" val="4733.12" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4226.0" iamt="0.0" camt="253.56" samt="253.56" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-27/B0602" idt="25-06-2026" val="17532.56" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="5183.0" iamt="0.0" camt="310.98" samt="310.98" csamt="0.0"/>
+              <aa:itm txval="1988.0" iamt="0.0" camt="178.92" samt="178.92" csamt="0.0"/>
+              <aa:itm txval="8935.0" iamt="0.0" camt="223.38" samt="223.38" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/26-27/B0603" idt="06-06-2026" val="7145.26" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6805.0" iamt="0.0" camt="170.13" samt="170.13" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/26-27/B0604" idt="02-06-2026" val="10128.02" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6866.0" iamt="0.0" camt="171.65" samt="171.65" csamt="0.0"/>
+              <aa:itm txval="2606.0" iamt="0.0" camt="156.36" samt="156.36" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="072026" dof="11-08-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0701" idt="02-07-2026" val="7628.26" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="1890.0" iamt="0.0" camt="170.1" samt="170.1" csamt="0.0"/>
+              <aa:itm txval="5141.0" iamt="0.0" camt="128.53" samt="128.53" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/26-27/B0702" idt="25-07-2026" val="18968.36" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6863.0" iamt="0.0" camt="411.78" samt="411.78" csamt="0.0"/>
+              <aa:itm txval="1599.0" iamt="0.0" camt="39.98" samt="39.98" csamt="0.0"/>
+              <aa:itm txval="8138.0" iamt="0.0" camt="732.42" samt="732.42" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-27/B0703" idt="25-07-2026" val="5173.36" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4927.0" iamt="0.0" camt="123.18" samt="123.18" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0704" idt="04-07-2026" val="13830.54" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4670.0" iamt="0.0" camt="116.75" samt="116.75" csamt="0.0"/>
+              <aa:itm txval="5991.0" iamt="0.0" camt="149.78" samt="149.78" csamt="0.0"/>
+              <aa:itm txval="2354.0" iamt="0.0" camt="141.24" samt="141.24" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAFCO4410M1Z8" inum="SGS/26-27/B0705" idt="16-07-2026" val="2783.62" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2359.0" iamt="0.0" camt="212.31" samt="212.31" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="082026" dof="11-09-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0801" idt="06-08-2026" val="9749.6" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8705.0" iamt="0.0" camt="522.3" samt="522.3" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-27/B0802" idt="24-08-2026" val="20229.38" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7583.0" iamt="0.0" camt="454.98" samt="454.98" csamt="0.0"/>
+              <aa:itm txval="6113.0" iamt="0.0" camt="152.83" samt="152.83" csamt="0.0"/>
+              <aa:itm txval="4748.0" iamt="0.0" camt="284.88" samt="284.88" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-27/B0803" idt="16-08-2026" val="3281.6" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2930.0" iamt="0.0" camt="175.8" samt="175.8" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+      <aa:gstr1 ret_prd="092026" dof="11-10-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:b2b_dtls>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0901" idt="20-09-2026" val="11688.32" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8248.0" iamt="0.0" camt="494.88" samt="494.88" csamt="0.0"/>
+              <aa:itm txval="2188.0" iamt="0.0" camt="131.28" samt="131.28" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AAICS9921L1ZQ" inum="SGS/26-27/B0902" idt="15-09-2026" val="12681.46" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="2387.0" iamt="0.0" camt="214.83" samt="214.83" csamt="0.0"/>
+              <aa:itm txval="8360.0" iamt="0.0" camt="752.4" samt="752.4" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-27/B0903" idt="20-09-2026" val="8608.96" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="8199.0" iamt="0.0" camt="204.98" samt="204.98" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-27/B0904" idt="16-09-2026" val="18331.4" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="4691.0" iamt="0.0" camt="117.28" samt="117.28" csamt="0.0"/>
+              <aa:itm txval="7027.0" iamt="0.0" camt="421.62" samt="421.62" csamt="0.0"/>
+              <aa:itm txval="5272.0" iamt="0.0" camt="131.8" samt="131.8" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-27/B0905" idt="19-09-2026" val="19333.94" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7733.0" iamt="0.0" camt="193.33" samt="193.33" csamt="0.0"/>
+              <aa:itm txval="3249.0" iamt="0.0" camt="292.41" samt="292.41" csamt="0.0"/>
+              <aa:itm txval="7029.0" iamt="0.0" camt="175.73" samt="175.73" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AACFD1086P1Z6" inum="SGS/26-27/B0906" idt="11-09-2026" val="20516.76" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="7216.0" iamt="0.0" camt="432.96" samt="432.96" csamt="0.0"/>
+              <aa:itm txval="2663.0" iamt="0.0" camt="239.67" samt="239.67" csamt="0.0"/>
+              <aa:itm txval="8850.0" iamt="0.0" camt="221.25" samt="221.25" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+          <aa:b2b ctin="27AABHM7703N1Z2" inum="SGS/26-27/B0907" idt="18-09-2026" val="7527.22" pos="27" rchrg="N" inv_typ="R" diff_percent="0.0">
+            <aa:itm_det>
+              <aa:itm txval="6379.0" iamt="0.0" camt="574.11" samt="574.11" csamt="0.0"/>
+            </aa:itm_det>
+          </aa:b2b>
+        </aa:b2b_dtls>
+      </aa:gstr1>
+    </aa:Gstr1Details>
+    <aa:Gstr3bDetails>
+      <aa:gstr3b ret_prd="042025" dof="20-05-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="968695.0" iamt="0.0" camt="44283.5" samt="44283.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="704842.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24023.5" samt="24023.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24023.5" samt="24023.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="521583.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-05-2025">
+            <aa:cgst tx="44283.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="44283.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24023.5" s_pdi="0.0" s_pds="24023.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20260.0" spd="20260.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="052025" dof="20-06-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1030355.0" iamt="0.0" camt="47102.5" samt="47102.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="749707.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="26017.5" samt="26017.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="26017.5" samt="26017.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="554783.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-06-2025">
+            <aa:cgst tx="47102.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="47102.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="26017.5" s_pdi="0.0" s_pds="26017.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="21085.0" spd="21085.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="062025" dof="20-07-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="972145.0" iamt="0.0" camt="44441.5" samt="44441.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="707351.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24256.5" samt="24256.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24256.5" samt="24256.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="523440.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-07-2025">
+            <aa:cgst tx="44441.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="44441.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24256.5" s_pdi="0.0" s_pds="24256.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20185.0" spd="20185.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="072025" dof="20-08-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="943590.0" iamt="0.0" camt="43135.5" samt="43135.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="686575.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="23680.5" samt="23680.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="23680.5" samt="23680.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="508066.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-08-2025">
+            <aa:cgst tx="43135.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="43135.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="23680.5" s_pdi="0.0" s_pds="23680.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="19455.0" spd="19455.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="082025" dof="20-09-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1068579.0" iamt="0.0" camt="48850.0" samt="48850.0" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="777520.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="27100.0" samt="27100.0" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="27100.0" samt="27100.0" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="575365.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-09-2025">
+            <aa:cgst tx="48850.0" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="48850.0" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="27100.0" s_pdi="0.0" s_pds="27100.0" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="21750.0" spd="21750.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="092025" dof="20-10-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="983107.0" iamt="0.0" camt="44942.5" samt="44942.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="715328.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24312.5" samt="24312.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24312.5" samt="24312.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="529343.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-10-2025">
+            <aa:cgst tx="44942.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="44942.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24312.5" s_pdi="0.0" s_pds="24312.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20630.0" spd="20630.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="102025" dof="20-11-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1190775.0" iamt="0.0" camt="54436.0" samt="54436.0" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="866431.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="30151.0" samt="30151.0" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="30151.0" samt="30151.0" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="641159.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-11-2025">
+            <aa:cgst tx="54436.0" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="54436.0" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="30151.0" s_pdi="0.0" s_pds="30151.0" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="24285.0" spd="24285.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="112025" dof="20-12-2025" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="970961.0" iamt="0.0" camt="44387.5" samt="44387.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="706491.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24142.5" samt="24142.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24142.5" samt="24142.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="522803.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-12-2025">
+            <aa:cgst tx="44387.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="44387.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24142.5" s_pdi="0.0" s_pds="24142.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20245.0" spd="20245.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="122025" dof="20-01-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1044029.0" iamt="0.0" camt="47727.5" samt="47727.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="759657.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="26582.5" samt="26582.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="26582.5" samt="26582.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="562146.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-01-2026">
+            <aa:cgst tx="47727.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="47727.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="26582.5" s_pdi="0.0" s_pds="26582.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="21145.0" spd="21145.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="012026" dof="24-02-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="972106.0" iamt="0.0" camt="44439.5" samt="44439.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="707324.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24064.5" samt="24064.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24064.5" samt="24064.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="523420.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="40.0" samt="40.0" csamt="0.0"/>
+          <aa:ltfee_details camt="100.0" samt="100.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="24-02-2026">
+            <aa:cgst tx="44439.5" intr="40.0" fee="100.0"/>
+            <aa:sgst tx="44439.5" intr="40.0" fee="100.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24064.5" s_pdi="0.0" s_pds="24064.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20375.0" spd="20375.0" cspd="0.0" i_intrpd="0.0" c_intrpd="40.0" s_intrpd="40.0" cs_intrpd="0.0" c_lfeepd="100.0" s_lfeepd="100.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="022026" dof="20-03-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="912402.0" iamt="0.0" camt="41710.5" samt="41710.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="663882.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="22495.5" samt="22495.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="22495.5" samt="22495.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="491273.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-03-2026">
+            <aa:cgst tx="41710.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="41710.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="22495.5" s_pdi="0.0" s_pds="22495.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="19215.0" spd="19215.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="032026" dof="20-04-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1011667.0" iamt="0.0" camt="46248.0" samt="46248.0" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="736109.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24998.0" samt="24998.0" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24998.0" samt="24998.0" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="544721.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-04-2026">
+            <aa:cgst tx="46248.0" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="46248.0" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24998.0" s_pdi="0.0" s_pds="24998.0" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="21250.0" spd="21250.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="042026" dof="20-05-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1005958.0" iamt="0.0" camt="45987.0" samt="45987.0" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="731955.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="25592.0" samt="25592.0" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="25592.0" samt="25592.0" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="541647.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-05-2026">
+            <aa:cgst tx="45987.0" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="45987.0" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="25592.0" s_pdi="0.0" s_pds="25592.0" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20395.0" spd="20395.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="052026" dof="20-06-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1044414.0" iamt="0.0" camt="47745.0" samt="47745.0" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="759936.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="26570.0" samt="26570.0" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="26570.0" samt="26570.0" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="562353.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-06-2026">
+            <aa:cgst tx="47745.0" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="47745.0" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="26570.0" s_pdi="0.0" s_pds="26570.0" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="21175.0" spd="21175.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="062026" dof="20-07-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="981956.0" iamt="0.0" camt="44889.5" samt="44889.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="714491.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24719.5" samt="24719.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24719.5" samt="24719.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="528723.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-07-2026">
+            <aa:cgst tx="44889.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="44889.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24719.5" s_pdi="0.0" s_pds="24719.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20170.0" spd="20170.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="072026" dof="20-08-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="980217.0" iamt="0.0" camt="44810.5" samt="44810.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="713225.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="24655.5" samt="24655.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="24655.5" samt="24655.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="527786.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-08-2026">
+            <aa:cgst tx="44810.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="44810.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="24655.5" s_pdi="0.0" s_pds="24655.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="20155.0" spd="20155.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="082026" dof="20-09-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1042745.0" iamt="0.0" camt="47668.5" samt="47668.5" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="758722.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="26523.5" samt="26523.5" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="26523.5" samt="26523.5" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="561454.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-09-2026">
+            <aa:cgst tx="47668.5" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="47668.5" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="26523.5" s_pdi="0.0" s_pds="26523.5" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="21145.0" spd="21145.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+      <aa:gstr3b ret_prd="092026" dof="20-10-2026" filingFrequency="MONTHLY" status="Filed">
+        <aa:sup_details>
+          <aa:osup_det txval="1012628.0" iamt="0.0" camt="46292.0" samt="46292.0" csamt="0.0"/>
+          <aa:osup_zero txval="0.0" iamt="0.0" csamt="0.0"/>
+          <aa:osup_nil_exmp txval="736809.0"/>
+          <aa:isup_rev txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:osup_nongst txval="0.0"/>
+        </aa:sup_details>
+        <aa:sup_inter>
+        </aa:sup_inter>
+        <aa:eco_dtls>
+          <aa:eco_sup txval="0.0" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:eco_reg_sup txval="0.0"/>
+        </aa:eco_dtls>
+        <aa:itc_elg>
+          <aa:itc_avl ty="IMPG" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="IMPS" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISRC" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="ISD" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_avl ty="OTH" iamt="0.0" camt="25047.0" samt="25047.0" csamt="0.0"/>
+          <aa:itc_rev ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_rev ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_net iamt="0.0" camt="25047.0" samt="25047.0" csamt="0.0"/>
+          <aa:itc_inelg ty="RUL" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:itc_inelg ty="OTH" iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+        </aa:itc_elg>
+        <aa:inward_sup>
+          <aa:isup_details ty="GST" inter="0.0" intra="545239.0"/>
+          <aa:isup_details ty="NONGST" inter="0.0" intra="0.0"/>
+        </aa:inward_sup>
+        <aa:intr_ltfee>
+          <aa:intr_details iamt="0.0" camt="0.0" samt="0.0" csamt="0.0"/>
+          <aa:ltfee_details camt="0.0" samt="0.0"/>
+        </aa:intr_ltfee>
+        <aa:tx_pmt>
+          <aa:tx_py trancd="30002" trandate="20-10-2026">
+            <aa:cgst tx="46292.0" intr="0.0" fee="0.0"/>
+            <aa:sgst tx="46292.0" intr="0.0" fee="0.0"/>
+            <aa:igst tx="0.0" intr="0.0" fee="0.0"/>
+            <aa:cess tx="0.0" intr="0.0" fee="0.0"/>
+          </aa:tx_py>
+          <aa:pditc i_pdi="0.0" i_pdc="0.0" i_pds="0.0" c_pdi="0.0" c_pdc="25047.0" s_pdi="0.0" s_pds="25047.0" cs_pdcs="0.0"/>
+        </aa:tx_pmt>
+        <aa:pdcash_dtls>
+          <aa:pdcash ipd="0.0" cpd="21245.0" spd="21245.0" cspd="0.0" i_intrpd="0.0" c_intrpd="0.0" s_intrpd="0.0" cs_intrpd="0.0" c_lfeepd="0.0" s_lfeepd="0.0"/>
+        </aa:pdcash_dtls>
+      </aa:gstr3b>
+    </aa:Gstr3bDetails>
+  </aa:Transactions>
+</aa:Account>

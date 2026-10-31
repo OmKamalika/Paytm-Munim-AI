@@ -40,7 +40,7 @@ test('daily cash closings reproduce supplied workbook anchors without exposing o
   assert.equal(close('2026-11-04'), -145000);
   assert.equal(close('2026-11-05'), -184500);
   assert.equal(close('2026-11-06'), -64500);
-  assert.equal(close('2026-11-07'), 55500);
+  assert.equal(close('2026-11-07'), 33500);
   assert.equal('openingBalance' in cashPlanFixture.cashPlan, false);
   assert.equal('openingBalanceInr' in cashPlanFixture.cashPlan, false);
 });

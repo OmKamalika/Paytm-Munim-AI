@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import FlowRiskOps from "./FlowRiskOps";
 import "./RiskOps.css";
 
 export type CaseDecision = "PASS" | "ESCALATE" | "BLOCK";
@@ -141,18 +142,29 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
   const [executionEvidence, setExecutionEvidence] = useState<ExecutionEvidence[] | null>(null);
   const [chainCheck, setChainCheck] = useState<{ ok: boolean; first_broken_seq: number | null } | null>(null);
   const [chainError, setChainError] = useState("");
+  const [observedPause, setObservedPause] = useState<boolean | null>(null);
   useEffect(() => {
     let active = true;
-    Promise.all([fetch("/api/evidence", { cache: "no-store" }), fetch("/api/evidence/verify", { cache: "no-store" })])
-      .then(async ([entriesResponse, checkResponse]) => {
-        if (!entriesResponse.ok || !checkResponse.ok) throw new Error("The server evidence chain could not load.");
-        const entriesData = await entriesResponse.json() as { entries: ExecutionEvidence[] };
-        const checkData = await checkResponse.json() as { ok: boolean; first_broken_seq: number | null };
-        if (active) { setExecutionEvidence(entriesData.entries); setChainCheck(checkData); setChainError(""); }
-      })
-      .catch(() => { if (active) setChainError("The server evidence chain could not load."); });
-    return () => { active = false; };
+    let inFlight = false;
+    const load = () => {
+      if (inFlight) return;
+      inFlight = true;
+      Promise.all([fetch("/api/evidence", { cache: "no-store" }), fetch("/api/evidence/verify", { cache: "no-store" }), fetch("/api/control/pause", { cache: "no-store" })])
+        .then(async ([entriesResponse, checkResponse, pauseResponse]) => {
+          if (!entriesResponse.ok || !checkResponse.ok || !pauseResponse.ok) throw new Error("The server evidence chain could not load.");
+          const entriesData = await entriesResponse.json() as { entries: ExecutionEvidence[] };
+          const checkData = await checkResponse.json() as { ok: boolean; first_broken_seq: number | null };
+          const pauseData = await pauseResponse.json() as { paused: boolean };
+          if (active) { setExecutionEvidence(entriesData.entries); setChainCheck(checkData); setObservedPause(pauseData.paused); setChainError(""); }
+        })
+        .catch(() => { if (active) setChainError("The server evidence chain could not load."); })
+        .finally(() => { inFlight = false; });
+    };
+    const initial = window.setTimeout(load, 0);
+    const timer = window.setInterval(load, 1000);
+    return () => { active = false; window.clearTimeout(initial); window.clearInterval(timer); };
   }, []);
+  const effectivePaused = observedPause ?? paused;
   const headId = cases[0]?.id ?? null;
   const selectedId = selection.headId === headId ? selection.caseId : headId;
   const filteredCases = cases.filter((item) => {
@@ -185,17 +197,19 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
             <span aria-hidden="true">←</span> Merchant view
           </button>
           <button
-            className={`rops-pause-button ${paused ? "is-paused" : ""}`}
+            className={`rops-pause-button ${effectivePaused ? "is-paused" : ""}`}
             type="button"
-            onClick={() => onPauseChange(!paused)}
-            aria-pressed={paused}
+            onClick={() => onPauseChange(!effectivePaused)}
+            aria-pressed={effectivePaused}
           >
-            {paused ? "Resume demo checks" : "Pause demo checks"}
+            {effectivePaused ? "Resume demo checks" : "Pause demo checks"}
           </button>
         </div>
       </header>
 
       <div className="rops-synthetic-ribbon">Synthetic demo data - nothing here is real.</div>
+
+      <FlowRiskOps/>
 
       <div className="rops-page">
         <div className="rops-intro">
@@ -204,11 +218,11 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
             <h1>Review actions against intent</h1>
             <p>See what the merchant asked for, what the agent attempted, and where they diverged.</p>
           </div>
-          <div className={`rops-delegate-state ${paused ? "is-paused" : ""}`} role="status" aria-live="polite">
+          <div className={`rops-delegate-state ${effectivePaused ? "is-paused" : ""}`} role="status" aria-live="polite">
             <span className="rops-state-dot" />
             <div>
-              <strong>{paused ? "Demo-session pause is on" : "Demo checks active"}</strong>
-              <span>{paused ? "Future checks in this demo server session are paused" : "Future checks in this demo server session can run"}</span>
+              <strong>{effectivePaused ? "Demo-session pause is on" : "Demo checks active"}</strong>
+              <span>{effectivePaused ? "Future checks in this demo server session are paused" : "Future checks in this demo server session can run"}</span>
             </div>
           </div>
         </div>

@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const paths = [
   'data/synthetic',
+  'data/synthetic-v3',
+  'data/synthetic-v4',
   'specs/prds',
   'specs/workbooks',
   'specs/legacy-fixture',
@@ -38,9 +40,19 @@ const counts = {
   excelWorkbooks: records.filter((item) => item.path.endsWith('.xlsx')).length,
   syntheticCsv: records.filter((item) => /^data\/synthetic\/.*\.csv$/.test(item.path)).length,
   sourceGenerators: records.filter((item) => /^data\/synthetic\/.*\.py$/.test(item.path)).length,
+  syntheticV3Csv: records.filter((item) => /^data\/synthetic-v3\/csv\/.*\.csv$/.test(item.path)).length,
+  syntheticV3Generators: records.filter((item) => /^data\/synthetic-v3\/.*\.py$/.test(item.path)).length,
+  syntheticV3InvoiceJson: records.filter((item) => /^data\/synthetic-v3\/invoices\/.*\.json$/.test(item.path)).length,
+  syntheticV3RebitFiles: records.filter((item) => /^data\/synthetic-v3\/rebit\/.*\.(json|xml)$/.test(item.path)).length,
+  syntheticV4Csv: records.filter((item) => /^data\/synthetic-v4\/csv\/.*\.csv$/.test(item.path)).length,
+  syntheticV4Generators: records.filter((item) => /^data\/synthetic-v4\/.*\.py$/.test(item.path)).length,
+  syntheticV4InvoiceJson: records.filter((item) => /^data\/synthetic-v4\/invoices\/.*\.json$/.test(item.path)).length,
+  syntheticV4RebitFiles: records.filter((item) => /^data\/synthetic-v4\/rebit\/.*\.(json|xml)$/.test(item.path)).length,
   legacyJsonFixture: records.filter((item) => /^specs\/legacy-fixture\/.*\.txt$/.test(item.path)).length,
 };
-const expected = { prdMarkdown: 25, excelWorkbooks: 3, syntheticCsv: 15, sourceGenerators: 2, legacyJsonFixture: 1 };
+const expected = { prdMarkdown: 25, excelWorkbooks: 5, syntheticCsv: 15, sourceGenerators: 2,
+  syntheticV3Csv: 18, syntheticV3Generators: 4, syntheticV3InvoiceJson: 7, syntheticV3RebitFiles: 2,
+  syntheticV4Csv: 20, syntheticV4Generators: 5, syntheticV4InvoiceJson: 7, syntheticV4RebitFiles: 4, legacyJsonFixture: 1 };
 if (JSON.stringify(counts) !== JSON.stringify(expected)) {
   throw new Error(`Source set incomplete: ${JSON.stringify(counts)}; expected ${JSON.stringify(expected)}`);
 }
@@ -52,5 +64,5 @@ if (process.argv.includes('--write')) {
 } else {
   const stored = JSON.parse(await readFile(manifestPath, 'utf8'));
   if (JSON.stringify(stored) !== JSON.stringify(manifest)) throw new Error('Source manifest does not match the bundled files.');
-  console.log(`Verified ${records.length} source files: ${counts.prdMarkdown} markdown, ${counts.excelWorkbooks} Excel, ${counts.syntheticCsv} CSV, ${counts.sourceGenerators} generators, and the legacy JSON fixture.`);
+  console.log(`Verified ${records.length} source files: ${counts.prdMarkdown} PRD markdown, ${counts.excelWorkbooks} Excel, ${counts.syntheticCsv + counts.syntheticV3Csv + counts.syntheticV4Csv} CSV, ${counts.sourceGenerators + counts.syntheticV3Generators + counts.syntheticV4Generators} generators, ${counts.syntheticV3InvoiceJson + counts.syntheticV4InvoiceJson} invoice JSON, ${counts.syntheticV3RebitFiles + counts.syntheticV4RebitFiles} ReBIT files, and the legacy fixture.`);
 }

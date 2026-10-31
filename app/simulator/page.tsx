@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
+import FlowSimulator from '../../components/FlowSimulator';
 import './simulator.css';
 
 type Kind = 'supplier' | 'aa' | 'lenders';
@@ -14,7 +15,15 @@ type SimState = {
   catalog: Scenario[];
   latest: Record<Kind, SimEvent | null>;
   events: SimEvent[];
+  requests: { kind: Kind; requestId: string; cursor: number; timestamp: string }[];
+  latestRequest: Record<Kind, { requestId: string; cursor: number; timestamp: string } | null>;
 };
+
+function hasPending(state: SimState | null, kind: Kind) {
+  const request = state?.latestRequest[kind];
+  const response = state?.latest[kind];
+  return Boolean(request && (!response || response.seq <= request.cursor));
+}
 
 const groups: { kind: Kind; title: string; description: string }[] = [
   { kind: 'supplier', title: 'Supplier replies', description: 'Terms, account, or beneficiary changes for Gupta Distributors.' },
@@ -88,14 +97,19 @@ export default function SimulatorPage() {
       <section className="sim-intro">
         <div>
           <span className="sim-eyebrow">Demo control room</span>
-          <h1>Send the next response</h1>
-          <p>Choose a fixture-backed response after the merchant starts a request. The merchant accepts only a new event of the matching kind. No external system is contacted.</p>
+          <h1>Control the next external response</h1>
+          <p>Watch incoming merchant tasks, inspect each request, and choose a synthetic response for its current step. The merchant sees the result and RiskOps sees the decision trail.</p>
         </div>
-        <div className="sim-sequence"><span>Latest event</span><strong>{state ? `#${state.latestSeq}` : '…'}</strong><small>In-memory demo session</small></div>
+        <div className="sim-sequence"><span>Runtime</span><strong>Local</strong><small>Synthetic responses only</small></div>
       </section>
 
       {error && <div className="sim-error" role="alert">{error} <button onClick={() => void load()}>Retry</button></div>}
 
+      <FlowSimulator/>
+      <details className="sim-legacy">
+        <summary>Single-step sample requests · supplier, AA, and offer comparison</summary>
+        <p>These requests come from the individual comparison screens. The tracked-task inbox above handles complete delegated journeys.</p>
+        <div className="sim-legacy-requests">{groups.map(group => <div key={group.kind}><b>{group.title}</b><span>{hasPending(state, group.kind) ? "Incoming request · waiting" : state?.latestRequest[group.kind] ? "Response delivered" : "No request yet"}</span><small>{state?.latestRequest[group.kind]?.requestId || "Start a request in the merchant app"}</small></div>)}</div>
       <div className="sim-grid">
         <div className="sim-scenarios">
           {groups.map((group) => <section className="sim-section" key={group.kind} aria-labelledby={`sim-${group.kind}`}>
@@ -107,7 +121,7 @@ export default function SimulatorPage() {
               {state ? state.catalog.filter((scenario) => scenario.kind === group.kind).map((scenario) =>
                 <div className="sim-card" key={scenario.id}>
                   <div><h3>{scenario.label}</h3><p>{scenario.description}</p></div>
-                  <button disabled={busyId !== null} onClick={() => void dispatch(scenario.id)}>
+                  <button disabled={busyId !== null || !hasPending(state, group.kind)} onClick={() => void dispatch(scenario.id)}>
                     {busyId === scenario.id ? 'Sending…' : lastSent !== null && state.latest[group.kind]?.seq === lastSent && state.latest[group.kind]?.scenarioId === scenario.id ? 'Send again' : 'Send to merchant'}
                   </button>
                 </div>) : <p className="sim-loading">Loading scenarios…</p>}
@@ -129,6 +143,7 @@ export default function SimulatorPage() {
           <p className="sim-footnote">This feed lives in server memory for the demo session. Restarting the server clears it. It is not the evidence log.</p>
         </aside>
       </div>
+      </details>
     </div>
   </main>;
 }

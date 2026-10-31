@@ -1,5 +1,7 @@
 # Preserve user-supplied source bytes so SOURCE_MANIFEST.json hashes verify on every platform.
 data/synthetic/** -text
+data/synthetic-v3/** -text
+data/synthetic-v4/** -text
 specs/prds/** -text
 specs/workbooks/** -text
 specs/legacy-fixture/** -text
