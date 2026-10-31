@@ -9,6 +9,7 @@
     "install:ci": "node scripts/install-ci.mjs",
     "dev": "node scripts/run-framework.mjs dev",
     "build": "node scripts/run-framework.mjs build",
+    "build:netlify": "next build --webpack",
     "test": "node scripts/run-tests.mjs",
     "configure:pin": "node scripts/configure-demo-pin.mjs",
     "verify:sources": "node scripts/verify-source-manifest.mjs",
