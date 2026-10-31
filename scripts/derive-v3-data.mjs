@@ -1,0 +1,117 @@
+import { createHash } from 'node:crypto';
+import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { normalizeInvoiceDocument, evaluateInvoiceEvidence, deriveAaHistory, deriveRecurringBills } from '../lib/v3-evidence.js';
+
+// Our importer reads supplied files as evidence. It never runs the supplied Python generators.
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const sourceDir = join(root, 'data', 'synthetic-v3');
+function parseCsv(text) {
+  const rows = []; let row = []; let field = ''; let quoted = false;
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    if (quoted) {
+      if (char === '"' && text[index + 1] === '"') { field += '"'; index += 1; }
+      else if (char === '"') quoted = false;
+      else field += char;
+    } else if (char === '"') quoted = true;
+    else if (char === ',') { row.push(field); field = ''; }
+    else if (char === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+    else if (char !== '\r') field += char;
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  if (quoted) throw new Error('Unterminated CSV field');
+  const headers = rows.shift();
+  return rows.filter(values => values.some(Boolean)).map(values => Object.fromEntries(headers.map((key, index) => [key, values[index] ?? ''])));
+}
+async function csv(name) { return parseCsv(await readFile(join(sourceDir, 'csv', name), 'utf8')); }
+async function walk(folder = '') {
+  const entries = await readdir(join(sourceDir, folder), { withFileTypes: true });
+  const paths = [];
+  for (const entry of entries) {
+    const path = join(folder, entry.name);
+    if (entry.isDirectory()) paths.push(...await walk(path));
+    else if (entry.isFile()) paths.push(path.replaceAll('\\', '/'));
+  }
+  return paths.sort();
+}
+const [supplierRows, billRows, paytmRows, handovers, gstRows] = await Promise.all([
+  csv('suppliers.csv'), csv('bill_uploads.csv'), csv('paytm_transactions.csv'), csv('shift_handovers.csv'), csv('gst_returns.csv'),
+]);
+const suppliers = supplierRows.map(row => ({ id: row.supplier_id === 'SUP-02' ? 'gupta' : row.supplier_id,
+  registryId: row.supplier_id, name: row.name, category: row.category,
+  accountLast4: row.verified_account_last4, approved: row.approved === 'True', accountChangedOn: row.account_changed_on }));
+const paths = await walk();
+const files = await Promise.all(paths.map(async path => {
+  const bytes = await readFile(join(sourceDir, path));
+  return { path, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
+}));
+const document = JSON.parse(await readFile(join(sourceDir, 'rebit', 'deposit_v2.0.0.json'), 'utf8'));
+const account = document.Account;
+// Whitelist actual FI fields. Test-label columns are deliberately not copied into runtime data.
+const bankTransactions = account.Transactions.Transaction.map(row => ({
+  txnId: String(row.txnId), type: String(row.type), mode: String(row.mode), amount: Number(row.amount),
+  transactionalBalance: Number(row.transactionalBalance), transactionTimestamp: String(row.transactionTimestamp),
+  valueDate: String(row.valueDate).slice(0, 10), narration: String(row.narration ?? ''), reference: String(row.reference ?? ''),
+}));
+const invoices = [];
+for (const path of paths.filter(path => path.startsWith('invoices/') && path.endsWith('.json'))) {
+  const raw = JSON.parse(await readFile(join(sourceDir, path), 'utf8'));
+  invoices.push({ ...normalizeInvoiceDocument(raw, suppliers), sourcePath: path,
+    sourceSha256: files.find(item => item.path === path).sha256 });
+}
+invoices.sort((left, right) => left.row.localeCompare(right.row));
+for (const invoice of invoices) invoice.evidence = evaluateInvoiceEvidence(invoice, invoices, suppliers);
+const aa = deriveAaHistory(bankTransactions, suppliers);
+const coverage = { from: account.Transactions.startDate, to: '2026-03-31', completeFinancialYear: false,
+  missingPeriod: '2025-04-01 to 2025-04-30', note: 'Statement starts 1 May 2025; the FY figure is observed attributable spend, not a complete FY total.' };
+const supplierSummary = aa.supplierSummary.map(row => ({ ...row, coverage }));
+const acceptedPurchases = invoices.filter(row => row.evidence.status === 'PASS');
+const productMap = new Map();
+for (const invoice of acceptedPurchases) for (const line of invoice.lines) {
+  const key = `${line.description}|${line.unit}`;
+  if (!productMap.has(key)) productMap.set(key, { description: line.description, unit: line.unit, purchasedQuantityFromDocuments: 0, invoiceRows: [],
+    sourceType: 'supplier_invoice_lines', stockOnHandObserved: false });
+  const product = productMap.get(key);
+  product.purchasedQuantityFromDocuments += line.quantity;
+  if (!product.invoiceRows.includes(invoice.row)) product.invoiceRows.push(invoice.row);
+}
+const paymentTrails = acceptedPurchases.map(invoice => {
+  const escaped = invoice.number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const exactInvoice = new RegExp(`(?:^|[^A-Z0-9])${escaped}(?:$|[^A-Z0-9])`, 'i');
+  const matches = bankTransactions.filter(row => row.type === 'DEBIT' && exactInvoice.test(row.narration));
+  return { invoiceRow: invoice.row, invoiceNumber: invoice.number, suppliedPeriodThrough: account.Transactions.endDate,
+    matchedPaymentInr: matches.reduce((total, row) => total + row.amount, 0), matchedTxnIds: matches.map(row => row.txnId),
+    status: matches.length ? 'payment_reference_seen' : 'no_matching_payment_in_supplied_period',
+    caveat: 'Absence of a matching narration does not prove that a bill is unpaid. Open-bill status comes from supplied bill uploads.' };
+});
+const source = {
+  synthetic: true, version: 'v3', asOf: '2026-10-31',
+  provenance: { description: 'User-supplied v3 synthetic invoice, CSV, Excel and ReBIT evidence; no test answer keys drive runtime decisions.',
+    files, rowCounts: { bankTransactions: bankTransactions.length, paytmTransactions: paytmRows.length, shiftHandovers: handovers.length,
+      suppliers: suppliers.length, invoiceDocuments: invoices.length, invoiceLines: invoices.reduce((total, row) => total + row.lines.length, 0), billUploads: billRows.length, gstReturns: gstRows.length },
+    aaDataRule: 'Narration and registry matching only; unknown or ambiguous payees stay unmatched. label_* is not imported.',
+    fyCoverage: coverage,
+  },
+  bankAccount: { maskedAccount: account.maskedAccNumber, ifsc: account.Summary.ifsc, schemaVersion: account.version,
+    statementFrom: account.Transactions.startDate, statementThrough: account.Transactions.endDate },
+  suppliers, invoices, bankTransactions, aaDebits: aa.matchedDebits, supplierSummary,
+  aaAttribution: { matchedDebitCount: aa.matchedDebits.length, unmatchedDebitCount: aa.unmatchedDebitCount,
+    highConfidenceMatchedCount: aa.matchedDebits.filter(row => row.confidence === 'high').length,
+    mediumConfidenceMatchedCount: aa.matchedDebits.filter(row => row.confidence === 'medium').length,
+    notAttributedToSupplierCount: aa.unmatchedDebitCount,
+    note: 'Matching is a synthetic evidence inference, not beneficiary identity attested by the bank. Unattributed debits include legitimate payroll, rent and other non-supplier expenses, plus blank or ambiguous narrations.' },
+  recurringBills: deriveRecurringBills(bankTransactions),
+  billUploads: billRows.map(row => ({ id: row.upload_id, uploadedAt: row.uploaded_at, uploadedBy: row.uploaded_by,
+    uploaderRole: row.uploader_role, channel: row.channel, mimeType: row.file_type, invoiceRow: row.linked_invoice_row || null,
+    extraction: row.extraction, voiceTranscript: row.voice_transcript, extractionSummary: row.extraction_summary })),
+  procurementEstimates: { stockOnHandObserved: false, salesUnitsObserved: false,
+    description: 'Invoice quantities describe documented B2B purchases. Payment trails and negotiation terms can support procurement estimates, but do not measure stock on hand or end-customer SKU sales.',
+    invoiceRowsIncluded: acceptedPurchases.map(row => row.row), products: [...productMap.values()], paymentTrails },
+};
+await writeFile(join(root, 'lib', 'v3-source.generated.js'),
+  '// Generated by scripts/derive-v3-data.mjs from data/synthetic-v3. Do not edit by hand.\nexport const v3Source = ' + JSON.stringify(source) + ';\n', 'utf8');
+console.log(`Generated v3: ${bankTransactions.length} label-free FI transactions, ${invoices.length} invoice documents, ${source.provenance.rowCounts.invoiceLines} lines, ${files.length} source hashes.`);
+for (const invoice of invoices) console.log(`${invoice.row} ${invoice.number}: ${invoice.evidence.status}`);
+console.log(`Gupta observed FY spend: ${supplierSummary.find(row => row.id === 'gupta').priorFyDebitTotal}; April 2025 missing.`);

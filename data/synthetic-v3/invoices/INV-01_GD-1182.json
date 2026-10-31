@@ -1,0 +1,29 @@
+{
+ "header": {
+  "invoice_row": "INV-01",
+  "invoice_no": "GD-1182",
+  "supplier_name": "Gupta Distributors",
+  "supplier_gstin": "27AAGFG4417K1Z2",
+  "supplier_address": "Unit 12, Bhiwandi Logistics Park, Thane 421302",
+  "buyer_name": "Sharma General Stores",
+  "buyer_gstin": "27ABCDE1234F1Z5",
+  "place_of_supply": "27-Maharashtra",
+  "issue_date": "2026-10-21",
+  "due_date": "2026-11-04",
+  "payment_terms_days": 14,
+  "bank_account_masked": "XXXXXXXX7781",
+  "bank_ifsc": "DEMO0007781",
+  "account_holder": "Gupta Distributors",
+  "eway_bill": "EWB 3812 7741 0921",
+  "received_via": "WhatsApp photo (owner)",
+  "scenario": "header_only",
+  "notes": "Page 1 of 9 photographed. Line items not readable.",
+  "round_off": null,
+  "invoice_total": 520000,
+  "line_count": 0,
+  "body_status": "HEADER_ONLY",
+  "expected_guard_result": "NEEDS_VERIFICATION: invoice body missing, no payment (fail closed)"
+ },
+ "lines": [],
+ "data_source": "synthetic"
+}

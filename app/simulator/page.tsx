@@ -1,7 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
+import FlowSimulator from '../../components/FlowSimulator';
 import './simulator.css';
 
 type Kind = 'supplier' | 'aa' | 'lenders';
@@ -14,7 +14,15 @@ type SimState = {
   catalog: Scenario[];
   latest: Record<Kind, SimEvent | null>;
   events: SimEvent[];
+  requests: { kind: Kind; requestId: string; cursor: number; timestamp: string }[];
+  latestRequest: Record<Kind, { requestId: string; cursor: number; timestamp: string } | null>;
 };
+
+function hasPending(state: SimState | null, kind: Kind) {
+  const request = state?.latestRequest[kind];
+  const response = state?.latest[kind];
+  return Boolean(request && (!response || response.seq <= request.cursor));
+}
 
 const groups: { kind: Kind; title: string; description: string }[] = [
   { kind: 'supplier', title: 'Supplier replies', description: 'Terms, account, or beneficiary changes for Gupta Distributors.' },
@@ -35,67 +43,32 @@ function eventSummary(event: SimEvent) {
   return 'Lender A, B and C offers sent';
 }
 
+// Operator console. It answers only the open, correlated requests of tracked
+// merchant tasks; the earlier single-step dispatcher is retired.
 export default function SimulatorPage() {
-  const [state, setState] = useState<SimState | null>(null);
-  const [busyId, setBusyId] = useState<string | null>(null);
-  const [error, setError] = useState('');
-  const [lastSent, setLastSent] = useState<number | null>(null);
-
-  const load = useCallback(async () => {
-    try {
-      const response = await fetch('/api/simulator/state', { cache: 'no-store' });
-      if (!response.ok) throw new Error('Could not load simulator state.');
-      setState(await response.json() as SimState);
-      setError('');
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Could not load simulator state.');
-    }
-  }, []);
-
-  useEffect(() => {
-    const initial = window.setTimeout(() => { void load(); }, 0);
-    const timer = window.setInterval(() => { void load(); }, 3000);
-    return () => { window.clearTimeout(initial); window.clearInterval(timer); };
-  }, [load]);
-
-  async function dispatch(scenarioId: string) {
-    setBusyId(scenarioId);
-    setError('');
-    try {
-      const response = await fetch('/api/simulator/dispatch', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ scenarioId }),
-      });
-      const result = await response.json() as { event?: SimEvent; state?: SimState; error?: string };
-      if (!response.ok || !result.event || !result.state) throw new Error(result.error ?? 'Could not send response.');
-      setState(result.state);
-      setLastSent(result.event.seq);
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Could not send response.');
-    } finally {
-      setBusyId(null);
-    }
-  }
-
   return <main className="sim-page">
     <header className="sim-topbar">
       <div className="sim-brand"><span>paytm</span><small>Munim</small><strong>Simulator console</strong></div>
-      <Link className="sim-merchant-link" href="/">Open merchant demo <span aria-hidden="true">↗</span></Link>
+      <Link prefetch={false} className="sim-merchant-link" href="/">Open merchant demo <span aria-hidden="true">↗</span></Link>
     </header>
     <div className="sim-ribbon">Synthetic demo data - nothing here is real.</div>
     <div className="sim-content">
       <section className="sim-intro">
         <div>
           <span className="sim-eyebrow">Demo control room</span>
-          <h1>Send the next response</h1>
-          <p>Choose a fixture-backed response after the merchant starts a request. The merchant accepts only a new event of the matching kind. No external system is contacted.</p>
+          <h1>Control the next external response</h1>
+          <p>Watch incoming merchant tasks, inspect each request, and choose a synthetic response for its current step. The merchant sees the result and RiskOps sees the decision trail.</p>
         </div>
-        <div className="sim-sequence"><span>Latest event</span><strong>{state ? `#${state.latestSeq}` : '…'}</strong><small>In-memory demo session</small></div>
+        <div className="sim-sequence"><span>Runtime</span><strong>Local</strong><small>Synthetic responses only</small></div>
       </section>
 
       {error && <div className="sim-error" role="alert">{error} <button onClick={() => void load()}>Retry</button></div>}
 
+      <FlowSimulator/>
+      <details className="sim-legacy">
+        <summary>Single-step sample requests · supplier, AA, and offer comparison</summary>
+        <p>These requests come from the individual comparison screens. The tracked-task inbox above handles complete delegated journeys.</p>
+        <div className="sim-legacy-requests">{groups.map(group => <div key={group.kind}><b>{group.title}</b><span>{hasPending(state, group.kind) ? "Incoming request · waiting" : state?.latestRequest[group.kind] ? "Response delivered" : "No request yet"}</span><small>{state?.latestRequest[group.kind]?.requestId || "Start a request in the merchant app"}</small></div>)}</div>
       <div className="sim-grid">
         <div className="sim-scenarios">
           {groups.map((group) => <section className="sim-section" key={group.kind} aria-labelledby={`sim-${group.kind}`}>
@@ -107,7 +80,7 @@ export default function SimulatorPage() {
               {state ? state.catalog.filter((scenario) => scenario.kind === group.kind).map((scenario) =>
                 <div className="sim-card" key={scenario.id}>
                   <div><h3>{scenario.label}</h3><p>{scenario.description}</p></div>
-                  <button disabled={busyId !== null} onClick={() => void dispatch(scenario.id)}>
+                  <button disabled={busyId !== null || !hasPending(state, group.kind)} onClick={() => void dispatch(scenario.id)}>
                     {busyId === scenario.id ? 'Sending…' : lastSent !== null && state.latest[group.kind]?.seq === lastSent && state.latest[group.kind]?.scenarioId === scenario.id ? 'Send again' : 'Send to merchant'}
                   </button>
                 </div>) : <p className="sim-loading">Loading scenarios…</p>}
@@ -129,6 +102,12 @@ export default function SimulatorPage() {
           <p className="sim-footnote">This feed lives in server memory for the demo session. Restarting the server clears it. It is not the evidence log.</p>
         </aside>
       </div>
+      </details>
+          <p>Each merchant task opens one request at a time. Pick that request and choose a synthetic response for its current step. A response to an older or answered request is rejected. The merchant sees the result and RiskOps sees the same decision trail.</p>
+        </div>
+        <div className="sim-sequence"><span>Runtime</span><strong>Local</strong><small>Synthetic responses only · resets on server restart</small></div>
+      </section>
+      <FlowSimulator/>
     </div>
   </main>;
 }

@@ -1,0 +1,4 @@
+outlet_id,name,delivery_address,receiving_window
+DAD,Dadar,"Shop 4, Ranade Road, Dadar West, Mumbai 400028 (synthetic)",08:00-11:00
+MAT,Matunga,"12 Telang Road, Matunga East, Mumbai 400019 (synthetic)",08:00-11:00
+SIO,Sion,"7 Sion Main Road, Sion West, Mumbai 400022 (synthetic)",08:00-11:00

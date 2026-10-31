@@ -1,0 +1,8 @@
+supplier_id,name,category,verified_account_last4,account_changed_on,approved
+SUP-01,Patel Traders,Staples and grains,3307,2023-06-12,True
+SUP-02,Gupta Distributors,FMCG,7781,2024-03-04,True
+SUP-03,Mehta Dry Fruits,Dry fruits,5520,2024-01-18,True
+SUP-04,Shree Ganesh Oil Mills,Edible oil,6194,2023-11-02,True
+SUP-05,Kumar Agencies,Personal care,2048,2024-07-22,True
+SUP-06,Desai Packaging,Packaging,8836,2023-09-30,True
+SUP-07,R K Enterprises,Unknown,0419,2026-10-27,False

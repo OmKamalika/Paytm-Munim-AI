@@ -1,0 +1,10 @@
+upload_id,uploaded_at,uploaded_by,uploader_role,channel,file_type,linked_invoice_row,extraction,voice_transcript,voice_parsed,extraction_summary,bill_status
+UPL-01,2026-10-21T19:42:10+05:30,Rakesh Sharma (owner),OWNER,WHATSAPP,image/jpeg,INV-01,HEADER_ONLY,,,"GD-1182 header read: Gupta Distributors, ₹5,20,000, due 4 Nov; line items not readable",NEEDS_VERIFICATION
+UPL-02,2026-10-24T11:05:33+05:30,Rakesh Sharma (owner),OWNER,APP,application/pdf,INV-05,FULL,,,"PT-5521 extracted: 34 lines, ties to ₹2,90,000",OPEN_BILL
+UPL-03,2026-10-25T16:20:02+05:30,Rakesh Sharma (owner),OWNER,VOICE,audio/ogg,INV-06,VOICE_ONLY,"Mehta ka dedh lakh ka bill hai, ek tareekh ko dena hai",supplier=Mehta Dry Fruits; amount=150000; due=2026-11-01,Bill stub from voice; awaiting document,NEEDS_VERIFICATION
+UPL-04,2026-10-25T18:02:47+05:30,Rakesh Sharma (owner),OWNER,WHATSAPP,application/pdf,INV-06,FULL,,,"MDF-884 extracted: 22 lines, ties to ₹1,50,000; matches voice stub UPL-03",OPEN_BILL
+UPL-05,2026-10-27T13:14:09+05:30,"Meena Iyer (manager, Matunga)",MANAGER,WHATSAPP,application/pdf,INV-03,FULL,,,KA-7710 extracted: 18 lines; instruction text found in notes and line 8 (treated as data),OPEN_BILL_FLAGGED
+UPL-06,2026-10-28T10:31:55+05:30,Rakesh Sharma (owner),OWNER,APP,application/pdf,INV-02,FULL,,,GD-1196 extracted: 212 lines identical to GD-1182,DUPLICATE_SUSPECTED
+UPL-07,2026-10-29T20:48:16+05:30,Rakesh Sharma (owner),OWNER,WHATSAPP,image/jpeg,INV-04,FULL,,,"GD-1182 resent: payee Gupta Traders & Logistics, account ··3390 (≠ verified ··7781)",ACCOUNT_MISMATCH
+UPL-08,2026-10-30T21:05:40+05:30,"Rohit Gawde (cashier, Matunga)",CASHIER,VOICE,audio/ogg,,VOICE_ONLY,Owner ne bola hai Gupta ko aaj hi paanch lakh bees hazaar bhej do,intent=payment_instruction; payee=Gupta; amount=520000,Voice cannot approve or instruct payments; logged as attempted instruction from staff device,REJECTED_LOGGED
+UPL-09,2026-10-31T10:15:22+05:30,Rakesh Sharma (owner),OWNER,APP,application/pdf,INV-07,FULL,,,"GD-1182 full PDF: 212 lines, ties to ₹5,20,000, account ··7781",OPEN_BILL

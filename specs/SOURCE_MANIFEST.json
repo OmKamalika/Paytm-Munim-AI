@@ -2,12 +2,375 @@
   "description": "User-supplied synthetic source files and project references; all hashes are SHA-256.",
   "counts": {
     "prdMarkdown": 25,
-    "excelWorkbooks": 3,
+    "excelWorkbooks": 5,
     "syntheticCsv": 15,
     "sourceGenerators": 2,
+    "syntheticV3Csv": 18,
+    "syntheticV3Generators": 4,
+    "syntheticV3InvoiceJson": 7,
+    "syntheticV3RebitFiles": 2,
+    "syntheticV4Csv": 20,
+    "syntheticV4Generators": 5,
+    "syntheticV4InvoiceJson": 7,
+    "syntheticV4RebitFiles": 4,
     "legacyJsonFixture": 1
   },
   "files": [
+    {
+      "path": "data/synthetic-v3/PayTMunim_Synthetic_Data.xlsx",
+      "bytes": 13166240,
+      "sha256": "495aea5a567e25cec32831111dd6f7c6b5487f8f572e30d53be9fc3a8f8effb7"
+    },
+    {
+      "path": "data/synthetic-v3/README.md",
+      "bytes": 8867,
+      "sha256": "20a65a6ea30311b47c2e258602acb915ab0a5f76d63bec14ad0f55f743ca33f8"
+    },
+    {
+      "path": "data/synthetic-v3/build_xlsx.py",
+      "bytes": 29824,
+      "sha256": "72b08bd717f0b9a52dd17bb24019f0f8aef3a8757cddf028023d646681f3b732"
+    },
+    {
+      "path": "data/synthetic-v3/csv/bank_statement.csv",
+      "bytes": 1187842,
+      "sha256": "260bae33e1277917847d0ce4b04559c0937b83e4e3623db8c1417f2f457eadf7"
+    },
+    {
+      "path": "data/synthetic-v3/csv/bill_uploads.csv",
+      "bytes": 2086,
+      "sha256": "22250a29cdab27eea2c83c642a24e9bead78aa365fe7c535d54361b99bb427e4"
+    },
+    {
+      "path": "data/synthetic-v3/csv/business.csv",
+      "bytes": 190,
+      "sha256": "3e6f5bd00bc5c435ec79a11fe029bfe25370f1e227a7c57698983201eff8279a"
+    },
+    {
+      "path": "data/synthetic-v3/csv/device_map.csv",
+      "bytes": 596,
+      "sha256": "aae44a625ace0d27e5d7f94323ddf8a1f57c7dc68838d1011dfe6b11793668a4"
+    },
+    {
+      "path": "data/synthetic-v3/csv/existing_emis.csv",
+      "bytes": 94,
+      "sha256": "975e3ec216078fa0aa36ca1d6c28168b09f81bdcaec8904ae29b393a712df2b9"
+    },
+    {
+      "path": "data/synthetic-v3/csv/gst_returns.csv",
+      "bytes": 1505,
+      "sha256": "c8944815518ff71f541d5f78a4a3f2c9930c60d00e67d27050089c80441381e4"
+    },
+    {
+      "path": "data/synthetic-v3/csv/invoice_headers.csv",
+      "bytes": 2987,
+      "sha256": "4468f7a3e8d6c5fd63c5b48aa59a9d1c3c2f0dee43f7e7e6d29ba72d0aa96461"
+    },
+    {
+      "path": "data/synthetic-v3/csv/invoice_lines.csv",
+      "bytes": 70997,
+      "sha256": "a07dbf6365aebcea20628220954e6b349f22f93233e6ebd9c9ea11fb1c0af6fa"
+    },
+    {
+      "path": "data/synthetic-v3/csv/invoices.csv",
+      "bytes": 1395,
+      "sha256": "39b9e84308d668ff28110ca127971282431f1e9ac94fcab8eb17a5f68a645613"
+    },
+    {
+      "path": "data/synthetic-v3/csv/lenders.csv",
+      "bytes": 364,
+      "sha256": "ce8ef49229cd3ac1465ad9aed1ed92509f1db727c47113c11b8c0fb002b11306"
+    },
+    {
+      "path": "data/synthetic-v3/csv/other_qrs.csv",
+      "bytes": 89,
+      "sha256": "ff8e506b1c16d2404bd4c21f6b087c6b1741b117cd8b2e3279db40c5348e107c"
+    },
+    {
+      "path": "data/synthetic-v3/csv/outlets.csv",
+      "bytes": 241,
+      "sha256": "48483f89c8fcead1c40c2343f5174349fbcb9da804cc9b7f3cf24c2817230fab"
+    },
+    {
+      "path": "data/synthetic-v3/csv/owner_mandate.csv",
+      "bytes": 508,
+      "sha256": "7a1af33cb6a64cf92704f8a3578e2c4a2c72c140abc6d6896747e5b126511c14"
+    },
+    {
+      "path": "data/synthetic-v3/csv/paytm_transactions.csv",
+      "bytes": 15854161,
+      "sha256": "e39cbafc179573d9d096b62facf9bb4b6f92f3d90a3662f72ccfeeeb223d7045"
+    },
+    {
+      "path": "data/synthetic-v3/csv/shift_handovers.csv",
+      "bytes": 269974,
+      "sha256": "3f996065e6edc9cdbf92c780d69cc6f453278dd23100638995165d2c618d0da2"
+    },
+    {
+      "path": "data/synthetic-v3/csv/staff.csv",
+      "bytes": 844,
+      "sha256": "ebd8aa589386634f2ea2a8e74de57a3d9a47a88ed79f7fd88bfc22c33364cdc3"
+    },
+    {
+      "path": "data/synthetic-v3/csv/suppliers.csv",
+      "bytes": 480,
+      "sha256": "3099f9ad0fe3e61c3898319958c275d7f074e0274f667724bae7f65eefec1723"
+    },
+    {
+      "path": "data/synthetic-v3/csv/upcoming_outflows.csv",
+      "bytes": 563,
+      "sha256": "e15b02f24e04d88776308ac544eb94e8f1e9ebcb4b2784341f188b1db4fa7694"
+    },
+    {
+      "path": "data/synthetic-v3/generate.py",
+      "bytes": 32867,
+      "sha256": "2fead403848860f88e76e5853d85f63c1d3d118fa3d7c335d36bad080fe24b63"
+    },
+    {
+      "path": "data/synthetic-v3/invoices.py",
+      "bytes": 12453,
+      "sha256": "661fc9fda6677b480b033cae4fa8151fc40c58667f9a927199554024f59da7ea"
+    },
+    {
+      "path": "data/synthetic-v3/invoices/INV-01_GD-1182.json",
+      "bytes": 953,
+      "sha256": "2ef0ed60c042aca81e8b72d1de894e8c31cdd2d665a54bdb00466c67b1f6a6ee"
+    },
+    {
+      "path": "data/synthetic-v3/invoices/INV-02_GD-1196.json",
+      "bytes": 75756,
+      "sha256": "3a4109ac1ff9c86958a9319ff22c9669e1a0de11654442d79d7cd113193b8a09"
+    },
+    {
+      "path": "data/synthetic-v3/invoices/INV-03_KA-7710.json",
+      "bytes": 7330,
+      "sha256": "0f8cfed4421d6c0a9122d324accea183bc09ca2a3eaa256df9e2e416c1cce1f3"
+    },
+    {
+      "path": "data/synthetic-v3/invoices/INV-04_GD-1182.json",
+      "bytes": 75845,
+      "sha256": "8bb835d288df8f6446491b2776fcad0abe68fb32ec32eae205baa508cbfa41d5"
+    },
+    {
+      "path": "data/synthetic-v3/invoices/INV-05_PT-5521.json",
+      "bytes": 12651,
+      "sha256": "8fa1d173ab6539f7af40573bbce81fba3365e13bc91a5fd547ae94f0875a63df"
+    },
+    {
+      "path": "data/synthetic-v3/invoices/INV-06_MDF-884.json",
+      "bytes": 8588,
+      "sha256": "c19d2881c30ee202c71e7d6e8e08eae2dc0c899cd77dbbed42617e0f8c5c6668"
+    },
+    {
+      "path": "data/synthetic-v3/invoices/INV-07_GD-1182.json",
+      "bytes": 75787,
+      "sha256": "ec551820929eae48b21eb0ac19b3ab08191adf28f6838bc8f15ad310148b495b"
+    },
+    {
+      "path": "data/synthetic-v3/rebit/deposit_v2.0.0.json",
+      "bytes": 2700673,
+      "sha256": "340f8ef348602f05fe31aaef3c973dc66e7473e36c530527da42e148ef2df73b"
+    },
+    {
+      "path": "data/synthetic-v3/rebit/deposit_v2.0.0.xml",
+      "bytes": 2147519,
+      "sha256": "e9e8083921a7eefdab4bdfff3d64c9acabb20d195f3e765e903174b65b549156"
+    },
+    {
+      "path": "data/synthetic-v3/rebit_export.py",
+      "bytes": 3397,
+      "sha256": "a5f30f5c28f4f7587826f758317eaf3acd380a4c13d42ba1be0757e6aaa627d1"
+    },
+    {
+      "path": "data/synthetic-v4/PayTMunim_Synthetic_Data.xlsx",
+      "bytes": 13878863,
+      "sha256": "471a451c355a4afa052294f77f60f63fb270fdb8217b26909da77d47bef19909"
+    },
+    {
+      "path": "data/synthetic-v4/README.md",
+      "bytes": 10852,
+      "sha256": "cca3237f7b6865ee94118b7eea60d4a22772c223a1134c47ff4df2392cfa32b0"
+    },
+    {
+      "path": "data/synthetic-v4/build_xlsx.py",
+      "bytes": 33411,
+      "sha256": "48a32eed98eaadf9e2088f6dcfbf19d6216548b7cd1779f078b53ff0a7cd9605"
+    },
+    {
+      "path": "data/synthetic-v4/csv/bank_statement.csv",
+      "bytes": 1265454,
+      "sha256": "7f84a5c8da6f9ca57e43146edfc879760b0b18c53d53362e82a54da467d0d557"
+    },
+    {
+      "path": "data/synthetic-v4/csv/bill_uploads.csv",
+      "bytes": 2086,
+      "sha256": "22250a29cdab27eea2c83c642a24e9bead78aa365fe7c535d54361b99bb427e4"
+    },
+    {
+      "path": "data/synthetic-v4/csv/business.csv",
+      "bytes": 190,
+      "sha256": "3e6f5bd00bc5c435ec79a11fe029bfe25370f1e227a7c57698983201eff8279a"
+    },
+    {
+      "path": "data/synthetic-v4/csv/device_map.csv",
+      "bytes": 596,
+      "sha256": "1cf33dcaa41911c04debb05021ac722922546eb0448758e2aaf9fd1c014df1f3"
+    },
+    {
+      "path": "data/synthetic-v4/csv/existing_emis.csv",
+      "bytes": 94,
+      "sha256": "975e3ec216078fa0aa36ca1d6c28168b09f81bdcaec8904ae29b393a712df2b9"
+    },
+    {
+      "path": "data/synthetic-v4/csv/gst_returns.csv",
+      "bytes": 1582,
+      "sha256": "104dedba93b069f7e63c5e756bf4540558f108e21c4b855d4b3ebd234d26f484"
+    },
+    {
+      "path": "data/synthetic-v4/csv/gstr1_b2b_invoices.csv",
+      "bytes": 23382,
+      "sha256": "52a12aeb442b36eb865273f3853c71f3358eef5d9243f7545b6786778050a583"
+    },
+    {
+      "path": "data/synthetic-v4/csv/gstr3b_returns.csv",
+      "bytes": 2364,
+      "sha256": "a298cc4a8ea4f021f028bee60ca71ed4a811021ce6cb5d91963a5e24ceb8597d"
+    },
+    {
+      "path": "data/synthetic-v4/csv/invoice_headers.csv",
+      "bytes": 2987,
+      "sha256": "4468f7a3e8d6c5fd63c5b48aa59a9d1c3c2f0dee43f7e7e6d29ba72d0aa96461"
+    },
+    {
+      "path": "data/synthetic-v4/csv/invoice_lines.csv",
+      "bytes": 70997,
+      "sha256": "a07dbf6365aebcea20628220954e6b349f22f93233e6ebd9c9ea11fb1c0af6fa"
+    },
+    {
+      "path": "data/synthetic-v4/csv/invoices.csv",
+      "bytes": 1395,
+      "sha256": "39b9e84308d668ff28110ca127971282431f1e9ac94fcab8eb17a5f68a645613"
+    },
+    {
+      "path": "data/synthetic-v4/csv/lenders.csv",
+      "bytes": 364,
+      "sha256": "ce8ef49229cd3ac1465ad9aed1ed92509f1db727c47113c11b8c0fb002b11306"
+    },
+    {
+      "path": "data/synthetic-v4/csv/other_qrs.csv",
+      "bytes": 89,
+      "sha256": "ff8e506b1c16d2404bd4c21f6b087c6b1741b117cd8b2e3279db40c5348e107c"
+    },
+    {
+      "path": "data/synthetic-v4/csv/outlets.csv",
+      "bytes": 241,
+      "sha256": "48483f89c8fcead1c40c2343f5174349fbcb9da804cc9b7f3cf24c2817230fab"
+    },
+    {
+      "path": "data/synthetic-v4/csv/owner_mandate.csv",
+      "bytes": 508,
+      "sha256": "7a1af33cb6a64cf92704f8a3578e2c4a2c72c140abc6d6896747e5b126511c14"
+    },
+    {
+      "path": "data/synthetic-v4/csv/paytm_transactions.csv",
+      "bytes": 16670976,
+      "sha256": "e8b830e480b76d23100026fbcd399ee82cf2170ceb155f57ee1c6e78982f37d2"
+    },
+    {
+      "path": "data/synthetic-v4/csv/shift_handovers.csv",
+      "bytes": 285227,
+      "sha256": "a5eefffeaccfd038aec9aedc109fc030ddd04d63ba579bd75cf636ce078546d1"
+    },
+    {
+      "path": "data/synthetic-v4/csv/staff.csv",
+      "bytes": 844,
+      "sha256": "ebd8aa589386634f2ea2a8e74de57a3d9a47a88ed79f7fd88bfc22c33364cdc3"
+    },
+    {
+      "path": "data/synthetic-v4/csv/suppliers.csv",
+      "bytes": 480,
+      "sha256": "3099f9ad0fe3e61c3898319958c275d7f074e0274f667724bae7f65eefec1723"
+    },
+    {
+      "path": "data/synthetic-v4/csv/upcoming_outflows.csv",
+      "bytes": 563,
+      "sha256": "e15b02f24e04d88776308ac544eb94e8f1e9ebcb4b2784341f188b1db4fa7694"
+    },
+    {
+      "path": "data/synthetic-v4/generate.py",
+      "bytes": 33690,
+      "sha256": "3c965c476962002e6f1d697f5b455d1e0def0f2d4e841d77ce5a2f23244495fc"
+    },
+    {
+      "path": "data/synthetic-v4/gst_aa.py",
+      "bytes": 10758,
+      "sha256": "2618f9c09c3f0e47628f184c65fc5124b5106448630804e2f663d1167bc42480"
+    },
+    {
+      "path": "data/synthetic-v4/invoices.py",
+      "bytes": 12453,
+      "sha256": "661fc9fda6677b480b033cae4fa8151fc40c58667f9a927199554024f59da7ea"
+    },
+    {
+      "path": "data/synthetic-v4/invoices/INV-01_GD-1182.json",
+      "bytes": 953,
+      "sha256": "2ef0ed60c042aca81e8b72d1de894e8c31cdd2d665a54bdb00466c67b1f6a6ee"
+    },
+    {
+      "path": "data/synthetic-v4/invoices/INV-02_GD-1196.json",
+      "bytes": 75756,
+      "sha256": "3a4109ac1ff9c86958a9319ff22c9669e1a0de11654442d79d7cd113193b8a09"
+    },
+    {
+      "path": "data/synthetic-v4/invoices/INV-03_KA-7710.json",
+      "bytes": 7330,
+      "sha256": "0f8cfed4421d6c0a9122d324accea183bc09ca2a3eaa256df9e2e416c1cce1f3"
+    },
+    {
+      "path": "data/synthetic-v4/invoices/INV-04_GD-1182.json",
+      "bytes": 75845,
+      "sha256": "8bb835d288df8f6446491b2776fcad0abe68fb32ec32eae205baa508cbfa41d5"
+    },
+    {
+      "path": "data/synthetic-v4/invoices/INV-05_PT-5521.json",
+      "bytes": 12651,
+      "sha256": "8fa1d173ab6539f7af40573bbce81fba3365e13bc91a5fd547ae94f0875a63df"
+    },
+    {
+      "path": "data/synthetic-v4/invoices/INV-06_MDF-884.json",
+      "bytes": 8588,
+      "sha256": "c19d2881c30ee202c71e7d6e8e08eae2dc0c899cd77dbbed42617e0f8c5c6668"
+    },
+    {
+      "path": "data/synthetic-v4/invoices/INV-07_GD-1182.json",
+      "bytes": 75787,
+      "sha256": "ec551820929eae48b21eb0ac19b3ab08191adf28f6838bc8f15ad310148b495b"
+    },
+    {
+      "path": "data/synthetic-v4/rebit/deposit_v2.0.0.json",
+      "bytes": 2875973,
+      "sha256": "ffc4fd751614c7553582961bee1c089f801e5712800ff3b922ae91f4e6e70dad"
+    },
+    {
+      "path": "data/synthetic-v4/rebit/deposit_v2.0.0.xml",
+      "bytes": 2287035,
+      "sha256": "ded6284d52e9b2faefe966ea7fb79f1613a565b38784fb8a9958706780818ce4"
+    },
+    {
+      "path": "data/synthetic-v4/rebit/gstr1_3b_v1.1.0.json",
+      "bytes": 130113,
+      "sha256": "c44ca364a4a2105d76acad90032f06bdc2861cf931e31fb6518cf8673acad1e5"
+    },
+    {
+      "path": "data/synthetic-v4/rebit/gstr1_3b_v1.1.0.xml",
+      "bytes": 84250,
+      "sha256": "387fb7622fd657120085c170d66a7cd5ff85f25f5c1833d8ae5824dfb4b0405b"
+    },
+    {
+      "path": "data/synthetic-v4/rebit_export.py",
+      "bytes": 3397,
+      "sha256": "a5f30f5c28f4f7587826f758317eaf3acd380a4c13d42ba1be0757e6aaa627d1"
+    },
     {
       "path": "data/synthetic/PayTMunim_Synthetic_Data.xlsx",
       "bytes": 13079165,
