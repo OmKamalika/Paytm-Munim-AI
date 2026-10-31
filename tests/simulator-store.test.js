@@ -11,7 +11,7 @@ test('the simulator starts with no dispatched responses or events', () => {
   assert.equal(state.latestSeq, 0);
   assert.equal(state.synthetic, true);
   assert.equal(state.sessionOnly, true);
-  assert.equal(state.catalog.length, 7);
+  assert.equal(state.catalog.length, 9);
 });
 
 test('supplier dispatch uses the server fixture and monotonically numbered events', () => {

@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import { createActionRuntime, sha256Hex, verifyEvidenceChain } from '../lib/action-runtime.js';
 import { createSimulatorStore } from '../lib/simulator-store.js';
 import { createPaymentFence } from '../lib/payment-fence.js';
+import { buildCashPlan } from '../lib/cash-fixture.js';
+
+// The runtime response follows the active forecast basis rather than the archived workbook baseline.
+const baseline5Nov = () => buildCashPlan().cashPlan.dailyBalanceSeries.find(day => day.date === '2026-11-05').balanceInr;
 
 const drawdown = () => ({
   type: 'drawdown',
@@ -91,7 +95,7 @@ test('replay is refused and exactly one drawdown effect is recorded', async () =
   const first = await runtime.execute({ action, approval_id: evaluation.approval_id, pin, idempotency_key: key });
   const replay = await runtime.execute({ action, approval_id: evaluation.approval_id, pin, idempotency_key: key });
   assert.equal(first.outcome, 'done-simulated');
-  assert.equal(first.balance_on_5_nov, -68279);
+  assert.equal(first.balance_on_5_nov, baseline5Nov() + 200000);
   assert.equal(replay.outcome, 'blocked');
   assert.equal(replay.reason, 'REPLAY');
   assert.equal((await runtime.getLedger()).effects.length, 1);
@@ -132,7 +136,7 @@ test('valid drawdown requires exact approved payload and owner account', async (
   assert.equal((await runtime.getLedger()).effects.length, 0);
   const accepted = await runtime.execute({ action, approval_id: evaluation.approval_id, pin, idempotency_key: crypto.randomUUID() });
   assert.equal(accepted.outcome, 'done-simulated');
-  assert.equal(accepted.balance_on_5_nov, -68279);
+  assert.equal(accepted.balance_on_5_nov, baseline5Nov() + 200000);
   assert.equal((await runtime.getLedger()).effects.length, 1);
 });
 

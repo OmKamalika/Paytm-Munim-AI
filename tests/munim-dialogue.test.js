@@ -5,9 +5,10 @@ import { buildCashPlan, buildOptions } from '../lib/cash-fixture.js';
 import { deferralAdjustment } from '../lib/cash-engine.js';
 import { cashInputs } from '../lib/cash-inputs.js';
 import { syntheticSource } from '../lib/synthetic-source.generated.js';
+import { revisedInvoice } from '../lib/invoice-gd-1182-r1.generated.js';
 import { outletOrder } from '../lib/outlet-order.js';
 
-const context = (relief = []) => ({ cash: buildCashPlan(relief), options: buildOptions(relief), invoice: syntheticSource.invoice, order: outletOrder, outlets: syntheticSource.outletMetrics });
+const context = (relief = []) => ({ cash: buildCashPlan(relief), options: buildOptions(relief), invoice: syntheticSource.invoice, revisedInvoice, order: outletOrder, outlets: syntheticSource.outletMetrics });
 const amounts = (text) => (text.match(/−?₹[\d,]+/g) ?? []).map((value) => Number(value.replace(/[₹,]/g, '').replace('−', '-')));
 
 test('each supported demo question maps to its own intent', () => {
@@ -59,6 +60,7 @@ test('the order answer gives the outlet split and the payment answer keeps GD-11
   assert.match(order.text, /Dadar 210 boxes, Matunga 115 boxes, Sion 75 boxes/);
   assert.match(order.text, /not observed SKU sales/);
   const pay = answerQuestion('Can you pay Gupta now?', context());
-  assert.match(pay.text, /header-only/);
-  assert.match(pay.text, /212-line/);
+  assert.match(pay.text, /GD-1182 stays on hold/);
+  assert.match(pay.text, /GD-1182-R1/);
+  assert.match(pay.text, /₹2,60,000/);
 });

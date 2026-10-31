@@ -21,8 +21,6 @@ test('cash plan anchors are calculated from the per-outlet forecast', () => {
 test('listed outflows retain exact amounts, dates, invoice and rent split', () => {
   const outflows = cashPlanFixture.cashPlan.outflows;
   assert.equal(outflows.length, 12);
-  assert.deepEqual(outflows.filter(row => !row.id.startsWith('recurring_')).map((row) => [row.id, row.date, row.amountInr, row.quality]), [
-  assert.equal(outflows.length, 8);
   assert.deepEqual(outflows.map((row) => [row.id, row.date, row.amountInr, row.quality]), [
     ['patel', '2026-10-31', 290000, 'exact'],
     ['salaries', '2026-11-01', 105000, 'exact'],
@@ -30,12 +28,12 @@ test('listed outflows retain exact amounts, dates, invoice and rent split', () =
     ['gupta', '2026-11-04', 520000, 'exact'],
     ['rent', '2026-11-05', 107000, 'exact'],
     ['bonus', '2026-11-05', 52500, 'exact'],
+    ['existing_emi', '2026-11-07', 22000, 'exact'],
     ['gst', '2026-11-20', 42000, 'estimate'],
-    ['recurring_emi', '2026-11-07', 22000, 'exact'],
-    ['recurring_electricity_dadar', '2026-11-12', 9466, 'estimate'],
-    ['recurring_electricity_matunga', '2026-11-12', 6910, 'estimate'],
-    ['recurring_electricity_sion', '2026-11-12', 5687, 'estimate'],
-    ['recurring_broadband', '2026-11-15', 3540, 'estimate'],
+    ['electricity_dadar', '2026-11-12', 9466, 'estimate'],
+    ['electricity_matunga', '2026-11-12', 6910, 'estimate'],
+    ['electricity_sion', '2026-11-12', 5687, 'estimate'],
+    ['broadband', '2026-11-15', 3540, 'estimate'],
   ]);
   assert.equal(outflows.find((row) => row.id === 'gupta').invoiceId, 'GD-1182');
   assert.deepEqual(outflows.find((row) => row.id === 'rent').outletSplit, [
@@ -43,16 +41,13 @@ test('listed outflows retain exact amounts, dates, invoice and rent split', () =
     { outlet: 'Matunga', amountInr: 30000 },
     { outlet: 'Sion', amountInr: 32000 },
   ]);
-  assert.equal(outflows.filter(row => row.category === 'rent').length, 1);
-  assert.equal(outflows.filter(row => row.category === 'salaries').length, 1);
-  assert.equal(outflows.filter(row => row.id === 'gst').length, 1);
-  assert.equal(outflows.find(row => row.id === 'recurring_emi').amountInr, 22000);
-  assert.equal(cashPlanFixture.cashPlan.dailyBalanceSeries.find(row => row.date === '2026-11-07').balanceInr, 33500);
 });
 
-test('Paytm Home collection is separate from all-channel monthly collections', () => {
-  assert.equal(cashPlanFixture.homePaytmToday.totalInr, 10140);
-  assert.equal(cashPlanFixture.homePaytmToday.outlets.reduce((sum, outlet) => sum + outlet.amountInr, 0), 10140);
+test('unavailable current-day Paytm sales stay unknown and separate from monthly collections', () => {
+  assert.equal(cashPlanFixture.homePaytmToday.date, '2026-10-31');
+  assert.equal(cashPlanFixture.homePaytmToday.available, false);
+  assert.equal(cashPlanFixture.homePaytmToday.totalInr, null);
+  assert.ok(cashPlanFixture.homePaytmToday.outlets.every((outlet) => outlet.amountInr === null && outlet.available === false));
   assert.equal(cashPlanFixture.monthlyAllChannelCollectionsInr, 1900000);
   assert.notEqual(cashPlanFixture.homePaytmToday.channel, cashPlanFixture.monthlyCollectionsChannel);
 });

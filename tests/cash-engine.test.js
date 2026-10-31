@@ -5,31 +5,43 @@ import {
   balanceOn, computeCashPlan, deferralAdjustment, drawdownAdjustment, minimumDrawdownInr, simpleInterestInr,
 } from '../lib/cash-engine.js';
 
-// v4 workbook data/synthetic-v4/PayTMunim_Synthetic_Data.xlsx, Cash_Plan!E5:E26 (cached values; includes Recurring_Bills).
-const WORKBOOK_V4_CLOSINGS = [520000, 300000, 115000, 185000, 255000, -145000, -184500, -64500, 33500, 153500, 273500,
-  393500, 513500, 611437, 731437, 851437, 967897, 1087897, 1207897, 1327897, 1447897, 1525897];
-// v2 workbook data/synthetic/PayTMunim_Synthetic_Data.xlsx, Cash_Plan!D5:D26: the same bills without recurring ones.
-const WORKBOOK_V2_CLOSINGS = [520000, 300000, 115000, 185000, 255000, -145000, -184500, -64500, 55500, 175500, 295500,
+// Workbook data/synthetic/PayTMunim_Synthetic_Data.xlsx, Cash_Plan!D5:D26 (cached values).
+const WORKBOOK_CLOSINGS = [520000, 300000, 115000, 185000, 255000, -145000, -184500, -64500, 55500, 175500, 295500,
   415500, 535500, 655500, 775500, 895500, 1015500, 1135500, 1255500, 1375500, 1495500, 1573500];
 // The arithmetic tests use the workbook's fixed collections so they can be checked against the workbook.
-const workbook = { ...structuredClone(cashInputs), collectionsBasis: 'workbook_fixed', expectedCollections: structuredClone(WORKBOOK_FIXED_COLLECTIONS) };
+const workbook = {
+  ...structuredClone(cashInputs), collectionsBasis: 'workbook_fixed',
+  openingBalance: { date: '2026-10-30', amountInr: 450000 },
+  expectedCollections: structuredClone(WORKBOOK_FIXED_COLLECTIONS),
+  // Historical workbook scenario only; current v4 utilities were not in it.
+  // Eight explicit bills keep this reconciliation independent of live inputs.
+  outflows: [
+    { id: 'patel', date: '2026-10-31', invoiceId: 'PT-5521', amountInr: 290000 },
+    { id: 'salaries', date: '2026-11-01', amountInr: 105000 },
+    { id: 'mehta', date: '2026-11-01', invoiceId: 'MDF-884', amountInr: 150000 },
+    { id: 'gupta', date: '2026-11-04', invoiceId: 'GD-1182', amountInr: 520000 },
+    { id: 'rent', date: '2026-11-05', amountInr: 107000 },
+    { id: 'bonus', date: '2026-11-05', amountInr: 52500 },
+    { id: 'existing_emi', date: '2026-11-07', amountInr: 22000 },
+    { id: 'gst', date: '2026-11-20', amountInr: 42000 },
+  ],
+};
 const withChanges = (change) => { const copy = structuredClone(workbook); change(copy); return copy; };
 const totalOwed = (plan) => [...plan.outflows, ...plan.afterHorizon].reduce((sum, item) => sum + item.amountInr, 0);
 
-test('on fixed collections the engine reproduces the v4 workbook Cash_Plan closings exactly', () => {
-  const plan = computeCashPlan(workbook);
-  assert.equal(plan.ok, true);
-  assert.deepEqual(plan.days.map((day) => day.balanceInr), WORKBOOK_V4_CLOSINGS);
+test('without the EMI the engine reproduces the workbook Cash_Plan closings exactly', () => {
+  const plan = computeCashPlan(withChanges((i) => { i.outflows = i.outflows.filter((item) => item.id !== 'existing_emi'); }));
+  assert.deepEqual(plan.days.map((day) => day.balanceInr), WORKBOOK_CLOSINGS);
   assert.deepEqual(plan.anchors, { firstNegativeDate: '2026-11-04', lowestDate: '2026-11-05', lowestBalanceInr: -184500, recoveryAboveZeroDate: '2026-11-07' });
 });
 
-test('without the v4 recurring bills it reproduces the earlier v2 workbook, so each bill is counted once', () => {
-  const plan = computeCashPlan(withChanges((i) => { i.outflows = i.outflows.filter((item) => !item.id.startsWith('recurring_')); }));
-  assert.deepEqual(plan.days.map((day) => day.balanceInr), WORKBOOK_V2_CLOSINGS);
-  const recurring = cashInputs.outflows.filter((item) => item.id.startsWith('recurring_'));
-  assert.deepEqual(recurring.map((item) => item.id), ['recurring_emi', 'recurring_electricity_dadar', 'recurring_electricity_matunga', 'recurring_electricity_sion', 'recurring_broadband']);
-  // Rent, salary and GST are in upcoming_outflows.csv and must not appear twice.
-  for (const category of ['rent', 'salaries', 'gst']) assert.equal(cashInputs.outflows.filter((item) => item.category === category).length, 1);
+test('on fixed collections, the plan differs from the workbook only by the ₹22,000 EMI from 7 Nov', () => {
+  const plan = computeCashPlan(workbook);
+  assert.equal(plan.ok, true);
+  plan.days.forEach((day, index) => {
+    assert.equal(day.balanceInr, WORKBOOK_CLOSINGS[index] - (day.date >= '2026-11-07' ? 22000 : 0), day.date);
+  });
+  assert.deepEqual(plan.anchors, { firstNegativeDate: '2026-11-04', lowestDate: '2026-11-05', lowestBalanceInr: -184500, recoveryAboveZeroDate: '2026-11-07' });
 });
 
 test('changing an input amount or date changes the result', () => {

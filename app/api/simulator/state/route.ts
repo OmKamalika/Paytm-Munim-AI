@@ -1,7 +1,7 @@
-import { retired } from "../../disabled";
+import { getSimulatorStore } from '../../../../lib/simulator-store.js';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  return retired("GET /api/simulator/state");
+  return Response.json(getSimulatorStore().getState(), { headers: { 'Cache-Control': 'no-store' } });
 }
