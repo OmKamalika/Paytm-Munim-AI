@@ -51,7 +51,7 @@ try {
   const temporary = `${projectEnv}.tmp`;
   writeFileSync(temporary, `${lines.join('\n')}\n`, { encoding: 'utf8', mode: 0o600 });
   renameSync(temporary, projectEnv);
-  process.stdout.write('Demo PIN hash saved to the ignored local environment file. Restart the dev server.\n');
+  process.stdout.write('Demo PIN hash saved to the ignored local environment file. Restart npm run dev or npm start.\n');
 } catch (error) {
   process.stderr.write(`${error instanceof Error ? error.message : 'Setup failed.'}\n`);
   process.exitCode = 1;

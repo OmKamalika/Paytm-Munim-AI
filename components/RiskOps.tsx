@@ -150,7 +150,7 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
     const load = () => {
       if (inFlight) return;
       inFlight = true;
-      Promise.all([fetch("/api/evidence", { cache: "no-store" }), fetch("/api/evidence/verify", { cache: "no-store" }), fetch("/api/control/pause", { cache: "no-store" })])
+      Promise.all([fetch("/api/evidence?scope=legacy", { cache: "no-store" }), fetch("/api/evidence/verify?scope=legacy", { cache: "no-store" }), fetch("/api/control/pause", { cache: "no-store" })])
         .then(async ([entriesResponse, checkResponse, pauseResponse]) => {
           if (!entriesResponse.ok || !checkResponse.ok || !pauseResponse.ok) throw new Error("The server evidence chain could not load.");
           const entriesData = await entriesResponse.json() as { entries: ExecutionEvidence[] };
@@ -214,8 +214,8 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
         <div className="rops-intro">
           <div>
             <p className="rops-context">Sharma General Stores / delegated supplier actions</p>
-            <h1>Review actions against intent</h1>
-            <p>See what the merchant asked for, what the agent attempted, and where they diverged.</p>
+            <h1>Historical single-step checks</h1>
+            <p>Read-only diagnostics from the retired single-step demo. Tracked requests, disclosures and money outcomes are shown in the live workflow dashboard above.</p>
           </div>
           <div className={`rops-delegate-state ${effectivePaused ? "is-paused" : ""}`} role="status" aria-live="polite">
             <span className="rops-state-dot" />
@@ -227,12 +227,12 @@ export default function RiskOps({ cases, paused, onPauseChange, onBack }: RiskOp
         </div>
 
         <div className="rops-ledger-heading">
-          <h2>Supplier intent checks</h2>
+          <h2>Historical supplier intent checks</h2>
           <p>{cases.length} checked · {attentionCount + blockedCount} need attention</p>
         </div>
 
         <section className="rops-server-evidence" aria-label="Server evidence chain">
-          <div><strong>Server action evidence chain</strong><p>Final guard and execution attempts are separate from supplier intent checks. This chain is held in server memory and has no external audit anchor.</p></div>
+          <div><strong>Historical action evidence chain</strong><p>Read-only checks from the retired single-step runtime. Public execution through that endpoint is disabled. This chain is held in server memory and has no external audit anchor.</p></div>
           <div className="rops-server-evidence-status" role="status">
             {chainError || (chainCheck ? chainCheck.ok ? `Verified · ${executionEvidence?.length ?? 0} attempts` : `Broken at entry ${chainCheck.first_broken_seq ?? "unknown"}` : "Checking chain…")}
           </div>

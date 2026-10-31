@@ -10,7 +10,7 @@ import "./FlowMerchant.css";
 const money = (value: number) => "₹" + new Intl.NumberFormat("en-IN").format(value);
 const statusLabel = (value: string) => ({ awaiting_response: "Waiting for response", awaiting_owner: "Needs your sign-off", paused: "Paused for review", blocked: "Blocked by guard", completed: "Done · simulated", failed: "Failed · no effect", payment_pending: "Payment unresolved", declined: "You declined" }[value] || value.replaceAll("_", " "));
 const kindLabel = (value: string) => ({ monitor: "Stock signal", supplier: "Supplier", judge: "Intent review", invoice: "Invoice evidence", aa: "Account data", kya: "Agent authority", bureau: "Bureau verification", lender: "Lender", payment: "Payment rail", owner: "Owner consent", done: "Complete" }[value] || value);
-const termLabels: Record<string, string> = { totalInr: "Order value", upfrontPercent: "Upfront share", creditDays: "Negotiated credit", buybackPercent: "Unsold buyback", sourceVersion: "Source version", sourceInvoiceLines: "Invoice lines checked", sourceInvoiceAmountInr: "Source invoice value", sourceInvoiceCreditDays: "Original invoice credit", sourceInvoiceDueDate: "Original invoice due", priorFySpendInr: "Matched FY payments", supplierLimitInr: "Supplier payment ceiling", matchedPaymentCount: "Matched payment count", invoiceTotalInr: "Full invoice value", advanceInr: "Advance to pay", observedPriorFyPaidInr: "Matched FY payments", observedPeriod: "Period checked", completeFinancialYear: "Full FY covered", missingPeriod: "Missing period", sourceInvoiceRow: "Source document", beneficiary: "Verified payee", account: "Account", requestedAmountInr: "Requested loan", amountInr: "Loan amount", destination: "Destination", kyaRequired: "Agent authority check required", kyaVerified: "Agent authority verified", lender: "Lender", aprPercent: "APR", tenorMonths: "Repayment term", emiInr: "Monthly EMI", totalInterestInr: "Illustrative total interest", existingEmiInr: "Existing monthly EMI", combinedEmiInr: "Combined monthly EMI", emiCapInr: "Monthly EMI ceiling", agentMandateMaxInr: "Agent mandate ceiling", agentIdentity: "Agent identity", bureauPull: "Bureau check" };
+const termLabels: Record<string, string> = { cashDate: "Cash forecast date", remainingPayableInr: "Still owed", remainingDueDate: "Balance due", totalInr: "Order value", upfrontPercent: "Upfront share", creditDays: "Negotiated credit", buybackPercent: "Unsold buyback", sourceVersion: "Source version", sourceInvoiceLines: "Invoice lines checked", sourceInvoiceAmountInr: "Source invoice value", sourceInvoiceCreditDays: "Original invoice credit", sourceInvoiceDueDate: "Original invoice due", priorFySpendInr: "Matched FY payments", supplierLimitInr: "Supplier payment ceiling", matchedPaymentCount: "Matched payment count", invoiceTotalInr: "Full invoice value", advanceInr: "Advance to pay", observedPriorFyPaidInr: "Matched FY payments", observedPeriod: "Period checked", completeFinancialYear: "Full FY covered", missingPeriod: "Missing period", sourceInvoiceRow: "Source document", beneficiary: "Verified payee", account: "Account", requestedAmountInr: "Requested loan", amountInr: "Loan amount", destination: "Destination", kyaRequired: "Agent authority check required", kyaVerified: "Agent authority verified", lender: "Lender", aprPercent: "APR", tenorMonths: "Repayment term", emiInr: "Monthly EMI", totalInterestInr: "Illustrative total interest", existingEmiInr: "Existing monthly EMI", combinedEmiInr: "Combined monthly EMI", emiCapInr: "Monthly EMI ceiling", agentMandateMaxInr: "Agent mandate ceiling", agentIdentity: "Agent identity", bureauPull: "Bureau check" };
 const termLabel = (key: string) => termLabels[key] || key.replaceAll("_", " ").replace(/([a-z])([A-Z])/g, "$1 $2");
 const termValue = (key: string, value: string | number | boolean) => typeof value === "boolean" ? value ? "Yes" : "No" : typeof value === "number" && key.endsWith("Inr") ? money(value) : /Percent$/.test(key) ? String(value) + "%" : /Days$/.test(key) ? String(value) + " days" : /Months$/.test(key) ? String(value) + " months" : String(value);
 async function readState(): Promise<FlowState> {
@@ -27,7 +27,7 @@ async function command(path: string, value: unknown): Promise<{ run: FlowRun; st
 
 function Disclosure({ item: sourceItem }: { item: FlowDisclosure }) {
   const item = { ...sourceItem, summary: displayCopy(sourceItem.summary), why: displayCopy(sourceItem.why), risks: sourceItem.risks.map(displayCopy), alternatives: sourceItem.alternatives.map(displayCopy), dataShared: sourceItem.dataShared.map(displayCopy) };
-  const preferred = item.type === "payment_consent" ? ["invoiceTotalInr", "advanceInr", "upfrontPercent", "creditDays", "buybackPercent", "supplierLimitInr", "sourceInvoiceCreditDays", "sourceInvoiceDueDate"] : item.type === "loan_consent" ? ["amountInr", "lender", "aprPercent", "tenorMonths", "emiInr", "totalInterestInr", "combinedEmiInr", "emiCapInr", "kyaRequired", "kyaVerified"] : item.type === "bureau_consent" ? ["requestedAmountInr", "bureauPull", "account"] : ["totalInr", "upfrontPercent", "creditDays", "buybackPercent"];
+  const preferred = item.type === "payment_consent" ? ["invoiceTotalInr", "advanceInr", "cashDate", "remainingPayableInr", "remainingDueDate", "upfrontPercent", "creditDays", "buybackPercent", "supplierLimitInr", "sourceInvoiceCreditDays", "sourceInvoiceDueDate"] : item.type === "loan_consent" ? ["amountInr", "cashDate", "remainingPayableInr", "remainingDueDate", "lender", "aprPercent", "tenorMonths", "emiInr", "totalInterestInr", "combinedEmiInr", "emiCapInr", "kyaRequired", "kyaVerified"] : item.type === "bureau_consent" ? ["requestedAmountInr", "bureauPull", "account"] : ["totalInr", "upfrontPercent", "creditDays", "buybackPercent"];
   const primary = Object.entries(item.terms).filter(([key]) => preferred.includes(key));
   const supporting = Object.entries(item.terms).filter(([key]) => !preferred.includes(key));
   return <div className="fm-disclosure">
@@ -43,9 +43,9 @@ function Disclosure({ item: sourceItem }: { item: FlowDisclosure }) {
   </div>;
 }
 
-export default function FlowMerchant({ setupRequest = 0, onSetupOpened, outletId = "all" }: { setupRequest?: number; onSetupOpened?: () => void; outletId?: string }) {
+export default function FlowMerchant({ setupRequest = 0, onSetupOpened, outletId = "all", category }: { setupRequest?: number; onSetupOpened?: () => void; outletId?: string; category?: "supplier" | "capital" }) {
   const [state, setState] = useState<FlowState | null>(null);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null | undefined>(undefined);
   const [error, setError] = useState("");
   const [loadError, setLoadError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -67,7 +67,9 @@ export default function FlowMerchant({ setupRequest = 0, onSetupOpened, outletId
     const timer = window.setInterval(load, 1000);
     return () => { active = false; window.clearInterval(timer); };
   }, []);
-  const run = state?.runs.find(item => item.id === selected);
+  const visibleRuns = state?.runs.filter(item => !category || item.category === category) ?? [];
+  const run = selected === null ? undefined : visibleRuns.find(item => item.id === selected) ?? visibleRuns.find(item => item.status === "awaiting_owner") ?? visibleRuns[0];
+  const availableIntents = state?.intents.filter(intent => intent.id !== "supplier_stock" && (!category || intent.category === category)) ?? [];
   const request = state?.requests.find(item => item.id === run?.currentRequestId);
   async function start(intentId: string, delegation?: AgentDelegation) {
     setBusy(true); setError(""); setPin("");
@@ -92,14 +94,14 @@ export default function FlowMerchant({ setupRequest = 0, onSetupOpened, outletId
     finally { setBusy(false); }
   }
   return <section className="fm-shell" aria-label="Tracked delegated tasks">
-    <div className="fm-heading"><div><h2>A stock agent, on your terms</h2></div><ShieldCheck size={24}/></div>
-    <p className="fm-intro">Let Munim watch purchasing signals and prepare a supplier proposal. You set the limits and approve commitments.</p>
-    <button type="button" className="fm-setup-entry" disabled={busy || state?.paused} onClick={() => { setError(""); setShowSetup(true); }}><span><b>Set up a stock agent</b><small>Goal → limits → permissions → your review</small></span><ArrowRight size={19}/></button>
+    <div className="fm-heading"><div><h2>{category === "capital" ? "Capital, with each step tracked" : "A stock agent, on your terms"}</h2></div><ShieldCheck size={24}/></div>
+    <p className="fm-intro">{category === "capital" ? "Request the AA and GST evidence, authorize the bureau check, then review the lender disclosure before any simulated instruction." : "Let Munim watch purchasing signals and prepare a supplier proposal. You set the limits and approve commitments."}</p>
+    {category !== "capital" && <button type="button" className="fm-setup-entry" disabled={busy || state?.paused} onClick={() => { setError(""); setShowSetup(true); }}><span><b>Set up a stock agent</b><small>Goal → limits → permissions → your review</small></span><ArrowRight size={19}/></button>}
     {(error || loadError) && <div className="fm-alert" role="alert"><CircleAlert size={17}/><span>{error || loadError}</span><button type="button" onClick={() => { setError(""); void refresh(); }} aria-label="Refresh task status"><RefreshCw size={15}/></button></div>}
     {!state && <p className="fm-muted">Loading your agents…</p>}
     {state?.paused && <div className="fm-alert"><CircleAlert size={17}/><span>RiskOps has paused this demo session. New task actions are on hold.</span></div>}
-    {state && state.runs.length > 0 && <>
-      <details className="fm-task-list"><summary>Your agents and tasks <span>{state.runs.length}</span>{state.runs.some(item => item.status === "awaiting_owner") && <small>Decision needed</small>}</summary><div className="fm-run-tabs">{state.runs.map(item => <button type="button" key={item.id} aria-pressed={run?.id === item.id} onClick={() => { setSelected(item.id); setPin(""); setError(""); }}><b>{item.title}</b><small>{statusLabel(item.status)}</small></button>)}</div></details>
+    {state && visibleRuns.length > 0 && <>
+      <details className="fm-task-list"><summary>Your agents and tasks <span>{visibleRuns.length}</span>{visibleRuns.some(item => item.status === "awaiting_owner") && <small>Decision needed</small>}</summary><div className="fm-run-tabs">{visibleRuns.map(item => <button type="button" key={item.id} aria-pressed={run?.id === item.id} onClick={() => { setSelected(item.id); setPin(""); setError(""); }}><b>{item.title}</b><small>{statusLabel(item.status)}</small></button>)}</div></details>
     </>}
     {run && <div className="fm-run" aria-live="polite">
       <div className="fm-run-top"><span className={"fm-status fm-status-" + run.status}>{statusLabel(run.status)}</span><small>{kindLabel(run.stage)}</small></div>
@@ -119,7 +121,7 @@ export default function FlowMerchant({ setupRequest = 0, onSetupOpened, outletId
       <details className="fm-checks"><summary>Updates and evidence{run.checks.length > 0 ? ` · ${run.checks.length} checks` : ""}</summary>{run.latestResponse && <div className="fm-responses"><b>{run.latestResponse.label}</b><p>{run.latestResponse.summary}</p></div>}{run.checks.map((check, index) => <div key={check.id + index}><span className={check.status === "PASS" ? "fm-good" : "fm-attention"}>{check.status === "PASS" ? <FileCheck2 size={15}/> : <CircleAlert size={15}/>}</span><p><b>{check.id.replaceAll("_", " ")} · {check.status.replaceAll("_", " ")}</b><small>{check.detail}</small></p></div>)}{run.judge && <p className="fm-judge"><ShieldCheck size={15}/><span>{run.judge.mode === "deterministic_document_scan" ? "Document instruction scan" : "Simulated LLM judge"}: {run.judge.decision}. {run.judge.reason}</span></p>}<small className="fm-task-id">Task {run.id} · trace {run.traceId}</small></details>
       <button type="button" className="fm-dismiss" onClick={() => setSelected(null)}>Close task details</button>
     </div>}
-    {state && <details className="fm-other"><summary>Other things Munim can help with</summary><div className="fm-intents">{state.intents.filter(intent => intent.id !== "supplier_stock").map(intent => <button type="button" key={intent.id} disabled={busy || state.paused} onClick={() => void start(intent.id)}><span><b>{intent.title}</b><small>{intent.description}</small></span><ArrowRight size={17}/></button>)}</div></details>}
+    {state && availableIntents.length > 0 && <details className="fm-other" open={Boolean(category)}><summary>{category === "capital" ? "Start a tracked capital request" : category === "supplier" ? "Start a tracked supplier task" : "Other things Munim can help with"}</summary><div className="fm-intents">{availableIntents.map(intent => <button type="button" key={intent.id} disabled={busy || state.paused} onClick={() => void start(intent.id)}><span><b>{intent.title}</b><small>{intent.description}</small></span><ArrowRight size={17}/></button>)}</div></details>}
     <p className="fm-foot">Responses and money movement are simulated. Agents reset when the server restarts.</p>
     {showSetup && <AgentSetup initialOutletId={outletId} onClose={() => { setShowSetup(false); setError(""); }} onActivate={delegation => start("supplier_stock", delegation)} busy={busy} error={error}/>}
   </section>;

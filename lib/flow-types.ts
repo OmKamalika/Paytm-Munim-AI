@@ -28,7 +28,7 @@ export type FlowRequest = {
   status: "open" | "answered" | "cancelled"; createdAt: string; response?: FlowResponse;
 };
 export type FlowScenario = { id: string; kind: FlowKind; label: string; description: string };
-export type FlowEffect = { id: string; runId: string; type: "supplier_payment" | "drawdown"; amountInr: number; payee: string; account: string; invoiceId?: string; rail: string; recordedAt: string; requestId: string; projected5NovInr?: number };
+export type FlowEffect = { id: string; runId: string; type: "supplier_payment" | "drawdown"; amountInr: number; payee: string; account: string; invoiceId?: string; cashDate?: string; rail: string; recordedAt: string; requestId: string; projected5NovInr?: number };
 export type FlowRun = {
   id: string; traceId: string; intentId: string; title: string; category: "supplier" | "capital" | "invoice";
   status: FlowStatus; stage: FlowKind | "owner" | "done"; version: number;

@@ -33,14 +33,16 @@ test('supplied synthetic sources reconcile outlet productivity and Paytm Home', 
   assert.equal(syntheticSource.invoice.hasFullBody, false);
 });
 
-test('daily cash closings reproduce supplied workbook anchors without exposing opening balance', () => {
+test('daily cash closings use the per-outlet forecast without exposing opening balance', () => {
   const series = cashPlanFixture.cashPlan.dailyBalanceSeries;
   assert.equal(series.length, 22);
   const close = (date) => series.find((row) => row.date === date)?.balanceInr;
-  assert.equal(close('2026-11-04'), -145000);
-  assert.equal(close('2026-11-05'), -184500);
-  assert.equal(close('2026-11-06'), -64500);
-  assert.equal(close('2026-11-07'), 33500);
+  // Workbook-basis figures are checked in tests/cash-engine.test.js; these use the outlet forecast.
+  assert.equal(close('2026-11-04'), -214966);
+  assert.equal(close('2026-11-05'), -268279);
+  assert.equal(close('2026-11-06'), -172243);
+  assert.equal(close('2026-11-07'), -87289);
+  assert.equal(close('2026-11-08'), 20400);
   assert.equal('openingBalance' in cashPlanFixture.cashPlan, false);
   assert.equal('openingBalanceInr' in cashPlanFixture.cashPlan, false);
 });

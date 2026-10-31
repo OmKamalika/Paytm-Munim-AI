@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Activity, ArrowLeft, ArrowRight, BadgeCheck, Bell, Check, CheckCircle2, ChevronRight, CircleAlert, FileText, Handshake, Home, Info, Landmark, LockKeyhole, RotateCcw, ShieldCheck, Sparkles, Store, Wallet } from "lucide-react";
-import RiskOps, { type CaseRecord } from "../components/RiskOps";
+import { Activity, ArrowLeft, ArrowRight, BadgeCheck, Bell, CheckCircle2, ChevronRight, CircleAlert, FileText, Handshake, Home, Info, Landmark, RotateCcw, ShieldCheck, Sparkles, Store, Wallet } from "lucide-react";
+import RiskOps from "../components/RiskOps";
+import FlowRiskOps from "../components/FlowRiskOps";
+import type { FlowState } from "../lib/flow-types";
 import FlowMerchant from "../components/FlowMerchant";
 import MunimChat, { munimPrompts, type MunimMessage } from "../components/MunimChat";
 import { suggestsStockAgent } from "../lib/munim-chat.js";
@@ -42,11 +44,6 @@ type Event = { seq: number; kind: Kind; scenarioId: string; timestamp: string; p
 } };
 type Simulator = { latestSeq: number; latest: Record<Kind, Event | null>; events: Event[] };
 type RequestState = { cursor: number; event?: Event; waiting: boolean };
-type Action = Record<string, string | number | undefined>;
-type Guard = { decision: "PASS" | "BLOCK" | "ESCALATE"; checks: { id: string; status: string; detail: string }[]; approval_id?: string; action_hash?: string; needs_verification?: boolean; reason?: string; evidence_entry?: Entry | null };
-type Execution = { outcome: "done-simulated" | "requested-waiting" | "blocked"; balance_on_5_nov?: number; ledger_effect?: number; reason?: string };
-type Entry = { seq: number; timestamp: string; actor?: string; outcome?: string; hash?: string; action?: Record<string, unknown> };
-type Verification = { ok: boolean; first_broken_seq?: number | null };
 type PauseState = { paused: boolean; scope: string; durable: boolean };
 type DataSummary = {
   synthetic: boolean;
@@ -95,7 +92,7 @@ const dateLabel = (s?: string) => {
 };
 const asOfLabel = (s?: string | null) => s ? new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "Asia/Kolkata" }).format(new Date(s)) + " IST" : "Unavailable";
 async function get<T>(url: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(url, init);
+  const response = await fetch(url, { cache: "no-store", ...init });
   const data = await response.json() as T & { error?: string; reason?: string; outcome?: string };
   if (!response.ok && !data.outcome) throw new Error(data.error || data.reason || "Demo service unavailable");
   return data;
@@ -127,7 +124,7 @@ function answerFor(question: string, cash: Cash | null, options: Options | null,
     if (named) return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, ${named.name} has an estimated ${money(named.total.pointInr)} in all-channel sales, with a historical low/high scenario of ${money(named.total.lowInr)}–${money(named.total.highInr)}. Count stock before deciding what to replenish; this is not SKU demand.`;
     if (!scoped.length) return `No sales forecast is available for ${outletScopeLabel(outletScope)}.`;
     const point = scoped.reduce((sum, item) => sum + item.total.pointInr, 0);
-    return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, All outlets have a forecast of ${money(point)} in all-channel sales. Review each outlet in Your data, then check actual SKU stock before placing orders. This forecast does not change the cash plan.`;
+    return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, All outlets have a forecast of ${money(point)} in all-channel sales. The combined cash plan uses the same outlet forecasting method with listed bills and payment effects. Check actual stock before confirming an order.`;
   }
   if (!cash || !options) return "Loading the cash plan.";
   const a = cash.cashPlan.anchors;
@@ -157,28 +154,18 @@ export default function HomePage() {
   const [stockBusy, setStockBusy] = useState(false);
   const stockRequestToken = useRef(0);
   const [requests, setRequests] = useState<Partial<Record<Kind, RequestState>>>({});
-  const [cases, setCases] = useState<CaseRecord[]>([]);
-  const [latestCase, setLatestCase] = useState<CaseRecord | null>(null);
   const [paused, setPaused] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatDraft, setChatDraft] = useState("");
   const [chatMessages, setChatMessages] = useState<MunimMessage[]>([]);
   const [agentSetupRequest, setAgentSetupRequest] = useState(0);
   const [whatIf, setWhatIf] = useState(false);
-  const [selectedLender, setSelectedLender] = useState("A");
-  const [action, setAction] = useState<Action | null>(null);
-  const [guard, setGuard] = useState<Guard | null>(null);
-  const [execution, setExecution] = useState<Execution | null>(null);
-  const [pin, setPin] = useState("");
-  const [idempotencyKey, setIdempotencyKey] = useState("");
-  const [entries, setEntries] = useState<Entry[]>([]);
-  const [verification, setVerification] = useState<Verification | null>(null);
-  const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [liveError, setLiveError] = useState("");
+  const [attentionCount, setAttentionCount] = useState(0);
 
   useEffect(() => {
-    Promise.all([get<Cash>("/api/cashplan"), get<Options>("/api/options"), get<Lenders>("/api/lenders")])
-      .then(([c, o, l]) => { setCash(c); setOptions(o); setLenders(l); })
+    get<Lenders>("/api/lenders").then(setLenders)
       .catch(e => setError(e instanceof Error ? e.message : "Shop data could not load."));
     get<DataSummary>("/api/data-summary").then(setDataSummary)
       .catch(() => setError("Outlet and bank-data summary could not load."));
@@ -188,6 +175,33 @@ export default function HomePage() {
       .catch(e => setForecastError(e instanceof Error ? e.message : "Outlet forecast could not load."));
     get<PauseState>("/api/control/pause").then(state => setPaused(state.paused))
       .catch(() => setError("Pause status could not load."));
+  }, []);
+  useEffect(() => {
+    let active = true;
+    let inFlight = false;
+    const controller = new AbortController();
+    const refresh = async () => {
+      if (inFlight || document.visibilityState === "hidden") return;
+      inFlight = true;
+      try {
+        const [nextCash, nextOptions, flowState, control] = await Promise.all([
+          get<Cash>("/api/cashplan", { signal: controller.signal }),
+          get<Options>("/api/options", { signal: controller.signal }),
+          get<FlowState>("/api/flows/state?view=merchant", { signal: controller.signal }),
+          get<PauseState>("/api/control/pause", { signal: controller.signal }),
+        ]);
+        if (active) {
+          setCash(nextCash); setOptions(nextOptions); setPaused(control.paused);
+          setLiveError("");
+          setAttentionCount(flowState.runs.filter(run => ["awaiting_owner", "blocked", "payment_pending", "paused"].includes(run.status)).length);
+        }
+      } catch { if (active) setLiveError("Live cash and task status could not refresh. The last successful snapshot remains visible."); }
+      finally { inFlight = false; }
+    };
+    void refresh();
+    const timer = window.setInterval(() => void refresh(), 2000);
+    document.addEventListener("visibilitychange", refresh);
+    return () => { active = false; controller.abort(); window.clearInterval(timer); document.removeEventListener("visibilitychange", refresh); };
   }, []);
   const aaEventSeq = requests.aa?.event?.seq;
   useEffect(() => {
@@ -229,44 +243,15 @@ export default function HomePage() {
   const scopedForecastOutlets = filterOutletRows(outletForecast?.outlets || [], selectedOutlet, row => row.id);
   const scopeLabel = outletScopeLabel(selectedOutlet);
   const scopePrompts = [munimPrompts[0], `How is ${selectedOutlet === "all" ? "Dadar" : scopeLabel} doing?`, munimPrompts[2]];
-  const drawdown = choices.find(item => item.id === "drawdown");
   const gupta = cash?.cashPlan.outflows.find(item => item.id === "gupta");
-  const supplierEvent = requests.supplier?.event;
-  const receivedCandidate = supplierEvent?.payload.candidate;
-  const receivedUpfrontRaw = receivedCandidate && Number.isSafeInteger(receivedCandidate.totalAmount) &&
-    receivedCandidate.totalAmount > 0 &&
-    typeof receivedCandidate.upfrontPercent === "number" &&
-    receivedCandidate.upfrontPercent > 0 && receivedCandidate.upfrontPercent <= 100
-    ? receivedCandidate.totalAmount * receivedCandidate.upfrontPercent / 100 : null;
-  const receivedUpfront = Number.isSafeInteger(receivedUpfrontRaw) ? receivedUpfrontRaw : null;
   const aaEvent = requests.aa?.event;
-  const lenderEvent = requests.lenders?.event;
-  const visibleLenders = lenderEvent?.payload?.offers ? { ...lenders, offers: lenderEvent.payload.offers as Lender[], emiCap: lenderEvent.payload.emiCap as Lenders["emiCap"] } : null;
 
-  async function refreshEvidence() {
-    try {
-      const [log, checked] = await Promise.all([get<{ entries: Entry[] }>("/api/evidence"), get<Verification>("/api/evidence/verify")]);
-      setEntries(log.entries || []); setVerification(checked);
-    } catch (e) { setVerification(null); setError(e instanceof Error ? e.message : "Evidence unavailable."); }
-  }
   async function changePause(next: boolean) {
     try {
       const state = await get<PauseState>("/api/control/pause", body({ paused: next }));
       setPaused(state.paused);
     } catch (e) { setError(e instanceof Error ? e.message : "Pause control unavailable."); }
   }
-  useEffect(() => {
-    if (screen !== "evidence") return;
-    let active = true;
-    Promise.all([get<{ entries: Entry[] }>("/api/evidence"), get<Verification>("/api/evidence/verify")])
-      .then(([log, checked]) => {
-        if (active) { setEntries(log.entries || []); setVerification(checked); }
-      })
-      .catch(e => {
-        if (active) { setVerification(null); setError(e instanceof Error ? e.message : "Evidence unavailable."); }
-      });
-    return () => { active = false; };
-  }, [screen]);
   async function request(kind: Kind) {
     setError("");
     try {
@@ -319,57 +304,6 @@ export default function HomePage() {
       if (requestToken === stockRequestToken.current) setStockError(e instanceof Error ? e.message : "Stock coverage could not be checked.");
     } finally { setStockBusy(false); }
   }
-  async function evaluateAction(next: Action) {
-    setBusy(true); setError(""); setAction(next); setGuard(null); setExecution(null); setPin("");
-    setIdempotencyKey(crypto.randomUUID());
-    try {
-      const result = await get<Guard>("/api/guard/evaluate", body({ action: next }));
-      setGuard(result); setScreen("guard"); await refreshEvidence();
-    } catch (e) { setError(e instanceof Error ? e.message : "Guard check failed."); }
-    finally { setBusy(false); }
-  }
-  async function evaluateDrawdown() {
-    if (!drawdown?.amountInr || !visibleLenders) return;
-    await evaluateAction({ type: "drawdown", lender_id: "A", amount: drawdown.amountInr, destination_account: drawdown.destinationAccountMasked || "**4029", invoice_id: "GD-1182" });
-  }
-  async function evaluateSupplier() {
-    if (!supplierEvent || !gupta) return;
-    const candidate = supplierEvent.payload.candidate;
-    if (!candidate) {
-      setError("The received response has no supplier quote. No payment action was prepared.");
-      return;
-    }
-    const proposedPayment = candidate.totalAmount * candidate.upfrontPercent / 100;
-    if (!Number.isSafeInteger(candidate.totalAmount) || candidate.totalAmount <= 0 ||
-      typeof candidate.upfrontPercent !== "number" || candidate.upfrontPercent <= 0 ||
-      candidate.upfrontPercent > 100 || !Number.isSafeInteger(proposedPayment) || proposedPayment <= 0) {
-      setError("The received quote lacks valid price or upfront terms. No payment action was prepared.");
-      return;
-    }
-    setBusy(true); setError(""); setExecution(null); setPin("");
-    try {
-      const raw = await get<Omit<CaseRecord, "id" | "timestamp">>("/api/analyze", body({ event_seq: supplierEvent.seq }));
-      const reviewed: CaseRecord = { ...raw, id: "EP-" + crypto.randomUUID().slice(0, 8).toUpperCase(), timestamp: new Date().toISOString() };
-      setLatestCase(reviewed); setCases(previous => [reviewed, ...previous].slice(0, 20));
-      const next: Action = { type: "supplier_payment", supplier_id: "gupta", amount: proposedPayment,
-        simulator_event_seq: supplierEvent.seq,
-        beneficiary_name: candidate.beneficiaryName || "Gupta Distributors",
-        beneficiary_account: candidate.supplierAccount || "XXXX7781", invoice_id: gupta.invoiceId || "GD-1182" };
-      setAction(next);
-      const result = await get<Guard>("/api/guard/evaluate", body({ action: next }));
-      setGuard(result); setScreen("guard"); await refreshEvidence();
-    } catch (e) { setError(e instanceof Error ? e.message : "Supplier check failed."); }
-    finally { setBusy(false); }
-  }
-  async function execute() {
-    if (!action || !guard?.approval_id || !pin || !idempotencyKey) return;
-    setBusy(true); setError("");
-    try {
-      const result = await get<Execution>("/api/execute", body({ action, approval_id: guard.approval_id, pin, idempotency_key: idempotencyKey }));
-      setExecution(result); setPin(""); await refreshEvidence();
-    } catch (e) { setError(e instanceof Error ? e.message : "Simulated action refused."); }
-    finally { setBusy(false); }
-  }
   function choose(item: Option) {
     if (item.id === "supplier_deferral") setScreen("supplier");
     else if (item.id === "drawdown") setScreen("capital");
@@ -419,14 +353,13 @@ export default function HomePage() {
   function resetView() {
     setMode("merchant"); setScreen("home"); setChatOpen(false); setChatDraft(""); setChatMessages([]);
     changeOutletScope("all");
-    setWhatIf(false); setSelectedLender("A"); setAction(null); setGuard(null);
-    setExecution(null); setPin(""); setError("");
+    setWhatIf(false); setError("");
   }
   function back() {
-    const previous: Partial<Record<Screen, Screen>> = { plan: "home", munim: "home", supplier: "plan", mandate: "supplier", guard: action?.type === "drawdown" ? "capital" : "supplier", capital: "plan", data: "home", evidence: "home" };
+    const previous: Partial<Record<Screen, Screen>> = { plan: "home", munim: "home", supplier: "plan", mandate: "supplier", guard: "home", capital: "plan", data: "home", evidence: "home" };
     setScreen(previous[screen] || "home");
   }
-  if (mode === "riskops") return <RiskOps cases={cases} paused={paused} onPauseChange={next => void changePause(next)} onBack={() => setMode("merchant")} />;
+  if (mode === "riskops") return <RiskOps cases={[]} paused={paused} onPauseChange={next => void changePause(next)} onBack={() => setMode("merchant")} />;
   return <main className="pm-shell">
     <aside className="pm-side" aria-label="Demo navigation">
       <div className="pm-side-brand"><span>paytm</span><small>for Business</small><strong>Munim</strong></div>
@@ -441,11 +374,11 @@ export default function HomePage() {
       </div></header>
       <div className="pm-phone" aria-label="Merchant app">
         <div className="pm-statusbar"><span>15:55</span><span>●●● ▰</span></div>
-        <header className="pm-app-head"><div>{screen !== "home" && <button type="button" aria-label="Back" onClick={back}><ArrowLeft size={22}/></button>}{screen === "home" ? <span className="pm-logo">paytm <small>for Business</small></span> : <strong>{labels[screen]}</strong>}</div><button type="button" aria-label="Open evidence" onClick={() => setScreen("evidence")}><Bell size={19}/>{entries.length > 0 && <i/>}</button></header>
+        <header className="pm-app-head"><div>{screen !== "home" && <button type="button" aria-label="Back" onClick={back}><ArrowLeft size={22}/></button>}{screen === "home" ? <span className="pm-logo">paytm <small>for Business</small></span> : <strong>{labels[screen]}</strong>}</div><button type="button" aria-label="Open evidence" onClick={() => setScreen("evidence")}><Bell size={19}/>{attentionCount > 0 && <i/>}</button></header>
         <div className="os-selector"><label htmlFor="merchant-outlet"><Store size={15}/>Outlet</label><select id="merchant-outlet" value={selectedOutlet} onChange={event => changeOutletScope(event.target.value)}>{outletScopes.map(outlet => <option key={outlet.id} value={outlet.id}>{outlet.label}</option>)}</select></div>
         <p className="os-asof">As of {asOfLabel(salesSummary?.asOf || "2026-10-31T15:55:00+05:30")}</p>
         <div className="pm-scroll" key={screen}>
-          {error && <div className="pm-error" role="alert"><CircleAlert size={17}/>{displayCopy(error)}<button type="button" aria-label="Dismiss" onClick={() => setError("")}>×</button></div>}
+          {(error || liveError) && <div className="pm-error" role="alert"><CircleAlert size={17}/>{displayCopy(error || liveError)}{error && <button type="button" aria-label="Dismiss" onClick={() => setError("")}>×</button>}</div>}
           {selectedOutlet !== "all" && ["plan", "supplier", "mandate", "guard", "capital"].includes(screen) && <p className="os-business-note">Cash planning, supplier invoices and credit limits cover All outlets.</p>}
           {screen === "home" && <div className="pm-screen">
             <p className="pm-greeting">Good evening, {cash?.business.owner || "Rakesh"}</p>
@@ -479,14 +412,10 @@ export default function HomePage() {
             <div className="ml-tools"><button type="button" onClick={() => setScreen("plan")}><Activity size={16}/>Cash plan</button><button type="button" onClick={() => setScreen("data")}><Store size={16}/>Your shop data</button></div>
           </div>}
           {screen === "supplier" && <div className="pm-screen">
-            <button type="button" className="pm-primary pm-full" onClick={() => setScreen("munim")}>Delegate and track a negotiation<ArrowRight size={18}/></button>
-            <div className="pm-lead"><p>Gupta Distributors · invoice {gupta?.invoiceId || "GD-1182"}</p><h2>Ask for room to stock up</h2><span>Deferral or a split costs ₹0 only if Gupta agrees. No revised terms are guaranteed.</span></div>
+            <div className="pm-lead"><p>Gupta Distributors · invoice {gupta?.invoiceId || "GD-1182"}</p><h2>Ask for room to stock up</h2><span>Review supplier replies, full invoice evidence and your disclosure before a simulated payment.</span></div>
             <div className="pm-intent"><div><Handshake size={17}/><b>Listed supplier bill</b></div><p>{money(gupta?.amountInr)} due {dateLabel(gupta?.date)}. No supplier is contacted by this demo.</p></div>
-            <button type="button" className="pm-row pm-mandate-link" onClick={() => setScreen("mandate")}><ShieldCheck size={19}/><span><b>View guard boundaries</b><small>Identity, account, amount limit, and owner approval</small></span><ChevronRight size={18}/></button>
-            <button type="button" className="pm-primary pm-full" onClick={() => void request("supplier")}>Request supplier response<ArrowRight size={18}/></button>
-            {requests.supplier?.waiting && <div className="pm-hold"><CircleAlert size={18}/><span><b>Requested - waiting (simulated)</b><small>Waiting for Gupta&apos;s response.</small></span></div>}
-            {supplierEvent && !requests.supplier?.waiting && <div className="pm-loan-step"><div><Handshake size={19}/><b>Supplier response received</b></div><p>{displayCopy(String(receivedCandidate?.supplierMessage || "A supplier response was received."))}</p><small>{receivedCandidate?.beneficiaryName ? "Proposed beneficiary name: " + String(receivedCandidate.beneficiaryName) : "Registered payee on file: Gupta Distributors; reply did not supply a name."}</small><small>Conditional upfront payment from quote: {money(receivedUpfront)}. The listed {money(gupta?.amountInr)} invoice stays in the baseline plan.</small><small>Received after this request · event #{supplierEvent.seq}</small><button type="button" className="pm-primary pm-full" disabled={busy} onClick={() => void evaluateSupplier()}>{busy ? "Checking…" : "Check received response"}<ArrowRight size={18}/></button></div>}
-            <p className="pm-caption">{aaEvent && dataSummary?.supplier.aaAvailable ? "The AA response has released observed Gupta payments for the guard." : "Request a simulated AA response before the guard uses observed Gupta payments."} This single-quote check uses header-only evidence. A tracked negotiation can request the full invoice, sign-off, and rail outcome.</p>
+            <button type="button" className="pm-row pm-mandate-link" onClick={() => setScreen("mandate")}><ShieldCheck size={19}/><span><b>View guard boundaries</b><small>Identity, account, evidence and your sign-off</small></span><ChevronRight size={18}/></button>
+            <FlowMerchant category="supplier" outletId={selectedOutlet}/>
           </div>}
           {screen === "mandate" && <div className="pm-screen">
             <div className="pm-lead"><p>Owner boundaries</p><h2>What the guard can verify</h2><span>Missing requirements fail closed.</span></div>
@@ -494,29 +423,11 @@ export default function HomePage() {
             <div className="pm-hold"><CircleAlert size={18}/><span><b>Evidence follows the task</b><small>{aaEvent && dataSummary?.supplier.aaAvailable ? "The current ceiling uses clearly matched bank narrations across the complete prior financial year." : "Request the AA response before the guard uses observed Gupta payments."} The tracked task checks the selected header-only or full invoice version before any sign-off.</small></span></div>
             <button type="button" className="pm-primary pm-full" onClick={() => setScreen("supplier")}>Return to supplier request<ArrowRight size={18}/></button>
           </div>}
-          {screen === "guard" && <div className="pm-screen" aria-live="polite">
-            {!guard ? <div className="pm-empty"><ShieldCheck size={30}/><h2>No guard check yet</h2><p>Request an offer or supplier response to run the deterministic check.</p><button type="button" className="pm-primary" onClick={() => setScreen("capital")}>Go to Capital<ArrowRight size={18}/></button></div> : <>
-              <div className={"pm-result pm-result-" + guard.decision.toLowerCase()}><Pill tone={guard.decision === "PASS" ? "green" : guard.decision === "BLOCK" ? "red" : "amber"}>{guard.decision === "PASS" ? "Guard passed" : guard.decision === "BLOCK" ? "Blocked" : "Needs owner"}</Pill><h2>{guard.decision === "PASS" ? "Requested - waiting (simulated)" : "This action cannot proceed"}</h2><p>{guard.reason || guard.checks.find(item => item.status !== "PASS")?.detail || "The checks are recorded below."}</p></div>
-              {latestCase && action?.type === "supplier_payment" && <div className="pm-guard-summary"><span>Supplier intent check</span><b>{latestCase.decision}</b><small>{displayCopy(latestCase.reasons?.[0]?.message || "Runtime action compared with merchant intent.")}</small></div>}
-              <div className="pm-guard-summary"><span>Server guard action</span><b>{action?.type === "drawdown" ? "Lender A drawdown of " + money(Number(action.amount)) : "Supplier payment to " + action?.beneficiary_name}</b><small>{guard.needs_verification ? "Needs verification · no execution" : "Owner PIN is required for simulated execution."}</small></div>
-              <Heading title="Rules and drift checks"/><div className="pm-checks">{guard.checks.map((item, index) => <div key={item.id + index}><span className={item.status === "PASS" ? "pass" : item.status === "BLOCK" ? "block" : "warn"}>{item.status === "PASS" ? <Check size={15}/> : <CircleAlert size={15}/>}</span><div><b>{item.id.replaceAll("_", " ")}</b><small>{item.detail} · {item.status === "NEEDS_VERIFICATION" ? "Needs verification" : item.status}</small></div></div>)}</div>
-              <div className="pm-ai-note"><ShieldCheck size={19}/><div><b>AI can stop or escalate, never approve</b><small>Fixed limits are enforced in code. Only the owner PIN can approve a passing action.</small></div></div>
-              {guard.action_hash && <div className="pm-evidence-hash"><FileText size={16}/><span>Action hash</span><code>{guard.action_hash.slice(0, 16)}…</code></div>}
-              {guard.decision === "PASS" && !execution && action?.type === "drawdown" && <div className="pm-consent"><b>Owner approval · simulated</b><p>This request is waiting. Enter the owner PIN to attempt the simulated drawdown. No real money moves.</p><label htmlFor="pm-pin">Owner PIN</label><input id="pm-pin" type="password" autoComplete="off" value={pin} onChange={event => setPin(event.target.value)} placeholder="Enter PIN"/><button type="button" className="pm-primary pm-full" disabled={!pin || busy} onClick={() => void execute()}>{busy ? "Checking…" : "Approve and simulate"}<LockKeyhole size={17}/></button></div>}
-              {execution?.outcome === "done-simulated" && <div className="pm-success"><CheckCircle2 size={20}/><span><b>Done (simulated){typeof execution.balance_on_5_nov === "number" ? " - 5 Nov now " + money(execution.balance_on_5_nov) : ""}</b><small>One simulated ledger effect was recorded. No real funds moved.</small></span></div>}
-              {execution?.outcome === "blocked" && <div className="pm-hold"><CircleAlert size={18}/><span><b>Execution refused</b><small>{execution.reason || "Zero ledger effect."}</small></span></div>}
-              {guard.decision !== "PASS" && <div className="pm-hold"><CircleAlert size={18}/><span><b>{guard.needs_verification ? "Needs verification" : "Held for review"}</b><small>{guard.evidence_entry ? "No action can proceed. The blocked check was recorded in the server evidence log." : "No action can proceed. Evidence recording failed; this check has no log entry."}</small></span></div>}
-              <button type="button" className="pm-secondary pm-full" onClick={() => setScreen("evidence")}>View evidence and verify chain<ArrowRight size={18}/></button>
-            </>}
-          </div>}
+          {screen === "guard" && <div className="pm-screen" aria-live="polite"><FlowRiskOps compact/></div>}
           {screen === "capital" && <div className="pm-screen">
-            <div className="pm-lead"><p>Partner financing · separate from supplier terms</p><h2>Compare capital offers</h2><span>Request a simulated lender response to see the illustrative schedule.</span></div>
-            <button type="button" className="pm-primary pm-full" onClick={() => void request("lenders")}>Request lender offers<ArrowRight size={18}/></button>
-            {requests.lenders?.waiting && <div className="pm-hold"><CircleAlert size={18}/><span><b>Requested - waiting (simulated)</b><small>Waiting for lender offers.</small></span></div>}
-            {visibleLenders && !requests.lenders?.waiting && <><p className="pm-caption">{displayCopy(lenders?.scheduleLabel)}</p><div className="pm-note"><b>Monthly EMI cap: {money(visibleLenders.emiCap.maxTotalMonthlyEmiInr)}</b><p>{money(visibleLenders.emiCap.monthlyCollectionsInr)} sales × {visibleLenders.emiCap.percentage}%. Existing EMI: {money(visibleLenders.emiCap.existingMonthlyEmiInr)}.</p></div>
-              <div className="pm-offer-list">{visibleLenders.offers.map(item => <button type="button" key={item.id} className={"pm-loan pm-offer-choice " + (selectedLender === item.id ? "selected" : "")} onClick={() => setSelectedLender(item.id)}><div><Landmark size={21}/><Pill tone={item.underCap ? "green" : "red"}>{item.underCap ? "Under cap" : "Over cap"}</Pill></div><b>{item.name} · {item.type}</b><p>{item.aprPercent}% APR · {item.tenorMonths} months · {money(item.totalInterestInr)} total interest</p><div><span>Monthly EMI <strong>{money(item.emiInr)}</strong></span><span>With existing <strong>{money(item.totalMonthlyEmiInr)}</strong></span></div>{item.earlyRepayment && <small>After {item.earlyRepayment.afterDays} days: about {money(item.earlyRepayment.estimatedInterestInr)} interest</small>}</button>)}</div>
-              {selectedLender === "A" ? <div className="pm-loan-step"><div><ShieldCheck size={19}/><b>Review Lender A drawdown</b></div><p>{money(drawdown?.amountInr)} enters the owner account {drawdown?.destinationAccountMasked || "**4029"} once. Gupta invoice {gupta?.invoiceId || "GD-1182"} remains a full {money(gupta?.amountInr)} outflow.</p><small>5 Nov becomes {money(drawdown?.effectOn5Nov.balanceInr)} only after a completed simulated drawdown. A request alone changes nothing.</small><button type="button" className="pm-primary pm-full" disabled={!drawdown || busy} onClick={() => void evaluateDrawdown()}>Review guard and owner PIN<ArrowRight size={18}/></button></div> : <div className="pm-note"><b>Comparison only</b><p>Select Lender A to run the guarded drawdown simulation.</p></div>}
-            </>}
+            <div className="pm-lead"><p>Partner financing · separate from supplier terms</p><h2>Compare capital offers</h2><span>Every executable request follows tracked evidence, bureau consent, offer disclosure and a simulated rail response.</span></div>
+            <FlowMerchant category="capital" outletId={selectedOutlet}/>
+            {lenders && <details className="pm-note"><summary>Illustrative lender comparison</summary><p>{displayCopy(lenders.scheduleLabel)}</p><p>Monthly EMI ceiling: {money(lenders.emiCap.maxTotalMonthlyEmiInr)}. Existing EMI: {money(lenders.emiCap.existingMonthlyEmiInr)}.</p><div className="pm-offer-list">{lenders.offers.map(item => <div key={item.id} className="pm-loan"><div><Landmark size={21}/><Pill tone={item.underCap ? "green" : "red"}>{item.underCap ? "Under cap" : "Over cap"}</Pill></div><b>{item.name} · {item.type}</b><p>{item.aprPercent}% APR · {item.tenorMonths} months · {money(item.totalInterestInr)} total interest</p><div><span>Monthly EMI <strong>{money(item.emiInr)}</strong></span><span>With existing <strong>{money(item.totalMonthlyEmiInr)}</strong></span></div></div>)}</div></details>}
           </div>}
           {screen === "data" && <div className="pm-screen">
             <div className="pm-lead"><p>Sources and limits</p><h2>Where the plan&apos;s numbers come from</h2><span>Cash anchors are illustrative, not measured future balances.</span></div>
@@ -538,7 +449,7 @@ export default function HomePage() {
               <button type="button" className="pm-secondary pm-full" onClick={() => setScreen("munim")}>Negotiate and review a supplier commitment<ArrowRight size={17}/></button>
             </>}
             <Heading title="Diwali week sales forecast"/>
-            <div className="pm-forecast-intro"><span><Sparkles size={16}/>4–10 Nov · Projected future sales</span><p>This forecast does not change the cash plan&apos;s fixed inflows or its 5 Nov shortfall.</p></div>
+            <div className="pm-forecast-intro"><span><Sparkles size={16}/>4–10 Nov · Projected future sales</span><p>The combined cash plan uses this outlet forecasting method, listed bills and completed payment effects. These figures are estimates, separate from recorded sales.</p></div>
             {forecastError && <div className="pm-hold" role="alert"><CircleAlert size={18}/><span><b>Outlet estimate unavailable</b><small>{displayCopy(forecastError)}</small></span><button type="button" onClick={() => { setForecastError(""); void get<OutletForecast>("/api/outlet-forecast").then(setOutletForecast).catch(e => setForecastError(e instanceof Error ? e.message : "Outlet forecast could not load.")); }}>Retry</button></div>}
             {scopedForecastOutlets.length ? <>
               <div className="pm-forecast-source"><b>{money(scopedForecastOutlets.reduce((sum, item) => sum + item.total.pointInr, 0))}</b><span>Forecast sales · {scopeLabel} · 4–10 Nov</span><small>Complete shift handovers through {dateLabel(outletForecast?.source.through)}. Partial 30 Oct payments are excluded.</small></div>
@@ -569,12 +480,9 @@ export default function HomePage() {
             <p className="pm-caption">{displayCopy(cash?.sourceNote)}</p>
           </div>}
           {screen === "evidence" && <div className="pm-screen">
-            <div className="pm-lead"><p>Server evidence log</p><h2>What the guard recorded</h2><span>Only demo attempts appear here. The hash-chain check runs on the server.</span></div>
-            <div className={verification?.ok && entries.length > 0 ? "pm-success" : "pm-hold"}>{verification?.ok && entries.length > 0 ? <CheckCircle2 size={20}/> : <CircleAlert size={20}/>}<span><b>{verification ? entries.length === 0 ? "No entries to verify" : verification.ok ? "Hash chain verified" : "Hash chain failed" : "Verification unavailable"}</b><small>{verification && !verification.ok ? "First broken sequence: " + String(verification.first_broken_seq ?? "unknown") : "Read from the verification endpoint."}</small></span></div>
-            {entries.length === 0 ? <div className="pm-empty"><FileText size={28}/><h2>No attempts yet</h2><p>Run a guard check to create the first evidence entry.</p><button type="button" className="pm-primary" onClick={() => setScreen("capital")}>Go to Capital<ArrowRight size={18}/></button></div> : <div className="pm-case-list">{[...entries].reverse().map(item => <div className="pm-evidence-entry" key={item.seq}><span><b>#{item.seq} · {item.outcome || "Recorded"}</b><small>{item.timestamp}</small></span><code>{item.hash?.slice(0, 20)}…</code></div>)}</div>}
-            <button type="button" className="pm-secondary pm-full" onClick={() => void refreshEvidence()}>Verify again<ArrowRight size={18}/></button>
-            <button type="button" className="pm-secondary pm-full" onClick={() => setMode("riskops")}>Open RiskOps trace<ArrowRight size={18}/></button>
-            <p className="pm-caption">This log records checks and outcomes, not a payment receipt.</p>
+            <div className="pm-lead"><p>Shared workflow evidence</p><h2>What happened, and what you were shown</h2><span>Follow the same live journal, disclosures and outcomes available in RiskOps.</span></div>
+            <FlowRiskOps compact/>
+            <button type="button" className="pm-secondary pm-full" onClick={() => setMode("riskops")}>Open full RiskOps trace<ArrowRight size={18}/></button>
           </div>}
         </div>
         <nav className="pm-bottom" aria-label="Merchant sections">{([{ id: "home", icon: Home, name: "Home" }, { id: "plan", icon: Activity, name: "Plan" }, { id: "munim", icon: Sparkles, name: "Munim" }, { id: "capital", icon: Landmark, name: "Capital" }, { id: "evidence", icon: FileText, name: "More" }] as const).map(item => { const Icon = item.icon; return <button type="button" key={item.id} className={screen === item.id ? "active" : ""} onClick={() => setScreen(item.id)}><Icon size={19}/><span>{item.name}</span></button>; })}</nav>

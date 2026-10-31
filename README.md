@@ -1,61 +1,80 @@
-# PayTMunim demo
+# PayTMunim
 
-A local, synthetic merchant and RiskOps demonstration. The merchant sees a projected Diwali cash gap, compares three relief options, requests external responses, and reviews guarded actions. A separate simulator console sends supplier, Account Aggregator (AA), and lender responses. No real payment, supplier message, AA fetch, bureau request, or loan submission occurs.
+A merchant cash-planning and guarded-delegation demonstration. The owner reviews outlet sales, sets an agent's scope, and approves exact commitments. A separate operator supplies simulated external responses; RiskOps follows the same requests, disclosures and effects. No real supplier message, AA fetch, bureau check, loan or payment occurs.
 
-## Run locally
+## Start the demo
 
 Node.js 22.13 or newer is required.
 
-```powershell
-npm install
-npm run configure:pin
-npm run dev
-```
+    npm ci
+    npm run configure:pin
+    npm run build
+    npm start
 
-PIN setup prompts privately in the terminal and saves only its SHA-256 hash in ignored `.env.local`. Restart the dev server if the PIN is configured or changed while it is running. No PIN value is bundled with this project. Without a configured hash, the guard fails closed and the drawdown cannot complete.
+Open http://127.0.0.1:5173/ and the /simulator and /riskops paths in separate tabs. PIN setup prompts privately and saves only its hash in ignored .env.local. Built start explicitly loads that file into the local Worker. Without verification configured, the app starts and financial approval fails closed.
 
-Open the local URL printed by the dev server in three tabs: `/` for the merchant, `/simulator` for the operator, and `/riskops` for live review. In the merchant app, open **Ask Munim → Delegate and track** and choose a business intent. Its next external request appears in the simulator inbox. Select that exact request and respond; the merchant receives the result and RiskOps refreshes the same run, intent delta, guard action, disclosure, and trace every second. The merchant cannot select a supplier, judge, or rail scenario.
+For development use npm run dev. To run another built instance on Windows PowerShell, use npm.cmd start -- --port 5180; npm.cmd preserves argument forwarding. --host, --port and --env-file are supported. Defaults are loopback and port 5173. A clean checkout needs no .openai/hosting.json, PostgreSQL, D1 or R2 service.
 
-`npm test` runs unit and isolated acceptance checks. `npm run eval:flows` runs the selected delegated-flow evaluations with readable case names. Tests create their own private random approval inputs and never mutate the live demo state.
+Restart view resets navigation only. Stop and restart the server to reset requests, evidence, pause state and duplicate reservations. All three tabs must use the same server/port. Private owner verification remains configured across restarts.
 
-## Merchant chat, outlet scope and agent setup
+## Merchant chat and delegation
 
-**Ask Munim** opens a conversation with a persistent thread. An explicit stock-agent request offers setup; a message alone never activates a task. Setup separates the owner's goal, outlet/product scope, trigger, spending and supplier-term limits, permissions and final review. The mandate is stored with the run, disclosure and trace. Monitoring responses arrive through the operator console. Quotes/proposals may be prepared within the mandate; orders, payments, bureau checks and loans still require their separate sign-offs.
+The persistent outlet selector scopes recorded sales, forecast cards, generic chat and setup defaults. Business cash and credit limits remain labelled All outlets. Explicit outlet names in chat override the selection.
 
-The available GD-1182 invoice covers shared stock across the business. A different product or individual-outlet mandate can monitor, but pauses for matching evidence before approaching the supplier. Owner ceilings, expiry, fixed beneficiary and source rules remain binding.
+Ask Munim opens a persistent conversation. A stock-agent request offers an explicit setup action; a message alone never activates a task. Setup separates goal/product/outlet/trigger, order and advance ceilings, credit/buyback goals, expiry, permissions and review by the owner or authorized signatory. The validated mandate is recorded with the run, disclosures and traces. It may narrow fixed guardrails and cannot grant automatic payment authority.
 
-The persistent outlet selector scopes recorded sales and outlet forecasts, and pre-fills agent setup. Business-wide cash planning and credit limits remain labelled All outlets. Actual sales use **31 October 2026, 15:55 IST** as a fixed reporting cutoff. The transaction file ends on 30 October at 12:30:07 IST, so 31 October sales are unavailable, not zero. Observed 25–31 October net Paytm sales total ₹93,649; complete coverage is unverified. Future Diwali forecasts are shown separately. `node scripts/derive-sales-summary.mjs` reproduces the compact sales snapshot from the archived CSV without a database.
+Monitoring responses are operator-supplied payment/supplier signals. There is no unattended scheduler or observed retail SKU stock. The GD-1182 invoice covers shared procurement. Another product or an individual-outlet order pauses for matching evidence before supplier negotiation. Purchase quantities and payments do not prove shelf stock or retail sell-through.
 
-## Tracked simulations (Milestone 3)
+## Sales and forecast basis
 
-- **Supplier happy path:** start the Gupta intent; respond with agreed terms → simulated judge clear → full INV-07 invoice → AA available. The merchant reviews the amount, account, credit, buyback, source checks, risks, alternatives, and original intent, then approves with PIN. The operator returns payment success, failure, or pending. Pending instructions request status reconciliation rather than a second transfer.
-- **Intent drift:** return the supplier counteroffer (60% upfront, 30-day credit, no buyback). The guard requires a version-bound owner decision on those changes. That decision does not approve payment; the final advance requires a separate sign-off.
-- **Source attacks:** a changed supplier account or duplicate invoice blocks. A header-only photo or invoice instruction attack pauses the run. Source text never becomes owner authority.
-- **Capital:** AA bank and GST evidence → explicit owner bureau-purpose consent → simulated OTP outcome → lender offer/decline → final loan disclosure/PIN → simulated drawdown rail outcome. The ₹2.5 lakh intent additionally checks agent identity, scopes, amount, destination, expiry, revocation, and proof of possession. These are synthetic credentials and outcomes, with no external identity or lending call.
+Actual sales stop at 31 October 2026, 15:55 IST. The supplied Paytm file ends on 30 October at 12:30:07 IST, so today's value is unavailable rather than zero. Observed 25–31 October net sales total ₹93,649: Dadar ₹43,411, Matunga ₹30,594, Sion ₹19,644. Two refunds are included; full-period coverage is unverified. Future dates appear separately as forecasts.
 
-Responses bind to one open request and stale responses are rejected. A shared payment reservation prevents the tracked and single-step demos from paying or drawing against the same invoice twice. Successful rail outcomes create one local ledger effect. The journal records source/tool decisions, actors, original/runtime intents, deltas, simulated judge flags, exact disclosures, consent outcomes, and hashes. The judge fixture can add escalation and cannot overrule deterministic failures.
+The M4 cash default uses active v4 outlet history over the 22-day plan, listed obligations, EMI and four bank-narration utility estimates. The ₹4,50,000 opening is the supplied historical workbook scenario, not the current AA balance. It is not displayed as an account balance.
 
-## Synthetic data and calculations
+The baseline first turns negative on 4 November, reaches −₹2,68,279 on 5 November and recovers on 8 November. It differs from the earlier −₹1,84,500 workbook-only scenario because the default now uses the integrated v4 outlet forecast. Historical workbook arithmetic remains independently reconciled in tests.
 
-The active data adapter is `lib/active-source.js`, using the supplied v4 bundle at `data/synthetic-v4/`. Earlier versions remain in `data/synthetic/` and `data/synthetic-v3/`. All supplied CSV, Excel, invoice JSON, ReBIT XML/JSON, README, and generator code are preserved. The 25 strategy/PRD markdown files, earlier workbooks/JSON fixture, and pasted briefs are in `specs/`. `specs/SOURCE_MANIFEST.json` records hashes for all 120 source files, including five Excel workbooks. Run `npm run verify:sources` to check the bundle. Our importers derive compact runtime snapshots without running the supplied Python generators. No PostgreSQL database is created or used.
+Only completed, disclosure-bound effects update the shared plan. Quotes, pending instructions, failures and rejected approvals provide no cash relief. The planned cash date is shown before consent:
 
-- Home shows Paytm-only collections through 12:40 pm on 30 October 2026: ₹10,140 across Dadar, Matunga, and Sion. The ₹19,00,000 monthly figure is **all-channel** collections across twelve complete months. Existing EMI is ₹22,000 and the 8% total EMI cap is ₹1,52,000.
-- The cash plan uses the supplied workbook forecast formula, listed outflows, and recurring EMI/utilities inferred from narrations. Rent, salaries, and GST are not duplicated. It first turns negative on 4 November, reaches −₹1,84,500 on 5 November, and closes at ₹33,500 on 7 November. The merchant view omits the opening input. The full ₹5,20,000 Gupta invoice remains an outflow; a completed ₹2,00,000 drawdown is counted once as an inflow and gives +₹15,500 on 5 November.
-- Outlet cards show Paytm activity, an all-channel monthly baseline, and last Diwali's observed collection uplift. These are transaction signals, not SKU sales or a product-level stock forecast.
-- V4 covers the complete prior financial year from April 2025. Gupta's 53 transfer-narration matches total ₹62,86,960, giving the 110% ceiling of ₹69,15,656. The active matcher excludes `label_*` answer keys and ambiguous matches. Narration attribution is inferred, not a bank attestation of identity. Data is released to a tracked request only after its AA simulator response.
-- The GD-1182 photo (INV-01) is header-only; the full app-upload document (INV-07) has 212 lines. Evidence checks recompute tax/discount arithmetic, exact line sums and invoice total, registry account/name, duplicates, and instruction text. Full evidence can pass while the photo fails closed. Owner approval is still required.
-- The active bank and drawdown destination both end `4029`. The single-step demo retains the ₹2,00,000 boundary; the tracked ₹2,50,000 example requires simulated Know Your Agent checks and separate owner consent. No real agent credential or payment rail is used.
-- The active source has 8,293 bank transactions, 120,705 Paytm rows, 3,462 handovers, and 18 filed AA GST periods through September 2026. October's estimated return is not counted as filed. Deposit/GST XML and JSON mirrors are checked for structural/value consistency. The supplied GST schema assumptions remain explicit; this is not full XSD validation.
-- Supplier invoice quantities describe B2B billed purchases. Neither payments nor invoice quantities prove current stock or end-customer SKU sales. The merchant data view shows this purchase evidence separately from the optional owner-input coverage calculation.
+- A completed ₹2,00,000 drawdown counts once on 4 November. Standalone, 5 November is −₹68,279: the loan does not fully solve the gap.
+- A completed 50% Gupta advance records ₹2,60,000 on 4 November and preserves ₹2,60,000 payable on 19 December, counting 45-day credit from the listed due date. Its standalone low is −₹8,279.
+- Both completed effects give ₹1,91,721 on 5 November; the deferred supplier balance remains owed.
 
-## Outlet demand and stock coverage (Milestone 2)
+Home, Plan and options refresh from server state. These are cash-scenario dates, distinct from wall-clock trace timestamps. The historical /api/execute endpoint returns HTTP 410; executable merchant actions use tracked evidence, authority and consent.
 
-`GET /api/outlet-forecast` produces a seven-day 4–10 November collection estimate for each outlet from complete all-channel shift handovers through 29 October. It uses a recent same-weekday median, a bounded recent trend, and the measured 2025 Diwali uplift. Low and high values are historical residual scenarios, **not** a calibrated confidence interval. The partial 30 October Paytm sample is excluded. This separate forecast does not overwrite the workbook cash plan or its 5 November low.
+## Presenter rehearsal
 
-In the existing **Your data** screen, an owner can enter an outlet, product label, unit price, assumed share of outlet revenue, units on hand, and the number of festival days to cover from 4 November. `POST /api/stock-coverage` returns a low/point/high **unit proxy** and a manual replenishment or surplus review suggestion. It does not model supplier lead time or record an order, supplier message, payment, or inventory update. Without owner inputs, no SKU unit estimate is shown.
+1. Show recorded Sales and the separate cash projection. Open chat, then review stock-agent goal, limits and permissions.
+2. Start the shared-stock task. In the simulator return a monitoring signal if requested, agreed supplier terms, judge clear, full INV-07 evidence, then AA available.
+3. Review the exact invoice/account, the proposed amendment from 14-day original credit to 45 days, buyback, dated advance, remaining payable, risks and alternatives. Approve with the privately configured PIN.
+4. Return payment pending: Home remains unchanged. The next request reconciles the same instruction. Return success and inspect the updated plan and shared evidence.
+5. Demonstrate a changed-account hard block, counteroffer review or header-only evidence pause. Restart the server before repeating a completed invoice/action.
+6. Capital requires AA/GST, bureau-purpose consent, simulated verification, lender response, final loan disclosure/PIN and rail outcome. The ₹2.5 lakh preset also checks simulated KYA identity, scopes, amount, destination, expiry, revocation and proof.
 
-## Boundaries
+Guard/More and standalone RiskOps read the same journal, exact disclosures and ledger. Pause is rechecked before final effect commit. Replays and stale approvals cannot create a second effect. Evidence is SHA-256 chained in memory, without external anchoring.
 
-Simulator requests and dispatches, approvals, pause state, ledger reservations/effects, and evidence live in server memory and reset on restart. Demo roles are actor labels; production authentication and tenant isolation are not implemented. RiskOps hashes are not independently anchored audit evidence. The simulated judge does not call an LLM. The full multilingual golden-evals workbook remains a specification; the selected flow evaluations run real local code. The interface was built against the supplied Stitch reference; its page source was not imported.
+## PWA and connectivity
 
-See `docs/MILESTONE.md`, `docs/MILESTONE-2.md`, and `docs/MILESTONE-3.md` for the checkpoint scope and remaining boundaries.
+The standalone manifest includes identity/scope, explicit 192/512 PNGs and maskable variants. Apple metadata/icon and safe areas are included. Supporting browsers receive an install affordance when their installation event is available. The in-app browser is not an installation test device.
+
+For Netlify, the committed netlify.toml uses npm run build:netlify (native Next.js) and publishes .next with the Next.js adapter. The local npm run build remains the Vinext/Worker path. Publishing dist alone does not adapt the server-rendered pages and API handlers to Netlify.
+
+The worker caches only public offline explanation, manifest and icon assets. It never caches or queues APIs, mutations, approvals, payments or React data payloads. Offline interaction is blocked; reconnection reloads server state. Supporting browsers can show a read-only fallback on failed navigation.
+
+Physical-device installation, OS launch/resume and a reachable HTTPS deployment remain release-rehearsal gates. The repository is not hosting. A phone cannot reach the laptop through its own 127.0.0.1. Keep operator controls presenter-restricted when hosting; actors are named demo roles, not production authentication.
+
+## Sources and verification
+
+All supplied sources remain in data/synthetic/, data/synthetic-v3/, data/synthetic-v4/ and specs/. The source manifest verifies 120 supplied files, including 25 PRD/strategy markdown files, five Excel workbooks, 53 CSVs, 11 generators, 14 invoice JSONs and six ReBIT files. The inherited synthetic-ext procurement plans are explicitly demonstration assumptions, not historical retail observations.
+
+The active v4 adapter includes 8,293 bank transactions, 120,705 Paytm rows, 3,462 handovers, seven invoice documents/710 lines and 18 filed AA GST periods. Gupta's 53 high-confidence prior-FY narration matches total ₹62,86,960 and yield the 110% ceiling of ₹69,15,656. Ambiguous matches and answer-key fields are excluded. Narration matching is inferred, not bank-attested identity.
+
+    npm run verify:sources
+    npm test
+    npm run lint
+    npm run typecheck
+    npm run build
+    npm run smoke:start
+
+CI runs these gates on Ubuntu and Windows. The built-server smoke uses port 5194 and private random verification inputs to check absent configuration, runtime binding and artifact leakage without changing the owner's file. Tests do not mutate the live demo. Regenerate the compact sales snapshot with node scripts/derive-sales-summary.mjs; no database is needed.
+
+Ask replies are scripted and the judge is simulated. Structured drift, source evidence, authority, consent, pause and duplicate checks execute real code. Live models/financial rails, durable audits, production role isolation and the full 24-PRD operating suite remain outside this local demonstration.

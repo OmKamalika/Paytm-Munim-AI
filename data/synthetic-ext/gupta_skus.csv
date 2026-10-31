@@ -1,0 +1,5 @@
+sku_id,name,supplier_id,unit_cost_inr,retail_price_inr,case_pack
+GB-DRY,Dry-fruit Diwali gift box,gupta,1300,1699,5
+GB-CHOC,Chocolate and cookies hamper,gupta,1300,1699,5
+GB-PUJA,Puja and diya gift set,gupta,1300,1699,5
+GB-SWT,Sweets and namkeen box,gupta,1300,1699,5

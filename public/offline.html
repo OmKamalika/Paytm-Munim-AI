@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#002e6e">
+  <title>Reconnect · PayTMunim</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); background: #f5f7fa; color: #1d2d3e; font: 16px/1.6 "Segoe UI", Arial, sans-serif; }
+    main { width: min(100%, 390px); }
+    .brand { margin: 0 0 40px; color: #002e6e; font-size: 24px; font-weight: 800; letter-spacing: -1px; }
+    .brand span { color: #008db8; }
+    h1 { margin: 0 0 12px; font-size: 29px; line-height: 1.2; color: #002e6e; letter-spacing: -.8px; }
+    p { margin: 0 0 16px; color: #516a7d; }
+    button { min-height: 48px; border: 0; border-radius: 8px; padding: 10px 22px; background: #002e6e; color: white; font: 700 15px "Segoe UI", Arial, sans-serif; cursor: pointer; }
+    button:focus-visible { outline: 3px solid #00baf2; outline-offset: 3px; }
+    small { display: block; margin-top: 24px; color: #64768a; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="brand">paytm <span>Munim</span></p>
+    <h1>Reconnect to continue</h1>
+    <p>PayTMunim needs a connection to load your latest information.</p>
+    <p>Actions are unavailable offline. Nothing is queued to run later.</p>
+    <button id="retry" type="button">Try again</button>
+    <small id="connection" role="status">This page will refresh when your connection returns.</small>
+  </main>
+  <script>
+    document.getElementById('retry').addEventListener('click', function () { window.location.reload(); });
+    window.addEventListener('online', function () {
+      document.getElementById('connection').textContent = 'Connection restored. Refreshing…';
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>

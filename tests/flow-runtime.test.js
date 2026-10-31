@@ -7,6 +7,9 @@ import { activeSource } from '../lib/active-source.js';
 import { evaluateInvoiceEvidence } from '../lib/v3-evidence.js';
 import { createPaymentFence } from '../lib/payment-fence.js';
 import { createActionRuntime } from '../lib/action-runtime.js';
+import { buildCashPlan } from '../lib/cash-fixture.js';
+
+const baseline5Nov = () => buildCashPlan().cashPlan.dailyBalanceSeries.find(day => day.date === '2026-11-05').balanceInr;
 
 function fixture(config = {}) {
   const pin = crypto.randomUUID();
@@ -159,7 +162,7 @@ test('capital path records bureau purpose disclosure, verified consent and final
   assert.equal(run.ledgerEffect.type, 'drawdown');
   assert.equal(run.ledgerEffect.amountInr, 200000);
   assert.equal(run.ledgerEffect.account, '**4029');
-  assert.equal(run.ledgerEffect.projected5NovInr, 15500);
+  assert.equal(run.ledgerEffect.projected5NovInr, baseline5Nov() + run.ledgerEffect.amountInr);
 });
 
 test('higher capital requires KYA scope, expiry and revocation checks before bureau consent', async () => {
@@ -180,7 +183,7 @@ test('higher capital requires KYA scope, expiry and revocation checks before bur
   assert.ok(run.currentDisclosure.terms.combinedEmiInr <= 152000);
   run = await approve(runtime, run, pin);
   run = await reply(runtime, run, 'payment_success');
-  assert.equal(run.ledgerEffect.projected5NovInr, 65500);
+  assert.equal(run.ledgerEffect.projected5NovInr, baseline5Nov() + run.ledgerEffect.amountInr);
 });
 
 test('failed bureau or lender response never fabricates a successful loan', async () => {
