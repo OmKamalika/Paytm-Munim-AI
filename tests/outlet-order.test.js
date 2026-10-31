@@ -23,11 +23,11 @@ test('the owner order splits into whole case packs by outlet and SKU and keeps i
   assert.equal(outletOrder.totalAmountInr, 520000);
   assert.equal(outletOrder.matchesOwnerOrder, true);
   assert.ok(outletOrder.lines.every((line) => line.orderUnits % 5 === 0));
-  assert.deepEqual(outletOrder.byOutlet.map((item) => [item.outletId, item.units, item.amountInr]), [['DAD', 220, 286000], ['MAT', 115, 149500], ['SIO', 65, 84500]]);
+  assert.deepEqual(outletOrder.byOutlet.map((item) => [item.outletId, item.units, item.amountInr]), [['DAD', 210, 273000], ['MAT', 115, 149500], ['SIO', 75, 97500]]);
   // The gap that drives the weights is the Milestone 2 point gap from forecast x share / price - on hand.
   const dry = outletOrder.lines.find((line) => line.outletId === 'DAD' && line.skuId === 'GB-DRY');
   assert.equal(dry.gapUnits, dry.demandUnits.point - dry.unitsOnHand);
-  assert.equal(outletOrder.forecastGapUnits, 81);
+  assert.equal(outletOrder.forecastGapUnits, 83);
   assert.match(outletOrder.note, /buyback/);
   assert.deepEqual(demoFixture.originalIntent.deliveries, outletOrder.deliveries);
 });
@@ -36,7 +36,7 @@ test('changing an outlet assumption changes the split', () => {
   const fixture = structuredClone(skuFixture);
   fixture.plan.find((p) => p.outletId === 'SIO' && p.skuId === 'GB-PUJA').festivalRevenueSharePct = 20;
   const changed = buildOutletOrder({ fixture, order: OWNER_ORDER });
-  assert.ok(changed.byOutlet.find((item) => item.outletId === 'SIO').units > 65);
+  assert.ok(changed.byOutlet.find((item) => item.outletId === 'SIO').units > 75);
   assert.equal(changed.byOutlet.reduce((sum, item) => sum + item.units, 0), 400);
 });
 

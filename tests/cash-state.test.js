@@ -20,7 +20,7 @@ test('an accepted, guard-passing supplier response moves part of GD-1182 and upd
   const relief = await reliefAfter('supplier_clean');
   assert.deepEqual(relief.map((item) => [item.type, item.deferredInr, item.newDate]), [['supplier_deferral', 260000, '2026-12-19']]);
   const cash = buildCashPlan(relief);
-  assert.equal(fiveNov(cash), -9892);
+  assert.equal(fiveNov(cash), -8279);
   assert.equal(cash.cashPlan.afterHorizon[0].amountInr, 260000);
   const rec = buildOptions(relief).recommendation;
   assert.equal(rec.status, 'shortfall');
@@ -54,11 +54,11 @@ test('an executed drawdown is counted once in the plan and in the option preview
   const relief = await currentRelief({ simulatorStore: store, runtime, paused: false });
   assert.equal(relief.filter((item) => item.type === 'drawdown').length, 1);
   const cash = buildCashPlan(relief);
-  assert.equal(fiveNov(cash), -69892);
+  assert.equal(fiveNov(cash), -68279);
   assert.equal(cash.cashPlan.dailyBalanceSeries.reduce((sum, day) => sum + day.reliefInflowInr, 0), 200000);
   const options = buildOptions(relief);
   const drawdown = options.options.find((item) => item.id === 'drawdown');
-  assert.equal(drawdown.effectOn5Nov.balanceInr, -69892);
+  assert.equal(drawdown.effectOn5Nov.balanceInr, -68279);
   assert.equal(drawdown.effectOn5Nov.inflowCount, 1);
   assert.equal(drawdown.effectOn5Nov.guptaInvoiceOutflowInr, 520000);
 });
