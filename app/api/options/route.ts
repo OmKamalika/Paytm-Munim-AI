@@ -1,7 +1,8 @@
-import { optionsFixture } from '../../../lib/cash-fixture.js';
+import { buildOptions } from '../../../lib/cash-fixture.js';
+import { currentRelief } from '../../../lib/cash-state.js';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  return Response.json(optionsFixture, { headers: { 'Cache-Control': 'no-store' } });
+  return Response.json(buildOptions(await currentRelief()), { headers: { 'Cache-Control': 'no-store' } });
 }

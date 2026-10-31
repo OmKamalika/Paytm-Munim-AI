@@ -9,6 +9,7 @@ const testOnlyAaDebits = [{ supplier_id: 'gupta', amount: 500000, date: '2025-08
 async function fresh(config = {}) {
   const pin = Array.from(crypto.getRandomValues(new Uint8Array(8)), (byte) => String(byte % 10)).join('');
   const simulatorStore = createSimulatorStore();
+  simulatorStore.request('supplier');
   simulatorStore.dispatch('supplier_clean');
   if (config.aaDebits) { simulatorStore.request('aa'); simulatorStore.dispatch('aa_available'); }
   return { pin, runtime: createActionRuntime({ pinHash: await sha256Hex(pin),

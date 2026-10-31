@@ -11,6 +11,14 @@
 - Empty-start, hash-chained server evidence with verification; automated unit and isolated acceptance checks.
 - Self-contained synthetic CSV and workbook sources with a reproducible derived snapshot and source hashes. The cash view uses the supplied workbook formula and never displays its opening input. All 25 supplied strategy/PRD markdown files, three distinct Excel workbooks, the earlier JSON fixture, and source generator scripts are bundled with a 49-file SHA-256 manifest.
 
+## Milestone 1.1 — computed cash decision (backend only)
+
+- `lib/cash-inputs.js` maps every cash input to its source file or workbook cell; `lib/cash-engine.js` calculates daily closings, first shortfall, lowest balance and each relief option. The `/api/cashplan` and `/api/options` response shapes are unchanged; options add a calculated `recommendation`.
+- `lib/cash-state.js` applies relief only after a fresh, accepted, guard-passing supplier response or a completed drawdown. `/api/execute` reports the 5 Nov balance from the engine.
+- `POST /api/munim` is a deterministic dialogue simulator over the calculated results (not a model).
+- Guard fix: a supplier response now authorizes only if it answers the latest supplier request; previously a reply to an older request still passed after a new request.
+- No screens were changed beyond the merchant poller matching the response to its request id. Screen work waits for the Stitch flows.
+
 ## Still to build
 
 1. **Merchant intelligence:** product-level inventory and SKU demand data, calibrated outlet forecasts, stock transfer/reorder recommendations, and measured business outcomes. Payment amounts alone do not identify sold products.
