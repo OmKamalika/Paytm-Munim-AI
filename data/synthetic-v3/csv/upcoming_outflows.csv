@@ -1,0 +1,8 @@
+outflow_id,due_date,payee,amount_inr,category,invoice_no,note
+OUT-01,2026-10-31,Patel Traders,290000,supplier_payment,PT-5521,Diwali stock
+OUT-02,2026-11-01,"Salaries, 7 staff",105000,salary,,Monthly payroll
+OUT-03,2026-11-01,Mehta Dry Fruits,150000,supplier_payment,MDF-884,Diwali stock
+OUT-04,2026-11-04,Gupta Distributors,520000,supplier_payment,GD-1182,Diwali stock
+OUT-05,2026-11-05,"Rent, 3 outlets",107000,rent,,Monthly rent
+OUT-06,2026-11-05,Diwali bonus,52500,bonus,,Half-month bonus
+OUT-07,2026-11-20,GST for October,42000,gst,,GSTR-3B Oct 2026

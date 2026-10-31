@@ -1,0 +1,60 @@
+# Browser journeys (Pixel 7 emulation, production build from a clean clone, commit 57dc6e7)
+PASS Home shows the calculated −₹2,68,279 low
+PASS phone layout: app fills the screen
+PASS Plan recommends Gupta deferral + ₹50,000 top-up
+PASS after starting a task its status card is on screen
+PASS J-block: changed payee blocks the run
+PASS J-block: nothing to approve, no PIN prompt
+PASS J-hold: header-only GD-1182 holds the payment
+PASS J-block/J-hold: zero money effects
+PASS PIN field opens a numeric keypad
+PASS wrong PIN refused
+PASS pending shown as unresolved
+PASS pending: plan unchanged
+PASS Plan flags the pending payment and does not ask to pay again
+PASS reconciled once: exactly one ledger effect
+PASS plan after drawdown: 5 Nov −₹68,279
+PASS Home updated from the ledger
+PASS drift: changed terms explained before approval
+PASS drift path: ₹3,12,000 advance under the approved 60/30 terms
+PASS no shortfall left (low 93939); no more relief recommended
+PASS Plan says no shortfall left
+PASS Ask Munim reflects the cleared gap
+PASS Evidence lists 44 journal entries
+PASS RiskOps reads the same journal
+PASS after reload the phone shows the server state (no shortfall)
+PASS offline banner while disconnected
+PASS reconnects and clears the banner
+FAIL no browser errors (3): Failed to load resource: the server responded with a status of 409 (Conflict) | Failed to load resource: net::ERR_INTERNET_DISCONNECTED | Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+
+# API journey (same build)
+PASS /api/execute is retired (410)
+PASS /api/guard/evaluate is retired (410)
+PASS /api/analyze is retired (410)
+PASS /api/simulator/dispatch is retired (410)
+PASS baseline 5 Nov -268279
+PASS bureau purpose disclosure shown
+PASS loan disclosure v10 sha256:be6e1
+PASS wrong PIN refused
+PASS approved: rail instruction requested
+PASS rail pending
+PASS pending: no cash effect, flagged
+PASS pending: no second-payment prompt
+PASS unknown/stale response refused (REQUEST_NOT_FOUND)
+PASS reconciled once: one ₹2,00,000 effect
+PASS plan after drawdown 5 Nov -68279
+PASS Gupta bill still full
+PASS option preview counts the drawdown once
+PASS merchant evidence has the ledger reference
+PASS wrong-PIN attempt is in evidence
+PASS RiskOps and Evidence read the same journal (17 entries)
+PASS hash chain verified after real attempts
+PASS same session, revision advanced
+{"sessionId":"d72c9745","entries":17,"recommendation":"shortfall"}
+
+# Server restart (same build)
+before restart: run completed 5 Nov -68279
+PASS while the server is down the phone shows the offline banner
+PASS after restart the phone says the server restarted
+PASS the old drawdown result is gone: Home −₹68,279 -> −₹2,68,279
+PASS evidence starts empty in the new session

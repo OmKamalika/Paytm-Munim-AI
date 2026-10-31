@@ -360,3 +360,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 @media(prefers-reduced-motion:reduce) {
   *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; }
 }
+
+/* Embedded RiskOps view inside the merchant app */
+.pm-riskops-mode { min-height:100dvh; padding:16px; background:var(--pm-page); display:grid; gap:12px; align-content:start; }
+.pm-riskops-mode > .pm-secondary { justify-self:start; }
