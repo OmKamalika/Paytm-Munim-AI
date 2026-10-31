@@ -20,7 +20,7 @@ type Option = { id: string; rank: number; title: string; costLabel: string; amou
 type Options = { basis: string; options: Option[] };
 type Lender = { id: string; name: string; type: string; aprPercent: number; tenorMonths: number; emiInr: number; totalInterestInr: number; totalMonthlyEmiInr: number; underCap: boolean; earlyRepayment?: { afterDays: number; estimatedInterestInr: number } };
 type Lenders = { scheduleLabel: string; emiCap: { monthlyCollectionsInr: number; existingMonthlyEmiInr: number; percentage: number; maxTotalMonthlyEmiInr: number }; offers: Lender[] };
-type Event = { seq: number; kind: Kind; scenarioId: string; timestamp: string; payload: {
+type Event = { seq: number; kind: Kind; scenarioId: string; requestId?: string | null; timestamp: string; payload: {
   candidate?: { totalAmount: number; upfrontPercent: number; supplierId: string; supplierAccount: string; beneficiaryName?: string; supplierMessage?: string };
   offers?: Lender[];
   emiCap?: Lenders["emiCap"];
@@ -28,7 +28,7 @@ type Event = { seq: number; kind: Kind; scenarioId: string; timestamp: string; p
   source?: string;
 } };
 type Simulator = { latestSeq: number; latest: Record<Kind, Event | null>; events: Event[] };
-type RequestState = { cursor: number; event?: Event; waiting: boolean };
+type RequestState = { cursor: number; requestId?: string; event?: Event; waiting: boolean };
 type Action = Record<string, string | number | undefined>;
 type Guard = { decision: "PASS" | "BLOCK" | "ESCALATE"; checks: { id: string; status: string; detail: string }[]; approval_id?: string; action_hash?: string; needs_verification?: boolean; reason?: string; evidence_entry?: Entry | null };
 type Execution = { outcome: "done-simulated" | "requested-waiting" | "blocked"; balance_on_5_nov?: number; ledger_effect?: number; reason?: string };
@@ -134,8 +134,9 @@ export default function HomePage() {
           for (const kind of ["supplier", "aa", "lenders"] as Kind[]) {
             const request = previous[kind];
             const event = state.latest?.[kind];
-            if (request?.waiting && event && event.seq > request.cursor) {
-              next[kind] = { cursor: request.cursor, event, waiting: false };
+            // Only a newer response to this exact request counts.
+            if (request?.waiting && event && event.seq > request.cursor && event.requestId === request.requestId) {
+              next[kind] = { cursor: request.cursor, requestId: request.requestId, event, waiting: false };
               changed = true;
             }
           }
@@ -188,7 +189,7 @@ export default function HomePage() {
     setError("");
     try {
       const started = await get<{ kind: Kind; cursor: number; requestId: string }>("/api/simulator/request", body({ kind }));
-      setRequests(previous => ({ ...previous, [kind]: { cursor: started.cursor, waiting: true } }));
+      setRequests(previous => ({ ...previous, [kind]: { cursor: started.cursor, requestId: started.requestId, waiting: true } }));
     } catch (e) { setError(e instanceof Error ? e.message : "Simulator unavailable."); }
   }
   async function evaluateAction(next: Action) {

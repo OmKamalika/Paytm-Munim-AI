@@ -33,14 +33,15 @@ test('supplied synthetic sources reconcile outlet productivity and Paytm Home', 
   assert.equal(syntheticSource.invoice.hasFullBody, false);
 });
 
-test('daily cash closings reproduce supplied workbook anchors without exposing opening balance', () => {
+test('daily cash closings reproduce workbook anchors (plus the 7 Nov EMI) without exposing opening balance', () => {
   const series = cashPlanFixture.cashPlan.dailyBalanceSeries;
   assert.equal(series.length, 22);
   const close = (date) => series.find((row) => row.date === date)?.balanceInr;
   assert.equal(close('2026-11-04'), -145000);
   assert.equal(close('2026-11-05'), -184500);
   assert.equal(close('2026-11-06'), -64500);
-  assert.equal(close('2026-11-07'), 55500);
+  // Workbook Cash_Plan shows 55,500; the engine also deducts the ₹22,000 EMI due 7 Nov (existing_emis.csv).
+  assert.equal(close('2026-11-07'), 33500);
   assert.equal('openingBalance' in cashPlanFixture.cashPlan, false);
   assert.equal('openingBalanceInr' in cashPlanFixture.cashPlan, false);
 });

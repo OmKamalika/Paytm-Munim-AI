@@ -28,7 +28,7 @@ const testOnlyAaDebits = [
 async function runtimeWithConfig(config = {}) {
   const pin = Array.from(crypto.getRandomValues(new Uint8Array(8)), (byte) => String(byte % 10)).join('');
   const simulatorStore = config.simulatorStore ?? createSimulatorStore();
-  if (!config.simulatorStore) simulatorStore.dispatch('supplier_clean');
+  if (!config.simulatorStore) { simulatorStore.request('supplier'); simulatorStore.dispatch('supplier_clean'); }
   if (config.aaDebits && !simulatorStore.getState().latest.aa) {
     simulatorStore.request('aa');
     simulatorStore.dispatch('aa_available');
@@ -212,23 +212,27 @@ test('client-supplied invoice text cannot replace server source evidence', async
 
 test('supplier guard uses the latest server-owned simulator event and original merchant intent', async () => {
   const simulatorStore = createSimulatorStore();
+  simulatorStore.request('supplier');
   const cleanEvent = simulatorStore.dispatch('supplier_clean');
   const { runtime } = await runtimeWithConfig({ aaDebits: testOnlyAaDebits, simulatorStore });
   const clean = await runtime.evaluate(supplierPayment(cleanEvent));
   assert.equal(clean.decision, 'PASS');
   assert.ok(clean.checks.some((check) => check.id === 'supplier_intent' && check.status === 'PASS'));
 
+  simulatorStore.request('supplier');
   const driftEvent = simulatorStore.dispatch('supplier_drift');
   const drift = await runtime.evaluate({ ...supplierPayment(driftEvent), amount: 312000 });
   assert.equal(drift.decision, 'ESCALATE');
   assert.equal(drift.approval_id, undefined);
   assert.ok(drift.checks.some((check) => check.id === 'supplier_intent' && check.status === 'ESCALATE'));
 
+  simulatorStore.request('supplier');
   const accountEvent = simulatorStore.dispatch('supplier_account_change');
   const account = await runtime.evaluate({ ...supplierPayment(accountEvent), beneficiary_account: 'XXXX9910' });
   assert.equal(account.decision, 'BLOCK');
   assert.ok(account.checks.some((check) => check.id === 'supplier_intent' && check.status === 'BLOCK'));
 
+  simulatorStore.request('supplier');
   const nameEvent = simulatorStore.dispatch('supplier_name_change');
   const name = await runtime.evaluate({ ...supplierPayment(nameEvent), beneficiary_name: 'Gupta Traders & Logistics' });
   assert.equal(name.decision, 'BLOCK');
@@ -243,11 +247,13 @@ test('missing or superseded supplier simulator event fails closed, including exe
   assert.ok(missing.checks.some((check) => check.id === 'simulator_event' && check.status === 'NEEDS_VERIFICATION'));
 
   const simulatorStore = createSimulatorStore();
+  simulatorStore.request('supplier');
   const cleanEvent = simulatorStore.dispatch('supplier_clean');
   const { pin, runtime } = await runtimeWithConfig({ aaDebits: testOnlyAaDebits, simulatorStore });
   const action = supplierPayment(cleanEvent);
   const approval = await runtime.evaluate(action);
   assert.equal(approval.decision, 'PASS');
+  simulatorStore.request('supplier');
   simulatorStore.dispatch('supplier_drift');
   const refused = await runtime.execute({ action, approval_id: approval.approval_id, pin, idempotency_key: crypto.randomUUID() });
   assert.equal(refused.outcome, 'blocked');
