@@ -43,6 +43,35 @@ type DataSummary = {
   supplier: { id: string; name: string; priorFyDebitCount: number; priorFyDebitTotal: number; derivedLimit: number; limitRule: string; aaAvailable: boolean; sourceLabel: string };
   invoice: { number: string; amount: number; verifiedAccountLast4: string; hasFullBody: boolean; integrity: string };
 };
+type ForecastDay = {
+  date: string; pointInr: number; lowInr: number; highInr: number; label: "estimate";
+  components: { weekdayBaselineInr: number; trendFactor: number; festivalFactor: number };
+};
+type ForecastOutlet = {
+  id: string; name: string; historyDays: number; trendFactor: number;
+  festivalUplift: { factor: number; source: string };
+  days: ForecastDay[];
+  total: { pointInr: number; lowInr: number; highInr: number };
+};
+type OutletForecast = {
+  synthetic: true; modelVersion: string;
+  window: { from: string; to: string };
+  source: { table: string; channel: string; through: string; partialDayExcluded: string; sourceHash: string };
+  rangeLabel: string;
+  outlets: ForecastOutlet[];
+};
+type StockInput = { outletId: string; skuLabel: string; priceInr: string; revenueSharePercent: string; unitsOnHand: string; coverageDays: string };
+type StockCoverage = {
+  synthetic: true; label: string; modelVersion: string;
+  outlet: { id: string; name: string }; skuLabel?: string;
+  horizon: { from: string; to: string; coverageDays: number };
+  assumptions: { priceInr: number; revenueSharePercent: number; unitsOnHand: number; coverageDays: number };
+  estimatedDemandUnits: { low: number; point: number; high: number };
+  gapsUnits: { low: number; point: number; high: number };
+  state: "likely_shortage" | "possible_surplus" | "monitor";
+  recommendedReviewUnits: number;
+  explanation: string;
+};
 
 const money = (n?: number | null) => typeof n === "number" ? (n < 0 ? "−" : "") + "₹" + new Intl.NumberFormat("en-IN").format(Math.abs(n)) : "Not supplied";
 const dateLabel = (s?: string) => {
@@ -73,7 +102,16 @@ function AnchorChart({ cash }: { cash: Cash | null }) {
   </div>;
 }
 
-function answerFor(question: string, cash: Cash | null, options: Options | null): string {
+function answerFor(question: string, cash: Cash | null, options: Options | null, forecast: OutletForecast | null): string {
+  if (/\b(sku|stock|replenish|reorder)\b/i.test(question))
+    return "Payment records do not show which SKU sold or how many units remain. Open Your data and enter the item price, estimated share of outlet revenue, stock on hand, and the number of festival days to cover from 4 Nov. I can then flag a possible shortfall or surplus for your review; no order is placed.";
+  if (/\b(outlet|dadar|matunga|sion|demand)\b/i.test(question)) {
+    if (!forecast) return "The outlet collection estimate is still loading. Open Your data to review it when ready.";
+    const named = forecast.outlets.find(item => question.toLowerCase().includes(item.name.toLowerCase()));
+    if (named) return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, ${named.name} has an estimated ${money(named.total.pointInr)} in all-channel collections, with a historical low/high scenario of ${money(named.total.lowInr)}–${money(named.total.highInr)}. Count stock before deciding what to replenish; this is not SKU demand.`;
+    const point = forecast.outlets.reduce((sum, item) => sum + item.total.pointInr, 0);
+    return `For ${dateLabel(forecast.window.from)}–${dateLabel(forecast.window.to)}, the three outlets have an estimated ${money(point)} in all-channel collections. Review each outlet in Your data, then check actual SKU stock before placing orders. This estimate does not change the cash plan.`;
+  }
   if (!cash || !options) return "Loading the synthetic cash plan.";
   const a = cash.cashPlan.anchors;
   const gupta = cash.cashPlan.outflows.find(item => item.id === "gupta");
@@ -91,6 +129,12 @@ export default function HomePage() {
   const [options, setOptions] = useState<Options | null>(null);
   const [lenders, setLenders] = useState<Lenders | null>(null);
   const [dataSummary, setDataSummary] = useState<DataSummary | null>(null);
+  const [outletForecast, setOutletForecast] = useState<OutletForecast | null>(null);
+  const [forecastError, setForecastError] = useState("");
+  const [stockInput, setStockInput] = useState<StockInput>({ outletId: "", skuLabel: "", priceInr: "", revenueSharePercent: "", unitsOnHand: "", coverageDays: "" });
+  const [stockResult, setStockResult] = useState<StockCoverage | null>(null);
+  const [stockError, setStockError] = useState("");
+  const [stockBusy, setStockBusy] = useState(false);
   const [requests, setRequests] = useState<Partial<Record<Kind, RequestState>>>({});
   const [cases, setCases] = useState<CaseRecord[]>([]);
   const [latestCase, setLatestCase] = useState<CaseRecord | null>(null);
@@ -115,6 +159,8 @@ export default function HomePage() {
       .catch(e => setError(e instanceof Error ? e.message : "Synthetic data could not load."));
     get<DataSummary>("/api/data-summary").then(setDataSummary)
       .catch(() => setError("Outlet and bank-data summary could not load."));
+    get<OutletForecast>("/api/outlet-forecast").then(setOutletForecast)
+      .catch(e => setForecastError(e instanceof Error ? e.message : "Outlet forecast could not load."));
     get<PauseState>("/api/control/pause").then(state => setPaused(state.paused))
       .catch(() => setError("Pause status could not load."));
   }, []);
@@ -190,6 +236,35 @@ export default function HomePage() {
       const started = await get<{ kind: Kind; cursor: number; requestId: string }>("/api/simulator/request", body({ kind }));
       setRequests(previous => ({ ...previous, [kind]: { cursor: started.cursor, waiting: true } }));
     } catch (e) { setError(e instanceof Error ? e.message : "Simulator unavailable."); }
+  }
+  function updateStockField(field: keyof StockInput, value: string) {
+    setStockInput(previous => ({ ...previous, [field]: value }));
+    setStockResult(null);
+    setStockError("");
+  }
+  async function checkStock(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStockResult(null);
+    setStockError("");
+    if (!outletForecast || !stockInput.outletId || !stockInput.priceInr ||
+      !stockInput.revenueSharePercent || !stockInput.unitsOnHand || !stockInput.coverageDays) {
+      setStockError("Choose an outlet and enter a price, estimated revenue share, units on hand, and festival days to cover.");
+      return;
+    }
+    setStockBusy(true);
+    try {
+      const result = await get<StockCoverage>("/api/stock-coverage", body({
+        outletId: stockInput.outletId,
+        skuLabel: stockInput.skuLabel.trim() || undefined,
+        priceInr: Number(stockInput.priceInr),
+        revenueSharePercent: Number(stockInput.revenueSharePercent),
+        unitsOnHand: Number(stockInput.unitsOnHand),
+        coverageDays: Number(stockInput.coverageDays),
+      }));
+      setStockResult(result);
+    } catch (e) {
+      setStockError(e instanceof Error ? e.message : "Stock coverage could not be checked.");
+    } finally { setStockBusy(false); }
   }
   async function evaluateAction(next: Action) {
     setBusy(true); setError(""); setAction(next); setGuard(null); setExecution(null); setPin("");
@@ -300,8 +375,8 @@ export default function HomePage() {
             {whatIf && <div className="pm-note"><b>Stock reduction · illustrative</b><p>{choices.find(item => item.id === "cut_stock")?.conditions.join(" ")}</p><p>Payment amounts do not reveal which products sold.</p><button type="button" onClick={() => setWhatIf(false)}>Close</button></div>}
           </div>}
           {screen === "munim" && <div className="pm-screen pm-chat">
-            <form className="pm-ask-form" onSubmit={event => { event.preventDefault(); setAnswer(answerFor(question, cash, options)); }}><label htmlFor="pm-question">Ask about cash, suppliers, or lenders</label><input id="pm-question" value={question} onChange={event => setQuestion(event.target.value)}/><button type="submit" className="pm-primary">Ask Munim<ArrowRight size={17}/></button></form>
-            <div className="pm-answer"><span><Sparkles size={18}/></span><div><b>Munim</b><p>{answer || answerFor(question, cash, options)}</p><small>Scripted demo response · numbers from backend tools</small></div></div>
+            <form className="pm-ask-form" onSubmit={event => { event.preventDefault(); setAnswer(answerFor(question, cash, options, outletForecast)); }}><label htmlFor="pm-question">Ask about cash, outlets, stock, suppliers, or lenders</label><input id="pm-question" value={question} onChange={event => setQuestion(event.target.value)}/><button type="submit" className="pm-primary">Ask Munim<ArrowRight size={17}/></button></form>
+            <div className="pm-answer"><span><Sparkles size={18}/></span><div><b>Munim</b><p>{answer || answerFor(question, cash, options, outletForecast)}</p><small>Scripted demo response · numbers from backend tools</small></div></div>
             <Heading title="Choose what to explore"/>
             <button type="button" className="pm-row" onClick={() => setScreen("plan")}><Activity size={19}/><span><b>See cash gap and options</b><small>Supplied anchors and outflows</small></span><ChevronRight size={18}/></button>
             <button type="button" className="pm-row" onClick={() => setScreen("supplier")}><Handshake size={19}/><span><b>Ask Gupta for terms</b><small>Wait for a simulated supplier reply</small></span><ChevronRight size={18}/></button>
@@ -359,6 +434,30 @@ export default function HomePage() {
               <p>Average all-channel month: {money(item.averageMonthlyAllChannelCollections)} against a {money(item.monthlyTarget)} monthly target. Today&apos;s Paytm amount is only one channel and part of one day.</p>
             </section>)}</div> : <div className="pm-hold"><CircleAlert size={18}/><span><b>Outlet summary unavailable</b><small>The transaction file could not be summarized.</small></span></div>}
             <div className="pm-note"><b>Stocking signal, not a SKU count</b><p>Last year&apos;s payment uplift can guide an outlet-level replenishment conversation. Payments do not identify units sold or stock on hand.</p></div>
+            <Heading title="Diwali week collection estimate"/>
+            <div className="pm-forecast-intro"><span><Sparkles size={16}/>4–10 Nov · all-channel</span><p>This separate demand estimate does not change the cash plan&apos;s fixed synthetic inflows or its 5 Nov shortfall.</p></div>
+            {forecastError && <div className="pm-hold" role="alert"><CircleAlert size={18}/><span><b>Outlet estimate unavailable</b><small>{forecastError}</small></span><button type="button" onClick={() => { setForecastError(""); void get<OutletForecast>("/api/outlet-forecast").then(setOutletForecast).catch(e => setForecastError(e instanceof Error ? e.message : "Outlet forecast could not load.")); }}>Retry</button></div>}
+            {outletForecast?.outlets?.length ? <>
+              <div className="pm-forecast-source"><b>{money(outletForecast.outlets.reduce((sum, item) => sum + item.total.pointInr, 0))}</b><span>estimated collections across three outlets for the week</span><small>Complete shift handovers through {dateLabel(outletForecast.source.through)}. Partial 30 Oct payments are excluded.</small></div>
+              <div className="pm-forecast-cards">{outletForecast.outlets.map(item => <section className="pm-forecast-card" key={item.id}>
+                <div className="pm-forecast-head"><b>{item.name}</b><Pill tone="amber">Estimate</Pill></div>
+                <div className="pm-forecast-point"><span>7-day collections</span><strong>{money(item.total.pointInr)}</strong></div>
+                <p>Historical spread: <b>{money(item.total.lowInr)}–{money(item.total.highInr)}</b></p>
+                <details><summary>See daily amounts and basis</summary><div className="pm-forecast-days">{item.days.map(day => <div key={day.date}><span>{dateLabel(day.date)}</span><b>{money(day.pointInr)}</b><small>{money(day.lowInr)}–{money(day.highInr)}</small></div>)}</div><p>Recent collection pace: {item.trendFactor.toFixed(2)}×. Last Diwali uplift: {item.festivalUplift.factor.toFixed(2)}×. These are payment patterns, not product sales.</p></details>
+              </section>)}</div>
+              <p className="pm-forecast-foot">{outletForecast.rangeLabel} Historical variation is a planning aid, not a guarantee.</p>
+            </> : !forecastError && <div className="pm-hold"><CircleAlert size={18}/><span><b>Preparing outlet estimates</b><small>Reading the bundled synthetic handover summary.</small></span></div>}
+            <Heading title="Check stock coverage"/>
+            <div className="pm-stock-intro"><b>Use your own item assumptions</b><p>Payments do not tell us which SKU sold. Enter a price, an estimated share of outlet revenue, stock on hand, and how many festival days to cover from 4 Nov to see a unit proxy.</p></div>
+            <form className="pm-stock-form" onSubmit={event => void checkStock(event)}>
+              <label>Outlet<select required value={stockInput.outletId} onChange={event => updateStockField("outletId", event.target.value)}><option value="">Choose outlet</option>{outletForecast?.outlets.map(item => <option value={item.id} key={item.id}>{item.name}</option>)}</select></label>
+              <label>Item name (optional)<input value={stockInput.skuLabel} onChange={event => updateStockField("skuLabel", event.target.value)} maxLength={80} placeholder="e.g. Diwali gift box"/></label>
+              <div className="pm-stock-grid"><label>Price per unit (₹)<input required type="number" inputMode="numeric" min="1" step="1" value={stockInput.priceInr} onChange={event => updateStockField("priceInr", event.target.value)} placeholder="Owner input"/></label><label>Revenue share (%)<input required type="number" inputMode="decimal" min="0.1" max="100" step="0.1" value={stockInput.revenueSharePercent} onChange={event => updateStockField("revenueSharePercent", event.target.value)} placeholder="Estimate"/></label></div>
+              <div className="pm-stock-grid"><label>Festival days to cover (from 4 Nov)<input required type="number" inputMode="numeric" min="1" max="7" step="1" value={stockInput.coverageDays} onChange={event => updateStockField("coverageDays", event.target.value)} placeholder="1–7"/></label><label>Units on hand<input required type="number" inputMode="numeric" min="0" step="1" value={stockInput.unitsOnHand} onChange={event => updateStockField("unitsOnHand", event.target.value)} placeholder="Counted stock"/></label></div>
+              <button type="submit" className="pm-primary pm-full" disabled={stockBusy || !outletForecast}>{stockBusy ? "Checking…" : "Check coverage"}<ArrowRight size={17}/></button>
+            </form>
+            {stockError && <div className="pm-hold" role="alert"><CircleAlert size={18}/><span><b>Coverage not calculated</b><small>{stockError}</small></span></div>}
+            {stockResult && <div className={"pm-stock-result pm-stock-result-" + stockResult.state} role="status"><div className="pm-stock-result-head"><b>{stockResult.state === "likely_shortage" ? "Likely shortfall — review replenishment" : stockResult.state === "possible_surplus" ? "Possible surplus — review the order" : "Coverage needs monitoring"}</b><Pill tone={stockResult.state === "likely_shortage" ? "red" : "amber"}>Proxy</Pill></div><p>{stockResult.outlet.name} · {dateLabel(stockResult.horizon.from)} to {dateLabel(stockResult.horizon.to)} · {stockResult.horizon.coverageDays} festival days covered</p><div><span>Estimated units needed<b>{stockResult.estimatedDemandUnits.point}</b><small>Historical range {stockResult.estimatedDemandUnits.low}–{stockResult.estimatedDemandUnits.high}</small></span><span>Units on hand<b>{stockResult.assumptions.unitsOnHand}</b><small>Entered by owner</small></span></div><p>{stockResult.explanation}</p>{stockResult.recommendedReviewUnits > 0 && <strong>Point-scenario gap: {stockResult.recommendedReviewUnits} units to review with the supplier.</strong>}<small>No SKU sales were observed. This check does not place an order or payment.</small></div>}
             <div className="pm-data-row"><Landmark size={19}/><span><b>Supplier payment history</b><small>{aaEvent && dataSummary?.supplier.aaAvailable ? `${dataSummary.supplier.priorFyDebitCount} synthetic prior-FY Gupta debits total ${money(dataSummary.supplier.priorFyDebitTotal)}. The 10% rule sets a ${money(dataSummary.supplier.derivedLimit)} ceiling.` : "Prior-FY Gupta debits exist in the synthetic bank file. Request an AA sample response before the guard uses them."}</small></span><Pill tone={aaEvent && dataSummary?.supplier.aaAvailable ? "green" : "amber"}>{aaEvent && dataSummary?.supplier.aaAvailable ? "Sample ready" : "Awaiting"}</Pill></div>
             <div className="pm-data-row"><FileText size={19}/><span><b>GD-1182 invoice</b><small>Amount and verified account are supplied as metadata. The full original invoice body is unavailable for instruction checks.</small></span><Pill tone="amber">Partial</Pill></div>
             <button type="button" className="pm-primary pm-full" onClick={() => void request("aa")}>Request sample AA response<ArrowRight size={18}/></button>
