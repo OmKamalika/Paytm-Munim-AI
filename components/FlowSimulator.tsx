@@ -47,6 +47,7 @@ export default function FlowSimulator() {
     catch (caught) { setError(caught instanceof Error ? caught.message : "Request queue unavailable."); }
   }
   return <section className="fs-shell" aria-label="Incoming delegated task requests">
+    <div className="fs-heading"><div><span>Live request inbox</span><h2>Respond to the merchant&apos;s next request</h2><p>Requests appear here when a merchant starts a tracked task. Choose a response for that exact request; the merchant sees its result.</p></div><Link href="/riskops">Open live RiskOps<ArrowRight size={16}/></Link></div>
     <div className="fs-heading"><div><span>Live request inbox</span><h2>Respond to the merchant&apos;s next request</h2><p>Requests appear here when a merchant starts a tracked task. Choose a response for that exact request; the merchant sees its result.</p></div><Link prefetch={false} href="/riskops">Open live RiskOps<ArrowRight size={16}/></Link></div>
     <div className="fs-summary"><span><Inbox size={16}/><b>{open.length}</b> waiting</span><span><ShieldCheck size={16}/><b>{state?.runs.length || 0}</b> tasks</span><span>Revision {state?.revision ?? "…"} · refreshes every second</span><button onClick={() => void refresh()} aria-label="Refresh incoming task requests"><RefreshCw size={15}/></button></div>
     {error && <div className="fs-alert" role="alert"><CircleAlert size={18}/>{error}</div>}

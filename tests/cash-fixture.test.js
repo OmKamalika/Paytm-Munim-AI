@@ -21,6 +21,8 @@ test('cash plan anchors are calculated from the per-outlet forecast', () => {
 test('listed outflows retain exact amounts, dates, invoice and rent split', () => {
   const outflows = cashPlanFixture.cashPlan.outflows;
   assert.equal(outflows.length, 12);
+  assert.deepEqual(outflows.filter(row => !row.id.startsWith('recurring_')).map((row) => [row.id, row.date, row.amountInr, row.quality]), [
+  assert.equal(outflows.length, 8);
   assert.deepEqual(outflows.map((row) => [row.id, row.date, row.amountInr, row.quality]), [
     ['patel', '2026-10-31', 290000, 'exact'],
     ['salaries', '2026-11-01', 105000, 'exact'],
@@ -41,6 +43,11 @@ test('listed outflows retain exact amounts, dates, invoice and rent split', () =
     { outlet: 'Matunga', amountInr: 30000 },
     { outlet: 'Sion', amountInr: 32000 },
   ]);
+  assert.equal(outflows.filter(row => row.category === 'rent').length, 1);
+  assert.equal(outflows.filter(row => row.category === 'salaries').length, 1);
+  assert.equal(outflows.filter(row => row.id === 'gst').length, 1);
+  assert.equal(outflows.find(row => row.id === 'recurring_emi').amountInr, 22000);
+  assert.equal(cashPlanFixture.cashPlan.dailyBalanceSeries.find(row => row.date === '2026-11-07').balanceInr, 33500);
 });
 
 test('Paytm Home collection is separate from all-channel monthly collections', () => {

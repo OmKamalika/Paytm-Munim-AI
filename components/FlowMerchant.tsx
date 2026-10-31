@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, CircleAlert, Clock3, FileCheck2, LockKeyhole, RefreshCw, ShieldCheck } from "lucide-react";
 import type { FlowDisclosure, FlowRun, FlowState } from "../lib/flow-types";
@@ -40,6 +41,7 @@ function Disclosure({ item }: { item: FlowDisclosure }) {
   </div>;
 }
 
+export default function FlowMerchant() {
 export default function FlowMerchant({ focusKey = 0 }: { focusKey?: number }) {
   const [state, setState] = useState<FlowState | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
@@ -59,6 +61,9 @@ export default function FlowMerchant({ focusKey = 0 }: { focusKey?: number }) {
   }, []);
   const run = state?.runs.find(item => item.id === selected) ?? state?.runs[0];
   const request = state?.requests.find(item => item.id === run?.currentRequestId);
+  async function start(intentId: string) {
+    setBusy(true); setError(""); setPin("");
+    try { const result = await command("start", { intentId }); setState(result.state); setSelected(result.run.id); }
   // On a phone the task card sits below the intent list. When a task starts
   // (here or from another screen), bring its status into view once.
   const runCard = useRef<HTMLDivElement | null>(null);
@@ -102,6 +107,7 @@ export default function FlowMerchant({ focusKey = 0 }: { focusKey?: number }) {
       <div className="fm-section-label">Your tracked tasks</div>
       <div className="fm-run-tabs">{state.runs.map(item => <button type="button" key={item.id} aria-pressed={run?.id === item.id} onClick={() => { setSelected(item.id); setPin(""); setError(""); }}><b>{item.title}</b><small>{statusLabel(item.status)}</small></button>)}</div>
     </>}
+    {run && <div className="fm-run" aria-live="polite">
     {run && <div className="fm-run" aria-live="polite" ref={runCard}>
       <div className="fm-run-top"><span className={"fm-status fm-status-" + run.status}>{statusLabel(run.status)}</span><small>{kindLabel(run.stage)}</small></div>
       <h3>{run.title}</h3><p>{run.summary}</p>
@@ -113,12 +119,14 @@ export default function FlowMerchant({ focusKey = 0 }: { focusKey?: number }) {
       {run.judge && <p className="fm-judge"><ShieldCheck size={15}/><span>{run.judge.mode === "deterministic_document_scan" ? "Document instruction scan" : "Simulated LLM judge"}: {run.judge.decision}. {run.judge.reason}</span></p>}
       {run.currentDisclosure && run.status === "awaiting_owner" && <>
         <Disclosure item={run.currentDisclosure}/>
+        {run.currentDisclosure.requiresPin && <label className="fm-pin">Owner PIN<input type="password" autoComplete="off" value={pin} onChange={event => setPin(event.target.value)} placeholder="Enter privately"/></label>}
         {run.currentDisclosure.requiresPin && <label className="fm-pin">Owner PIN<input type="password" inputMode="numeric" pattern="[0-9]*" enterKeyHint="done" autoComplete="off" maxLength={12} value={pin} onChange={event => setPin(event.target.value.replace(/\D/g, ""))} placeholder="Enter privately"/></label>}
         {!state?.pinConfigured && run.currentDisclosure.requiresPin && <p className="fm-alert"><LockKeyhole size={17}/><span>Owner verification needs to be configured for this local demo before approval can proceed.</span></p>}
         <div className="fm-consent-actions"><button type="button" disabled={busy || state?.paused} onClick={() => void consent("decline")}>Decline</button><button type="button" className="fm-primary" disabled={busy || state?.paused || (run.currentDisclosure.requiresPin && (!pin || !state?.pinConfigured))} onClick={() => void consent("approve")}>{busy ? "Recording…" : "Approve this decision"}<LockKeyhole size={16}/></button></div>
       </>}
       {run.status === "paused" && <button type="button" className="fm-primary" disabled={busy || state?.paused} onClick={() => void retry()}>Request a new response<RefreshCw size={16}/></button>}
       {run.status === "payment_pending" && <div className="fm-alert"><Clock3 size={18}/><span>The rail outcome is unresolved. The task is held to prevent a duplicate payment.</span></div>}
+      {run.ledgerEffect && <div className="fm-success"><CheckCircle2 size={20}/><span><b>{money(run.ledgerEffect.amountInr)} · {run.ledgerEffect.type === "drawdown" ? "drawdown" : "supplier payment"} recorded</b>{typeof run.ledgerEffect.projected5NovInr === "number" && <b>5 Nov projected balance: {money(run.ledgerEffect.projected5NovInr)}</b>}<small>One simulated ledger effect. No real money moved.</small></span></div>}
       {run.ledgerEffect && <div className="fm-success"><CheckCircle2 size={20}/><span><b>{money(run.ledgerEffect.amountInr)} · {run.ledgerEffect.type === "drawdown" ? "drawdown" : "supplier payment"} recorded</b><small>The cash plan on Home and Plan now includes it, counted once.</small><small>One simulated ledger effect. No real money moved.</small></span></div>}
       <small className="fm-task-id">Task {run.id} · trace {run.traceId}</small>
     </div>}

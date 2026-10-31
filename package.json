@@ -13,6 +13,7 @@
     "configure:pin": "node scripts/configure-demo-pin.mjs",
     "verify:sources": "node scripts/verify-source-manifest.mjs",
     "eval:flows": "node --test --test-reporter=spec tests/flow-runtime.test.js",
+    "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "start": "node scripts/start-built.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
