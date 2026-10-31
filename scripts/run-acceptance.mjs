@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createActionRuntime, sha256Hex, verifyEvidenceChain } from '../lib/action-runtime.js';
 import { createSimulatorStore } from '../lib/simulator-store.js';
+import { buildCashPlan } from '../lib/cash-fixture.js';
 
 const drawdown = () => ({ type: 'drawdown', lender_id: 'A', amount: 200000, destination_account: '**4029', invoice_id: 'GD-1182' });
 const supplier = () => ({ type: 'supplier_payment', supplier_id: 'gupta', amount: 260000, beneficiary_name: 'Gupta Distributors', beneficiary_account: 'XXXX7781', invoice_id: 'GD-1182', simulator_event_seq: 1 });
@@ -53,14 +54,15 @@ const cases = [
     assert.ok(result.checks.some((check) => check.id === 'invoice_injection' && check.status === 'ESCALATE'));
     assert.equal((await runtime.getLedger()).effects.length, 0);
   }],
-  ['Approved drawdown adds one inflow and 5 Nov becomes −₹68,279 (drawdown alone is not enough)', async () => {
+  ['Approved drawdown adds one inflow to the active cash forecast', async () => {
     const { pin, runtime } = await fresh();
     const action = drawdown();
     const check = await runtime.evaluate(action);
     assert.equal(check.decision, 'PASS');
     const result = await runtime.execute({ action, approval_id: check.approval_id, pin, idempotency_key: crypto.randomUUID() });
     assert.equal(result.outcome, 'done-simulated');
-    assert.equal(result.balance_on_5_nov, -68279);
+    const baseline = buildCashPlan().cashPlan.dailyBalanceSeries.find(day => day.date === '2026-11-05').balanceInr;
+    assert.equal(result.balance_on_5_nov, baseline + action.amount);
     assert.equal((await runtime.getLedger()).drawdownTotal, 200000);
     assert.equal((await runtime.getLedger()).effects.length, 1);
   }],

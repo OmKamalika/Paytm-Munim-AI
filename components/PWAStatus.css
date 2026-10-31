@@ -1,0 +1,11 @@
+.pm-connection-backdrop { position:fixed; z-index:200; inset:0; display:grid; place-items:center; padding:max(22px,env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) max(22px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left)); background:rgba(234,240,246,.93); }
+.pm-connection-message { width:min(100%,355px); color:var(--pm-navy); outline:none; }
+.pm-connection-message > svg { color:#087dad; }
+.pm-connection-message h2 { margin:16px 0 9px; font-size:26px; font-weight:750; letter-spacing:-.7px; line-height:1.2; }
+.pm-connection-message p { margin:0; max-width:34ch; color:#516a7d; font-size:14px; line-height:1.6; }
+.pm-install { position:fixed; z-index:100; bottom:calc(78px + env(safe-area-inset-bottom)); right:max(14px,env(safe-area-inset-right)); display:flex; align-items:center; max-width:calc(100vw - 28px); border:1px solid #c5dce9; border-radius:9px; background:white; box-shadow:0 5px 18px rgba(0,46,110,.12); overflow:hidden; }
+.pm-install button { min-height:44px; border:0; background:white; color:var(--pm-navy); }
+.pm-install button:hover { background:#eaf8fd; }
+.pm-install-action { display:flex; align-items:center; justify-content:center; gap:8px; padding:9px 12px; font-size:12px; font-weight:700; }
+.pm-install-dismiss { display:grid; place-items:center; width:42px; flex:none; }
+.pm-install-error p { margin:0; padding:9px 12px; max-width:32ch; color:#516a7d; font-size:12px; line-height:1.4; }
